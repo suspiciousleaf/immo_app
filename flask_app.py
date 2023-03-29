@@ -8,11 +8,25 @@ from flask import request
 with open("listings.json", "r") as infile:
     listings = json.load(infile)
 
+with open("postcodes_dict.json", "r") as infile:
+    postcodes_dict = json.load(infile)
+
+# Must change the above open json to this when hosted:
+# with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+#     listings = json.load(infile)
+
+# Must do for flask_app.py and app.py
+
+
 app = Flask(__name__)
     
-@app.route('/<name>/', methods=['GET'])
-def name(name):
-    return "Hello, {}".format(name)
+# @app.route('/<name>/', methods=['GET'])
+# def name(name):
+#     return "Hello, {}".format(name)
+
+@app.route('/postcode_dict/', methods=['GET'])
+def postcodes():
+    return postcodes_dict
 
 @app.route("/search_results", methods=['GET'])
 def search_call():
@@ -67,3 +81,4 @@ if __name__ == '__main__':
 
 
 
+# See expected format file for search format
