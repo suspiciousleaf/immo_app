@@ -6,7 +6,8 @@ from geopy.geocoders import Nominatim
 with open("ville_list.txt", "r", encoding = 'utf-8-sig') as infile:
     postcodes = infile.readlines()
 
-postcodes = [unidecode(line.strip()).replace("Code Postal ", "") for line in postcodes]
+postcodes = [unidecode(line.strip()).replace("Code Postal ", "").replace("-", " ").casefold() for line in postcodes]
+# print(postcodes)
 
 breaks = []
 def postcode_dict():
@@ -19,12 +20,12 @@ def postcode_dict():
     for i in range(len(breaks)-1): 
       postcode_list.append(postcodes[breaks[i]:breaks[i+1]])
 
-    postcode_dict = {lst[0]:lst[1:] for lst in postcode_list}
+    return {lst[0]:lst[1:] for lst in postcode_list}
 
     # pprint(postcode_dict)
 
-    with open("postcodes_dict.json", "w") as outfile:
-        json.dump(postcode_dict, outfile)
+with open("postcodes_dict.json", "w") as outfile:
+    json.dump(postcode_dict(), outfile)
 
 def get_gps(town, postcode):
     geolocator = Nominatim(user_agent="property-scraper")
@@ -34,8 +35,13 @@ def get_gps(town, postcode):
 
 town_list = [item for item in postcodes if item.isnumeric() == False]
 
-with open("postcodes_dict.json", "r") as infile:
-        town_postcode_dict = json.load(infile)
+with open("ville_list_clean.json", "w") as outfile:
+    json.dump(town_list, outfile)
+# print(town_list)
+
+def create_town_list():
+    with open("postcodes_dict.json", "r") as infile:
+            town_postcode_dict = json.load(infile)
 
 def get_gps_dict():
     
@@ -54,8 +60,10 @@ def get_key(val):
         if val in value:
             return key
 
-with open("postcodes_gps_dict.json", "w") as outfile:
-    json.dump(get_gps_dict(), outfile)
+def create_gps_dict():
+    with open("postcodes_gps_dict.json", "w") as outfile:  
+        json.dump(get_gps_dict(), outfile)
 
-# print(get_key("Quillan"))
-# print(get_gps("Mane", "31260"))
+# create_town_list()
+
+# create_gps_dict()

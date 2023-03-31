@@ -168,7 +168,7 @@ def get_listing_details(link_url):
     photos = [link.replace("amp;", "") for link in photos]
     photos = [link.replace('"/>', "") for link in photos]
 
-    if town == "Unknown":
+    if town == None:
          gps = None
     else:
         try:

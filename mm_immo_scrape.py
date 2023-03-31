@@ -169,7 +169,7 @@ def get_listing_details(link_url):
             if "www.mmimmobilier.com" not in child.get("src"):
                 photos.append(child.get("src"))
 
-    if town == "Unknown":
+    if town == None:
          gps = None
     else:
         try:

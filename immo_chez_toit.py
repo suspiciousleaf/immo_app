@@ -177,7 +177,7 @@ def get_listing_details(link_url):
             photos.append("https:" + child['src'])
     # pprint(photos)
 
-    if town == "Unknown":
+    if town == None:
          gps = None
     else:
         try:

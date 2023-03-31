@@ -137,7 +137,7 @@ def get_listing_details(link_url):
     photos = [photo for photo in photos_raw_list if len(photo) > 10]
     #pprint(photos)
 
-    if town == "Unknown":
+    if town == None:
          gps = None
     else:
         try:

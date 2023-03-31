@@ -60,6 +60,10 @@ for listing in all_listings:
         listing["types"] = "Apartment"
     listing["id"] = i
     i += 1
+    try:
+        listing["town"] = unidecode(listing["town"])
+    except:
+        pass
 
 with open("listings.json", "w") as outfile:
     json.dump(all_listings, outfile)

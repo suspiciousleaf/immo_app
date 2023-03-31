@@ -176,7 +176,7 @@ def get_listing_details(link_url):
         photos_div = str(soup.find_all("img", class_="photomrH")).split()
         photos = ["http://www.richardsonimmobilier.com/" + entry.replace('"', "").replace("src=", "") for entry in photos_div if "src=" in entry] 
 
-    if town == "Unknown":
+    if town == None:
          gps = None
     else:
         try:

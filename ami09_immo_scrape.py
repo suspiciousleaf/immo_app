@@ -89,7 +89,7 @@ def get_listing_details(link_url):
     if location_div.count("-") > 0:
          town = location_div.split("-")[-1].strip().capitalize()
     else:
-         town = "Unknown"
+         town = None
     #print(town)
 #     town = soup.find("div", class_="ville").get_text().capitalize()
     # print("Town:", town)
@@ -164,7 +164,7 @@ def get_listing_details(link_url):
 
     # pprint(photos)
     
-    if town == "Unknown":
+    if town == None:
          gps = None
     else:
         try:
