@@ -13,12 +13,26 @@ with open("postcodes_gps_dict.json", "r") as infile:
 with open("ville_list_clean.json", "r") as infile:
     town_list_clean = json.load(infile)
 
+agent_dict = {
+      'ami': 'Ami Immobilier',
+      'mm': 'M&M Immobilier',
+      'richardson': 'Richardson Immobilier',
+      "l'immo": "L'Immo Chez Toit",
+      'arthur': 'Arthur Immo',
+      'jammes': 'Cabinet Jammes',
+      'nestenn': 'Nestenn',
+      'cimm': 'Cimm Immobilier',
+      'api': 'A.P.I.',
+      'aude': 'Aude Immobilier',
+      'time': 'Time and Stone Immobilier'
+}
 
 def filter_price(results, min_price, max_price):
     return [x for x in results if min_price <= x["price"] <= max_price]
 
 def filter_agent_type(results, type_list, agent_list):
-    return [x for x in results if x["types"] in type_list and x["agent"] in agent_list]
+    fullname_agent_search = [agent_dict[agent] for agent in agent_list]
+    return [x for x in results if x["types"] in type_list and x["agent"] in fullname_agent_search]
 
 def filter_beds(results, inc_none_beds, min_beds, max_beds):
     if inc_none_beds == True:
@@ -65,22 +79,18 @@ def filter_location(results, towns, search_radius, inc_none_location):
                     else:
                         if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
                             location_results.append(result)
-    return location_results
-
+    return location_results 
 
 all_agents_set = set()
 all_types_set = set()
-price_types = set()
 for item in listings:
     all_agents_set.add(item["agent"])
     all_types_set.add(item["types"])
-    price_types.add(type(item["price"]))
 
-pprint(all_agents_set)
-agent_list = list(all_agents_set)
-type_list = list(all_types_set)
+all_agent_list = list(all_agents_set)
+all_type_list = list(all_types_set)
 
-def search(listings, type_list = type_list, agent_list = agent_list, inc_none_location = False, towns = None, search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf):
+def search(listings, type_list = all_type_list, agent_list = ['ami', 'mm', 'richardson', "l'immo", 'arthur', 'jammes', 'nestenn', 'cimm', 'api', 'aude', 'time'], inc_none_location = False, towns = None, search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf):
     results_list = filter_price(listings, min_price, max_price)
     results_list = filter_agent_type(results_list, type_list, agent_list)
     results_list = filter_beds(results_list, inc_none_beds, min_beds, max_beds)
@@ -88,7 +98,7 @@ def search(listings, type_list = type_list, agent_list = agent_list, inc_none_lo
     results_list = filter_size(results_list, inc_none_size, min_size, max_size)
     if towns:
         results_list = filter_location(results_list, towns, search_radius, inc_none_location)
-    # print(towns)
+
     return results_list
 
 
@@ -96,13 +106,11 @@ def search(listings, type_list = type_list, agent_list = agent_list, inc_none_lo
 
 # pprint(type_list)
 
-# results_list = (search(listings, inc_none_beds = True, min_price = 99999))
+# results_list = (search(listings, agent_list=["l'immo", "jammes"]))
 # pprint(results_list)
 
 
 # print("\nNumber of results:", len(results_list), "\n")
-
-
 
 
 
