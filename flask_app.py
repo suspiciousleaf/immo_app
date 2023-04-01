@@ -50,7 +50,7 @@ def search_call():
         except:
             return 0
 
-    def try_towns(input):
+    def try_csv(input):
         try:
             return input.split(",")
         except:
@@ -69,6 +69,9 @@ def search_call():
     min_price_req = try_min(request.args.get('min_price'))
     max_price_req = try_max(request.args.get('max_price'))
 
+    agent_list_req = try_csv(request.args.get('agents'))
+    type_list_req = try_csv(request.args.get('types')).capitalize()
+
     inc_none_plot_req = request.args.get('inc_none_plot') == "true"
 
     min_plot_req = try_min(request.args.get('min_plot'))
@@ -81,9 +84,9 @@ def search_call():
 
     search_radius_req = try_search_radius(request.args.get('search_radius'))
     inc_none_location_req = request.args.get('inc_none_location') == "true"
-    towns_req = try_towns(request.args.get('town'))
+    towns_req = try_csv(request.args.get('town'))
 
-    return search(listings = listings, towns = towns_req, inc_none_location = inc_none_location_req, search_radius = search_radius_req, inc_none_beds = inc_none_beds_req, min_beds = min_beds_req, max_beds = max_beds_req, min_price = min_price_req, max_price = max_price_req, inc_none_plot = inc_none_plot_req, min_plot = min_plot_req, max_plot = max_plot_req, inc_none_size = inc_none_size_req, min_size = min_size_req, max_size = max_size_req)
+    return search(listings = listings, type_list = type_list_req, agent_list = agent_list_req, towns = towns_req, inc_none_location = inc_none_location_req, search_radius = search_radius_req, inc_none_beds = inc_none_beds_req, min_beds = min_beds_req, max_beds = max_beds_req, min_price = min_price_req, max_price = max_price_req, inc_none_plot = inc_none_plot_req, min_plot = min_plot_req, max_plot = max_plot_req, inc_none_size = inc_none_size_req, min_size = min_size_req, max_size = max_size_req)
 
 # search(listings, type_list = type_list, agent_list = agent_list, town = "", search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf)
 

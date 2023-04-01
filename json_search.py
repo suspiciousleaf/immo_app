@@ -87,8 +87,10 @@ for item in listings:
     all_agents_set.add(item["agent"])
     all_types_set.add(item["types"])
 
+
 all_agent_list = list(all_agents_set)
 all_type_list = list(all_types_set)
+print(all_type_list)
 
 def search(listings, type_list = all_type_list, agent_list = ['ami', 'mm', 'richardson', "l'immo", 'arthur', 'jammes', 'nestenn', 'cimm', 'api', 'aude', 'time'], inc_none_location = False, towns = None, search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf):
     results_list = filter_price(listings, min_price, max_price)
@@ -106,13 +108,11 @@ def search(listings, type_list = all_type_list, agent_list = ['ami', 'mm', 'rich
 
 # pprint(type_list)
 
-# results_list = (search(listings, agent_list=["l'immo", "jammes"]))
+# results_list = (search(listings, type_list=["Terrain"]))
 # pprint(results_list)
 
 
 # print("\nNumber of results:", len(results_list), "\n")
-
-
 
 # num = 0
 # for item in listings:
