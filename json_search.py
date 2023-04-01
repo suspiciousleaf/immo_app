@@ -76,7 +76,7 @@ for item in listings:
     all_types_set.add(item["types"])
     price_types.add(type(item["price"]))
 
-# print(price_types)
+pprint(all_agents_set)
 agent_list = list(all_agents_set)
 type_list = list(all_types_set)
 

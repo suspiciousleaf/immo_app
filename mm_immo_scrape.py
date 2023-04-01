@@ -37,7 +37,7 @@ def mm_immo_get_listings():
 
     num_props_div = mm_immo_soup.find('span', class_="NbBien")
     num_props = int(num_props_div.find(string=True))
-    print("\nMM Immo number of listings:", num_props)
+    print("\nM&M Immo number of listings:", num_props)
     pages = math.ceil(num_props / 10)
     print("Pages:", pages)
 

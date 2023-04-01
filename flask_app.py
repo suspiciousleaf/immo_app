@@ -2,7 +2,7 @@ from flask import Flask
 import json
 import math
 from json_search import search
-from markupsafe import escape
+# from markupsafe import escape
 from flask import request
 
 with open("listings.json", "r") as infile:
@@ -26,6 +26,11 @@ app = Flask(__name__)
 # @app.route('/<name>/', methods=['GET'])
 # def name(name):
 #     return "Hello, {}".format(name)
+
+@app.after_request
+def add_header(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 @app.route('/postcode_dict/', methods=['GET'])
 def postcodes():

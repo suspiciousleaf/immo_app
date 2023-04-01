@@ -44,9 +44,9 @@ i = 0
 
 house_catetogies = ['Autre','Batiment','Cafe','Chalet','Chambre','Chateau','Gite','Grange','Hotel','Investissement','Local','Maison','Propriete','Remise','Restaurant','Villa', 'Ferme','Longere','Demeure']
 
-commerce_categories = ['Agence', 'Bazar', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Locaux', 'Parking', 'Pret']
+commerce_categories = ['Agence', 'Ateliers', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Locaux', 'Parking', 'Pret']
 
-apartment_categories = ["Apartment", "Studio", "Duplex", "Appartment"]
+apartment_categories = ["Apartment", "Studio", "Duplex", "Appartment", "Appartement"]
 
 for listing in all_listings:
     listing["types"] = unidecode(listing["types"].capitalize())
@@ -57,7 +57,7 @@ for listing in all_listings:
     if listing["types"] in commerce_categories:
         listing["types"] = "Commerce"
     if listing["types"] in apartment_categories:
-        listing["types"] = "Apartment"
+        listing["types"] = "Appartement"
     listing["id"] = i
     i += 1
     try:
