@@ -32,7 +32,7 @@ def filter_price(results, min_price, max_price):
 
 def filter_agent_type(results, type_list, agent_list):
     fullname_agent_search = [agent_dict[agent] for agent in agent_list]
-    return [x for x in results if x["types"] in type_list and x["agent"] in fullname_agent_search]
+    return [x for x in results if x["types"].casefold() in type_list and x["agent"] in fullname_agent_search]
 
 def filter_beds(results, inc_none_beds, min_beds, max_beds):
     if inc_none_beds == True:

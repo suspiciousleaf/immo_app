@@ -70,7 +70,7 @@ def search_call():
     max_price_req = try_max(request.args.get('max_price'))
 
     agent_list_req = try_csv(request.args.get('agents'))
-    type_list_req = try_csv(request.args.get('types')).capitalize()
+    type_list_req = try_csv(request.args.get('types'))
 
     inc_none_plot_req = request.args.get('inc_none_plot') == "true"
 
