@@ -39,6 +39,20 @@ def filter_agent(results, agent_list):
     else:
         return results
 
+def filter_keywords(results, keyword_list):
+    if keyword_list:
+        valid_results = []
+        for result in results:
+            valid = True
+            for keyword in keyword_list:
+                if keyword not in result["description"]:
+                    valid = False
+            if valid == True:
+                valid_results.append(result)
+        return valid_results
+    else:
+        return results
+
 def filter_type(results, type_list):
     print("filter_type ran")
     if type_list:
@@ -123,24 +137,26 @@ all_type_list = list(all_types_set)
 # agent_list = ['ami', 'mm', 'richardson', "l'immo", 'arthur', 'jammes', 'nestenn', 'cimm', 'api', 'aude', 'time']
 
 
-def search(listings, type_list = None, agent_list = None, inc_none_location = False, towns = None, search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, inc_none_rooms = True, min_rooms = 0, max_rooms = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf):
-    print(len(listings))
+def search(listings, type_list = None, agent_list = None, keyword_list = None, inc_none_location = False, towns = None, search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, inc_none_rooms = True, min_rooms = 0, max_rooms = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf):
+    # print(len(listings))
     results_list = filter_price(listings, min_price, max_price)
-    print(len(results_list))
+    # print(len(results_list))
     results_list = filter_agent(results_list, agent_list)
-    print(len(results_list))
+    # print(len(results_list))
     results_list = filter_type(results_list, type_list)
-    print(len(results_list))
+    # print(len(results_list))
     results_list = filter_beds(results_list, inc_none_beds, min_beds, max_beds)
-    print(len(results_list))
+    # print(len(results_list))
     results_list = filter_rooms(results_list, inc_none_rooms, min_rooms, max_rooms)
-    print(len(results_list))
+    # print(len(results_list))
     results_list = filter_plot(results_list, inc_none_plot, min_plot, max_plot)
-    print(len(results_list))
+    # print(len(results_list))
     results_list = filter_size(results_list, inc_none_size, min_size, max_size)
-    print(len(results_list))
+    # print(len(results_list))
+    results_list = filter_keywords(results_list, keyword_list)
+    # print(len(results_list))
     results_list = filter_location(results_list, towns, search_radius, inc_none_location)
-    print(len(results_list))
+    # print(len(results_list))
 
     return results_list
 
@@ -149,8 +165,8 @@ def search(listings, type_list = None, agent_list = None, inc_none_location = Fa
 
 # pprint(all_type_list)
 
-# results_list = (search(listings, type_list=["immeuble"]))
-# pprint(results_list)
+# results_list = (search(listings, keyword_list = ["garage"], max_plot = 500))
+# pprint(len(results_list))
 
 
 # print("\nNumber of results:", len(results_list), "\n")

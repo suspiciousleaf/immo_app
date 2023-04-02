@@ -92,7 +92,9 @@ def search_call():
     inc_none_location_req = not request.args.get('inc_none_location') == "false"
     towns_req = try_csv(request.args.get('town'))
 
-    return search(listings = listings, type_list = type_list_req, agent_list = agent_list_req, towns = towns_req, inc_none_location = inc_none_location_req, search_radius = search_radius_req, inc_none_beds = inc_none_beds_req, min_beds = min_beds_req, max_beds = max_beds_req, inc_none_rooms = inc_none_rooms_req, min_rooms = min_rooms_req, max_rooms = max_rooms_req, min_price = min_price_req, max_price = max_price_req, inc_none_plot = inc_none_plot_req, min_plot = min_plot_req, max_plot = max_plot_req, inc_none_size = inc_none_size_req, min_size = min_size_req, max_size = max_size_req)
+    keyword_list_req = try_csv(request.args.get('keywords'))
+
+    return search(listings = listings, keyword_list = keyword_list_req, type_list = type_list_req, agent_list = agent_list_req, towns = towns_req, inc_none_location = inc_none_location_req, search_radius = search_radius_req, inc_none_beds = inc_none_beds_req, min_beds = min_beds_req, max_beds = max_beds_req, inc_none_rooms = inc_none_rooms_req, min_rooms = min_rooms_req, max_rooms = max_rooms_req, min_price = min_price_req, max_price = max_price_req, inc_none_plot = inc_none_plot_req, min_plot = min_plot_req, max_plot = max_plot_req, inc_none_size = inc_none_size_req, min_size = min_size_req, max_size = max_size_req)
 
 # Search parameters: Type, Agent, location, search radius, bedroom number, room number, price, plot size, property size
 
