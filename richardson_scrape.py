@@ -84,7 +84,7 @@ def get_listing_details(link_url):
 
     agent = "Richardson Immobilier"
     # Get type
-
+    # print(URL)
     #prop_type_div = soup.find('td', class_="SIZE3-50").b
 
 
@@ -119,9 +119,10 @@ def get_listing_details(link_url):
 
     # Get property details
 
-    description = str(soup.find("span", class_="SIZE35-51").contents).replace("<br/>", "").replace("</span>", "").replace('<span style="color: #CC0000">', "")
-    #description = [description[description.find(">")+1:-4]]
-    #print(description)
+    description = soup.find("span", class_="SIZE35-51").get_text()
+    # print(description, "\n\n")
+    # description = str(soup.find("span", class_="SIZE35-51").contents).replace("<br/>", "").replace("</span>", "").replace('<span style="color: #CC0000">', "")
+
 
     # Bedroom information not listed, sometimes written in description
     bedrooms = None
@@ -165,6 +166,16 @@ def get_listing_details(link_url):
         size = None
     # print("Size:", size, "m²")
 
+    # Terrain listings capture plot size as building size, and first section of price as plot size.
+    if types == "Terrain":
+        try:
+            if size > plot:
+                plot = size
+        except:
+            pass
+        size = None
+
+
     # Photos
     # Finds the links to full res photos for each listing and returns them as a list
     photos_div = str(soup.find_all("img", class_="photomH")).split()
@@ -191,7 +202,8 @@ def get_listing_details(link_url):
 #pprint(richardson_get_links(1))
 
 #get_listing_details("http://www.richardsonimmobilier.com/vente-maison-Haute-Vallee-4044.cgi?00000LQUI4044")
-# get_listing_details("http://www.richardsonimmobilier.com/investissement-Haute-Vallee-4095.cgi?00002LQUI4095")
+# pprint(get_listing_details("http://www.richardsonimmobilier.com/vente-terrain-Haute-Vallee-3684.cgi?00012LQUI3684").__dict__)
+# get_listing_details("http://www.richardsonimmobilier.com/vente-terrain-Haute-Vallee-3684.cgi?00012LQUI3684")
 
-#richardson_get_listings()
+# richardson_get_listings()
 
