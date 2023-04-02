@@ -45,7 +45,7 @@ def filter_keywords(results, keyword_list):
         for result in results:
             valid = True
             for keyword in keyword_list:
-                if keyword not in result["description"]:
+                if unidecode(keyword).casefold() not in unidecode(result["description"]).casefold():
                     valid = False
             if valid == True:
                 valid_results.append(result)
