@@ -4,6 +4,42 @@ from bs4 import BeautifulSoup
 import math
 from models import Listing
 from geopy.geocoders import Nominatim
+from unidecode import unidecode
+import re
+
+num_dict = {
+    "un" : "1",
+    "deux": "2",
+    "trois": "3",
+    "quatre": "4",
+    "cinq": "5",
+    "sept": "7",
+    "huit": "8",
+    "neuf": "9",
+    "dix": "10",
+    "t2": "a 1 chambre",
+    "t3": "a 2 chambre",
+    "t4": "a 3 chambre",
+    "t5": "a 4 chambre",
+    "t6": "a 5 chambre",
+    "t7": "a 6 chambre",
+    "t8": "a 7 chambre",
+}
+
+def find_chamb(string):
+    string = unidecode(string).casefold()
+
+    for key in num_dict.keys():   # Checks description for instances of numbers as words and replaces with digits
+        string = string.replace(key, num_dict[key])
+
+    pattern = r"(\d+)\s\w*\s*chambre"   # identifies all patterns of "X chambre" and "X xxxx chambre" and returns each X in a list
+    chambres = 0
+    matches = re.findall(pattern, string)
+    # print(matches)
+    for match in matches:
+        chambres += int(match)
+    # print(chambres)
+    return chambres
 
 def get_gps(town, postcode = ""):
     geolocator = Nominatim(user_agent="property-scraper")
@@ -75,7 +111,6 @@ def richardson_get_listings():
 
     return richardson_listings
 
-
 def get_listing_details(link_url):
     
     URL = link_url
@@ -121,11 +156,15 @@ def get_listing_details(link_url):
 
     description = soup.find("span", class_="SIZE35-51").get_text()
     # print(description, "\n\n")
-    # description = str(soup.find("span", class_="SIZE35-51").contents).replace("<br/>", "").replace("</span>", "").replace('<span style="color: #CC0000">', "")
-
 
     # Bedroom information not listed, sometimes written in description
-    bedrooms = None
+    try:
+        bedrooms = find_chamb(description)
+        if bedrooms == 0:
+            bedrooms = None
+    except:
+        bedrooms = None
+    # print(bedrooms)
 
     # Rooms
     # Data stored in a table, code below finds the whole table, turns everything with b tag into a list, and removes <b> and <\b>
@@ -175,7 +214,6 @@ def get_listing_details(link_url):
             pass
         size = None
 
-
     # Photos
     # Finds the links to full res photos for each listing and returns them as a list
     photos_div = str(soup.find_all("img", class_="photomH")).split()
@@ -201,8 +239,8 @@ def get_listing_details(link_url):
 
 #pprint(richardson_get_links(1))
 
-#get_listing_details("http://www.richardsonimmobilier.com/vente-maison-Haute-Vallee-4044.cgi?00000LQUI4044")
-# pprint(get_listing_details("http://www.richardsonimmobilier.com/vente-terrain-Haute-Vallee-3684.cgi?00012LQUI3684").__dict__)
+# get_listing_details("http://www.richardsonimmobilier.com/vente-maison-Haute-Vallee-4044.cgi?00000LQUI4044")
+# pprint(get_listing_details("http://www.richardsonimmobilier.com/vente-propriete-Pays-de-Sault-3691.cgi?00006LQUI3691").__dict__)
 # get_listing_details("http://www.richardsonimmobilier.com/vente-terrain-Haute-Vallee-3684.cgi?00012LQUI3684")
 
 # richardson_get_listings()
