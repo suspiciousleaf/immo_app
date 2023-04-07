@@ -8,7 +8,7 @@ try:
     with open("listings.json", "r") as infile:
         listings = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/listings.jsonlistings.json", "r") as infile:
+    with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
         listings = json.load(infile)
 try:
     with open("postcodes_dict.json", "r") as infile:
