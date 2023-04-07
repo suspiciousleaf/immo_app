@@ -5,14 +5,25 @@ from json_search import search
 # from markupsafe import escape
 from flask import request
 
-with open("listings.json", "r") as infile:
-    listings = json.load(infile)
+try:
+    with open("listings.json", "r") as infile:
+        listings = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/listings.jsonlistings.json", "r") as infile:
+        listings = json.load(infile)
+try:
+    with open("postcodes_dict.json", "r") as infile:
+        postcodes_dict = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r") as infile:
+        postcodes_dict = json.load(infile)
 
-with open("postcodes_dict.json", "r") as infile:
-    postcodes_dict = json.load(infile)
-
-with open("ville_list_clean.json", "r") as infile:
-    town_list_clean = json.load(infile)
+try:
+    with open("ville_list_clean.json", "r") as infile:
+        town_list_clean = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
+        town_list_clean = json.load(infile)
 
 # Must change the above open json to this when hosted:
 # with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
@@ -25,7 +36,7 @@ app = Flask(__name__, static_url_path='/static')
 
 @app.route("/images/<path:folder>/<path:image>")
 def download_file(folder, image):
-    return send_file(f"static\\images\\{folder}\\{image}"
+    return send_file(f"static/images/{folder}/{image}"
     )
 
 # @app.route('/<name>/', methods=['GET'])
