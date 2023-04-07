@@ -9,6 +9,7 @@ from nestenn_immo_scrape import nestenn_immo_get_listings
 from api_immo_scrape import api_get_listings
 from ami09_immo_scrape import ami09_get_listings
 from immo_chez_toit import immo_chez_toit_get_listings
+from ami_image_download import get_ami_images
 import json
 import time
 from unidecode import unidecode
@@ -68,6 +69,7 @@ for listing in all_listings:
 with open("listings.json", "w") as outfile:
     json.dump(all_listings, outfile)
 
+get_ami_images()
 
 print("Total listings: ", len(all_listings))
 print("COMPLETE")

@@ -21,7 +21,7 @@ with open("ville_list_clean.json", "r") as infile:
 # Must do for flask_app.py, app.py, json_search.py
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
     
 # @app.route('/<name>/', methods=['GET'])
 # def name(name):
