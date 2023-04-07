@@ -4,14 +4,30 @@ import math
 from unidecode import unidecode
 from geopy.distance import distance
 
-with open("listings.json", "r") as infile:
-    listings = json.load(infile)
-
-with open("postcodes_gps_dict.json", "r") as infile:
-    gps_dict = json.load(infile)
-
-with open("ville_list_clean.json", "r") as infile:
-    town_list_clean = json.load(infile)
+try:
+    with open("listings.json", "r") as infile:
+        listings = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/listings.jsonlistings.json", "r") as infile:
+        listings = json.load(infile)
+try:
+    with open("postcodes_dict.json", "r") as infile:
+        postcodes_dict = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r") as infile:
+        postcodes_dict = json.load(infile)
+try:
+    with open("postcodes_gps_dict.json", "r") as infile:
+        gps_dict = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
+        gps_dict = json.load(infile)
+try:
+    with open("ville_list_clean.json", "r") as infile:
+        town_list_clean = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
+        town_list_clean = json.load(infile)
 
 agent_dict = {
       'ami': 'Ami Immobilier',
@@ -28,11 +44,11 @@ agent_dict = {
 }
 
 def filter_price(results, min_price, max_price):
-    print("filter_price ran")
+    # print("filter_price ran")
     return [x for x in results if min_price <= x["price"] <= max_price]
 
 def filter_agent(results, agent_list):
-    print("filter_agent ran")
+    # print("filter_agent ran")
     if agent_list:
         fullname_agent_search = [agent_dict[agent] for agent in agent_list]
         return [x for x in results if x["agent"] in fullname_agent_search]
@@ -54,48 +70,48 @@ def filter_keywords(results, keyword_list):
         return results
 
 def filter_type(results, type_list):
-    print("filter_type ran")
+    # print("filter_type ran")
     if type_list:
         return [x for x in results if x["types"].casefold() in type_list]
     else:
         return results
 
 def filter_beds(results, inc_none_beds, min_beds, max_beds):
-    print("filter_beds ran")
+    # print("filter_beds ran")
     if inc_none_beds == True:
         return [x for x in results if x["bedrooms"] == None or min_beds <= x["bedrooms"] <= max_beds]
     elif inc_none_beds == False:
         return [x for x in results if x["bedrooms"] != None and min_beds <= x["bedrooms"] <= max_beds]
     
 def filter_rooms(results, inc_none_rooms, min_rooms, max_rooms):
-    print("filter_rooms ran")
+    # print("filter_rooms ran")
     if inc_none_rooms == True:
         return [x for x in results if x["bedrooms"] == None or min_rooms <= x["bedrooms"] <= max_rooms]
     elif inc_none_rooms == False:
         return [x for x in results if x["bedrooms"] != None and min_rooms <= x["bedrooms"] <= max_rooms]    
 
 def filter_plot(results, inc_none_plot, min_plot, max_plot):
-    print("filter_plot ran")
+    # print("filter_plot ran")
     if inc_none_plot == True:
         return [x for x in results if x["plot"] == None or min_plot <= x["plot"] <= max_plot]
     elif inc_none_plot == False:
         return [x for x in results if x["plot"] != None and min_plot <= x["plot"] <= max_plot]
 
 def filter_size(results, inc_none_size, min_size, max_size):
-    print("filter_size ran")
+    # print("filter_size ran")
     if inc_none_size == True:
         return [x for x in results if x["size"] == None or min_size <= x["size"] <= max_size]
     elif inc_none_size == False:
         return [x for x in results if x["size"] != None and min_size <= x["size"] <= max_size]
 
 def get_distance(origin, destination):
-    print("get_distance ran")
+    # print("get_distance ran")
     origin = gps_dict[origin]
     destination = gps_dict[destination]
     return distance(origin, destination).km
 
 def filter_location(results, towns, search_radius, inc_none_location):
-    print("filter_location ran")
+    # print("filter_location ran")
     if towns:
         location_results = []
         for town in towns:
