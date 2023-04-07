@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_file, send_from_directory
 import json
 import math
 from json_search import search
@@ -22,7 +22,12 @@ with open("ville_list_clean.json", "r") as infile:
 
 
 app = Flask(__name__, static_url_path='/static')
-    
+
+@app.route("/images/<path:folder>/<path:image>")
+def download_file(folder, image):
+    return send_file(f"static\\images\\{folder}\\{image}"
+    )
+
 # @app.route('/<name>/', methods=['GET'])
 # def name(name):
 #     return "Hello, {}".format(name)
