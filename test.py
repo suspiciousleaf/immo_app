@@ -6,18 +6,22 @@ import os
 with open("listings.json", "r") as infile:
     results = json.load(infile)
 
-ref = "5320"
+for listing in results:
+    if listing["agent"] == "Ami Immobilier":
+        print(listing["link_url"])
 
-image_path = f"\\static\\images\\{ref}"
-cwd = os.getcwd()
-print(cwd)
-print(f"{cwd}{image_path}")
-try:
-    os.mkdir(f"{cwd}{image_path}")
-except:
-    pass
+# ref = "5320"
 
-# os.mkdir(os.getcwd() + "\\new")
+# image_path = f"\\static\\images\\{ref}"
+# cwd = os.getcwd()
+# print(cwd)
+# print(f"{cwd}{image_path}")
+# try:
+#     os.mkdir(f"{cwd}{image_path}")
+# except:
+#     pass
+
+# # os.mkdir(os.getcwd() + "\\new")
 
 
 

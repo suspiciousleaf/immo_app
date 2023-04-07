@@ -96,7 +96,14 @@ def get_listing_details(link_url):
 
     # Get ref
     ref_div = soup.find('table', class_="main_tableau_acf").get_text()
+    # print(ref_div)
     ref = "".join([num for num in ref_div if num.isdigit()])
+    # print("ref:", ref)
+
+    if ref == "":
+        ref_div_2 = link_url.split("/")[-2].split("-")[0]
+        if ref_div_2.isnumeric():
+            ref = ref_div_2
     # print("ref:", ref)
 
     # Get price
@@ -176,8 +183,8 @@ def get_listing_details(link_url):
     # pprint(gps)
     return listing
 
-# pprint(get_listing_details("https://www.ami09.com/produit/5623-maison-cathare/").__dict__)
-# get_listing_details("https://www.ami09.com/produit/5669-au-pied-des-pyrenees/")
+# pprint(get_listing_details("https://www.ami09.com/produit/5219-sault/").__dict__)
+# get_listing_details("https://www.ami09.com/produit/5219-sault/")
 # get_listing_details("https://www.ami09.com/produit/5701-maison-lavelanet/")
 # ami09_get_listings()
 #ami09_get_links(1)
