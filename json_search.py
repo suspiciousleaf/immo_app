@@ -72,7 +72,7 @@ def filter_keywords(results, keyword_list):
 def filter_type(results, type_list):
     # print("filter_type ran")
     if type_list:
-        return [x for x in results if x["types"].casefold() in type_list]
+        return [x for x in results if x["types"].capitalize() in type_list]
     else:
         return results
 
@@ -154,29 +154,39 @@ all_type_list = list(all_types_set)
 
 
 def search(listings, type_list = None, agent_list = None, keyword_list = None, inc_none_location = False, towns = None, search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, inc_none_rooms = True, min_rooms = 0, max_rooms = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf):
-    # print(len(listings))
+    if print_filter_results:
+        print("Full results list length:", len(listings))
     results_list = filter_price(listings, min_price, max_price)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After price filter:", len(results_list))
     results_list = filter_agent(results_list, agent_list)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After agent filter:", len(results_list))
     results_list = filter_type(results_list, type_list)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After type filter:", len(results_list))
     results_list = filter_beds(results_list, inc_none_beds, min_beds, max_beds)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After bedrooms filter:", len(results_list))
     results_list = filter_rooms(results_list, inc_none_rooms, min_rooms, max_rooms)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After room filter:", len(results_list))
     results_list = filter_plot(results_list, inc_none_plot, min_plot, max_plot)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After plot filter:", len(results_list))
     results_list = filter_size(results_list, inc_none_size, min_size, max_size)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After size filter:", len(results_list))
     results_list = filter_keywords(results_list, keyword_list)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After keyword filter:", len(results_list))
     results_list = filter_location(results_list, towns, search_radius, inc_none_location)
-    # print(len(results_list))
+    if print_filter_results:
+        print("After location filter:", len(results_list))
 
     return results_list
 
-
+print_filter_results = False
 # pprint(agent_list)
 
 # pprint(all_type_list)
