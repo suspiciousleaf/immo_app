@@ -1,6 +1,6 @@
 [
   {
-    "types": "Maison",
+    "types": "Terrain",
     "town": null,
     "postcode": null,
     "price": 12000,
@@ -16,11 +16,10 @@
     "photos_hosted": [
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5316/0.jpg"
     ],
-    "gps": null,
-    "id": 0
+    "gps": null
   },
   {
-    "types": "Maison",
+    "types": "Terrain",
     "town": null,
     "postcode": null,
     "price": 25000,
@@ -36,11 +35,10 @@
     "photos_hosted": [
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5487/0.jpg"
     ],
-    "gps": null,
-    "id": 1
+    "gps": null
   },
   {
-    "types": "Maison",
+    "types": "Terrain",
     "town": null,
     "postcode": null,
     "price": 26000,
@@ -62,8 +60,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5622/1.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5622/2.jpg"
     ],
-    "gps": null,
-    "id": 2
+    "gps": null
   },
   {
     "types": "Maison",
@@ -90,12 +87,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5720/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5720/3.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 3
+    "gps": [44.0918084, 5.4087581]
   },
   {
-    "types": "Maison",
-    "town": "Immeuble - cathare",
+    "types": "Immeuble",
+    "town": "Immeuble \u2013 cathare",
     "postcode": null,
     "price": 40000,
     "agent": "Ami Immobilier",
@@ -118,8 +114,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5689/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5689/3.jpg"
     ],
-    "gps": null,
-    "id": 4
+    "gps": null
   },
   {
     "types": "Maison",
@@ -150,8 +145,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5671/4.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5671/5.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 5
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
     "types": "Maison",
@@ -178,12 +172,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/3036/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/3036/3.jpg"
     ],
-    "gps": null,
-    "id": 6
+    "gps": null
   },
   {
-    "types": "Maison",
-    "town": "Terrain - sault",
+    "types": "Terrain",
+    "town": "Terrain \u2013 sault",
     "postcode": null,
     "price": 40000,
     "agent": "Ami Immobilier",
@@ -200,8 +193,67 @@
     "photos_hosted": [
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5558/0.jpg"
     ],
-    "gps": [46.8755067, -0.5392819900098187],
-    "id": 7
+    "gps": [46.8755067, -0.5392819900098187]
+  },
+  {
+    "types": "Maison",
+    "town": "Puivert",
+    "postcode": "11230",
+    "price": 50000,
+    "agent": "Ami Immobilier",
+    "ref": "5738",
+    "bedrooms": 2,
+    "rooms": 3,
+    "plot": null,
+    "size": 55,
+    "link_url": "https://www.ami09.com/produit/5738-maison-puivert-11230/",
+    "description": "Maison de village Limite Aude-Ari\u00e8ge, maison de village, mitoyenne 2 cot\u00e9s, ni cour, ni jardin. Comprend : pi\u00e8ce \u00e0 vivre\u00a0 cuisine, salle \u00e0 manger salon, salle d\u2019eau, toilettes. A l\u2019\u00e9tage : 2 chambres, espace rangements et grenier. Id\u00e9al pour maison de vacances, pied \u00e0 terre.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/facade-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4394.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4395.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4397.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4399.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4401.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4404.png"
+    ],
+    "photos_hosted": [
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/0.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/1.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/2.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/3.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/4.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/5.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/6.jpg"
+    ],
+    "gps": [42.9199133, 2.0464486]
+  },
+  {
+    "types": "Maison",
+    "town": "Carcassonne",
+    "postcode": "11000",
+    "price": 50000,
+    "agent": "Ami Immobilier",
+    "ref": "5736",
+    "bedrooms": 2,
+    "rooms": 6,
+    "plot": null,
+    "size": 80,
+    "link_url": "https://www.ami09.com/produit/5736-maison-carcassonne-11000/",
+    "description": "Carcassonne Centre ville Maison avec garage comprenant RC grande pi\u00e8ce ,wc.1er \u00e9tage cuisine \u00e9quip\u00e9e s\u00e9jour,salon,wc.2\u00e8me \u00e9tage deux chambres,salle d\u2019eau,wc.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_115126.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114305.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114027.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114438.jpg"
+    ],
+    "photos_hosted": [
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5736/0.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5736/1.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5736/2.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5736/3.jpg"
+    ],
+    "gps": [43.2130358, 2.3491069]
   },
   {
     "types": "Maison",
@@ -236,73 +288,10 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5628/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5628/7.jpg"
     ],
-    "gps": [42.9029283, 1.9340613],
-    "id": 8
+    "gps": [42.9029283, 1.9340613]
   },
   {
-    "types": "Maison",
-    "town": "Puivert",
-    "postcode": "11230",
-    "price": 50000,
-    "agent": "Ami Immobilier",
-    "ref": "5738",
-    "bedrooms": 2,
-    "rooms": 3,
-    "plot": null,
-    "size": 55,
-    "link_url": "https://www.ami09.com/produit/5738-maison-puivert-11230/",
-    "description": "Maison de village Limite Aude-Ari\u00e8ge, maison de village, mitoyenne 2 cot\u00e9s, ni cour, ni jardin. Comprend : pi\u00e8ce \u00e0 vivre\u00a0 cuisine, salle \u00e0 manger salon, salle d\u2019eau, toilettes. A l\u2019\u00e9tage : 2 chambres, espace rangements et grenier. Id\u00e9al pour maison de vacances, pied \u00e0 terre.",
-    "photos": [
-      "https://www.ami09.com/wp-content/uploads/2023/04/facade-1.jpg",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4394.png",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4395.png",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4397.png",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4399.png",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4401.png",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4404.png"
-    ],
-    "photos_hosted": [
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/0.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/1.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/2.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/3.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/4.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/5.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5738/6.jpg"
-    ],
-    "gps": [42.9199133, 2.0464486],
-    "id": 9
-  },
-  {
-    "types": "Maison",
-    "town": "Carcassonne",
-    "postcode": "11000",
-    "price": 50000,
-    "agent": "Ami Immobilier",
-    "ref": "5736",
-    "bedrooms": 2,
-    "rooms": 6,
-    "plot": null,
-    "size": 80,
-    "link_url": "https://www.ami09.com/produit/5736-maison-carcassonne-11000/",
-    "description": "Carcassonne Centre ville Maison avec garage comprenant RC grande pi\u00e8ce ,wc.1er \u00e9tage cuisine \u00e9quip\u00e9e s\u00e9jour,salon,wc.2\u00e8me \u00e9tage deux chambres,salle d\u2019eau,wc.",
-    "photos": [
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_115126.jpg",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114305.jpg",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114027.jpg",
-      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114438.jpg"
-    ],
-    "photos_hosted": [
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5736/0.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5736/1.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5736/2.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5736/3.jpg"
-    ],
-    "gps": [43.2130358, 2.3491069],
-    "id": 10
-  },
-  {
-    "types": "Maison",
+    "types": "Terrain",
     "town": null,
     "postcode": null,
     "price": 50000,
@@ -316,8 +305,32 @@
     "description": "Sur le site de PUIVERT TERRAIN constructible de 2300m\u00b2 exposition sud avec jolie vue,eau,edf,\u00e9gout en limite de parcelle.",
     "photos": [],
     "photos_hosted": [],
-    "gps": null,
-    "id": 11
+    "gps": null
+  },
+  {
+    "types": "Maison",
+    "town": "Camurac",
+    "postcode": null,
+    "price": 60000,
+    "agent": "Ami Immobilier",
+    "ref": "5719",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5719-maison-camurac/",
+    "description": "Sur le site de CAMURAC D\u00e9pendance de 60m\u00b2\u00a0 avec jardinet.Eau,\u00e9lectricit\u00e9,\u00e9gout,charpente bon \u00e9tat,toiture neuve,possibilit\u00e9 de transformer en habitation.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_121913-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221119_151811-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221119_151749-1-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5719/0.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5719/1.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5719/2.jpg"
+    ],
+    "gps": [42.7968727, 1.9178977]
   },
   {
     "types": "Maison",
@@ -350,34 +363,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5715/5.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5715/6.jpg"
     ],
-    "gps": null,
-    "id": 12
-  },
-  {
-    "types": "Maison",
-    "town": "Camurac",
-    "postcode": null,
-    "price": 60000,
-    "agent": "Ami Immobilier",
-    "ref": "5719",
-    "bedrooms": null,
-    "rooms": null,
-    "plot": null,
-    "size": null,
-    "link_url": "https://www.ami09.com/produit/5719-maison-camurac/",
-    "description": "Sur le site de CAMURAC D\u00e9pendance de 60m\u00b2\u00a0 avec jardinet.Eau,\u00e9lectricit\u00e9,\u00e9gout,charpente bon \u00e9tat,toiture neuve,possibilit\u00e9 de transformer en habitation.",
-    "photos": [
-      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_121913-scaled.jpg",
-      "https://www.ami09.com/wp-content/uploads/2022/12/20221119_151811-scaled.jpg",
-      "https://www.ami09.com/wp-content/uploads/2022/12/20221119_151749-1-scaled.jpg"
-    ],
-    "photos_hosted": [
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5719/0.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5719/1.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5719/2.jpg"
-    ],
-    "gps": [42.7968727, 1.9178977],
-    "id": 13
+    "gps": null
   },
   {
     "types": "Maison",
@@ -400,8 +386,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5698/0.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5698/1.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 14
+    "gps": [44.0918084, 5.4087581]
   },
   {
     "types": "Maison",
@@ -424,8 +409,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5706/0.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5706/1.jpg"
     ],
-    "gps": null,
-    "id": 15
+    "gps": null
   },
   {
     "types": "Maison",
@@ -452,12 +436,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5559/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5559/3.jpg"
     ],
-    "gps": [42.9332121, 1.8487179],
-    "id": 16
+    "gps": [42.9332121, 1.8487179]
   },
   {
     "types": "Maison",
-    "town": "Esperaza",
+    "town": "Esp\u00e9raza",
     "postcode": "11260",
     "price": 66000,
     "agent": "Ami Immobilier",
@@ -482,12 +465,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5726/3.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5726/4.jpg"
     ],
-    "gps": [42.933793, 2.2207631],
-    "id": 17
+    "gps": [42.933793, 2.2207631]
   },
   {
     "types": "Maison",
-    "town": "Maison - belesta",
+    "town": "Maison \u2013 belesta",
     "postcode": null,
     "price": 66000,
     "agent": "Ami Immobilier",
@@ -516,8 +498,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5723/5.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5723/6.jpg"
     ],
-    "gps": [42.9040384, 1.9316612],
-    "id": 18
+    "gps": [42.9040384, 1.9316612]
   },
   {
     "types": "Maison",
@@ -552,8 +533,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5652/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5652/7.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 19
+    "gps": [44.0918084, 5.4087581]
   },
   {
     "types": "Maison",
@@ -580,8 +560,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/3022/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/3022/3.jpg"
     ],
-    "gps": null,
-    "id": 20
+    "gps": null
   },
   {
     "types": "Maison",
@@ -618,12 +597,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5724/7.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5724/8.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 21
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
     "types": "Maison",
-    "town": "Belesta",
+    "town": "B\u00e9lesta",
     "postcode": "09300",
     "price": 75000,
     "agent": "Ami Immobilier",
@@ -650,8 +628,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5682/4.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5682/5.jpg"
     ],
-    "gps": [42.9029283, 1.9340613],
-    "id": 22
+    "gps": [42.9029283, 1.9340613]
   },
   {
     "types": "Maison",
@@ -678,8 +655,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5705/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5705/3.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 23
+    "gps": [44.0918084, 5.4087581]
   },
   {
     "types": "Maison",
@@ -714,8 +690,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5704/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5704/7.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 24
+    "gps": [44.0918084, 5.4087581]
   },
   {
     "types": "Maison",
@@ -742,8 +717,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5701/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5701/3.jpg"
     ],
-    "gps": [42.9332121, 1.8487179],
-    "id": 25
+    "gps": [42.9332121, 1.8487179]
   },
   {
     "types": "Maison",
@@ -774,8 +748,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5659/4.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5659/5.jpg"
     ],
-    "gps": [43.7458333, 0.6719444],
-    "id": 26
+    "gps": [43.7458333, 0.6719444]
   },
   {
     "types": "Maison",
@@ -802,11 +775,10 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5678/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5678/3.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 27
+    "gps": [44.0918084, 5.4087581]
   },
   {
-    "types": "Maison",
+    "types": "Immeuble",
     "town": null,
     "postcode": null,
     "price": 100000,
@@ -834,8 +806,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5520/4.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5520/5.jpg"
     ],
-    "gps": null,
-    "id": 28
+    "gps": null
   },
   {
     "types": "Maison",
@@ -874,8 +845,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5690/8.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5690/9.jpg"
     ],
-    "gps": null,
-    "id": 29
+    "gps": null
   },
   {
     "types": "Maison",
@@ -904,8 +874,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5731/3.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5731/4.jpg"
     ],
-    "gps": [42.9029283, 1.9340613],
-    "id": 30
+    "gps": [42.9029283, 1.9340613]
   },
   {
     "types": "Maison",
@@ -934,8 +903,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5684/3.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5684/4.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 31
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
     "types": "Immeuble",
@@ -974,8 +942,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5733/8.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5733/9.jpg"
     ],
-    "gps": [42.9332121, 1.8487179],
-    "id": 32
+    "gps": [42.9332121, 1.8487179]
   },
   {
     "types": "Immeuble",
@@ -1010,8 +977,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5717/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5717/7.jpg"
     ],
-    "gps": [42.9199133, 2.0464486],
-    "id": 33
+    "gps": [42.9199133, 2.0464486]
   },
   {
     "types": "Maison",
@@ -1044,8 +1010,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5716/5.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5716/6.jpg"
     ],
-    "gps": [43.4328381, -0.0154831],
-    "id": 34
+    "gps": [43.4328381, -0.0154831]
   },
   {
     "types": "Maison",
@@ -1086,12 +1051,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5713/9.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5713/10.jpg"
     ],
-    "gps": [42.876584699999995, 2.1941008666750825],
-    "id": 35
+    "gps": [42.876584699999995, 2.1941008666750825]
   },
   {
     "types": "Maison",
-    "town": "Proche montsegur",
+    "town": "Proche monts\u00e9gur",
     "postcode": null,
     "price": 130000,
     "agent": "Ami Immobilier",
@@ -1120,8 +1084,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5714/5.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5714/6.jpg"
     ],
-    "gps": null,
-    "id": 36
+    "gps": null
   },
   {
     "types": "Maison",
@@ -1150,12 +1113,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5480/3.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5480/4.jpg"
     ],
-    "gps": null,
-    "id": 37
+    "gps": null
   },
   {
-    "types": "Maison ",
-    "town": "Proche montsegur",
+    "types": "Maison",
+    "town": "Proche monts\u00e9gur",
     "postcode": "09300",
     "price": 135000,
     "agent": "Ami Immobilier",
@@ -1184,8 +1146,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5735/5.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5735/6.jpg"
     ],
-    "gps": null,
-    "id": 38
+    "gps": null
   },
   {
     "types": "Maison",
@@ -1216,8 +1177,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5728/4.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5728/5.jpg"
     ],
-    "gps": [42.9638998, 1.6053807],
-    "id": 39
+    "gps": [42.9638998, 1.6053807]
   },
   {
     "types": "Maison",
@@ -1260,12 +1220,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5707/10.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5707/11.jpg"
     ],
-    "gps": [42.9029283, 1.9340613],
-    "id": 40
+    "gps": [42.9029283, 1.9340613]
   },
   {
     "types": "Maison",
-    "town": "Proche montsegur",
+    "town": "Proche monts\u00e9gur",
     "postcode": "09300",
     "price": 155000,
     "agent": "Ami Immobilier",
@@ -1300,8 +1259,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5734/8.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5734/9.jpg"
     ],
-    "gps": null,
-    "id": 41
+    "gps": null
   },
   {
     "types": "Maison",
@@ -1336,8 +1294,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5722/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5722/7.jpg"
     ],
-    "gps": [42.9029283, 1.9340613],
-    "id": 42
+    "gps": [42.9029283, 1.9340613]
   },
   {
     "types": "Maison",
@@ -1368,8 +1325,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5668/4.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5668/5.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 43
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
     "types": "Maison",
@@ -1402,8 +1358,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5709/5.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5709/6.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 44
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
     "types": "Maison",
@@ -1444,8 +1399,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5732/9.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5732/10.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 45
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
     "types": "Maison",
@@ -1480,8 +1434,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5695/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5695/7.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 46
+    "gps": [44.0918084, 5.4087581]
   },
   {
     "types": "Maison",
@@ -1526,11 +1479,10 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5681/11.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5681/12.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 47
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
-    "types": "Maison",
+    "types": "Chalet",
     "town": "Sault",
     "postcode": null,
     "price": 195000,
@@ -1558,8 +1510,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5700/4.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5700/5.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 48
+    "gps": [44.0918084, 5.4087581]
   },
   {
     "types": "Maison",
@@ -1584,8 +1535,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/1734/1.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/1734/2.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 49
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
     "types": "Maison",
@@ -1616,8 +1566,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5624/4.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5624/5.jpg"
     ],
-    "gps": [43.2835033, 2.9144722966704064],
-    "id": 50
+    "gps": [43.2835033, 2.9144722966704064]
   },
   {
     "types": "Maison",
@@ -1652,8 +1601,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5711/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5711/7.jpg"
     ],
-    "gps": [43.2130358, 2.3491069],
-    "id": 51
+    "gps": [43.2130358, 2.3491069]
   },
   {
     "types": "Maison",
@@ -1698,8 +1646,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5730/11.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5730/12.jpg"
     ],
-    "gps": [42.9029283, 1.9340613],
-    "id": 52
+    "gps": [42.9029283, 1.9340613]
   },
   {
     "types": "Maison",
@@ -1738,8 +1685,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/4060/8.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/4060/9.jpg"
     ],
-    "gps": [43.0328307, 1.900377],
-    "id": 53
+    "gps": [43.0328307, 1.900377]
   },
   {
     "types": "Maison",
@@ -1776,12 +1722,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5697/7.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5697/8.jpg"
     ],
-    "gps": null,
-    "id": 54
+    "gps": null
   },
   {
-    "types": "Maison",
-    "town": "Corps de ferme - mazeres",
+    "types": "Corps de ferme",
+    "town": "Corps de ferme \u2013 maz\u00e8res",
     "postcode": "09270",
     "price": 371000,
     "agent": "Ami Immobilier",
@@ -1816,8 +1761,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5727/8.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5727/9.jpg"
     ],
-    "gps": null,
-    "id": 55
+    "gps": null
   },
   {
     "types": "Maison",
@@ -1852,46 +1796,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5687/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5687/7.jpg"
     ],
-    "gps": [42.9638998, 1.6053807],
-    "id": 56
-  },
-  {
-    "types": "Maison",
-    "town": null,
-    "postcode": null,
-    "price": 395000,
-    "agent": "Ami Immobilier",
-    "ref": "5340",
-    "bedrooms": 4,
-    "rooms": null,
-    "plot": 6266,
-    "size": 200,
-    "link_url": "https://www.ami09.com/produit/5340-proprietes/",
-    "description": "Sur le chemin de Monts\u00e9gur demeure de caract\u00e8re sur un site historique, dans un cadre bucolique, avant tout un lieu o\u00f9 il fait bon vivre. 600m\u00b2 b\u00e2tis et restaur\u00e9s dans l\u2019ensemble dont 200m\u00b2 am\u00e9nag\u00e9s en habitation, soit une cuisine \u00e9quip\u00e9e, s\u00e9jour salon, 4 chambres, salle d\u2019eau, wc, buanderie chaufferie (fioul). De grands espaces am\u00e9nageables, des d\u00e9pendances, un parc de toute beaut\u00e9, le tout bord\u00e9 d\u2019eau.",
-    "photos": [
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5020.png",
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5024.png",
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5032.png",
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5047.png",
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5059.png",
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5061.png",
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5063.png",
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5070.png",
-      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5073.png"
-    ],
-    "photos_hosted": [
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/0.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/1.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/2.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/3.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/4.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/5.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/6.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/7.jpg",
-      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/8.jpg"
-    ],
-    "gps": null,
-    "id": 57
+    "gps": [42.9638998, 1.6053807]
   },
   {
     "types": "Maison",
@@ -1932,8 +1837,44 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/9.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/10.jpg"
     ],
-    "gps": null,
-    "id": 58
+    "gps": null
+  },
+  {
+    "types": "Propri\u00e9t\u00e9",
+    "town": null,
+    "postcode": null,
+    "price": 395000,
+    "agent": "Ami Immobilier",
+    "ref": "5340",
+    "bedrooms": 4,
+    "rooms": null,
+    "plot": 6266,
+    "size": 200,
+    "link_url": "https://www.ami09.com/produit/5340-proprietes/",
+    "description": "Sur le chemin de Monts\u00e9gur demeure de caract\u00e8re sur un site historique, dans un cadre bucolique, avant tout un lieu o\u00f9 il fait bon vivre. 600m\u00b2 b\u00e2tis et restaur\u00e9s dans l\u2019ensemble dont 200m\u00b2 am\u00e9nag\u00e9s en habitation, soit une cuisine \u00e9quip\u00e9e, s\u00e9jour salon, 4 chambres, salle d\u2019eau, wc, buanderie chaufferie (fioul). De grands espaces am\u00e9nageables, des d\u00e9pendances, un parc de toute beaut\u00e9, le tout bord\u00e9 d\u2019eau.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5020.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5024.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5032.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5047.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5059.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5061.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5063.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5070.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5073.png"
+    ],
+    "photos_hosted": [
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/0.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/1.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/2.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/3.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/4.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/5.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/6.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/7.jpg",
+      "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5340/8.jpg"
+    ],
+    "gps": null
   },
   {
     "types": "Maison",
@@ -1960,8 +1901,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5219/2.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5219/3.jpg"
     ],
-    "gps": [44.0918084, 5.4087581],
-    "id": 59
+    "gps": [44.0918084, 5.4087581]
   },
   {
     "types": "Maison",
@@ -2002,12 +1942,11 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5721/9.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5721/10.jpg"
     ],
-    "gps": null,
-    "id": 60
+    "gps": null
   },
   {
     "types": "Maison",
-    "town": "Au pied des pyrenees",
+    "town": "Au pied des pyr\u00e9n\u00e9es",
     "postcode": null,
     "price": 500000,
     "agent": "Ami Immobilier",
@@ -2038,8 +1977,7 @@
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5669/6.jpg",
       "https://suspiciousleaf.pythonanywhere.com/static/images/ami/5669/7.jpg"
     ],
-    "gps": [43.0651967, 0.1491916],
-    "id": 61
+    "gps": [43.0651967, 0.1491916]
   },
   {
     "types": "Terrain",

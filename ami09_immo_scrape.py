@@ -11,7 +11,7 @@ import shutil
 from image_downloader import make_photos_dir, dl_comp_photo
 
 try:
-    with open("listings.json", "r") as infile:
+    with open("api.json", "r") as infile:
         listings_json = json.load(infile)
 except:
     listings_json = []
@@ -120,10 +120,13 @@ def get_listing_details(link_url):
     #print(URL)
     # Get type
     types_div = soup.find('h1').get_text()
-    if types_div.count("-") == 2:
-         types = types_div.split("-")[1]
+    types_div_cleaned = types_div.replace("-", ";").replace("–", ";").replace("—", ";")
+    if types_div_cleaned.count(";") == 2:
+        types = types_div_cleaned.split(";")[1].strip().capitalize()
     else:
          types = "Maison"
+    if types[-1] == "s":
+        types = types[:-1]
     # print("Type:", types)
 
 
@@ -225,9 +228,6 @@ def get_listing_details(link_url):
     photos_hosted = []
     for i in range(len(photos)):
         photos_hosted.append(dl_comp_photo(photos[i], ref, i, cwd, agent_abbr))
-
-
-    # pprint(photos)
     
     if town == None:
          gps = None
@@ -239,20 +239,20 @@ def get_listing_details(link_url):
 
     # pprint(photos_hosted)
 
-    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
+    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)  
 
     # pprint(listing.__dict__)
     return listing
 
 cwd = os.getcwd()
 
-# pprint(get_listing_details("https://www.ami09.com/produit/5219-sault/").__dict__)
-# get_listing_details("https://www.ami09.com/produit/5219-sault/")
+# pprint(get_listing_details("https://www.ami09.com/produit/5316-terrains/").__dict__)
+# get_listing_details("https://www.ami09.com/produit/5316-terrains/")
 # get_listing_details("https://www.ami09.com/produit/5701-maison-lavelanet/")
 # ami09_get_listings()
 #ami09_get_links(1)
 
-# ami09_listings = ami09_get_listings()
+ami09_listings = ami09_get_listings()
 
-# with open("api.json", "w") as outfile:
-#     json.dump(ami09_listings, outfile)
+with open("api.json", "w") as outfile:
+    json.dump(ami09_listings, outfile)
