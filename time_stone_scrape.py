@@ -5,17 +5,29 @@ import re
 import math
 from models import Listing
 from geopy.geocoders import Nominatim
+import json
+import os
+from json_search import agent_dict
+import shutil
+from image_downloader import make_photos_dir, dl_comp_photo
 
-def get_gps(town, postcode = ""):
+#   The code below looks for a json holding previous scraped info, and will import it if present. The previous json is imported so the scraper can check if a property listing has already been scraped, and if it has it will skip over that listing to save time. Any listings that were previously scraped and are no longer present on the agent website will be deleted, and any new listings found will be scraped and added. This is all done using the URL, so changes within a listing (eg price, photos) will not be updated. The website is only there to give an overview of all available properties, so users will view the property on the agent website if interested and will see any updates there.
+
+try:
+    with open("listings.json", "r") as infile:
+        listings_json = json.load(infile)
+except:
+    listings_json = []
+
+def get_gps(town, postcode = ""):   # This uses geolocator to find GPS coordinates for the town where the property is located
     geolocator = Nominatim(user_agent="property-scraper")
     location = geolocator.geocode(town + " " + postcode + " France")
     gps = [location.latitude, location.longitude]
     return gps
 
-# URL https://www.timeandstoneimmobilier.com/fr/liste.htm?page=1
-
 def time_stone_get_links(i):
-    URL = "https://www.timeandstoneimmobilier.com/fr/liste.htm?page=" + str(i)
+    URL = f"https://www.timeandstoneimmobilier.com/fr/liste.htm?tri=DTE_CREA&menuSave=1&tdp=1&page={i}&TypeModeListeForm=text&lieu-alentour=0#page={i}&tdp=1&menuSave=1&tri=DTE_CREA&TypeModeListeForm=text"
+
     page = requests.get(URL)
 
     time_stone_soup = BeautifulSoup(page.content, "html.parser")
@@ -25,7 +37,9 @@ def time_stone_get_links(i):
             links_raw.add(link.get('href'))
 
     links_raw.discard(None)
-    links = [link for link in links_raw if "https://www.timeandstoneimmobilier.com/fr/detail.htm" in link]        
+    links = list(set([link for link in links_raw if "https://www.timeandstoneimmobilier.com/fr/detail.htm" in link]))
+
+    # Added to remove any potential duplicates
 
     return links
 
@@ -47,23 +61,63 @@ def time_stone_get_listings():
         links += time_stone_get_links(i)
 
     print("Number of unique listing URLs found:", len(links))
+    # pprint(links)
 
-    listings = []
-    for i in range(len(links)):
-        new_listing = get_listing_details(links[i])
-        listings.append(new_listing)
+    listings = [listing for listing in listings_json if listing["agent"] == "Time and Stone Immobilier"]
+
+    links_old = []
+    for listing in listings:
+        if listing["agent"] == "Time and Stone Immobilier":
+            links_old.append(listing["link_url"])
+    # print("Listings found from prevous scrape:", len(links_old))
+
+    links_to_scrape = [link for link in links if link not in links_old] # Identifies any listing URLs that haven't previously beed scraped
+    print("New listings to add:", len(links_to_scrape))
+    # pprint(links_to_scrape)
+    links_dead = [link for link in links_old if link not in links]  # Identifies any previously scraped URLs that are no longer online
+    print("Old listings to remove:", len(links_dead))
+    # pprint(links_dead)
+
+    listing_photos_to_delete_local = []
+
+    if links_dead:
+        for listing in listings:
+            if listing["link_url"] in links_dead:
+                listing_photos_to_delete_local.append(listing["ref"])
+                listings.remove(listing)
+
+        for listing_ref in listing_photos_to_delete_local:
+            try:
+                shutil.rmtree(f'{cwd}/static/images/time/{listing_ref}', ignore_errors=True) 
+            except:
+                pass
+
+    counter_success = 0
+    counter_fail = 0
+    failed_scrape_links = []
+    for i in range(len(links_to_scrape)):
+        try:
+            new_listing = get_listing_details(links_to_scrape[i])
+            listings.append(new_listing.__dict__)
+            counter_success += 1
+        except:
+            failed_scrape_links.append(links_to_scrape[i])
+            counter_fail += 1
+
+    if links_to_scrape:
+        print(f"Successfully scraped: {counter_success}/{len(links_to_scrape)}")
+
+    if failed_scrape_links:
+        print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
+        pprint(failed_scrape_links)
+
+    listings.sort(key=lambda x: x["price"])
         
-    listings.sort(key=lambda x: x.price)
-    time_stone_listings = [listing.__dict__ for listing in listings]
-    
-
-    # for listing in time_stome_listings:
+    # for listing in listings:
     #     pprint(listing)
     #     print("\n")
 
-    return time_stone_listings
-
-    #print("Number of unique listing URLs found:", len(links))
+    return listings
 
 def get_listing_details(link_url):
     agent = "Time and Stone Immobilier"
@@ -94,7 +148,7 @@ def get_listing_details(link_url):
     price_div = soup.find('div', class_="detail-bien-prix")
     price = price_div.find(string=re.compile("€"))
     price = int(price.replace(" ", "").strip("€"))
-    #print("Price:", price, "€")
+    # print("Price:", price, "€")
 
     # Get ref
 
@@ -105,7 +159,7 @@ def get_listing_details(link_url):
     prop_ref = "".join([char for char in str(prop_ref[1]) if char.isnumeric()])
     ref = prop_ref
 
-    #print("ref:", prop_ref)
+    # print("ref:", prop_ref)
 
     # Get property details
     # This returns a whole chunk of text for the property specs that gets separated to find the number of bedrooms, rooms, house size and land size. It's done in a janky way that Amy will hate
@@ -175,6 +229,17 @@ def get_listing_details(link_url):
     photos = [link.replace('"/>', "") for link in photos]
     #pprint(photos)
 
+    agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
+
+    make_photos_dir(ref, cwd, agent_abbr)
+
+    photos_hosted = []
+    for i in range(len(photos)):
+        try:
+            photos_hosted.append(dl_comp_photo(photos[i], ref, i, cwd, agent_abbr))
+        except:
+            pass
+
     if town == None:
          gps = None
     else:
@@ -183,7 +248,15 @@ def get_listing_details(link_url):
         except:
             gps = None
 
-    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, gps)
+    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
     return listing
 
+cwd = os.getcwd()
+
 #pprint(get_listing_details("https://www.timeandstoneimmobilier.com/fr/detail.htm?cle=11037181&monnaie=2").__dict__)
+
+# time_stone_listings = time_stone_get_listings()
+
+# with open("api.json", "w") as outfile:
+#     json.dump(time_stone_listings, outfile)
+

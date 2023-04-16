@@ -1,8 +1,7 @@
-from flask import Flask, send_file, send_from_directory
+from flask import Flask, send_file
 import json
 import math
 from json_search import search
-# from markupsafe import escape
 from flask import request
 
 try:
@@ -34,9 +33,9 @@ except:
 
 app = Flask(__name__, static_url_path='/static')
 
-@app.route("/images/<path:folder>/<path:image>")
-def download_file(folder, image):
-    return send_file(f"static/images/{folder}/{image}"
+@app.route("/static/images/<path:agent>/<path:ref>/<path:image>")
+def download_file(agent, ref, image):
+    return send_file(f"static/images/{agent}/{ref}/{image}"
     )
 
 # @app.route('/<name>/', methods=['GET'])
@@ -117,3 +116,6 @@ def search_call():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=105)
 
+# Richardson add image download and host
+
+# Change so that only new listings get scraped. Make new list of URLs, make list of old URLs from json, delete any listings from json that aren't in the new list, and scrape new listings to add to json

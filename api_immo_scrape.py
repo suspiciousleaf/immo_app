@@ -1,10 +1,20 @@
 from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
-import re
 import math
 from models import Listing
 from geopy.geocoders import Nominatim
+import json
+from json_search import agent_dict
+import shutil
+from image_downloader import make_photos_dir, dl_comp_photo
+import os
+
+try:
+    with open("listings.json", "r") as infile:
+        listings_json = json.load(infile)
+except:
+    listings_json = []
 
 def get_gps(town, postcode = ""):
     geolocator = Nominatim(user_agent="property-scraper")
@@ -43,20 +53,62 @@ def api_get_listings():
         links += api_get_links(i)
     print("Number of unique listing URLs found:", len(links))
 
-    listings = []
-    for i in range(len(links)):
-        new_listing = get_listing_details(links[i])
-        listings.append(new_listing)
-        
-    listings.sort(key=lambda x: x.price)
-    api_listings = [listing.__dict__ for listing in listings]
-    
+    listings = [listing for listing in listings_json if listing["agent"] == "A.P.I."]
 
-    # for listing in api_listings:
+    links_old = []
+    for listing in listings:
+        if listing["agent"] == "A.P.I.":
+            links_old.append(listing["link_url"])
+    # print("Listings found from prevous scrape:", len(links_old))
+
+    links_to_scrape = [link for link in links if link not in links_old]
+    print("New listings to add:", len(links_to_scrape))
+    # pprint(links_to_scrape)
+    links_dead = [link for link in links_old if link not in links]
+    print("Old listings to remove:", len(links_dead))
+    # pprint(links_dead)
+
+    listing_photos_to_delete_local = []
+
+    if links_dead:
+        for listing in listings:
+            if listing["link_url"] in links_dead:
+                listing_photos_to_delete_local.append(listing["ref"])
+                listings.remove(listing)
+
+        for listing_ref in listing_photos_to_delete_local:
+            try:
+                shutil.rmtree(f'{cwd}/static/images/api/{listing_ref}', ignore_errors=True)
+            except:
+                pass
+
+    counter_success = 0
+    counter_fail = 0
+    failed_scrape_links = []
+    for i in range(len(links_to_scrape)):
+        try:
+            new_listing = get_listing_details(links_to_scrape[i])
+            listings.append(new_listing.__dict__)
+            counter_success += 1
+        except:
+            # print(f"Failed to scrape listing {links_to_scrape[i]}")
+            failed_scrape_links.append(links_to_scrape[i])
+            counter_fail += 1
+
+    if links_to_scrape:
+        print(f"Successfully scraped: {counter_success}/{len(links_to_scrape)}")
+
+    if failed_scrape_links:
+        print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
+        pprint(failed_scrape_links)
+
+    listings.sort(key=lambda x: x["price"])
+        
+    # for listing in listings:
     #     pprint(listing)
     #     print("\n")
 
-    return api_listings
+    return listings
 
 def get_listing_details(link_url):
     agent = "A.P.I."
@@ -146,6 +198,14 @@ def get_listing_details(link_url):
               photos.append(element.get("src"))
     # pprint(photos)
 
+    agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
+
+    make_photos_dir(ref, cwd, agent_abbr)
+
+    photos_hosted = []
+    for i in range(len(photos)):
+        photos_hosted.append(dl_comp_photo(photos[i], ref, i, cwd, agent_abbr))
+
     if town == None:
          gps = None
     else:
@@ -153,11 +213,18 @@ def get_listing_details(link_url):
             gps = get_gps(town)
         except:
             gps = None
-    # print(gps)
-    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, gps)
+   
+    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
     # pprint(listing.__dict__)
     return listing
+
+cwd = os.getcwd()
 
 #pprint(get_listing_details("http://www.pyrenees-immobilier.com/fr/vente-maison-de-campagne-lasserre-p-r7-0900418119.html").__dict__)
 # api_get_listings()
 # api_get_links(1)
+
+# api_listings = api_get_listings()
+
+# with open("api.json", "w") as outfile:
+#     json.dump(api_listings, outfile)

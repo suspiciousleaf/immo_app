@@ -1,3 +1,5 @@
+# This program is used to build the dictionary of postcodes with their GPS coordinates, output is postcodes_gps_dict.json
+
 from pprint import pprint
 from unidecode import unidecode
 import json

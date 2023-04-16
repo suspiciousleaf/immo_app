@@ -5,13 +5,23 @@ import re
 import math
 from models import Listing
 from geopy.geocoders import Nominatim
+import json
+import os
+from json_search import agent_dict
+import shutil
+from image_downloader import make_photos_dir, dl_comp_photo
+
+try:
+    with open("listings.json", "r") as infile:
+        listings_json = json.load(infile)
+except:
+    listings_json = []
 
 def get_gps(town, postcode = ""):
     geolocator = Nominatim(user_agent="property-scraper")
     location = geolocator.geocode(town + " " + postcode + " France")
     gps = [location.latitude, location.longitude]
     return gps
-
 
 def mm_immo_get_links(i):
     URL = "https://www.mmimmobilier.com/fr/annonces/acheter-p-r70-4-{}.html".format(str(i))
@@ -48,20 +58,61 @@ def mm_immo_get_listings():
     print("Number of unique listing URLs found:", len(links))
     #pprint(links)
 
-    listings = []
-    for i in range(len(links)):
-        new_listing = get_listing_details(links[i])
-        listings.append(new_listing)
-        
-    listings.sort(key=lambda x: x.price)
-    mm_immo_listings = [listing.__dict__ for listing in listings]
-    
+    listings = [listing for listing in listings_json if listing["agent"] == "M&M Immobilier"]
 
-    # for listing in mm_immo_listings:
+    links_old = []
+    for listing in listings:
+        if listing["agent"] == "M&M Immobilier":
+            links_old.append(listing["link_url"])
+    # print("Listings found from prevous scrape:", len(links_old))
+
+    links_to_scrape = [link for link in links if link not in links_old]
+    print("New listings to add:", len(links_to_scrape))
+    # pprint(links_to_scrape)
+    links_dead = [link for link in links_old if link not in links]
+    print("Old listings to remove:", len(links_dead))
+    # pprint(links_dead)
+
+    listing_photos_to_delete_local = []
+
+    if links_dead:
+        for listing in listings:
+            if listing["link_url"] in links_dead:
+                listing_photos_to_delete_local.append(listing["ref"])
+                listings.remove(listing)
+
+        for listing_ref in listing_photos_to_delete_local:
+            try:
+                shutil.rmtree(f'{cwd}/static/images/mm/{listing_ref}', ignore_errors=True)
+            except:
+                pass
+
+    counter_success = 0
+    counter_fail = 0
+    failed_scrape_links = []
+    for i in range(len(links_to_scrape)):
+        try:
+            new_listing = get_listing_details(links_to_scrape[i])
+            listings.append(new_listing.__dict__)
+            counter_success += 1
+        except:
+            failed_scrape_links.append(links_to_scrape[i])
+            counter_fail += 1
+
+    if links_to_scrape:
+        print(f"Successfully scraped: {counter_success}/{len(links_to_scrape)}")
+
+    if failed_scrape_links:
+        print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
+        pprint(failed_scrape_links)
+
+    listings.sort(key=lambda x: x["price"])
+        
+    # for listing in listings:
     #     pprint(listing)
     #     print("\n")
 
-    return mm_immo_listings
+    return listings
 
 def get_listing_details(link_url):
     agent = "M&M Immobilier"
@@ -169,6 +220,17 @@ def get_listing_details(link_url):
             if "www.mmimmobilier.com" not in child.get("src"):
                 photos.append(child.get("src"))
 
+    agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
+
+    make_photos_dir(ref, cwd, agent_abbr)
+
+    photos_hosted = []
+    for i in range(len(photos)):
+        try:
+            photos_hosted.append(dl_comp_photo(photos[i], ref, i, cwd, agent_abbr))
+        except:
+            pass
+
     if town == None:
          gps = None
     else:
@@ -178,10 +240,12 @@ def get_listing_details(link_url):
             gps = None
     #pprint(photos)
 
-    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, gps)
+    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
     #pprint(listing.__dict__)
     # print(gps)
     return listing
+
+cwd = os.getcwd()
 
 # pprint(get_listing_details("https://www.mmimmobilier.com/fr/annonce/vente-maison-individuelle-villefort-p-r7-110271658.html").__dict__)
 
@@ -190,3 +254,8 @@ def get_listing_details(link_url):
 # pprint(len(mm_immo_get_links(1)))
 
 # mm_immo_get_listings()
+
+# mm_listings = mm_immo_get_listings()
+
+# with open("api.json", "w") as outfile:
+#     json.dump(mm_listings, outfile)

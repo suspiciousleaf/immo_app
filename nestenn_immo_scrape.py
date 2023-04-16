@@ -4,6 +4,17 @@ from bs4 import BeautifulSoup
 import math
 from models import Listing
 from geopy.geocoders import Nominatim
+import json
+import os
+from json_search import agent_dict
+import shutil
+from image_downloader import make_photos_dir, dl_comp_photo
+
+try:
+    with open("listings.json", "r") as infile:
+        listings_json = json.load(infile)
+except:
+    listings_json = []
 
 def get_gps(town, postcode = ""):
     geolocator = Nominatim(user_agent="property-scraper")
@@ -51,20 +62,61 @@ def nestenn_immo_get_listings():
     print("Number of unique listing URLs found:", len(links))
     #pprint(links)
 
-    listings = []
-    for i in range(len(links)):
-        new_listing = get_listing_details(links[i])
-        listings.append(new_listing)
+    listings = [listing for listing in listings_json if listing["agent"] == "Nestenn"]
+
+    links_old = []
+    for listing in listings:
+        if listing["agent"] == "Nestenn":
+            links_old.append(listing["link_url"])
+    # print("Listings found from prevous scrape:", len(links_old))
+
+    links_to_scrape = [link for link in links if link not in links_old]
+    print("New listings to add:", len(links_to_scrape))
+    # pprint(links_to_scrape)
+    links_dead = [link for link in links_old if link not in links]
+    print("Old listings to remove:", len(links_dead))
+    # pprint(links_dead)
+
+    listing_photos_to_delete_local = []
+
+    if links_dead:
+        for listing in listings:
+            if listing["link_url"] in links_dead:
+                listing_photos_to_delete_local.append(listing["ref"])
+                listings.remove(listing)
+
+        for listing_ref in listing_photos_to_delete_local:
+            try:
+                shutil.rmtree(f'{cwd}/static/images/nestenn/{listing_ref}', ignore_errors=True) 
+            except:
+                pass
+
+    counter_success = 0
+    counter_fail = 0
+    failed_scrape_links = []
+    for i in range(len(links_to_scrape)):
+        try:
+            new_listing = get_listing_details(links_to_scrape[i])
+            listings.append(new_listing.__dict__)
+            counter_success += 1
+        except:
+            failed_scrape_links.append(links_to_scrape[i])
+            counter_fail += 1
+
+    if links_to_scrape:
+        print(f"Successfully scraped: {counter_success}/{len(links_to_scrape)}")
+
+    if failed_scrape_links:
+        print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
+        pprint(failed_scrape_links)
+
+    listings.sort(key=lambda x: x["price"])
         
-    listings.sort(key=lambda x: x.price)
-    nestenn_immo_listings = [listing.__dict__ for listing in listings]
-    
+    # for listing in listings:
+    #     pprint(listing)
+    #     print("\n")
 
-#     # for listing in nestenn_immo_listings:
-#     #     pprint(listing)
-#     #     print("\n")
-
-    return nestenn_immo_listings
+    return listings
 
 def get_listing_details(link_url):
     agent = "Nestenn"
@@ -137,6 +189,17 @@ def get_listing_details(link_url):
     photos = [photo for photo in photos_raw_list if len(photo) > 10]
     #pprint(photos)
 
+    agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
+
+    make_photos_dir(ref, cwd, agent_abbr)
+
+    photos_hosted = []
+    for i in range(len(photos)):
+        try:
+            photos_hosted.append(dl_comp_photo(photos[i], ref, i, cwd, agent_abbr))
+        except:
+            pass
+
     if town == None:
          gps = None
     else:
@@ -145,9 +208,11 @@ def get_listing_details(link_url):
         except:
             gps = None
 
-    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, gps)
+    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
     #pprint(listing.__dict__)
     return listing
+
+cwd = os.getcwd()
 
 #get_listing_details("https://immobilier-lavelanet.nestenn.com/a-vendre-proche-de-foix-maison-de-village-de-116-m2-ref-38030026")
 #pprint(get_listing_details("https://immobilier-lavelanet.nestenn.com/terrain-a-vendre-belesta-5245-m2-pour-lotissement-ideal-investisseurs-ref-33828908").__dict__)
@@ -155,3 +220,8 @@ def get_listing_details(link_url):
 
 #nestenn_immo_get_listings()
 #nestenn_immo_get_links(1)
+
+# nestenn_listings = nestenn_immo_get_listings()
+
+# with open("api.json", "w") as outfile:
+#     json.dump(nestenn_listings, outfile)

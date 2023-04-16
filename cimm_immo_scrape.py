@@ -36,10 +36,10 @@ def cimm_get_listings():
         photos.append(listing["photo"])
         for i in range(len(listing["realtyphoto_set"])):
             photos.append(listing["realtyphoto_set"][i]["image"])
-
+        photos_hosted = photos
         # print(gps)
 
-        return Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, gps)
+        return Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
 
     cimm_listings = [cimm_create_listing(listing).__dict__ for listing in cimm_listing["results"]]
     

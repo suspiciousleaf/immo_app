@@ -1,10 +1,20 @@
 from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
-import re
 import math
 from models import Listing
 from geopy.geocoders import Nominatim
+import json
+import os
+from json_search import agent_dict
+import shutil
+from image_downloader import make_photos_dir, dl_comp_photo
+
+try:
+    with open("listings.json", "r") as infile:
+        listings_json = json.load(infile)
+except:
+    listings_json = []
 
 def get_gps(town):
     geolocator = Nominatim(user_agent="property-scraper")
@@ -34,7 +44,7 @@ def ami09_get_listings():
     ami09_soup = BeautifulSoup(page.content, "html.parser")
 
     num_props = int(ami09_soup.find('p', class_="woocommerce-result-count").get_text().split()[-2])
-    print("\nAmi09 Immo number of listings:", num_props)
+    print("\nAmi Immobilier number of listings:", num_props)
     pages = math.ceil(num_props / 12)
     print("Pages:", pages)
 
@@ -43,20 +53,61 @@ def ami09_get_listings():
         links += ami09_get_links(i)
     print("Number of unique listing URLs found:", len(links))
 
-    listings = []
-    for i in range(len(links)):
-        new_listing = get_listing_details(links[i])
-        listings.append(new_listing)
+    listings = [listing for listing in listings_json if listing["agent"] == "Ami Immobilier"]
+
+    links_old = []
+    for listing in listings:
+        if listing["agent"] == "Ami Immobilier":
+            links_old.append(listing["link_url"])
+
+    links_to_scrape = [link for link in links if link not in links_old]
+    print("New listings to add:", len(links_to_scrape))
+    # pprint(links_to_scrape)
+    links_dead = [link for link in links_old if link not in links]
+    print("Old listings to remove:", len(links_dead))
+    # pprint(links_dead)
+
+    listing_photos_to_delete_local = []
+
+    if links_dead:
+        for listing in listings:
+            if listing["link_url"] in links_dead:
+                listing_photos_to_delete_local.append(listing["ref"])
+                listings.remove(listing)
+
+        for listing_ref in listing_photos_to_delete_local:
+            try:
+                shutil.rmtree(f'{cwd}/static/images/ami/{listing_ref}', ignore_errors=True)
+            except:
+                pass
+
+    counter_success = 0
+    counter_fail = 0
+    failed_scrape_links = []
+    for i in range(len(links_to_scrape)):
+        try:
+            new_listing = get_listing_details(links_to_scrape[i])
+            listings.append(new_listing.__dict__)
+            counter_success += 1
+        except:
+            # print(f"Failed to scrape listing {links_to_scrape[i]}")
+            failed_scrape_links.append(links_to_scrape[i])
+            counter_fail += 1
+
+    if links_to_scrape:
+        print(f"Successfully scraped: {counter_success}/{len(links_to_scrape)}")
+
+    if failed_scrape_links:
+        print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
+        pprint(failed_scrape_links)
+
+    listings.sort(key=lambda x: x["price"])
         
-    listings.sort(key=lambda x: x.price)
-    ami09_listings = [listing.__dict__ for listing in listings]
-    
+    # for listing in listings:
+    #     pprint(listing)
+    #     print("\n")
 
-#     # for listing in ami09_listings:
-#     #     pprint(listing)
-#     #     print("\n")
-
-    return ami09_listings
+    return listings
 
 def get_listing_details(link_url):
     agent = "Ami Immobilier"
@@ -90,13 +141,11 @@ def get_listing_details(link_url):
          town = location_div.split("-")[-1].strip().capitalize()
     else:
          town = None
-    #print(town)
-#     town = soup.find("div", class_="ville").get_text().capitalize()
+
     # print("Town:", town)
 
     # Get ref
     ref_div = soup.find('table', class_="main_tableau_acf").get_text()
-    # print(ref_div)
     ref = "".join([num for num in ref_div if num.isdigit()])
     # print("ref:", ref)
 
@@ -169,6 +218,15 @@ def get_listing_details(link_url):
     for element in photos_div:
          photos.append(element.get("href"))
 
+    agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
+
+    make_photos_dir(ref, cwd, agent_abbr)
+
+    photos_hosted = []
+    for i in range(len(photos)):
+        photos_hosted.append(dl_comp_photo(photos[i], ref, i, cwd, agent_abbr))
+
+
     # pprint(photos)
     
     if town == None:
@@ -179,12 +237,22 @@ def get_listing_details(link_url):
         except:
             gps = None
 
-    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, gps)
-    # pprint(gps)
+    # pprint(photos_hosted)
+
+    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
+
+    # pprint(listing.__dict__)
     return listing
+
+cwd = os.getcwd()
 
 # pprint(get_listing_details("https://www.ami09.com/produit/5219-sault/").__dict__)
 # get_listing_details("https://www.ami09.com/produit/5219-sault/")
 # get_listing_details("https://www.ami09.com/produit/5701-maison-lavelanet/")
 # ami09_get_listings()
 #ami09_get_links(1)
+
+# ami09_listings = ami09_get_listings()
+
+# with open("api.json", "w") as outfile:
+#     json.dump(ami09_listings, outfile)

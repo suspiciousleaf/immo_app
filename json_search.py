@@ -4,12 +4,30 @@ import math
 from unidecode import unidecode
 from geopy.distance import distance
 
+agent_dict = {
+      'ami': 'Ami Immobilier',
+      'mm': 'M&M Immobilier',
+      'richardson': 'Richardson Immobilier',
+      "l'immo": "L'Immo Chez Toit",
+      'arthur': 'Arthur Immo',
+      'jammes': 'Cabinet Jammes',
+      'nestenn': 'Nestenn',
+      'cimm': 'Cimm Immobilier',
+      'api': 'A.P.I.',
+      'aude': 'Aude Immobilier',
+      'time': 'Time and Stone Immobilier'
+}
+
 try:
-    with open("listings.json", "r") as infile:
-        listings = json.load(infile)
+    try:
+        with open("listings.json", "r") as infile:
+            listings = json.load(infile)
+    except:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+            listings = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
-        listings = json.load(infile)
+    listings = []
+
 try:
     with open("postcodes_dict.json", "r") as infile:
         postcodes_dict = json.load(infile)
@@ -29,19 +47,7 @@ except:
     with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
         town_list_clean = json.load(infile)
 
-agent_dict = {
-      'ami': 'Ami Immobilier',
-      'mm': 'M&M Immobilier',
-      'richardson': 'Richardson Immobilier',
-      "l'immo": "L'Immo Chez Toit",
-      'arthur': 'Arthur Immo',
-      'jammes': 'Cabinet Jammes',
-      'nestenn': 'Nestenn',
-      'cimm': 'Cimm Immobilier',
-      'api': 'A.P.I.',
-      'aude': 'Aude Immobilier',
-      'time': 'Time and Stone Immobilier'
-}
+
 
 def filter_price(results, min_price, max_price):
     # print("filter_price ran")
@@ -186,7 +192,7 @@ def search(listings, type_list = None, agent_list = None, keyword_list = None, i
 
     return results_list
 
-print_filter_results = False
+print_filter_results = False    #   If this is set to true, console will log how many valid listings are found after applying each filter
 # pprint(agent_list)
 
 # pprint(all_type_list)

@@ -1,9 +1,19 @@
 from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
-import math
 from models import Listing
 from geopy.geocoders import Nominatim
+import json
+import os
+from json_search import agent_dict
+import shutil
+from image_downloader import make_photos_dir, dl_comp_photo
+
+try:
+    with open("listings.json", "r") as infile:
+        listings_json = json.load(infile)
+except:
+    listings_json = []
 
 def get_gps(town, postcode = ""):
     geolocator = Nominatim(user_agent="property-scraper")
@@ -31,7 +41,7 @@ def immo_chez_toit_get_listings():
 
     # Total number of listings isn't given on the page, so scans through pages until a page returns fewer than 10 listings, then stops
 
-    partial_page = False
+    partial_page = False    # Website doesn't give the total listing number, so it's done like this instead
     links = []
     page = 1
     while partial_page == False:
@@ -47,24 +57,62 @@ def immo_chez_toit_get_listings():
     print("Pages:", pages)
     print("Number of unique listing URLs found:", len(links))
 
-    listings = []
-    for i in range(len(links)):
-        new_listing = get_listing_details(links[i])
-        listings.append(new_listing)
-        
-    listings.sort(key=lambda x: x.price)
-    immo_chez_toit_listings = [listing.__dict__ for listing in listings]
-    
+    listings = [listing for listing in listings_json if listing["agent"] == "L'Immo Chez Toit"]
 
-    # for listing in time_stome_listings:
+    links_old = []
+    for listing in listings:
+        if listing["agent"] == "L'Immo Chez Toit":
+            links_old.append(listing["link_url"])
+    # print("Listings found from prevous scrape:", len(links_old))
+
+    links_to_scrape = [link for link in links if link not in links_old]
+    print("New listings to add:", len(links_to_scrape))
+    # pprint(links_to_scrape)
+    links_dead = [link for link in links_old if link not in links]
+    print("Old listings to remove:", len(links_dead))
+    # pprint(links_dead)
+
+    listing_photos_to_delete_local = []
+
+    if links_dead:
+        for listing in listings:
+            if listing["link_url"] in links_dead:
+                listing_photos_to_delete_local.append(listing["ref"])
+                listings.remove(listing)
+
+        for listing_ref in listing_photos_to_delete_local:
+            try:
+                shutil.rmtree(f"{cwd}/static/images/l'immo/{listing_ref}", ignore_errors=True) 
+            except:
+                pass
+
+    counter_success = 0
+    counter_fail = 0
+    failed_scrape_links = []
+    for i in range(len(links_to_scrape)):
+        try:
+            new_listing = get_listing_details(links_to_scrape[i])
+            listings.append(new_listing.__dict__)
+            counter_success += 1
+        except:
+            # print(f"Failed to scrape listing {links_to_scrape[i]}")
+            failed_scrape_links.append(links_to_scrape[i])
+            counter_fail += 1
+
+    if links_to_scrape:
+        print(f"Successfully scraped: {counter_success}/{len(links_to_scrape)}")
+
+    if failed_scrape_links:
+        print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
+        pprint(failed_scrape_links)
+
+    listings.sort(key=lambda x: x["price"])
+        
+    # for listing in listings:
     #     pprint(listing)
     #     print("\n")
 
-    return immo_chez_toit_listings
-
-
-
-    #print("Number of unique listing URLs found:", len(links))
+    return listings
 
 def get_listing_details(link_url):
     
@@ -177,6 +225,17 @@ def get_listing_details(link_url):
             photos.append("https:" + child['src'])
     # pprint(photos)
 
+    agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
+
+    make_photos_dir(ref, cwd, agent_abbr)
+
+    photos_hosted = []
+    for i in range(len(photos)):
+        try:
+            photos_hosted.append(dl_comp_photo(photos[i], ref, i, cwd, agent_abbr))
+        except:
+            pass
+
     if town == None:
          gps = None
     else:
@@ -185,12 +244,19 @@ def get_listing_details(link_url):
         except:
             gps = None
 
-    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, gps)
+    listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
     # pprint(listing.__dict__)
     return listing
 
-#pprint(immo_chez_toit_get_links(1))
-get_listing_details("https://www.limmocheztoit.fr/3252-ideal-grande-famille-ou-investisseurs.html")
+
+cwd = os.getcwd()
+
+# get_listing_details("https://www.limmocheztoit.fr/3267-vous-recherchez-un-bien-dans-un-village-dynamique.html")
 # get_listing_details("https://www.limmocheztoit.fr/1531-vous-voulez-profitez-d-une-agreable-maison-sur-les-hauteurs.html")
 
-# immo_chez_toit_get_listings()
+# immo_listings = immo_chez_toit_get_listings()
+
+# with open("api.json", "w") as outfile:
+#     json.dump(immo_listings, outfile)
+
+# Runs alternate between running correctly, and trying to add a delisted property, and remove a valid property. Following run is correct again.
