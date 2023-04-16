@@ -158,8 +158,8 @@ def get_listing_details(link_url):
     # print(description)
 
     # Property details
-    bedrooms = 99
-    rooms = 99
+    bedrooms = None
+    rooms = None
     plot = None
     size = None
     details_div = soup.find_all("div", class_="icon_property_description")

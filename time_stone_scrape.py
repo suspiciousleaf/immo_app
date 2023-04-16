@@ -177,7 +177,7 @@ def get_listing_details(link_url):
     if bedrooms.isnumeric():
         bedrooms = int(bedrooms)
     else:
-        bedrooms = 99
+        bedrooms = None
     #print("Bedrooms:", bedrooms)
 
     # Rooms
@@ -188,7 +188,7 @@ def get_listing_details(link_url):
     if rooms.isnumeric():
         rooms = int(rooms)
     else:
-        rooms = 99
+        rooms = None
     #print("Rooms:", rooms)
 
     # Plot size

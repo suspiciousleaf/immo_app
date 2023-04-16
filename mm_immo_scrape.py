@@ -175,7 +175,7 @@ def get_listing_details(link_url):
           if "chambre(s)" in bedrooms_line.get_text():
                 bedrooms = int(bedrooms_line.get_text().split()[0])
     except:
-         bedrooms = 99
+         bedrooms = None
 
     #print("Bedrooms:", bedrooms)
 
@@ -185,7 +185,7 @@ def get_listing_details(link_url):
           if "pièce(s)" in rooms_line.get_text():
                 rooms = int(rooms_line.get_text().split()[0])
     except:
-         rooms = 99
+         rooms = None
 
     #print("Rooms:", rooms)
 
