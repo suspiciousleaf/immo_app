@@ -11,6 +11,7 @@ import os
 from json_search import agent_dict
 import shutil
 from image_downloader import make_photos_dir, dl_comp_photo
+from location_fix import fix_location
 
 try:
     with open("listings.json", "r") as infile:
@@ -141,7 +142,7 @@ def richardson_get_listings():
     for i in range(len(links_to_scrape)):
         try:
             new_listing = get_listing_details(links_to_scrape[i])
-            listings.append(new_listing.__dict__)
+            listings.append(fix_location(new_listing.__dict__))
             counter_success += 1
         except:
             # print(f"Failed to scrape listing {links_to_scrape[i]}")

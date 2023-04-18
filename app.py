@@ -137,3 +137,6 @@ t1 = time.time()
 
 time_taken = t1-t0
 print("Time elapsed:", time_taken)
+
+
+# Arthur immo scrape photos from different IP addresses ?

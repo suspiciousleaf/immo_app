@@ -9,9 +9,10 @@ import os
 from json_search import agent_dict
 import shutil
 from image_downloader import make_photos_dir, dl_comp_photo
+from location_fix import fix_location
 
 try:
-    with open("api.json", "r") as infile:
+    with open("listings.json", "r") as infile:
         listings_json = json.load(infile)
 except:
     listings_json = []
@@ -87,7 +88,7 @@ def ami09_get_listings():
     for i in range(len(links_to_scrape)):
         try:
             new_listing = get_listing_details(links_to_scrape[i])
-            listings.append(new_listing.__dict__)
+            listings.append(fix_location(new_listing.__dict__))
             counter_success += 1
         except:
             # print(f"Failed to scrape listing {links_to_scrape[i]}")
@@ -238,7 +239,7 @@ def get_listing_details(link_url):
             gps = None
 
     # pprint(photos_hosted)
-
+    
     listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)  
 
     # pprint(listing.__dict__)
@@ -252,7 +253,7 @@ cwd = os.getcwd()
 # ami09_get_listings()
 #ami09_get_links(1)
 
-ami09_listings = ami09_get_listings()
+# ami09_listings = ami09_get_listings()
 
-with open("api.json", "w") as outfile:
-    json.dump(ami09_listings, outfile)
+# with open("api.json", "w") as outfile:
+#     json.dump(ami09_listings, outfile)

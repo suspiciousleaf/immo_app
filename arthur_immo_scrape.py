@@ -245,7 +245,7 @@ def get_listing_details(link_url):
          gps = None
     else:
         try:
-            gps = get_gps(town)
+            gps = get_gps(town, postcode)
         except:
             gps = None
 
