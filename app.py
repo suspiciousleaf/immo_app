@@ -1,16 +1,16 @@
 # Running this the first time, with no listings.json, will take around three hours. Running with a recent listongs.json with no listings to update will take around 90 seconds.
 
-from jammes_scrape import jammes_get_listings
-from time_stone_scrape import time_stone_get_listings
-from aude_immo_scrape import aude_immo_get_listings
-from richardson_scrape import richardson_get_listings
-from cimm_immo_scrape import cimm_get_listings
-from arthur_immo_scrape import arthur_immo_get_listings
-from mm_immo_scrape import mm_immo_get_listings
-from nestenn_immo_scrape import nestenn_immo_get_listings
-from api_immo_scrape import api_get_listings
-from ami09_immo_scrape import ami09_get_listings
-from immo_chez_toit import immo_chez_toit_get_listings
+from scraper_jammes import jammes_get_listings
+from scraper_time_stone import time_stone_get_listings
+from scraper_aude import aude_immo_get_listings
+from scraper_richardson import richardson_get_listings
+from scraper_cimm import cimm_get_listings
+from scraper_arthur_immo import arthur_immo_get_listings
+from scraper_mm import mm_immo_get_listings
+from scraper_nestenn import nestenn_immo_get_listings
+from scraper_api import api_get_listings
+from scraper_ami09 import ami09_get_listings
+from scraper_immo_chez_toit import immo_chez_toit_get_listings
 
 import json
 import time
@@ -20,67 +20,57 @@ t0 = time.time()
 
 failed_scrapes = []
 try:
-    ami09_listings = ami09_get_listings()
+    ami09_listings = ami09_get_listings(host_photos=True) # Must be True as host website blocks leeching for many photos
 except:
     ami09_listings = []
     failed_scrapes.append("Ami Immobilier")
-
 try:
-    api_listings = api_get_listings()
+    api_listings = api_get_listings(host_photos=False)
 except:
     api_listings = []
     failed_scrapes.append("A.P.I.")
-
 try:
-    arthur_immo_listings = arthur_immo_get_listings()
+    arthur_immo_listings = arthur_immo_get_listings(host_photos=False)
 except:
     arthur_immo_listings = []
     failed_scrapes.append("Arthur Immo")
-
 try:
-    aude_immo_listings = aude_immo_get_listings()
+    aude_immo_listings = aude_immo_get_listings(host_photos=False)
 except:
     aude_immo_listings = []
     failed_scrapes.append("Aude Immobilier")
-
 try:
-    cimm_listings = cimm_get_listings()
+    cimm_listings = cimm_get_listings() # host photos not needed due to public API use for CIMM
 except:
     cimm_listings = []
     failed_scrapes.append("Cimm Immobilier")
-
 try:
-    immo_chez_toit_listings = immo_chez_toit_get_listings()
+    immo_chez_toit_listings = immo_chez_toit_get_listings(host_photos=False)
 except:
     immo_chez_toit_listings = []
     failed_scrapes.append("L'Immo Chez Toit")
-
 try:    
-    jammes_listings = jammes_get_listings()
+    jammes_listings = jammes_get_listings(host_photos=False)
 except:
     jammes_listings = []
     failed_scrapes.append("Cabinet Jammes")
-
 try:
-    mm_immo_listings = mm_immo_get_listings()
+    mm_immo_listings = mm_immo_get_listings(host_photos=False)
 except:
     mm_immo_listings = []
     failed_scrapes.append("M&M Immobilier")
-
 try:
-    nestenn_listings = nestenn_immo_get_listings()
+    nestenn_listings = nestenn_immo_get_listings(host_photos=False)
 except:
     nestenn_listings = []
     failed_scrapes.append("Nestenn")
-
 try:
-    richardson_listings = richardson_get_listings()
+    richardson_listings = richardson_get_listings(host_photos=True) # Must be True as host website uses HTTP instead of HTTPS, can't embed images
 except:
     richardson_listings = []
     failed_scrapes.append("Richardson Immobilier")
-
 try:
-    time_stone_listings = time_stone_get_listings()
+    time_stone_listings = time_stone_get_listings(host_photos=False)
 except:
     time_stone_listings = []
     failed_scrapes.append("Time & Stone Immobilier")
@@ -136,7 +126,6 @@ print("COMPLETE")
 t1 = time.time()
 
 time_taken = t1-t0
-print("Time elapsed:", time_taken)
+print(f"Total time elapsed: {time_taken:.2f}s")
 
-
-# Arthur immo scrape photos from different IP addresses ?
+# Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos
