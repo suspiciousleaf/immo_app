@@ -1,14 +1,35 @@
 import json
 from unidecode import unidecode
 
-with open("listings.json", "r") as infile:
-    listings = json.load(infile)
+try:
+    try:
+        with open("listings.json", "r") as infile:
+            listings_json = json.load(infile)
+    except:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+            listings_json = json.load(infile)
+except:
+    listings_json = []
 
-with open("postcodes_dict.json", "r") as infile:
-     postcodes_dict = json.load(infile)
+try:
+    try:
+        with open("postcodes_dict.json", "r") as infile:
+            postcodes_dict = json.load(infile)
+    except:
+        with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r") as infile:
+            postcodes_dict = json.load(infile)
+except:
+    postcodes_dict = []
 
-with open("postcodes_gps_dict.json", "r") as infile:
-     postcodes_gps_dict = json.load(infile)
+try:
+    try:
+        with open("postcodes_gps_dict.json", "r") as infile:
+            postcodes_gps_dict = json.load(infile)
+    except:
+        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
+            postcodes_gps_dict = json.load(infile)
+except:
+    postcodes_gps_dict = []
 
 town_list = [item for sublist in postcodes_dict.values() for item in sublist]   # Creates a flat list of all town names from postcode_dict
 

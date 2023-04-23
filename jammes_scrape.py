@@ -12,7 +12,7 @@ import shutil
 from image_downloader import make_photos_dir, dl_comp_photo
 
 try:
-    with open("listings.json", "r") as infile:
+    with open("api.json", "r") as infile:
         listings_json = json.load(infile)
 except:
     listings_json = []
@@ -245,11 +245,11 @@ def get_listing_details(link_url):
 
 cwd = os.getcwd()
 
-#get_listing_details("https://www.cabinet-jammes.com/fr/detail.htm?cle=11036111&monnaie=2")
+# get_listing_details("https://www.cabinet-jammes.com/fr/detail.htm?cle=11036307&monnaie=2")
 
 # jammes_get_listings()
 
-# jammes_listings = jammes_get_listings()
+jammes_listings = jammes_get_listings()
 
-# with open("api.json", "w") as outfile:
-#     json.dump(jammes_listings, outfile)
+with open("api.json", "w") as outfile:
+    json.dump(jammes_listings, outfile)
