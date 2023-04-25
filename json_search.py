@@ -4,6 +4,7 @@ import math
 from unidecode import unidecode
 from geopy.distance import distance
 
+# This is used to convert the agent name strings used in the search request to the full agent names used in the listings
 agent_dict = {
       'ami': 'Ami Immobilier',
       'mm': 'M&M Immobilier',
@@ -46,8 +47,6 @@ try:
 except:
     with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
         town_list_clean = json.load(infile)
-
-
 
 def filter_price(results, min_price, max_price):
     # print("filter_price ran")
@@ -115,6 +114,13 @@ def get_distance(origin, destination):
     origin = gps_dict[origin]
     destination = gps_dict[destination]
     return distance(origin, destination).km
+   
+def filter_department(results, dep_list):
+    # print("filter_department ran")
+    if dep_list:
+        return [x for x in results if type(x["postcode"]) == str and x["postcode"][:2] in dep_list]
+    else:
+        return results
 
 def filter_location(results, towns, search_radius, inc_none_location):
     # print("filter_location ran")
@@ -144,22 +150,24 @@ def filter_location(results, towns, search_radius, inc_none_location):
     else:
         return results
 
-all_agents_set = set()
-all_types_set = set()
-for item in listings:
-    all_agents_set.add(item["agent"])
-    all_types_set.add(item["types"])
+# This block is run occasionally to check for any new property types that haven't been included in the filtering list in app.py
+# all_agents_set = set()    
+# all_types_set = set()
+# for item in listings:
+#     all_agents_set.add(item["agent"])
+#     all_types_set.add(item["types"])
 
-
-all_agent_list = list(all_agents_set)
-all_type_list = list(all_types_set)
+# all_agent_list = list(all_agents_set)
+# all_type_list = list(all_types_set)
 # print(all_type_list)
 
+
+# The below are the expected options for property types and agents
 # types = ['terrain', 'immeuble', 'appartement', 'commerce', 'maison']
 # agent_list = ['ami', 'mm', 'richardson', "l'immo", 'arthur', 'jammes', 'nestenn', 'cimm', 'api', 'aude', 'time']
 
 
-def search(listings, type_list = None, agent_list = None, keyword_list = None, inc_none_location = False, towns = None, search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, inc_none_rooms = True, min_rooms = 0, max_rooms = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf):
+def search(listings, type_list = None, agent_list = None, keyword_list = None, dep_list = None, inc_none_location = False, towns = None, search_radius = 0, inc_none_beds = True, min_beds = 0, max_beds = math.inf, inc_none_rooms = True, min_rooms = 0, max_rooms = math.inf, min_price = 0, max_price = math.inf,  inc_none_plot = True, min_plot = 0, max_plot = math.inf, inc_none_size = True, min_size = 0, max_size = math.inf):
     if print_filter_results:
         print("Full results list length:", len(listings))
     results_list = filter_price(listings, min_price, max_price)
@@ -183,6 +191,9 @@ def search(listings, type_list = None, agent_list = None, keyword_list = None, i
     results_list = filter_size(results_list, inc_none_size, min_size, max_size)
     if print_filter_results:
         print("After size filter:", len(results_list))
+    results_list = filter_department(results_list, dep_list)
+    if print_filter_results:
+        print("After department filter:", len(results_list))
     results_list = filter_keywords(results_list, keyword_list)
     if print_filter_results:
         print("After keyword filter:", len(results_list))
@@ -192,23 +203,13 @@ def search(listings, type_list = None, agent_list = None, keyword_list = None, i
 
     return results_list
 
-print_filter_results = False    #   If this is set to true, console will log how many valid listings are found after applying each filter
-# pprint(agent_list)
-
-# pprint(all_type_list)
-
-# results_list = (search(listings, keyword_list = ["garage"], max_plot = 500))
-# pprint(len(results_list))
+print_filter_results = False    #   If this is set to true, console will log how many valid listings are found after applying each filter. Used for debugging
 
 
+# results_list = (search(listings, dep_list = ["11", "66", "09"]))
 # print("\nNumber of results:", len(results_list), "\n")
 
-# num = 0
-# for item in listings:
-#     if type(item["plot"]) ==  str:
-#         num += 1
-#         print(item["link_url"])
-#         print(item["plot"])
+
 # print(num)            
 # print(types)
 # print(list_agents)
