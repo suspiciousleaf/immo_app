@@ -21,16 +21,6 @@ except:
     with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r") as infile:
         postcodes_dict = json.load(infile)
 
-# Delete the below if everything runs fine when hosted
-
-# try:
-#     with open("ville_list_clean.json", "r") as infile:
-#         town_list_clean = json.load(infile)
-# except:
-#     with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
-#         town_list_clean = json.load(infile)
-
-
 app = Flask(__name__, static_url_path='/static')
 
 # This path is used to serve images that have been downloaded from the listing agent and hosted, rather than being used directly from the listing agent image host
@@ -39,10 +29,6 @@ app = Flask(__name__, static_url_path='/static')
 def download_file(agent, ref, image):
     return send_file(f"static/images/{agent}/{ref}/{image}"
     )
-
-# @app.route('/<name>/', methods=['GET'])
-# def name(name):
-#     return "Hello, {}".format(name)
 
 # The after_request is used to add a header to every request to fix CORS errors (cross origin resource sharing)
 
@@ -124,5 +110,3 @@ def search_call():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=105)
-
-# Deal with multiple towns that have the same name. Search sends "belesta" but no postcode

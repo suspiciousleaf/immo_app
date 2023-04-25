@@ -139,3 +139,5 @@ print(f"Total time elapsed: {time_taken:.2f}s")
 # Agents to possibly add: Sphere, https://beauxvillages.com/, https://www.europe-sud-immobilier.com/, https://www.selectionhabitat.com/fr/annonces/lavelanet-p-r301-0-17747-1.html, Sextant
 
 # Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
+# Deal with multiple towns that have the same name. Search sends "belesta" but no postcode
+# Improve GPS dictionary building program and rebuild dictionary
