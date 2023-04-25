@@ -1,4 +1,9 @@
-# Running this the first time, with no listings.json, will take around three hours. Running with a recent listongs.json with no listings to update will take around 90 seconds.
+# Running this program will run all of the scrapers. If a listings.json file is found it will add newly found listings and remove ones that are no longer present on the agent websites. If no listings.json file is present, it will build one from scratch. Typical time to run an update is 1 minute, building a new one is around 6-10 minutes. If no photos are hosted, it can be as little as 90 seconds.
+
+import json
+import time
+
+from unidecode import unidecode # This library is used frequently to remove accepts from letters (used frequently in French), as some listings use accents correctly and some don't. 
 
 from scraper_jammes import jammes_get_listings
 from scraper_time_stone import time_stone_get_listings
@@ -12,11 +17,10 @@ from scraper_api import api_get_listings
 from scraper_ami09 import ami09_get_listings
 from scraper_immo_chez_toit import immo_chez_toit_get_listings
 
-import json
-import time
-from unidecode import unidecode
 
 t0 = time.time()
+
+# The code below will run the imported scraper for each agent, host_photos will determine if the photos for each listing are downloaded, resized, and compressed for local hosting. Try/except is used to prevent an error with a single scraper causing the whole program to fail to run. Faults are reported to the failed_scrapes list, and finally to the console.
 
 failed_scrapes = []
 try:
@@ -40,7 +44,7 @@ except:
     aude_immo_listings = []
     failed_scrapes.append("Aude Immobilier")
 try:
-    cimm_listings = cimm_get_listings() # host photos not needed due to public API use for CIMM
+    cimm_listings = cimm_get_listings() # host photos not needed due to public API use for Cimm
 except:
     cimm_listings = []
     failed_scrapes.append("Cimm Immobilier")
@@ -91,11 +95,11 @@ all_listings = (ami09_listings +
                 time_stone_listings
 )
 
-# The combined listings have a huge range of property categories, the code below reduces the total categories down to five. house, apartment, multi-lodging buildings, commercial property, and empty land
+# The combined listings have a huge range of property categories, the code below reduces the total categories down to five. House, apartment, multi-lodging buildings, commercial property, and empty land. It also adds a sequential ID number to each listing, reset for all listings each time the program is run.
 
-house_catetogies = ['Autre','Batiment','Cafe','Chalet','Chambre','Chateau','Gite','Grange','Hotel','Investissement','Local','Maison','Propriete','Remise','Restaurant','Villa', 'Ferme','Longere','Demeure']
+house_catetogies = ['Autre','Batiment','Cafe','Chalet','Chambre','Chateau','Gite','Grange','Hotel','Investissement','Local','Maison','Propriete','Remise','Restaurant','Villa', 'Ferme','Longere','Demeure', 'Pavillon', 'Corps']
 
-commerce_categories = ['Agence', 'Ateliers', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Locaux', 'Parking', 'Pret']
+commerce_categories = ['Agence', 'Ateliers', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier']
 
 apartment_categories = ["Apartment", "Studio", "Duplex", "Appartment", "Appartement"]
 
@@ -113,9 +117,11 @@ for listing in all_listings:
     listing["id"] = i
     i += 1
     try:
-        listing["town"] = unidecode(listing["town"])
+        listing["town"] = unidecode(listing["town"])    # Try/except is used as some listings return a town of None, which errors unidecode
     except:
         pass
+
+# The code below takes the final list of dictionaries and saves it as a json.
 
 with open("listings.json", "w") as outfile:
     json.dump(all_listings, outfile)
@@ -129,3 +135,7 @@ time_taken = t1-t0
 print(f"Total time elapsed: {time_taken:.2f}s")
 
 # Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos
+
+# Agents to possibly add: Sphere, https://beauxvillages.com/, https://www.europe-sud-immobilier.com/, https://www.selectionhabitat.com/fr/annonces/lavelanet-p-r301-0-17747-1.html, Sextant
+
+# Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others

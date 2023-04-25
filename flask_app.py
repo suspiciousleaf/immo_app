@@ -1,8 +1,12 @@
-from flask import Flask, send_file
 import json
 import math
-from json_search import search
+
+from flask import Flask, send_file
 from flask import request
+
+from json_search import search
+
+# The imports below are to get the listing data, as well as two dictionaries that are used. The path of the file is different when hosted locally or on PythonAnywhere, so the try/except allows the files to be imported correctly regardless of whether the program is run locally or when hosted.
 
 try:
     with open("listings.json", "r") as infile:
@@ -17,23 +21,21 @@ except:
     with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r") as infile:
         postcodes_dict = json.load(infile)
 
-try:
-    with open("ville_list_clean.json", "r") as infile:
-        town_list_clean = json.load(infile)
-except:
-    with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
-        town_list_clean = json.load(infile)
+# Delete the below if everything runs fine when hosted
 
-# Must change the above open json to this when hosted:
-# with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
-#     listings = json.load(infile)
-
-# Must do for flask_app.py, app.py, json_search.py
+# try:
+#     with open("ville_list_clean.json", "r") as infile:
+#         town_list_clean = json.load(infile)
+# except:
+#     with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
+#         town_list_clean = json.load(infile)
 
 
 app = Flask(__name__, static_url_path='/static')
 
-@app.route("/static/images/<path:agent>/<path:ref>/<path:image>")
+# This path is used to serve images that have been downloaded from the listing agent and hosted, rather than being used directly from the listing agent image host
+
+@app.route("/static/images/<path:agent>/<path:ref>/<path:image>")   
 def download_file(agent, ref, image):
     return send_file(f"static/images/{agent}/{ref}/{image}"
     )
@@ -42,40 +44,46 @@ def download_file(agent, ref, image):
 # def name(name):
 #     return "Hello, {}".format(name)
 
+# The after_request is used to add a header to every request to fix CORS errors (cross origin resource sharing)
+
 @app.after_request
 def add_header(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
+# The postcode dictionary is used by the front end for the location search section, to autofill search queries
+
 @app.route('/postcode_dict/', methods=['GET'])
 def postcodes():
     return postcodes_dict
 
+# The path below is to receive the search query and parameters, and call the search function from json_search.py
+
 @app.route("/search_results", methods=['GET'])
 def search_call():
+
+    # This  will check if a valid value is given for fields which define a maximum value, and will return infinite if not found
     def try_max(input):
         try:
             return int(input)
         except:
             return math.inf
         
+    # This  will check if a valid value is given for fields which define a minimum value, and will return 0 if not found    
     def try_min(input):
         try:
             return int(input)
         except:
             return 0
-
+        
+    # This will check for fields expected to be in csv format, location names etc
     def try_csv(input):
         try:
             return input.split(",")
         except:
             pass
 
-    def try_search_radius(input):
-        try:
-            return int(input)
-        except:
-            return 0
+    # The code below extracts the search parameters from the query and validates them using the above functions, then calls the search function with those parameters as arguments
 
     inc_none_beds_req = not request.args.get('inc_none_beds') == "false"
 
@@ -103,19 +111,18 @@ def search_call():
     min_size_req = try_min(request.args.get('min_size'))
     max_size_req = try_max(request.args.get('max_size'))
 
-    search_radius_req = try_search_radius(request.args.get('search_radius'))
+    dep_list_req = try_csv(request.args.get("dep"))
+    search_radius_req = try_min(request.args.get('search_radius'))
     inc_none_location_req = not request.args.get('inc_none_location') == "false"
     towns_req = try_csv(request.args.get('town'))
 
     keyword_list_req = try_csv(request.args.get('keywords'))
 
-    return search(listings = listings, keyword_list = keyword_list_req, type_list = type_list_req, agent_list = agent_list_req, towns = towns_req, inc_none_location = inc_none_location_req, search_radius = search_radius_req, inc_none_beds = inc_none_beds_req, min_beds = min_beds_req, max_beds = max_beds_req, inc_none_rooms = inc_none_rooms_req, min_rooms = min_rooms_req, max_rooms = max_rooms_req, min_price = min_price_req, max_price = max_price_req, inc_none_plot = inc_none_plot_req, min_plot = min_plot_req, max_plot = max_plot_req, inc_none_size = inc_none_size_req, min_size = min_size_req, max_size = max_size_req)
+    return search(listings = listings, keyword_list = keyword_list_req, type_list = type_list_req, agent_list = agent_list_req, dep_list = dep_list_req, towns = towns_req, inc_none_location = inc_none_location_req, search_radius = search_radius_req, inc_none_beds = inc_none_beds_req, min_beds = min_beds_req, max_beds = max_beds_req, inc_none_rooms = inc_none_rooms_req, min_rooms = min_rooms_req, max_rooms = max_rooms_req, min_price = min_price_req, max_price = max_price_req, inc_none_plot = inc_none_plot_req, min_plot = min_plot_req, max_plot = max_plot_req, inc_none_size = inc_none_size_req, min_size = min_size_req, max_size = max_size_req)
 
 # Search parameters: Type, Agent, location, search radius, bedroom number, room number, price, plot size, property size
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=105)
 
-# Richardson add image download and host
-
-# Change so that only new listings get scraped. Make new list of URLs, make list of old URLs from json, delete any listings from json that aren't in the new list, and scrape new listings to add to json
+# Deal with multiple towns that have the same name. Search sends "belesta" but no postcode
