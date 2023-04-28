@@ -19,24 +19,24 @@ from utilities import get_gps, get_data
 
 try:
     try:
-        with open("listings.json", "r") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict= json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict= json.load(infile)
 except:
-    print("postcodes_gps_dict not found")
-    postcodes_gps_dict = []
+    print("gps_dictnot found")
+    gps_dict= []
 
 def jammes_get_listings(host_photos=False):
 
@@ -152,7 +152,7 @@ def get_listing_details(page, url, host_photos):
         location_raw = location_div.find(string=True).strip().split()
         location_postcode = location_raw.pop(-1).strip("(").strip(")")
         location_town = " ".join(location_raw)
-        town = location_town.capitalize()
+        town = unidecode(location_town.capitalize().replace("-", " "))
         postcode = location_postcode
 
         #print("Town:", location_town)
@@ -266,11 +266,10 @@ def get_listing_details(page, url, host_photos):
         else:
             photos_hosted = photos
 
-        if unidecode(town.casefold()) in postcodes_gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
-            gps = postcodes_gps_dict[unidecode(town.casefold())]
-        else:
-            if town == None:
-                gps = None
+        gps = None
+        if type(town) == str:
+            if (postcode + ";" + town.casefold()) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
+                gps = gps_dict[postcode + ";" + town.casefold()]
             else:
                 try:
                     gps = get_gps(town, postcode)
@@ -288,9 +287,8 @@ cwd = os.getcwd()
 
 # jammes_listings = jammes_get_listings(host_photos=False)
 
-
-# with open("api.json", "w") as outfile:
-#     json.dump(jammes_listings, outfile)
+# with open("api.json", "w", encoding="utf-8") as outfile:
+#     json.dump(jammes_listings, outfile, ensure_ascii=False)
 
 
 # Time elapsed for Cabinet Jammes: 14.5 Double threading, no photos

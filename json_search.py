@@ -21,28 +21,28 @@ agent_dict = {
 
 try:
     try:
-        with open("listings.json", "r") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
             listings = json.load(infile)
 except:
     listings = []
 
 try:
-    with open("postcodes_dict.json", "r") as infile:
+    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r") as infile:
+    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 try:
-    with open("postcodes_gps_dict.json", "r") as infile:
+    with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
         gps_dict = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
+    with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
         gps_dict = json.load(infile)
 try:
-    with open("ville_list_clean.json", "r") as infile:
+    with open("ville_list_clean.json", "r", encoding="utf8") as infile:
         town_list_clean = json.load(infile)
 except:
     with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
@@ -111,8 +111,14 @@ def filter_size(results, inc_none_size, min_size, max_size):
 
 def get_distance(origin, destination):
     # print("get_distance ran")
-    origin = gps_dict[origin]
-    destination = gps_dict[destination]
+    origin_postcode = [i for i in postcodes_dict if origin in postcodes_dict[i]][0]
+    origin_key = origin_postcode + ";" + origin
+
+    destination_postcode = [i for i in postcodes_dict if destination in postcodes_dict[i]][0]
+    destination_key = destination_postcode + ";" + destination
+
+    origin = gps_dict[origin_key]
+    destination = gps_dict[destination_key]
     return distance(origin, destination).km
    
 def filter_department(results, dep_list):
@@ -128,15 +134,18 @@ def filter_location(results, towns, search_radius, inc_none_location):
         location_results = []
         for town in towns:
             for result in results:
-                if inc_none_location == True:
+                if inc_none_location == True:   # Adds any listings with a town name None, or name not in list of valid town names
                     if result["town"] == None:
                         location_results.append(result)
                     else:
                         if unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon")) not in town_list_clean:
                             location_results.append(result)
                         else:
-                            if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
-                                location_results.append(result)
+                            try:
+                                if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
+                                    location_results.append(result)
+                            except:
+                                pass
                 elif inc_none_location == False:
                     if result["town"] == None:
                         pass
@@ -144,8 +153,11 @@ def filter_location(results, towns, search_radius, inc_none_location):
                         if unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon")) not in town_list_clean:
                             pass
                         else:
-                            if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
-                                location_results.append(result)
+                            try:
+                                if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
+                                    location_results.append(result)
+                            except:
+                                pass
         return location_results 
     else:
         return results

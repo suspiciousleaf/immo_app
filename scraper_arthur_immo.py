@@ -18,24 +18,24 @@ from utilities import get_gps, get_data
 
 try:
     try:
-        with open("listings.json", "r") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict = json.load(infile)
 except:
-    print("postcodes_gps_dict not found")
-    postcodes_gps_dict = []
+    print("gps_dict not found")
+    gps_dict = []
 
 def arthur_immo_get_listings(host_photos=False):
 
@@ -159,6 +159,7 @@ def get_listing_details(page, url, host_photos):
                 if postcode in str(line.a):    
                     postcode_line = str(line.a)[str(line.a).find(">")+1 :]
         town = postcode_line[:postcode_line.find(postcode)-2]
+        town = unidecode(town.replace("-", " "))
 
         #print("Town:", town)
 
@@ -278,28 +279,15 @@ def get_listing_details(page, url, host_photos):
         else:
             photos_hosted = photos
 
-        # agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
-
-        # make_photos_dir(ref, cwd, agent_abbr)
-
-        # photos_hosted = []
-        # for i in range(len(photos)):
-        #     try:
-        #         photos_hosted.append(dl_comp_photo(photos[i], ref, i, cwd, agent_abbr))
-        #     except:
-        #         pass
-
         gps = None
-        if town == None:
-            gps = None
-        elif type(town) == str:
-            if unidecode(town.casefold()) in postcodes_gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
-                gps = postcodes_gps_dict[unidecode(town.casefold())]
-        else:
-            try:
-                gps = get_gps(town, postcode)
-            except:
-                gps = None
+        if type(town) == str:
+            if (postcode + ";" + town.casefold()) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
+                gps = gps_dict[postcode + ";" + town.casefold()]
+            else:
+                try:
+                    gps = get_gps(town, postcode)
+                except:
+                    gps = None
 
         listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
         return listing.__dict__
@@ -314,8 +302,8 @@ cwd = os.getcwd()
 
 # arthur_listings = arthur_immo_get_listings(host_photos=False)
 
-# with open("api.json", "w") as outfile:
-#     json.dump(arthur_listings, outfile)
+# with open("api.json", "w", encoding="utf-8") as outfile:
+#     json.dump(arthur_listings, outfile, ensure_ascii=False)
 
 # Time elapsed for Arthur Immo: 97.84560751914978 async 158 links with photos, down from 1.5+ hours
-# Time elapsed for Arthur Immo: 24.683752298355103 158 links without photos
+# Time elapsed for Arthur Immo: 24.02s 157 links without photos

@@ -18,24 +18,24 @@ from utilities import get_gps, get_data
 
 try:
     try:
-        with open("listings.json", "r") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict= json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict= json.load(infile)
 except:
-    print("postcodes_gps_dict not found")
-    postcodes_gps_dict = []    
+    print("gps_dictnot found")
+    gps_dict= []    
 
 def nestenn_immo_get_listings(host_photos=False):
 
@@ -158,7 +158,7 @@ def get_listing_details(page, url, host_photos):
             #     ref = line.get("value")
             elif line.get("name") == "localisation":
                 postcode = line.get("value")[:line.get("value").find(" ")]
-                town = line.get("value")[line.get("value").find(" ")+1:].capitalize()
+                town = unidecode(line.get("value")[line.get("value").find(" ")+1:].capitalize().replace("d olmes", "d'olmes"))
 
         ref = soup.find("div", class_="property_ref").get_text(strip=True)[-4:]
 
@@ -240,15 +240,15 @@ def get_listing_details(page, url, host_photos):
         else:
             photos_hosted = photos
 
-        if town == None:
-                gps = None
-        elif unidecode(town.casefold()) in postcodes_gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
-                gps = postcodes_gps_dict[unidecode(town.casefold())]
-        else:
-            try:
-                gps = get_gps(town, postcode)
-            except:
-                gps = None
+        gps = None
+        if type(town) == str:
+            if (postcode + ";" + town.casefold()) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
+                gps = gps_dict[postcode + ";" + town.casefold()]
+            else:
+                try:
+                    gps = get_gps(town, postcode)
+                except:
+                    gps = None
 
         listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
         
@@ -267,5 +267,5 @@ cwd = os.getcwd()
 
 # nestenn_listings = nestenn_immo_get_listings(host_photos=False)
 
-# with open("api.json", "w") as outfile:
-#     json.dump(nestenn_listings, outfile)
+# with open("api.json", "w", encoding="utf-8") as outfile:
+#     json.dump(nestenn_listings, outfile, ensure_ascii=False)

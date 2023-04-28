@@ -11,7 +11,7 @@ from image_downloader import make_photos_dir, dl_comp_photo
 import os
 
 try:
-    with open("listings.json", "r") as infile:
+    with open("listings.json", "r", encoding="utf8") as infile:
         listings_json = json.load(infile)
 except:
     listings_json = []
@@ -226,5 +226,5 @@ cwd = os.getcwd()
 
 # api_listings = api_get_listings()
 
-# with open("api.json", "w") as outfile:
-#     json.dump(api_listings, outfile)
+# with open("api.json", "w", encoding="utf-8") as outfile:
+#     json.dump(api_listings, outfile, ensure_ascii=False)

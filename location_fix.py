@@ -3,66 +3,70 @@ from unidecode import unidecode
 
 try:
     try:
-        with open("listings.json", "r") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
 
 try:
     try:
-        with open("postcodes_dict.json", "r") as infile:
+        with open("postcodes_dict.json", "r", encoding="utf8") as infile:
             postcodes_dict = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8") as infile:
             postcodes_dict = json.load(infile)
 except:
     postcodes_dict = []
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict = json.load(infile)
 except:
-    postcodes_gps_dict = []
+    gps_dict = []
 
 town_list = [item for sublist in postcodes_dict.values() for item in sublist]   # Creates a flat list of all town names from postcode_dict
 
 def fix_location(listing):
     if listing["town"] != None:
         listing["town"] = unidecode(listing["town"].capitalize())   
-        for key, value in postcodes_dict.items():
-            if listing["town"].casefold().replace("st ", "saint ").replace("proche ", "").strip() in value:  # Any listing which has a valid town name but might be missing details has those details added and GPS corrected in some cases
+        for postcode, town in postcodes_dict.items():
+            if listing["town"].casefold().replace("st ", "saint ").replace("proche ", "").strip() in town:  # Any listing which has a valid town name but might be missing details has those details added and GPS corrected in some cases. Anything ending with "st" could cause an error.
                 listing["town"] = listing["town"].casefold().replace("st ", "saint ").replace("proche ", "").capitalize().strip()
-                listing["postcode"] = key
-                listing["gps"] = postcodes_gps_dict[listing["town"].casefold()]
+                listing["postcode"] = postcode
+                listing["gps"] = gps_dict[postcode + ";" + listing["town"].casefold()] 
                 # print(listing["town"], listing["postcode"], listing["gps"], listing["link_url"]) 
 
         if not listing["postcode"]: # Look through non valid town strings to see if a town name can be found, then add details as above
             # print(listing["town"], listing["postcode"], listing["gps"], listing["link_url"])
             for word in listing["town"].split():
-                for key, value in postcodes_dict.items():
-                    if word.casefold() in value:
+                for postcode, town in postcodes_dict.items():
+                    if word.casefold() in town:
                         listing["town"] = word.capitalize()
-                        listing["postcode"] = key
-                        listing["gps"] = postcodes_gps_dict[listing["town"].casefold()]
+                        listing["postcode"] = postcode
+                        listing["gps"] = gps_dict[postcode + ";" + listing["town"].casefold()]
                         # print(listing["town"], listing["postcode"], listing["gps"], listing["link_url"])
                         
         if listing["town"].casefold() not in town_list: # If listing has a postcode but no recognised town, sets town and GPS based on postcode
             if listing["postcode"]:
-                listing["town"] = postcodes_dict[listing["postcode"]][0].capitalize()
-                listing["gps"] = postcodes_gps_dict[listing["town"].casefold()]
-                
-            for word in listing["description"].split():     # Check every word in description to find valid town names
-                if word.casefold() in town_list:
-                    listing["town"] = word.capitalize()
-                    listing["postcode"] = [i for i in postcodes_dict if listing["town"].casefold() in postcodes_dict[i]][0]
-                    listing["gps"] = postcodes_gps_dict[listing["town"].casefold()]
+                # print(listing["postcode"])
+                try:
+                    listing["town"] = postcodes_dict[listing["postcode"]][0].capitalize()
+                    listing["gps"] = gps_dict[listing["postcode"] + ";" + listing["town"].casefold()]
+                except:
+                    pass
+            if not listing["gps"]:    # Check every word in description to find valid town names if the above line didn't find valid gps
+                for word in listing["description"].split():     
+                    if word.casefold() in town_list:
+                        listing["town"] = word.capitalize()
+                        listing["postcode"] = [i for i in postcodes_dict if listing["town"].casefold() in postcodes_dict[i]][0]
+                        listing["gps"] = gps_dict[listing["postcode"] + ";" + listing["town"].casefold()]
                     
             if listing["town"] == "Sault":  # approximate locations for Ami listings Sault and Cathare
                 listing["town"] = "Belcaire"
@@ -82,4 +86,4 @@ def fix_location(listing):
             listing["gps"] = None
     return listing
 
-              
+#  Error with multiple listing locations being set to the last one in postcode_dict, caused by using "postcode" as variable for listing, and when iterating through dctionary in scraping program       

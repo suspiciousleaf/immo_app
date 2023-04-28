@@ -19,24 +19,31 @@ from utilities import get_gps, get_data
 
 try:
     try:
-        with open("listings.json", "r") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
 
 try:
-    try:
-        with open("postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
-    except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
+        postcodes_dict = json.load(infile)
 except:
-    print("postcodes_gps_dict not found")
-    postcodes_gps_dict = []
+    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8") as infile:
+        postcodes_dict = json.load(infile)
+
+try:
+    try:
+        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict = json.load(infile)
+    except:
+        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict = json.load(infile)
+except:
+    print("gps_dict not found")
+    gps_dict = []
 
 def ami09_get_listings(host_photos=False):
 
@@ -161,6 +168,8 @@ def get_listing_details(page, url, host_photos):
         else:
             postcode = None
         
+        # print(location_div)
+
         # print("Postcode:", postcode)
 
         if location_div.count("-") > 0:
@@ -263,20 +272,6 @@ def get_listing_details(page, url, host_photos):
                 except:
                     photos_failed.append(item["link"])
                     failed += 1
-
-        # The below code is for threading instead of async, seems to be roughly the same speed. Leaving this here to test later with smaller numbers of listings
-        # j = 0
-        # with concurrent.futures.ThreadPoolExecutor() as executor:
-        #     response_images = executor.map(requests.get, (link for link in photos))
-        #     for item in response_images:
-        #         try:
-        #             photos_hosted.append(dl_comp_photo(item, ref, i, cwd, agent_abbr))
-        #             i += 1
-        #             j += 1
-        #         except:
-        #             photos_failed.append(photos[j])
-        #             failed += 1
-        #             j += 1
             
             if failed:
                 print(f"{failed} photos failed to scrape")
@@ -285,35 +280,28 @@ def get_listing_details(page, url, host_photos):
             photos_hosted = photos
 
         gps = None
-        if town == None:
-            gps = None
-        elif type(town) == str:
-            if unidecode(town.casefold()) in postcodes_gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
-                gps = postcodes_gps_dict[unidecode(town.casefold())]
-        else:
-            try:
-                gps = get_gps(town, postcode)
-            except:
-                gps = None
-        
+       
         listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)  
 
         return listing.__dict__
     except:
-            return url
+        return url
     
 cwd = os.getcwd()
 
-# pprint(get_listing_details("https://www.ami09.com/produit/5316-terrains/").__dict__)
+# pprint(get_listing_details(requests.get("https://www.ami09.com/produit/5678-maison-sault/"), "https://www.ami09.com/produit/5678-maison-sault/", False))
+
+# get_listing_details(requests.get("https://www.ami09.com/produit/5678-maison-sault/"), "https://www.ami09.com/produit/5678-maison-sault/", False)
+
 # get_listing_details("https://www.ami09.com/produit/5316-terrains/")
 # get_listing_details("https://www.ami09.com/produit/5701-maison-lavelanet/")
 # ami09_get_listings()
 #ami09_get_links(1)
 
-# Time elapsed for Ami Immobilier: 153.61157703399658 async photo grab
+# Time elapsed for Ami Immobilier: 24.16s async photo grab
 # Time elapsed for Ami Immobilier: 145.64853525161743 threading photo grab
 
-# ami09_listings = ami09_get_listings(host_photos=False)
+# ami09_listings = ami09_get_listings(host_photos=True)
 
-# with open("api.json", "w") as outfile:
-#     json.dump(ami09_listings, outfile)
+# with open("api.json", "w", encoding="utf-8") as outfile:
+#     json.dump(ami09_listings, outfile, ensure_ascii=False)

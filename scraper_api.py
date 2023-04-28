@@ -18,24 +18,24 @@ from utilities import get_gps, get_data
 
 try:
     try:
-        with open("listings.json", "r") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict = json.load(infile)
 except:
-    print("postcodes_gps_dict not found")
-    postcodes_gps_dict = []
+    print("gps_dict not found")
+    gps_dict = []
 
 def api_get_listings(host_photos=False):
 
@@ -155,7 +155,7 @@ def get_listing_details(page, url, host_photos):
         postcode = "".join([num for num in postcode_string if num.isdigit()])
         # print("Postcode:", postcode)
 
-        town = soup.find("div", class_="ville").get_text().capitalize()#.replace("La", "")
+        town = unidecode(soup.find("div", class_="ville").get_text().capitalize())
         # print("Town:", town)
 
         # Get price
@@ -245,11 +245,10 @@ def get_listing_details(page, url, host_photos):
         else:
             photos_hosted = photos
 
-        if unidecode(town.casefold()) in postcodes_gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
-            gps = postcodes_gps_dict[unidecode(town.casefold())]
-        else:
-            if town == None:
-                gps = None
+        gps = None
+        if type(town) == str:
+            if (postcode + ";" + town.casefold()) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
+                gps = gps_dict[postcode + ";" + town.casefold()]
             else:
                 try:
                     gps = get_gps(town, postcode)
@@ -264,11 +263,11 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
-# get_listing_details({"link":"a", "response":requests.get("http://www.pyrenees-immobilier.com/fr/vente-studio-cabine-seix-p-r7-0900416735.html")})
+# get_listing_details(requests.get("http://www.pyrenees-immobilier.com/fr/vente-grange-castillon-en-couserans-p-r7-0900416111.html"), "http://www.pyrenees-immobilier.com/fr/vente-grange-castillon-en-couserans-p-r7-0900416111.html", False)
 
 # api_listings = api_get_listings(host_photos=False)
 
-# with open("api.json", "w") as outfile:
-#     json.dump(api_listings, outfile)
+# with open("api.json", "w", encoding="utf-8") as outfile:
+#     json.dump(api_listings, outfile, ensure_ascii=False)
 
-# Time elapsed for A.P.I.: 47.37086606025696 without photos
+# Time elapsed for A.P.I: 44.31s without photos

@@ -9,16 +9,16 @@ from json_search import search
 # The imports below are to get the listing data, as well as two dictionaries that are used. The path of the file is different when hosted locally or on PythonAnywhere, so the try/except allows the files to be imported correctly regardless of whether the program is run locally or when hosted.
 
 try:
-    with open("listings.json", "r") as infile:
+    with open("listings.json", "r", encoding="utf8") as infile:
         listings = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+    with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
         listings = json.load(infile)
 try:
-    with open("postcodes_dict.json", "r") as infile:
+    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r") as infile:
+    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 
 app = Flask(__name__, static_url_path='/static')
