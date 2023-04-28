@@ -20,24 +20,24 @@ from utilities import get_gps, get_data
 
 try:
     try:
-        with open("listings.json", "r") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r") as infile:
+        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict= json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r") as infile:
-            postcodes_gps_dict = json.load(infile)
+        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+            gps_dict= json.load(infile)
 except:
-    print("postcodes_gps_dict not found")
-    postcodes_gps_dict = []
+    print("gps_dictnot found")
+    gps_dict= []
 
 num_dict = {
     "un" : "1",
@@ -196,7 +196,7 @@ def get_listing_details(page, url, host_photos):
     
     try:
         agent = "Richardson Immobilier"
-        soup = BeautifulSoup(page.content, "html.parser")
+        soup = BeautifulSoup(page.content, "html.parser", from_encoding='UTF-8')
         link_url = url
 
         # Get type
@@ -214,7 +214,7 @@ def get_listing_details(page, url, host_photos):
 
         # # Get location
         try: 
-            town = str(soup.find('div', class_="SIZE3-50").b.contents[0]).replace("EXCLUSIF ", "").replace("SECTEUR ", "")
+            town = unidecode(str(soup.find('div', class_="SIZE3-50").b.contents[0]).replace("EXCLUSIF ", "").replace("SECTEUR ", "").capitalize())
         except:
             town = None
         postcode = None
@@ -322,15 +322,15 @@ def get_listing_details(page, url, host_photos):
         else:
             photos_hosted = photos
 
-        if town == None:
-            gps = None
-        elif unidecode(town.casefold()) in postcodes_gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
-                gps = postcodes_gps_dict[unidecode(town.casefold())]
-        else:
-            try:
-                gps = get_gps(town, postcode)
-            except:
-                gps = None
+        gps = None
+        if type(postcode) == str and type(town) == str:
+            if (postcode + ";" + town.casefold()) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
+                gps = gps_dict[postcode + ";" + town.casefold()]
+            else:
+                try:
+                    gps = get_gps(town, postcode)
+                except:
+                    gps = None
 
         listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
         return listing.__dict__
@@ -342,13 +342,14 @@ cwd = os.getcwd()
 
 #pprint(richardson_get_links(1))
 
-# get_listing_details("http://www.richardsonimmobilier.com/vente-maison-Haute-Vallee-4044.cgi?00000LQUI4044")
+# print(get_listing_details(requests.get("http://www.richardsonimmobilier.com/vente-propriete-3405.cgi?00008LQUI3405"), "http://www.richardsonimmobilier.com/vente-propriete-3405.cgi?00008LQUI3405", False))
+
 # pprint(get_listing_details("http://www.richardsonimmobilier.com/vente-propriete-Pays-de-Sault-3691.cgi?00006LQUI3691").__dict__)
 # get_listing_details("http://www.richardsonimmobilier.com/vente-terrain-Haute-Vallee-3684.cgi?00012LQUI3684")
 
 # richardson_listings = richardson_get_listings()
 
-# with open("api.json", "w") as outfile:
-#     json.dump(richardson_listings, outfile)
+# with open("api.json", "w", encoding='utf8') as outfile:
+#     json.dump(richardson_listings, outfile, ensure_ascii=False)
 
-# Time elapsed for Richardson: 20.556008338928223 threading
+# Time elapsed for Richardson Immobilier: 10.44s 104 listings exclusing photos

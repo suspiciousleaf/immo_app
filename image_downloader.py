@@ -6,7 +6,7 @@ import os
 
 cwd = os.getcwd()   # Sets the current working directory to cwd
 
-with open("listings.json", "r") as infile:
+with open("listings.json", "r", encoding="utf8") as infile:
     listings = json.load(infile)
 
 def make_photos_dir(ref, cwd, agent):

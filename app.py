@@ -1,4 +1,4 @@
-# Running this program will run all of the scrapers. If a listings.json file is found it will add newly found listings and remove ones that are no longer present on the agent websites. If no listings.json file is present, it will build one from scratch. Typical time to run an update is 1 minute, building a new one is around 6-10 minutes. If no photos are hosted, it can be as little as 90 seconds.
+# Running this program will run all of the scrapers. If a listings.json file is found it will add newly found listings and remove ones that are no longer present on the agent websites. If no listings.json file is present, it will build one from scratch. Typical time to run an update is 1 minute, building a new one is around 3 minutes. If no photos are hosted, it can be as little as 90 seconds.
 
 import json
 import time
@@ -123,8 +123,8 @@ for listing in all_listings:
 
 # The code below takes the final list of dictionaries and saves it as a json.
 
-with open("listings.json", "w") as outfile:
-    json.dump(all_listings, outfile)
+with open("listings.json", "w", encoding="utf-8") as outfile:
+    json.dump(all_listings, outfile, ensure_ascii=False)
 
 print("Total listings: ", len(all_listings))
 print("COMPLETE")
@@ -141,3 +141,5 @@ print(f"Total time elapsed: {time_taken:.2f}s")
 # Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
 # Deal with multiple towns that have the same name. Search sends "belesta" but no postcode
 # Improve GPS dictionary building program and rebuild dictionary
+
+# For Sextant, check https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=2&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=0 to see if info can be scraped, and if individual listings are not dynamic

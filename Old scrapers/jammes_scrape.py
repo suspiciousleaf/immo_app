@@ -12,7 +12,7 @@ import shutil
 from image_downloader import make_photos_dir, dl_comp_photo
 
 try:
-    with open("api.json", "r") as infile:
+    with open("api.json", "r", encoding="utf8") as infile:
         listings_json = json.load(infile)
 except:
     listings_json = []
@@ -251,5 +251,5 @@ cwd = os.getcwd()
 
 jammes_listings = jammes_get_listings()
 
-with open("api.json", "w") as outfile:
-    json.dump(jammes_listings, outfile)
+with open("api.json", "w", encoding="utf-8") as outfile:
+    json.dump(jammes_listings, outfile, ensure_ascii=False)
