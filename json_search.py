@@ -7,15 +7,16 @@ from geopy.distance import distance
 # This is used to convert the agent name strings used in the search request to the full agent names used in the listings
 agent_dict = {
       'ami': 'Ami Immobilier',
-      'mm': 'M&M Immobilier',
-      'richardson': 'Richardson Immobilier',
-      "l'immo": "L'Immo Chez Toit",
-      'arthur': 'Arthur Immo',
-      'jammes': 'Cabinet Jammes',
-      'nestenn': 'Nestenn',
-      'cimm': 'Cimm Immobilier',
       'api': 'A.P.I.',
+      'arthur': 'Arthur Immo',
       'aude': 'Aude Immobilier',
+      'cimm': 'Cimm Immobilier',
+      "l'immo": "L'Immo Chez Toit",
+      'jammes': 'Cabinet Jammes',
+      'mm': 'M&M Immobilier',
+      'nestenn': 'Nestenn',
+      'richardson': 'Richardson Immobilier',
+      'sextant': "Sextant",
       'time': 'Time and Stone Immobilier'
 }
 

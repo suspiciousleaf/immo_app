@@ -5,17 +5,18 @@ import time
 
 from unidecode import unidecode # This library is used frequently to remove accepts from letters (used frequently in French), as some listings use accents correctly and some don't. 
 
-from scraper_jammes import jammes_get_listings
-from scraper_time_stone import time_stone_get_listings
-from scraper_aude import aude_immo_get_listings
-from scraper_richardson import richardson_get_listings
-from scraper_cimm import cimm_get_listings
+from scraper_ami09 import ami09_get_listings
+from scraper_api import api_get_listings
 from scraper_arthur_immo import arthur_immo_get_listings
+from scraper_aude import aude_immo_get_listings
+from scraper_cimm import cimm_get_listings
+from scraper_immo_chez_toit import immo_chez_toit_get_listings
+from scraper_jammes import jammes_get_listings
 from scraper_mm import mm_immo_get_listings
 from scraper_nestenn import nestenn_immo_get_listings
-from scraper_api import api_get_listings
-from scraper_ami09 import ami09_get_listings
-from scraper_immo_chez_toit import immo_chez_toit_get_listings
+from scraper_richardson import richardson_get_listings
+from scraper_sextant import sextant_get_listings
+from scraper_time_stone import time_stone_get_listings
 
 
 t0 = time.time()
@@ -74,6 +75,11 @@ except:
     richardson_listings = []
     failed_scrapes.append("Richardson Immobilier")
 try:
+    sextant_listings = sextant_get_listings(host_photos=False)
+except:
+    sextant_listings = []
+    failed_scrapes.append("Sextant")
+try:
     time_stone_listings = time_stone_get_listings(host_photos=False)
 except:
     time_stone_listings = []
@@ -92,6 +98,7 @@ all_listings = (ami09_listings +
                 mm_immo_listings +
                 nestenn_listings +
                 richardson_listings + 
+                sextant_listings +
                 time_stone_listings
 )
 
@@ -126,7 +133,7 @@ for listing in all_listings:
 with open("listings.json", "w", encoding="utf-8") as outfile:
     json.dump(all_listings, outfile, ensure_ascii=False)
 
-print("Total listings: ", len(all_listings))
+print("\n\nTotal listings: ", len(all_listings))
 print("COMPLETE")
 
 t1 = time.time()

@@ -20,7 +20,7 @@ def cimm_get_listings():
     
     t1 = time.time()
     time_taken = t1-t0
-    print(f"Time elapsed for Cimm Immobilier: {time_taken:.2f}s")
+    print(f"\nTime elapsed for Cimm Immobilier: {time_taken:.2f}s")
 
     return cimm_listings
 
