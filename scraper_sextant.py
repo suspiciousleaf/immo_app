@@ -169,14 +169,17 @@ def get_listing_details(page, url, host_photos):
         postcode = details_dict[key_dict["postcode_key"]]
         
         try:
-            rooms = details_dict[key_dict["rooms_key"]]
+            rooms = int(details_dict[key_dict["rooms_key"]])
         except:
             rooms = None
         try:
-            bedrooms = details_dict[key_dict["bedrooms_key"]]
+            bedrooms = int(details_dict[key_dict["bedrooms_key"]])
         except:
             bedrooms = None
         
+        # print(rooms)
+        # print(bedrooms)
+
         # print("Type:", types)
 
         # Get location
@@ -198,9 +201,9 @@ def get_listing_details(page, url, host_photos):
 
         # Page returns two identical spans with itemprop="productID", one with a hidden ref and one with the 4 digit visible ref. No way to differentiate between the two. The second one has the desired  ref, so I turned it into a list, pulled the second item on the list (with the correct ref), then list comprehension to extract the digits, and join them into a string to get the correct ref.
 
-        prop_ref_div = soup.find_all('span', itemprop="productID")
-        prop_ref = list(prop_ref_div)
-        ref = "".join([char for char in str(prop_ref[1]) if char.isnumeric()])
+        # prop_ref_div = soup.find_all('span', itemprop="productID")
+        # prop_ref = list(prop_ref_div)
+        # ref = "".join([char for char in str(prop_ref[1]) if char.isnumeric()])
 
         # print("ref:", ref)
 
@@ -311,7 +314,7 @@ def get_listing_details(page, url, host_photos):
     #     return url
 cwd = os.getcwd()
 
-# pprint(get_listing_details(requests.get("https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html"), "https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html", False))
+get_listing_details(requests.get("https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html"), "https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html", False)
 
 
 # links = []
@@ -319,7 +322,7 @@ cwd = os.getcwd()
 #     links += sextant_get_links(requests.get(f"https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page={i}&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=1"))
 # print(len(links))
 
-# sextant_get_links(requests.get(f"https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=9&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=1")
+# sextant_get_links(requests.get(f"https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=9&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=1"))
 
 # sextant_get_listings(False)
 
