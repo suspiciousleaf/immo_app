@@ -53,8 +53,11 @@ def sextant_get_listings(host_photos=False):
     results_pages = [f"https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page={i}&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=0" for i in range(1, pages + 1)]
     resp = get_data(results_pages)
     links = []
-    for item in resp:
-        links  += sextant_get_links(item["response"])
+
+    with concurrent.futures.ThreadPoolExecutor() as executor:   
+        results = executor.map(sextant_get_links, (item["response"] for item in resp))
+        for result in results:
+            links += result
 
     print("Number of unique listing URLs found:", len(links))
 
@@ -132,7 +135,7 @@ def sextant_get_links(page):
 
 def get_listing_details(page, url, host_photos):
     
-    # try:
+    try:
         agent = "Sextant"
         soup = BeautifulSoup(page.content, "html.parser")
         link_url = url
@@ -310,8 +313,8 @@ def get_listing_details(page, url, host_photos):
         
         return listing.__dict__
     
-    # except:
-    #     return url
+    except:
+        return url
 cwd = os.getcwd()
 
 get_listing_details(requests.get("https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html"), "https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html", False)
@@ -331,4 +334,4 @@ get_listing_details(requests.get("https://www.sextantfrance.fr/fr/annonce/vente-
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(sextant_listings, outfile, ensure_ascii=False)
 
-# Time elapsed for Sextant: 17.46s 76 listings without photos. Minimal difference between multi-threading and async
+# Time elapsed for Sextant: 16.68s 76 listings without photos. Minimal difference between multi-threading and async

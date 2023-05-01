@@ -11,11 +11,13 @@ agent_dict = {
       'arthur': 'Arthur Immo',
       'aude': 'Aude Immobilier',
       'cimm': 'Cimm Immobilier',
+      "europe": "Europe Sud Immobilier",
       "l'immo": "L'Immo Chez Toit",
       'jammes': 'Cabinet Jammes',
       'mm': 'M&M Immobilier',
       'nestenn': 'Nestenn',
       'richardson': 'Richardson Immobilier',
+      'selection': 'Selection Habitat',
       'sextant': "Sextant",
       'time': 'Time and Stone Immobilier'
 }
@@ -139,11 +141,11 @@ def filter_location(results, towns, search_radius, inc_none_location):
                     if result["town"] == None:
                         location_results.append(result)
                     else:
-                        if unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon")) not in town_list_clean:
+                        if unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l'aiguillon").replace("l'isle en dodon", "l' isle en dodon")) not in town_list_clean:
                             location_results.append(result)
                         else:
                             try:
-                                if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
+                                if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l'aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
                                     location_results.append(result)
                             except:
                                 pass
@@ -151,11 +153,11 @@ def filter_location(results, towns, search_radius, inc_none_location):
                     if result["town"] == None:
                         pass
                     else:
-                        if unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon")) not in town_list_clean:
+                        if unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l'aiguillon").replace("l'isle en dodon", "l' isle en dodon")) not in town_list_clean:
                             pass
                         else:
                             try:
-                                if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l' aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
+                                if get_distance(town.casefold(), unidecode(result["town"].casefold().replace("-", " ").replace("l hers", "l'hers").replace("d olmes", "d'olmes").replace("val du faby", "esperaza").replace("l'aiguillon", "l'aiguillon").replace("l'isle en dodon", "l' isle en dodon"))) <= search_radius:
                                     location_results.append(result)
                             except:
                                 pass
