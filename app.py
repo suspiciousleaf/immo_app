@@ -10,11 +10,13 @@ from scraper_api import api_get_listings
 from scraper_arthur_immo import arthur_immo_get_listings
 from scraper_aude import aude_immo_get_listings
 from scraper_cimm import cimm_get_listings
+from scraper_europe_sud import europe_sud_get_listings
 from scraper_immo_chez_toit import immo_chez_toit_get_listings
 from scraper_jammes import jammes_get_listings
 from scraper_mm import mm_immo_get_listings
 from scraper_nestenn import nestenn_immo_get_listings
 from scraper_richardson import richardson_get_listings
+from scraper_selection_habitat import selection_get_listings
 from scraper_sextant import sextant_get_listings
 from scraper_time_stone import time_stone_get_listings
 
@@ -50,6 +52,11 @@ except:
     cimm_listings = []
     failed_scrapes.append("Cimm Immobilier")
 try:
+    europe_sud_listings = europe_sud_get_listings(host_photos=False)
+except:
+    europe_sud_listings = []
+    failed_scrapes.append("Europe Sud Immobilier")
+try:
     immo_chez_toit_listings = immo_chez_toit_get_listings(host_photos=False)
 except:
     immo_chez_toit_listings = []
@@ -75,6 +82,11 @@ except:
     richardson_listings = []
     failed_scrapes.append("Richardson Immobilier")
 try:
+    selection_listings = selection_get_listings(host_photos=False)
+except:
+    selection_listings = []
+    failed_scrapes.append("Selection Habitat")
+try:
     sextant_listings = sextant_get_listings(host_photos=False)
 except:
     sextant_listings = []
@@ -88,45 +100,86 @@ except:
 if failed_scrapes:
     print(f"The following agent(s) failed to scrape entirely: {failed_scrapes}")
 
-all_listings = (ami09_listings +
-                api_listings +
-                arthur_immo_listings +
-                aude_immo_listings + 
-                cimm_listings + 
-                immo_chez_toit_listings +
-                jammes_listings + 
-                mm_immo_listings +
-                nestenn_listings +
-                richardson_listings + 
-                sextant_listings +
-                time_stone_listings
+all_listings = (
+    ami09_listings +
+    api_listings +
+    arthur_immo_listings +
+    aude_immo_listings + 
+    cimm_listings + 
+    europe_sud_listings +
+    immo_chez_toit_listings +
+    jammes_listings + 
+    mm_immo_listings +
+    nestenn_listings +
+    richardson_listings + 
+    selection_listings +
+    sextant_listings +
+    time_stone_listings
 )
 
 # The combined listings have a huge range of property categories, the code below reduces the total categories down to five. House, apartment, multi-lodging buildings, commercial property, and empty land. It also adds a sequential ID number to each listing, reset for all listings each time the program is run.
 
-house_catetogies = ['Autre','Batiment','Cafe','Chalet','Chambre','Chateau','Gite','Grange','Hotel','Investissement','Local','Maison','Propriete','Remise','Restaurant','Villa', 'Ferme','Longere','Demeure', 'Pavillon', 'Corps']
+# house_catetogies = ['Autre','Batiment','Cafe','Chalet','Chambre','Chateau','Gite','Grange','Hotel','Investissement','Local','Maison','Propriete','Remise','Restaurant','Villa', 'Ferme','Longere','Demeure', 'Pavillon', 'Corps', "Résidence Tourisme Montagne"]
 
-commerce_categories = ['Agence', 'Ateliers', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier']
+# commerce_categories = ['Agence', 'Ateliers', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier', "Local commercial"]
 
-apartment_categories = ["Apartment", "Studio", "Duplex", "Appartment", "Appartement"]
+# apartment_categories = ["Apartment", "Studio", "Duplex", "Appartment", "Appartement"] 
 
+property_types = {
+    "Maison": {'Autre', 'Batiment', 'Cafe', 'Chalet', 'Chambre', 'Chateau', 'Domaine', 'Gite', 'Grange', 'Hotel', 'Investissement', 'Local', 'Maison', 'Mas', 'Peniche', 'Propriete', 'Remise', 'Restaurant', 'Villa', 'Ferme', 'Longere', 'Demeure', 'Pavillon', 'Corps', "Residence"},
+
+    "Commerce": {'Agence', 'Ateliers', 'Bar', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Haras', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier', "Local commercial"},
+
+    "Appartement": {"Apartment", "Studio", "Duplex", "Appartment", "Appartement"}
+}
+
+uncategorized_types = []
 i = 0
 for listing in all_listings:
     listing["types"] = unidecode(listing["types"].capitalize())
+    temp_type = listing["types"]
+    # Maison is he most common type, and some descriptions have "maison" as the second word (eg jolie maison), so the split line would cause the maison to be lost, leaving the type as jolie in the example 
+    if "maison" in listing["types"].casefold():
+        listing["types"] = "Maison"
     if len(listing["types"].split()) > 1:
         listing["types"] = listing["types"].split()[0]
-    if listing["types"] in house_catetogies:
-        listing["types"] = "Maison"
-    if listing["types"] in commerce_categories:
-        listing["types"] = "Commerce"
-    if listing["types"] in apartment_categories:
-        listing["types"] = "Appartement"
+        temp_type = listing["types"].split()[0]
+    for property_type, values in property_types.items():
+        if temp_type in values:
+            listing["types"] = property_type
+    if listing["types"] not in ["Maison", "Appartement", "Immeuble", "Terrain", "Commerce", "Other"]:
+        uncategorized_types.append({"types": listing["types"], "url": listing["link_url"]})
+        listing["types_original"] = listing["types"]
+        listing["types"] = "Other"  # Check if this causes shallow copy issues
     listing["id"] = i
     i += 1
     try:
         listing["town"] = unidecode(listing["town"])    # Try/except is used as some listings return a town of None, which errors unidecode
     except:
         pass
+
+if uncategorized_types:
+    print("The following uncategorized property types were found:", uncategorized_types)
+
+
+# for listing in all_listings:
+#     listing["types"] = unidecode(listing["types"].capitalize())
+#     if "maison" in listing["types"].casefold():
+#         listing["types"] = "Maison"
+#     if len(listing["types"].split()) > 1:
+#         listing["types"] = listing["types"].split()[0]
+#     if listing["types"] in house_catetogies:
+#         listing["types"] = "Maison"
+#     if listing["types"] in commerce_categories:
+#         listing["types"] = "Commerce"
+#     if listing["types"] in apartment_categories:
+#         listing["types"] = "Appartement"
+#     listing["id"] = i
+#     i += 1
+#     try:
+#         listing["town"] = unidecode(listing["town"])    # Try/except is used as some listings return a town of None, which errors unidecode
+#     except:
+#         pass
 
 # The code below takes the final list of dictionaries and saves it as a json.
 
@@ -143,10 +196,8 @@ print(f"Total time elapsed: {time_taken:.2f}s")
 
 # Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos
 
-# Agents to possibly add: Sphere, https://beauxvillages.com/, https://www.europe-sud-immobilier.com/, https://www.selectionhabitat.com/fr/annonces/lavelanet-p-r301-0-17747-1.html, Sextant
+# Agents to possibly add: Sphere, https://beauxvillages.com/
 
 # Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
-# Deal with multiple towns that have the same name. Search sends "belesta" but no postcode
-# Improve GPS dictionary building program and rebuild dictionary
 
-# For Sextant, check https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=2&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=0 to see if info can be scraped, and if individual listings are not dynamic
+# Changed l' aiguillon to l'aiguillon in town list, and several .replace("l'aiguillon", "l' aiguillon") sections in json_search. Left in the replace statements so they can be found and reverted if errors. Changed on 30/4/23, remove them if no errors in a few days
