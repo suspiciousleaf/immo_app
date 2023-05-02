@@ -48,15 +48,12 @@ try:
 except:
     postcodes_dict= []
 
-
 try:
     with open("ville_list_clean.json", "r", encoding="utf8") as infile:
         town_list = json.load(infile)
 except:
     with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r", encoding="utf8") as infile:
         town_list = json.load(infile)
-
-
 
 def selection_get_listings(host_photos=False):
 

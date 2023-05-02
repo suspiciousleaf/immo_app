@@ -78,7 +78,7 @@ def europe_sud_get_listings(host_photos=False):
 
         for listing_ref in listing_photos_to_delete_local:
             try:
-                shutil.rmtree(f"{cwd}/static/images/l'immo/{listing_ref}", ignore_errors=True) 
+                shutil.rmtree(f"{cwd}/static/images/europe/{listing_ref}", ignore_errors=True) 
             except:
                 pass
 
