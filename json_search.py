@@ -12,6 +12,7 @@ agent_dict = {
       'aude': 'Aude Immobilier',
       'cimm': 'Cimm Immobilier',
       "europe": "Europe Sud Immobilier",
+      "iad": "IAD Immobilier",
       "l'immo": "L'Immo Chez Toit",
       'jammes': 'Cabinet Jammes',
       'mm': 'M&M Immobilier',

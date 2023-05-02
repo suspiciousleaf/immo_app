@@ -11,6 +11,7 @@ from scraper_arthur_immo import arthur_immo_get_listings
 from scraper_aude import aude_immo_get_listings
 from scraper_cimm import cimm_get_listings
 from scraper_europe_sud import europe_sud_get_listings
+from scraper_iad import iad_immo_get_listings
 from scraper_immo_chez_toit import immo_chez_toit_get_listings
 from scraper_jammes import jammes_get_listings
 from scraper_mm import mm_immo_get_listings
@@ -56,6 +57,11 @@ try:
 except:
     europe_sud_listings = []
     failed_scrapes.append("Europe Sud Immobilier")
+try:
+    iad_listings = iad_immo_get_listings(host_photos=False)
+except:
+    iad_listings = []
+    failed_scrapes.append("IAD Immobilier")
 try:
     immo_chez_toit_listings = immo_chez_toit_get_listings(host_photos=False)
 except:
@@ -107,6 +113,7 @@ all_listings = (
     aude_immo_listings + 
     cimm_listings + 
     europe_sud_listings +
+    iad_listings +
     immo_chez_toit_listings +
     jammes_listings + 
     mm_immo_listings +
@@ -117,13 +124,8 @@ all_listings = (
     time_stone_listings
 )
 
-# The combined listings have a huge range of property categories, the code below reduces the total categories down to five. House, apartment, multi-lodging buildings, commercial property, and empty land. It also adds a sequential ID number to each listing, reset for all listings each time the program is run.
-
-# house_catetogies = ['Autre','Batiment','Cafe','Chalet','Chambre','Chateau','Gite','Grange','Hotel','Investissement','Local','Maison','Propriete','Remise','Restaurant','Villa', 'Ferme','Longere','Demeure', 'Pavillon', 'Corps', "Résidence Tourisme Montagne"]
-
-# commerce_categories = ['Agence', 'Ateliers', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier', "Local commercial"]
-
-# apartment_categories = ["Apartment", "Studio", "Duplex", "Appartment", "Appartement"] 
+# The combined listings have a huge range of property categories, the code below reduces the total categories down to six. House, apartment, multi-lodging buildings, commercial property, empty land, and "other". Any listings that don't fit into the first five are reclassified as "other", and the original type is saved to "types_original" so it can be examined and classified later.
+# # It also adds a sequential ID number to each listing, reset for all listings each time the program is run.
 
 property_types = {
     "Maison": {'Autre', 'Batiment', 'Cafe', 'Chalet', 'Chambre', 'Chateau', 'Domaine', 'Gite', 'Grange', 'Hotel', 'Investissement', 'Local', 'Maison', 'Mas', 'Peniche', 'Propriete', 'Remise', 'Restaurant', 'Villa', 'Ferme', 'Longere', 'Demeure', 'Pavillon', 'Corps', "Residence"},
@@ -138,7 +140,7 @@ i = 0
 for listing in all_listings:
     listing["types"] = unidecode(listing["types"].capitalize())
     temp_type = listing["types"]
-    # Maison is he most common type, and some descriptions have "maison" as the second word (eg jolie maison), so the split line would cause the maison to be lost, leaving the type as jolie in the example 
+    # Maison is the most common type, and some descriptions have "maison" as the second word (eg jolie maison), so the split line would cause the maison to be lost, leaving the type as jolie in the example 
     if "maison" in listing["types"].casefold():
         listing["types"] = "Maison"
     if len(listing["types"].split()) > 1:
@@ -160,26 +162,6 @@ for listing in all_listings:
 
 if uncategorized_types:
     print("The following uncategorized property types were found:", uncategorized_types)
-
-
-# for listing in all_listings:
-#     listing["types"] = unidecode(listing["types"].capitalize())
-#     if "maison" in listing["types"].casefold():
-#         listing["types"] = "Maison"
-#     if len(listing["types"].split()) > 1:
-#         listing["types"] = listing["types"].split()[0]
-#     if listing["types"] in house_catetogies:
-#         listing["types"] = "Maison"
-#     if listing["types"] in commerce_categories:
-#         listing["types"] = "Commerce"
-#     if listing["types"] in apartment_categories:
-#         listing["types"] = "Appartement"
-#     listing["id"] = i
-#     i += 1
-#     try:
-#         listing["town"] = unidecode(listing["town"])    # Try/except is used as some listings return a town of None, which errors unidecode
-#     except:
-#         pass
 
 # The code below takes the final list of dictionaries and saves it as a json.
 
