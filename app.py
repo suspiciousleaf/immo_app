@@ -17,6 +17,7 @@ from scraper_jammes import jammes_get_listings
 from scraper_mm import mm_immo_get_listings
 from scraper_nestenn import nestenn_immo_get_listings
 from scraper_richardson import richardson_get_listings
+from scraper_safti import safti_get_listings
 from scraper_selection_habitat import selection_get_listings
 from scraper_sextant import sextant_get_listings
 from scraper_time_stone import time_stone_get_listings
@@ -88,6 +89,11 @@ except:
     richardson_listings = []
     failed_scrapes.append("Richardson Immobilier")
 try:
+    safti_listings = safti_get_listings(host_photos=False) 
+except:
+    safti_listings = []
+    failed_scrapes.append("Safti")
+try:
     selection_listings = selection_get_listings(host_photos=False)
 except:
     selection_listings = []
@@ -119,6 +125,7 @@ all_listings = (
     mm_immo_listings +
     nestenn_listings +
     richardson_listings + 
+    safti_listings +
     selection_listings +
     sextant_listings +
     time_stone_listings

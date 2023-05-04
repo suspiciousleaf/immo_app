@@ -18,6 +18,7 @@ agent_dict = {
       'mm': 'M&M Immobilier',
       'nestenn': 'Nestenn',
       'richardson': 'Richardson Immobilier',
+      'safti': 'Safti',
       'selection': 'Selection Habitat',
       'sextant': "Sextant",
       'time': 'Time and Stone Immobilier'
