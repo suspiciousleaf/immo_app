@@ -89,7 +89,7 @@ except:
     richardson_listings = []
     failed_scrapes.append("Richardson Immobilier")
 try:
-    safti_listings = safti_get_listings(host_photos=False) 
+    safti_listings = safti_get_listings() # host photos not needed
 except:
     safti_listings = []
     failed_scrapes.append("Safti")
