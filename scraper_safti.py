@@ -40,7 +40,7 @@ except:
     print("gps_dictnot found")
     gps_dict= []    
 
-def safti_get_listings(host_photos=False):
+def safti_get_listings():
 
     t0 = time.time()
 
@@ -53,12 +53,10 @@ def safti_get_listings(host_photos=False):
     counter_fail = 0
     failed_scrape_links = []
 
-    listings = [listing for listing in listings_json if listing["agent"] == "Safti"]
-
     resp_to_scrape = get_data(links_to_scrape)
 
     with concurrent.futures.ThreadPoolExecutor() as executor:    
-        results = executor.map(get_listing_details, (item["response"] for item in resp_to_scrape), links_to_scrape, [host_photos for x in resp_to_scrape])
+        results = executor.map(get_listing_details, (item["response"] for item in resp_to_scrape), links_to_scrape)
         for result in results:
             if type(result) == str:
                 failed_scrape_links.append(result)
@@ -66,10 +64,7 @@ def safti_get_listings(host_photos=False):
             else:
                 new_listings += result
                 counter_success += 1
-    links = []
-    for listing in new_listings:
-        links.append(listing["link_url"])
-
+  
     if links_to_scrape:
         print(f"Agents successfully scraped: {counter_success}/{len(links_to_scrape)}")
 
@@ -78,32 +73,6 @@ def safti_get_listings(host_photos=False):
         pprint(failed_scrape_links)
 
     print(f"Listings found: {len(new_listings)}")
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Safti":
-            links_old.append(listing["link_url"])
-
-    links_to_scrape = [link for link in links if link not in links_old]
-    print("New listings to add:", len(links_to_scrape))
-
-    links_dead = [link for link in links_old if link not in links]
-    print("Old listings to remove:", len(links_dead))
-
-
-    listing_photos_to_delete_local = []
-
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
-
-        for listing_ref in listing_photos_to_delete_local:
-            try:
-                shutil.rmtree(f'{cwd}/static/images/safti/{listing_ref}', ignore_errors=True)
-            except:
-                pass
 
     new_listings.sort(key=lambda x: x["price"])
         
@@ -114,7 +83,7 @@ def safti_get_listings(host_photos=False):
 
     return new_listings
 
-def get_listing_details(page, url, host_photos):
+def get_listing_details(page, url):
 
     try:
         safti_soup = BeautifulSoup(page.content, "html.parser")
@@ -141,7 +110,7 @@ def get_listing_details(page, url, host_photos):
                 bedrooms = item["bedroomNumber"]
                 description = item["description"].replace("<br/>", "\n").replace("<br />", "\n")
                 photos = [list_item["urlPhotoLarge"] for list_item in item["photos"]]
-                photos_hosted = photos # Add logic for photo scraper
+                photos_hosted = photos
                 gps = [item["lat"], item["lng"]]
 
                 if "ommerc" in types:
@@ -162,7 +131,7 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
-# safti_listings = safti_get_listings(host_photos=False)
+# safti_listings = safti_get_listings()
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(safti_listings, outfile, ensure_ascii=False)
