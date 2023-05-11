@@ -9,6 +9,7 @@ from scraper_ami09 import ami09_get_listings
 from scraper_api import api_get_listings
 from scraper_arthur_immo import arthur_immo_get_listings
 from scraper_aude import aude_immo_get_listings
+from scraper_beaux import beaux_get_listings
 from scraper_cimm import cimm_get_listings
 from scraper_europe_sud import europe_sud_get_listings
 from scraper_iad import iad_immo_get_listings
@@ -48,6 +49,11 @@ try:
 except:
     aude_immo_listings = []
     failed_scrapes.append("Aude Immobilier")
+try:
+    beaux_listings = beaux_get_listings() # host photos not needed 
+except:
+    beaux_listings = []
+    failed_scrapes.append("Beaux Villages")
 try:
     cimm_listings = cimm_get_listings() # host photos not needed due to public API use for Cimm
 except:
@@ -117,6 +123,7 @@ all_listings = (
     api_listings +
     arthur_immo_listings +
     aude_immo_listings + 
+    beaux_listings +
     cimm_listings + 
     europe_sud_listings +
     iad_listings +
@@ -139,7 +146,7 @@ property_types = {
 
     "Commerce": {'Agence', 'Ateliers', 'Bar', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Haras', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier', "Local commercial"},
 
-    "Appartement": {"Apartment", "Studio", "Duplex", "Appartment", "Appartement"}
+    "Appartement": {"Apartment", "Studio", "Duplex", "Appartment", "Appartement", "Appart’hôtel"}
 }
 
 uncategorized_types = []
@@ -152,6 +159,7 @@ for listing in all_listings:
         listing["types"] = "Maison"
     if len(listing["types"].split()) > 1:
         listing["types"] = listing["types"].split()[0]
+    # "temp_type" is used to store the type of property. If it is unknown and is corrected to "other", the original listing type can stll be accessed and categorised later.
         temp_type = listing["types"].split()[0]
     for property_type, values in property_types.items():
         if temp_type in values:
@@ -159,7 +167,7 @@ for listing in all_listings:
     if listing["types"] not in ["Maison", "Appartement", "Immeuble", "Terrain", "Commerce", "Other"]:
         uncategorized_types.append({"types": listing["types"], "url": listing["link_url"]})
         listing["types_original"] = listing["types"]
-        listing["types"] = "Other"  # Check if this causes shallow copy issues
+        listing["types"] = "Other"  
     listing["id"] = i
     i += 1
     try:
@@ -168,7 +176,7 @@ for listing in all_listings:
         pass
 
 if uncategorized_types:
-    print("The following uncategorized property types were found:", uncategorized_types)
+    print("\nThe following uncategorized property types were found:", uncategorized_types)
 
 # The code below takes the final list of dictionaries and saves it as a json.
 
@@ -185,7 +193,7 @@ print(f"Total time elapsed: {time_taken:.2f}s")
 
 # Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos
 
-# Agents to possibly add: Sphere, https://beauxvillages.com/
+# Agents to possibly add: Sphere
 
 # Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
 

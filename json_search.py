@@ -10,6 +10,7 @@ agent_dict = {
       'api': 'A.P.I.',
       'arthur': 'Arthur Immo',
       'aude': 'Aude Immobilier',
+      'beaux': 'Beaux Villages',
       'cimm': 'Cimm Immobilier',
       "europe": "Europe Sud Immobilier",
       "iad": "IAD Immobilier",

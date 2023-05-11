@@ -264,7 +264,7 @@ def get_listing_details(page, url, host_photos):
             i = 0
             failed = 0
 
-            resp = get_data(photos)
+            resp = get_data(photos, header=False)
             for item in resp:
                 try:
                     photos_hosted.append(dl_comp_photo(item["response"], ref, i, cwd, agent_abbr))
@@ -291,10 +291,8 @@ cwd = os.getcwd()
 
 # pprint(get_listing_details(requests.get("https://www.ami09.com/produit/5678-maison-sault/"), "https://www.ami09.com/produit/5678-maison-sault/", False))
 
-# get_listing_details(requests.get("https://www.ami09.com/produit/5678-maison-sault/"), "https://www.ami09.com/produit/5678-maison-sault/", False)
+# pprint(get_listing_details(requests.get("https://www.ami09.com/produit/5744-maison-belcaire-11340/"), "https://www.ami09.com/produit/5744-maison-belcaire-11340/", True))
 
-# get_listing_details("https://www.ami09.com/produit/5316-terrains/")
-# get_listing_details("https://www.ami09.com/produit/5701-maison-lavelanet/")
 # ami09_get_listings()
 #ami09_get_links(1)
 

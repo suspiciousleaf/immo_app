@@ -33,9 +33,6 @@ def dl_comp_photo(response, ref, filename, cwd, agent):     # This function goes
     # print("dl_comp_photo ran")
 
     image_path = f"static/images/{agent}/{ref}"
-    # response = requests.get(URL, stream = True, timeout=3)
-    # response.raw.decode_content = True
-
     img = response.content
     image = Image.open(io.BytesIO(img))
     image = image.convert('RGB')    # converts to RGB so it can be saved as a jpg, RGBA cannot be saved to jpg so was causing errors
@@ -50,14 +47,3 @@ def dl_comp_photo(response, ref, filename, cwd, agent):     # This function goes
 
     return f"https://suspiciousleaf.pythonanywhere.com/{image_path}/{filename}.jpg"
 
-
-# import grequests
-# urls = ['url1', 'url2', ....] # this should be the list of urls
-
-#     requests = (grequests.get(u) for u in urls)
-#     responses = grequests.map(requests)
-#     for response in responses:
-#         if 199 < response.status_code < 400:
-#              name = generate_file_name()    # generate some name for your image file with extension like example.jpg
-#              with open(name, 'wb') as f:    # or save to S3 or something like that
-#                   f.write(response.content)
