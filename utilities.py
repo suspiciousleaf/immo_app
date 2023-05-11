@@ -18,9 +18,13 @@ def get_gps(town, postcode = ""):
     gps = [location.latitude, location.longitude]
     return gps
 
-def get_data(links): 
-    reqs = [grequests.get(link, headers=headers, stream=True) for link in links]
-    resp = grequests.map(reqs)
+def get_data(links, header=True):
+    if header: 
+        reqs = [grequests.get(link, headers=headers, stream=True) for link in links]
+        resp = grequests.map(reqs)
+    else:
+        reqs = [grequests.get(link, stream=True) for link in links]
+        resp = grequests.map(reqs) 
      
     data = []
     for i in range(len(resp)):

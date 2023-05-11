@@ -232,7 +232,7 @@ def get_listing_details(page, url, host_photos):
             i = 0
             failed = 0
 
-            resp = get_data(photos)
+            resp = get_data(photos, header=False)
             for item in resp:
                 try:
                     photos_hosted.append(dl_comp_photo(item["response"], ref, i, cwd, agent_abbr))

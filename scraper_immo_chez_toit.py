@@ -39,19 +39,18 @@ except:
 def immo_chez_toit_get_listings(host_photos=False):
 
     t0 = time.time()
-
     # Total number of listings isn't given on the page, so scans through pages until a page returns fewer than 10 listings, then stops
-    partial_page = False 
+    final_page = False 
     links = []
     page = 1
-    while partial_page == False:
+    while final_page == False:
         new_links = immo_chez_toit_get_links(page)
         links += new_links
-        if len(new_links) % 10 != 0:
-             partial_page = True
+        if len(new_links) % 10 != 0 or len(new_links) == 0:
+             final_page = True
         page += 1
 
-    pages = page - 1
+    pages = int(len(links) / 10)
     print("\nL'Immo Chez Toit number of listings:", len(links))
     print("Pages:", pages)
     print("Number of unique listing URLs found:", len(links))
@@ -252,7 +251,7 @@ def get_listing_details(page, url, host_photos):
             i = 0
             failed = 0
 
-            resp = get_data(photos)
+            resp = get_data(photos, header=False)
             for item in resp:
                 try:
                     photos_hosted.append(dl_comp_photo(item["response"], ref, i, cwd, agent_abbr))
