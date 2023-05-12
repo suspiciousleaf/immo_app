@@ -191,9 +191,9 @@ t1 = time.time()
 time_taken = t1-t0
 print(f"Total time elapsed: {time_taken:.2f}s")
 
-# Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos
+# Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos, not including Beaux Villages
 
-# Agents to possibly add: Sphere
+# Agents to possibly add: Sphere, Century21
 
 # Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
 

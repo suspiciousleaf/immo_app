@@ -1,3 +1,5 @@
+# This is a little utility program that will make a set of "Types" for all listings present in the json opened.
+
 import json
 from pprint import pprint
 
