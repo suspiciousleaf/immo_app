@@ -193,7 +193,7 @@ print(f"Total time elapsed: {time_taken:.2f}s")
 
 # Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos, not including Beaux Villages
 
-# Agents to possibly add: Sphere, Century21
+# Agents to possibly add: Sphere, Century21, Eureka
 
 # safti returned duplicate property listing https://www.safti.fr/annonces/achat/Maison/la-pomarede-11400/839453
 

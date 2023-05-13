@@ -72,6 +72,8 @@ def safti_get_listings():
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
+    new_listings = remove_duplicates(new_listings)
+
     print(f"Listings found: {len(new_listings)}")
 
     new_listings.sort(key=lambda x: x["price"])
@@ -128,6 +130,20 @@ def get_listing_details(page, url):
     except:
         return url
 
+def remove_duplicates(listings):
+    # Safti duplicates some results, this puts the urls into a set to remove duplicates, then returns a new list with a single listing for each url from the set.
+    safti_urls = set()
+    for listing in listings:
+        safti_urls.add(listing["link_url"])
+
+    new_listings = []
+    for link in safti_urls:
+        for listing in listings:
+            if link in listing.values():
+                new_listings.append(listing)
+                break
+    return new_listings
+
 
 cwd = os.getcwd()
 
@@ -136,4 +152,3 @@ cwd = os.getcwd()
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(safti_listings, outfile, ensure_ascii=False)
 
-# Photo logic not yet added
