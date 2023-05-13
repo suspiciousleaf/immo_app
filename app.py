@@ -195,6 +195,8 @@ print(f"Total time elapsed: {time_taken:.2f}s")
 
 # Agents to possibly add: Sphere, Century21
 
+# safti returned duplicate property listing https://www.safti.fr/annonces/achat/Maison/la-pomarede-11400/839453
+
 # Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
 
 # Changed l' aiguillon to l'aiguillon in town list, and several .replace("l'aiguillon", "l' aiguillon") sections in json_search. Left in the replace statements so they can be found and reverted if errors. Changed on 30/4/23, remove them if no errors in a few days
