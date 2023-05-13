@@ -12,5 +12,3 @@ for listing in listings:
     types.add(listing["types"])
 
 pprint(types)
-
-
