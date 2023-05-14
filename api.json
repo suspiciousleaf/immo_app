@@ -1,1 +1,2357 @@
-[{"types": "Maison", "town": "Belesta", "postcode": "09300", "price": 39000, "agent": "L'Immo Chez Toit", "ref": "VMA10002489", "bedrooms": 1, "rooms": 3, "plot": null, "size": 43, "link_url": "https://www.limmocheztoit.fr/2489-vous-voulez-vivre-dans-une-ravissante-maison-de-village.html", "description": "Découvrez cette maison de village tout en hauteur.\nL'entrée se fait par un grand espace pouvant être aménagé comme studio, atelier ou bibliothèque.\nA l'étage, vous trouverez une cuisine neuve avec salon donnant sur une agréable terrasse où profiter.\nEnfin, au second, un coin nuit plein de charme avec une chambre, une douche, un wc et un autre espace.\nLes seuls travaux : étanchéifier la terrasse afin que l'eau ne s'infiltre plus. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site  _riskAndTech_label ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/3c315c0cd2676ffa891819ecc5acd062/photo_8786318e1c1e3f3e250e299d136bf431_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/3c315c0cd2676ffa891819ecc5acd062/photo_834c6330005dd0b14f7edcf4f89b5440.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/3c315c0cd2676ffa891819ecc5acd062/photo_8ed469c9e7a77589e2af7e16cc3c23b2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/3c315c0cd2676ffa891819ecc5acd062/photo_6dc670c809bbc772abc7be264980cc7c_Inc_0.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/3c315c0cd2676ffa891819ecc5acd062/photo_8786318e1c1e3f3e250e299d136bf431_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/3c315c0cd2676ffa891819ecc5acd062/photo_834c6330005dd0b14f7edcf4f89b5440.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/3c315c0cd2676ffa891819ecc5acd062/photo_8ed469c9e7a77589e2af7e16cc3c23b2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/3c315c0cd2676ffa891819ecc5acd062/photo_6dc670c809bbc772abc7be264980cc7c_Inc_0.jpg"], "gps": [42.9029283, 1.9340613], "id": 802}, {"types": "Maison", "town": "Montjardin", "postcode": "11230", "price": 39000, "agent": "L'Immo Chez Toit", "ref": "VMA10003275", "bedrooms": 2, "rooms": 3, "plot": null, "size": 86, "link_url": "https://www.limmocheztoit.fr/3275-vous-souhaitez-vivre-dans-un-village-calme.html", "description": "En plein coeur de village, découvrez cette maison mitoyenne avec 3 entrées.\nAu rez-de-chaussée, se trouvent les pièces de vie qui se composent d'une salle à manger et d'une cuisine à repenser et créer et d'un salon.\nAu premier, l'espace nuit se caractérise par une chambre avec une salle d'eau et une chambre donnant sur une annexe.\nEnfin, vous trouverez une pièce pouvant servir de buanderie ou atelier.\nAprès quelques travaux, vous redonnerez vie à cette maison.\n ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_2eb8c22dca4f381899371b3c499d247b.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_8434eec9cd6648f45dc4ca084eac729b.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_e298bf8bed4ae0ab152d8cbbeff9a2e6.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_eb2500870b08c8ecb67457f54b5abe74.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_69fc5ac5454d983ec30b678dce1e09f0.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_2eb8c22dca4f381899371b3c499d247b.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_8434eec9cd6648f45dc4ca084eac729b.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_e298bf8bed4ae0ab152d8cbbeff9a2e6.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_eb2500870b08c8ecb67457f54b5abe74.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/90d94b9156a552ca8a720c6d8a94d894/photo_69fc5ac5454d983ec30b678dce1e09f0.jpg"], "gps": [42.9826496, 2.0281585], "id": 803}, {"types": "Terrain", "town": "Montjardin", "postcode": "11230", "price": 40000, "agent": "L'Immo Chez Toit", "ref": "VTE10002658", "bedrooms": null, "rooms": null, "plot": 1222, "size": null, "link_url": "https://www.limmocheztoit.fr/2658-terrain-de-1222m.html", "description": "Découvrez le lieu de votre future maison dans un cadre verdoyant et convivial.", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/de9c45d7926f15680a55dd28316d4ee5/photo_339f2e49ac849567cabf6cc5a5167c14.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/de9c45d7926f15680a55dd28316d4ee5/photo_4f25676b19d5c0ccbd6f7c27d4687f6b.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/de9c45d7926f15680a55dd28316d4ee5/photo_6c25ad5025f17ff344169792c3619231.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/de9c45d7926f15680a55dd28316d4ee5/photo_339f2e49ac849567cabf6cc5a5167c14.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/de9c45d7926f15680a55dd28316d4ee5/photo_4f25676b19d5c0ccbd6f7c27d4687f6b.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/de9c45d7926f15680a55dd28316d4ee5/photo_6c25ad5025f17ff344169792c3619231.jpg"], "gps": [42.9826496, 2.0281585], "id": 804}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 50000, "agent": "L'Immo Chez Toit", "ref": "VMA10002626", "bedrooms": 4, "rooms": 8, "plot": null, "size": 340, "link_url": "https://www.limmocheztoit.fr/2626-une-maison-a-fort-potentiel.html", "description": "Découvrez une ancienne maison en plein coeur de Chalabre.\nVous avez envie de créer un nouveau projet ? Les travaux ne vous font pas peur ? \nAlors n'hésitez plus, cette belle Dame est faite pour vous ! \nLes possibilités ne manquent pas : création chambres d'hôtes, grande maison familiale, maison secondaire...\nVotre imagination pourra s'en donner à coeur joie.\nJolie suprise : un petit extérieur vous permettra de cultiver un potager tout en ayant une table et des chaises.\n ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_849cbb0e317bbceb5a891af7b8f73cc6.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_5d6e0370e3afbbd2dad65b6b6fd556f0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_ed729f8030c9809ac4c2137a233794e1.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_a2e04bc3230ca2f94a8509a2923650d8.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_4d8487f620260c3b7ed0feaf49f63140.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_849cbb0e317bbceb5a891af7b8f73cc6.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_5d6e0370e3afbbd2dad65b6b6fd556f0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_ed729f8030c9809ac4c2137a233794e1.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_a2e04bc3230ca2f94a8509a2923650d8.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/dfb21394985cc38117d30e5464e522de/photo_4d8487f620260c3b7ed0feaf49f63140.jpg"], "gps": [42.9825951, 2.0063646], "id": 805}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 54000, "agent": "L'Immo Chez Toit", "ref": "VMA10002278", "bedrooms": 2, "rooms": 4, "plot": null, "size": 178, "link_url": "https://www.limmocheztoit.fr/2278-ideal-investisseurs.html", "description": "Vous voulez investir sur la commune de Chalabre?\nVous voulez faire 3 appartements et les travaux ne vous font pas peur ?\nCette maison est faite pour vous ! \nAu rez-de-chaussée vous trouverez une ancienne salle de réunion que vous pouvez transformer en commerce ou studio.\nAu premier un appartement peut être envisagé tout en conservant son indépendance.\nAu second, un appartement a été commencé (double vitrage, placo etc...) mais n'a pas été terminé.\nLà, vous trouverez l'espace cuisine, salon, séjour, une chambre, un wc indépendant et une salle d'eau.\nSi vous voulez une habitation plus grande, il est possible de créer un appartement reliant le 1er et le 2nd.\nA votre imagination et à vos outils ! ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_f3fcfe729a61ae1e60fef98eb416e1ac.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_9abce3b784ad6036c4c3e53a917dbb2e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_364c96d10e6e26176db94831e51c1820.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_8f9572323690eb46b74bc4c6842f7c7c.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_2699d88716cdae8d44a00d471fceb4ad.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_f3fcfe729a61ae1e60fef98eb416e1ac.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_9abce3b784ad6036c4c3e53a917dbb2e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_364c96d10e6e26176db94831e51c1820.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_8f9572323690eb46b74bc4c6842f7c7c.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/95b28d41a7a1f19cea4295e1469585d1/photo_2699d88716cdae8d44a00d471fceb4ad.jpg"], "gps": [42.9825951, 2.0063646], "id": 806}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 60000, "agent": "L'Immo Chez Toit", "ref": "VMA10001354", "bedrooms": 2, "rooms": 4, "plot": null, "size": 109, "link_url": "https://www.limmocheztoit.fr/1354-vous-aimez-les-maisons-de-village-avec-travaux.html", "description": "Venez découvrir cette maison en plein coeur du village avec un fort potentiel.La toiture est neuve et une partie de la façade l'est également.Vous pourrez profiter d'un bel extérieur de 12m² où vous pourrez créer une terrasse ou un petit jardinet.Place de parking.Pour les amoureux des travaux.A visiter sans tarderHonoraires charge vendeur", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_e052b060f3267db7272426e247e62945.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_414e7a3ef7b777bfcbedddbd5b3df452.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_e0662e9b028f34646e2e2a47054b78e7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_83747a8d75a708ca01feeb43fbce3b1c.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_e9802096cf1da6c33f95615583043352.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_c948820ecb03b185475c16ba3076e512.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_e052b060f3267db7272426e247e62945.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_414e7a3ef7b777bfcbedddbd5b3df452.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_e0662e9b028f34646e2e2a47054b78e7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_83747a8d75a708ca01feeb43fbce3b1c.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_e9802096cf1da6c33f95615583043352.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/2bfa37f88c11743330d124ae7c6ab878/photo_c948820ecb03b185475c16ba3076e512.jpg"], "gps": [42.9825951, 2.0063646], "id": 807}, {"types": "Maison", "town": "Sonnac sur l'Hers", "postcode": "11230", "price": 65000, "agent": "L'Immo Chez Toit", "ref": "VMA10001966", "bedrooms": 4, "rooms": 6, "plot": 102, "size": 150, "link_url": "https://www.limmocheztoit.fr/1966-la-petite-maison-de-village.html", "description": "Venez découvrir cette charmante maison traversante idéale pour une maison secondaire.\nVous pourrez héberger vos proches dans des chambres équipées de point d'eau.\nL'été, vous profiterez d'un bon repas dans votre agréable jardin accompagné de sa cuisine d'été.\nQuelques travaux à prévoir et vous serez comblé\nA découvrir sans tarder ! \n \n \n \n ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_5a5d007871a741f097954908f22f092f.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_613a1109e4c65b95aededd8785c3adfe.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_1d602914522c28d0673f404aa1be7f3d.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_bbb9d06fee7a7119c1d6be032bcf777f.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_97ec7444201f15d38d5556590355766c.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_5a5d007871a741f097954908f22f092f.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_613a1109e4c65b95aededd8785c3adfe.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_1d602914522c28d0673f404aa1be7f3d.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_bbb9d06fee7a7119c1d6be032bcf777f.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/ea7333fa477dd5fb2d81824bc2fb9a36/photo_97ec7444201f15d38d5556590355766c.jpg"], "gps": [43.0042727, 1.9926406], "id": 808}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 65000, "agent": "L'Immo Chez Toit", "ref": "VMA10003229", "bedrooms": 1, "rooms": 2, "plot": null, "size": 73, "link_url": "https://www.limmocheztoit.fr/3229-vous-aimez-vivre-en-coeur-de-village.html", "description": "Après quelques marches pour accéder au logement, découvrez ce ravissant plain pied qui n'attend que vous.\nUne fois dans l'entrée, empruntez un couloir qui vous permettra d'accéder à une lumineuse chambre, une salle d'eau spacieuse, un espace cuisine et un salon.\nDans l'espace cuisine, vous pourrez aménager l'espace comme bon vous semble.\nCréer un coin-repas, un ilot avec mange debout, cet endroit est à personnaliser.\nLe salon est agréable et dispose d'un placard.\nEnfin, pour parfaire l'ensemble, une spacieuse cave avec entrée indépendante peut vous permettre de stocker.\nPas d'extérieur.\nPas de travaux à prévoir\nEn plein coeur de village, vous pourrez profiter des commodités à pied.", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/78271075151a7b7b0380c0d86585e729/photo_1672e548186dc4396ab18e1e07511ca8_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/78271075151a7b7b0380c0d86585e729/photo_37eb7d8d8f5ff053f298edba4f470715_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/78271075151a7b7b0380c0d86585e729/photo_a43b91a09a446f8128d1323211448c5a_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/78271075151a7b7b0380c0d86585e729/photo_5bcd4e9d8c8c87452ede3f1d926412fd_Inc_0.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/78271075151a7b7b0380c0d86585e729/photo_1672e548186dc4396ab18e1e07511ca8_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/78271075151a7b7b0380c0d86585e729/photo_37eb7d8d8f5ff053f298edba4f470715_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/78271075151a7b7b0380c0d86585e729/photo_a43b91a09a446f8128d1323211448c5a_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/78271075151a7b7b0380c0d86585e729/photo_5bcd4e9d8c8c87452ede3f1d926412fd_Inc_0.jpg"], "gps": [42.9825951, 2.0063646]}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 75000, "agent": "L'Immo Chez Toit", "ref": "VMA10003282", "bedrooms": 1, "rooms": 2, "plot": null, "size": 55, "link_url": "https://www.limmocheztoit.fr/3282-vous-voulez-vivre-dans-une-maison-entierement-renovee.html", "description": "Découvrez cette charmante maison mitoyenne idéale pour un premier achat ou un investissement locatif.\nA l'entrée se trouve un grand garage où vous pourrez garer votre voiture et bricoler.\nAu premier une seule lumineuse pièce réunit la cuisine, la salle à manger et le sallon.\nEnfin au second, vous aurez le plaisir de trouver une confortable chambre ainsi que sa mezzanine.\nL'ensemble a été entièrement refait, vous n'aurez plus qu'à poser vos valises et profiter de votre nouveau cocon.", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_d62aa4432401566d841d0079e5f6c353.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_b48b214248687f6e2b35e8549798ef7d.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_dc55a68da9e013849edce6a99208955e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_109443c2a8d007c52672055770405379.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_7ab221e3300d74301e6e46ead4cbf2af.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_d62aa4432401566d841d0079e5f6c353.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_b48b214248687f6e2b35e8549798ef7d.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_dc55a68da9e013849edce6a99208955e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_109443c2a8d007c52672055770405379.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/8c87493852961dace6774074b83b8652/photo_7ab221e3300d74301e6e46ead4cbf2af.jpg"], "gps": [42.9825951, 2.0063646], "id": 809}, {"types": "Maison", "town": "Nebias", "postcode": "11500", "price": 80000, "agent": "L'Immo Chez Toit", "ref": "VMA40003271", "bedrooms": 2, "rooms": 4, "plot": null, "size": 93, "link_url": "https://www.limmocheztoit.fr/3271-vous-voulez-vivre-dans-une-maison-en-coeur-de-village.html", "description": "Découvrez cette charmante maison située dans un village calme.\nAu rdc se trouve la pièce de vie donnant sur l'agréable cuisine.\nSur ce niveau il y a également deux placards ainsi qu'un wc.\nAu premier, découvrez deux spacieuses chambres avec parquet bois, séparées par une salle d'eau fonctionnelle avec wc.\nEnfin au dernier étage, il y a un autre espace, pouvant faire office de bureau, chambre d'amis, salle de jeux...\nPour une résidence principale ou pour les vacances, cette maison mitoyenne offre tout le confort dont vous aurez besoin.\nQuelques jolies surprises vous attendent.", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_8d0e6569ca0b0762dce4642d017520f1.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_df815f22f7d464e7d45175c4aea67b60.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_064f819423f19ef1c82702006daf6ae4.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_dbf129ef33e60b0e0871bfcbd2713400.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_fac100bf2fd2f1db07007960415128b5.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_6c62c5ef9d5fb1fb0a5107f65c046559.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_8d0e6569ca0b0762dce4642d017520f1.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_df815f22f7d464e7d45175c4aea67b60.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_064f819423f19ef1c82702006daf6ae4.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_dbf129ef33e60b0e0871bfcbd2713400.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_fac100bf2fd2f1db07007960415128b5.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/4b8ad22de007f5d3ec0414fb331e3aba/photo_6c62c5ef9d5fb1fb0a5107f65c046559.jpg"], "gps": [42.8968558, 2.1148971], "id": 810}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 89000, "agent": "L'Immo Chez Toit", "ref": "VMA10003274", "bedrooms": 1, "rooms": 2, "plot": null, "size": 74, "link_url": "https://www.limmocheztoit.fr/3274-la-ravissante-maison-de-village.html", "description": "Découvrez cette jolie maison qui se compose au rdc d'une cuisine neuve et fonctionnelle donnant sur une agréable pièce de vie, un espace buanderie et un wc. A l'étage vous trouverez une salle d'eau avec douche à l'italienne ainsi que l'espace nuit.\nUne annexe avec garage peut être achetée pour compléter l'ensemble.\nCette maison est située au calme et le centre du village est à quelques minutes à pied.\nVisite virtuelle sur demande", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/a95461cbce74f78762a8d6433e2a9259/photo_ba4b15df2cb08426fb43190e9cfa941c.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/a95461cbce74f78762a8d6433e2a9259/photo_7167f414625c77c7c14dadf655537818.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/a95461cbce74f78762a8d6433e2a9259/photo_a968407c019d4c98e91e4295263a4c68_Inc_1.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/a95461cbce74f78762a8d6433e2a9259/photo_3ed9fa2cb08ee260bcd063ea01331bca.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/a95461cbce74f78762a8d6433e2a9259/photo_ba4b15df2cb08426fb43190e9cfa941c.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/a95461cbce74f78762a8d6433e2a9259/photo_7167f414625c77c7c14dadf655537818.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/a95461cbce74f78762a8d6433e2a9259/photo_a968407c019d4c98e91e4295263a4c68_Inc_1.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/a95461cbce74f78762a8d6433e2a9259/photo_3ed9fa2cb08ee260bcd063ea01331bca.jpg"], "gps": [42.9825951, 2.0063646], "id": 811}, {"types": "Maison", "town": "Montjardin", "postcode": "11230", "price": 107000, "agent": "L'Immo Chez Toit", "ref": "VMA40003265", "bedrooms": 2, "rooms": 4, "plot": 253, "size": 89, "link_url": "https://www.limmocheztoit.fr/3265-vous-voulez-le-calme-et-la-tranquilite.html", "description": "Venez découvrir cette maison située à l'écart des nuisances sonores, qui offre le cadre idéal pour votre résidence principale ou vos vacances.\nLes commodités sont à seulement 3km.\nConcernant la maison, celle-ci est agréable et équipée de double vitrage pour un meilleur confort.\nAu rdc se trouve la partie jour avec salon/cuisine et salle à manger.\nAu premier, vous trouverez une mezzanine ainsi que deux chambres.\nAu second enfin, le grenier de plus de 40m² vous permettra d'aménager un espace supplémentaire à votre image.\nCoté extérieur, vous aurez le plaisir de jouir d'une terrasse d'un peu plus de de 35m² ainsi que d'un petit jardin pour les amoureux du potager ou pour les jouets des enfants.\nPour clôre la visite, un garage vous permettra de ranger votre voiture à l'abri ou d'utiliser le lieu pour du stockage.\nA découvrir sans tarder", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_7a027816d4e19abf173ce52bd4d4a6cb.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_8d1a07cd9a7d15c0ac31f7a15698b95c.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_866d7d55473ef3abb96dc8a0157ae84a.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_d7eb589333f4c1a1540653223f9d5c47.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_7f24fe23c756b8b396417bfa6816e237.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_0286af5debc2a66fb3864f8af57c0b65.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_7a027816d4e19abf173ce52bd4d4a6cb.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_8d1a07cd9a7d15c0ac31f7a15698b95c.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_866d7d55473ef3abb96dc8a0157ae84a.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_d7eb589333f4c1a1540653223f9d5c47.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_7f24fe23c756b8b396417bfa6816e237.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/1a704e068037f91425bdc1dbd9965397/photo_0286af5debc2a66fb3864f8af57c0b65.jpg"], "gps": [42.9826496, 2.0281585], "id": 812}, {"types": "Maison", "town": "Rivel", "postcode": "11230", "price": 120000, "agent": "L'Immo Chez Toit", "ref": "VMA10003251", "bedrooms": 3, "rooms": 8, "plot": null, "size": 320, "link_url": "https://www.limmocheztoit.fr/3252-ideal-grande-famille-ou-investisseurs.html", "description": "Ne cherchez plus, cette grande bâtisse est faite pour vous !\nElle dispose de trois entrée, les espaces sont grands et confortables.\nVous pourrez aménager avec votre famille et créer des espaces pour tous ou chambres d'hotes.\nSi vous êtes investisseurs en revanche, vous pourrez créer des appartements pour mettre en location.\nIl y a tout à créer : menuiseries, électricité à refaire entièrement, chauffage, plomberie...\nIl n'y a pas de garage ni d'extérieur.\nVotre imagination et vos projets sont recommandés pour cette grande maison aux multiples possibilités. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site  _riskAndTech_label ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_72cc92db309b3bc014dbe56e1f238af2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_9b260a584f283e0ad3d45d9cf1ca9072.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_37afcc6da1a6969eff77f78e01e249b6.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_b6b5cfc7fdcaed5e45f0b9015105bf1a.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_aea6fd3939d05f31cc6d71ae6d936232.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_6082daf57b196183b67416c6356fd105.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_cec117b37dd8ba8d6b99b1fbc43300ce.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_75882bb9db87bcd24e4f01238f8f0d64.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_fbd42966e8f93dcb9ff0b1e60079736f.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_01e69d06c75a09ace012e209e5cc4d75.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_72cc92db309b3bc014dbe56e1f238af2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_9b260a584f283e0ad3d45d9cf1ca9072.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_37afcc6da1a6969eff77f78e01e249b6.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_b6b5cfc7fdcaed5e45f0b9015105bf1a.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_aea6fd3939d05f31cc6d71ae6d936232.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_6082daf57b196183b67416c6356fd105.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_cec117b37dd8ba8d6b99b1fbc43300ce.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_75882bb9db87bcd24e4f01238f8f0d64.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_fbd42966e8f93dcb9ff0b1e60079736f.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/17a3181527be001a1abf069bd2b12609/photo_01e69d06c75a09ace012e209e5cc4d75.jpg"], "gps": [42.9442457, 2.0001823], "id": 813}, {"types": "Immeuble", "town": "Esperaza", "postcode": "11260", "price": 130000, "agent": "L'Immo Chez Toit", "ref": "VIM40003260", "bedrooms": 4, "rooms": 5, "plot": 168, "size": 168, "link_url": "https://www.limmocheztoit.fr/3260-ideal-investisseurs.html", "description": "Venez investir à Espéraza, ancienne cité chapelière où se trouve un immeuble avec de belles possibilités.\nAu rdc se trouve un commerce, actuellement occupé et loué au prix de 793.50€*\nMontez à l'étage par l'entrée indépendante, et vous trouverez un grand appartement avec cuisine ouverte sur la salle à manger/salon, 4 belles chambres, une salle de bain, wc séparés.\nLes chambres sont spacieuses et lumineuses.\nPour parfaire l'ensemble, vous pourrez profiter d'une agréable terrasse de plus de 20m².\nAu grenier vous pourrez aménager l'espace de plus de 100m² comme bon vous semble.\nA découvrir sans tarder", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_778bc496a33d0e313b465262e819141f.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_d4c076d11d7fa70dff1cd9a7f192b939.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_f86127bd52a6c4903b9d9fe5e107e6f8.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_a92468fb9172deb0e5b7f1c7ab921933_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_f9a3506ebd35461e38e21397e5e144a2.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_778bc496a33d0e313b465262e819141f.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_d4c076d11d7fa70dff1cd9a7f192b939.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_f86127bd52a6c4903b9d9fe5e107e6f8.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_a92468fb9172deb0e5b7f1c7ab921933_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/5b46d18087bbcb5455ef3f793b30a09f/photo_f9a3506ebd35461e38e21397e5e144a2.jpg"], "gps": [42.933793, 2.2207631], "id": 814}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 138000, "agent": "L'Immo Chez Toit", "ref": "VMA40003251", "bedrooms": 4, "rooms": 6, "plot": null, "size": 107, "link_url": "https://www.limmocheztoit.fr/3251-vous-voulez-le-confort-d-un-village-sans-en-avoir-les-inconvenients.html", "description": "Venez découvrir cette ravissante maison à l'extérieur de Chalabre.\nAu rez-de -chaussée, il y a une cuisine/salle à manger.\nEmpruntez un petit couloir et vous trouverez le salon qui dessert un wc, ainsi qu'un garage aux multiples rangements.\nMontez les escaliers et découvrez deux espaces.\nLe premier, dessert deux jolies chambres possédant chacune sa salle d'eau/salle de bain.\nLorsque vous empruntez le couloir, vous trouverez deux chambres supplémentaires avec également salle d'eau/de bain. \nLa particularité de ces deux dernières étant l'accés direct à la terrasse.\nCependant, pour ne pas déranger vos convives, un accès indépendant se fait par le couloir.\nLa terrasse est un véritable coin de paradis où vous pourrez profiter en famille ou entre amis d'un barbecue au soleil.\nCette maison est idéale si vous avez une grande famille, ou un projet de gites, location saisonnière, ou maison pour vos vacances.\nAprès quelques travaux, vous aurez le plaisir d'avoir une maison confortable et agréable à vivre.", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_8544cb15606462a735c8795d0d672503.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_a4a6c5fc2d7daa241d1e3bee2013a30a.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_9cb8e9d12c6409911964ae38ca7854a2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_7ef30d43810a581f40fd4be26fc78bed.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_6405cee938cafa246b678dfab86481e7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_8677570b858081af63ef9d611d83a323.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_f769261cdbc900c5e724579294acd97e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_eb50ccbb474c18f9a89f2c8559afa923.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_37c9baa470e588aa6cc6c186bf48d948.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_d31593e9d16712d88ca508328b781de4.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_8544cb15606462a735c8795d0d672503.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_a4a6c5fc2d7daa241d1e3bee2013a30a.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_9cb8e9d12c6409911964ae38ca7854a2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_7ef30d43810a581f40fd4be26fc78bed.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_6405cee938cafa246b678dfab86481e7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_8677570b858081af63ef9d611d83a323.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_f769261cdbc900c5e724579294acd97e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_eb50ccbb474c18f9a89f2c8559afa923.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_37c9baa470e588aa6cc6c186bf48d948.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/897c00f135c5571e0339bb907b88e861/photo_d31593e9d16712d88ca508328b781de4.jpg"], "gps": [42.9825951, 2.0063646]}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 189000, "agent": "L'Immo Chez Toit", "ref": "VMA10002937", "bedrooms": 4, "rooms": 9, "plot": 1690, "size": 163, "link_url": "https://www.limmocheztoit.fr/2937-vous-souhaitez-vivre-sur-les-hauteurs-de-chalabre.html", "description": "Cette maison divisée en deux, offre deux lieux de vie distincts et indépendants.\nLe premier lieu, situé au rez-de-chaussée, propose une belle pièce de vie avec de grandes fenêtres qui laissent entrer la lumière, un coin cuisine à créer à votre convenance ainsi qu'un bel espace nuit et une salle de bain avec baignoire demandant une touche de modernité.\nLe deuxième lieu, se trouve au dessus du premier.\nIl s'agit d'une maison avec une belle véranda offrant une vue dégagée sur le village.\nLa maison est équipée d'une cuisine séparée avec son cellier, d'un agréable salon/séjour, de deux chambres et un bureau.\nLe jardin quand à lui est arboré et offre de ravissants endroits où se prélasser et profiter de la vue.\nIl y a un petit garage indépendant et diverses annexes où développer vos projets.\nQuelques travaux à réaliser et vous aurez un véritable havre de paix. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site  _riskAndTech_label ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_a4859a0eec09d9dbf43cbf972af111c7_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_22060014586a877f147dc2d8678feb55.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_ff6ee2c7e05b21cbe0bac8f299e4a8ed.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_e0d0513de78629c599253be12dca3f2e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_6ad92b094f207a5a95c7cb9081ff1bbe.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_39b7c3f69426147510e3de12391b7fba.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_9dc585506339cd08cbe2631e81633ca5.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_e4e12af49aa1f12f99d406ed2e46068b.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_55df31f2cd19bb4bd95fc8fc448737d8_Inc_0.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_a4859a0eec09d9dbf43cbf972af111c7_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_22060014586a877f147dc2d8678feb55.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_ff6ee2c7e05b21cbe0bac8f299e4a8ed.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_e0d0513de78629c599253be12dca3f2e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_6ad92b094f207a5a95c7cb9081ff1bbe.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_39b7c3f69426147510e3de12391b7fba.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_9dc585506339cd08cbe2631e81633ca5.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_e4e12af49aa1f12f99d406ed2e46068b.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b40721f95d36b96c4cb45e2bf2d4f56d/photo_55df31f2cd19bb4bd95fc8fc448737d8_Inc_0.jpg"], "gps": [42.9825951, 2.0063646], "id": 815}, {"types": "Maison", "town": "Chalabre", "postcode": "11230", "price": 345000, "agent": "L'Immo Chez Toit", "ref": "VMA10003283", "bedrooms": 8, "rooms": 15, "plot": 1355, "size": 562, "link_url": "https://www.limmocheztoit.fr/3283-la-maison-aux-grandes-possibilites.html", "description": "Imaginez un lieu où vous avez suffisament d'espace pour créer une grande maison familiale, un complexe d'accueil, un gîte...\nCe lieu est le vôtre et votre imagination sera votre meilleure alliée.\nC'est ici en plein coeur de Chalabre que ce endroit plein de charme et d'histoire vous ouvre ses portes.\nAu rdc, un couloir dessert différentes pièces comme une chaufferie, une chapelle et l'accès au jardin.\nA l'étage inférieur se trouve des pièces pouvant être exploitées comme atelier par exemple.\nAu premier, se trouve également un long couloir desservant salon, cuisine, de spacieuses chambres, dressing, salle d'eau...\nAu deuxième, la configuration est sensiblement identique avec un autre espace de vie avec un salon, des chambres, salle d'eau...\nEnfin au grenier, vous trouverez de grands espaces pour créer ce dont vous révez (salle de musique, de danse, atelier de peinture...)\nCôté jardin là non plus, vous désirs ne seront pas laissés à l'abandon et vous aurez le plaisir de découvrir un endroit pleinement pensé.\nVous accédez à ce jardin par une spacieuse terrasse de plus 70m2 où vous pourrez recevoir vos amis et votre famille.\nLe jardin est partagé en divers espaces tels qu'un ravissant jardin de curé (avec les plantes médicinales et les annuelles), un jardin en permaculture où de nombreuses espèces se retrouvent (fuitiers, légumes, aromates...) et interagissent les unes avec les autres en fonction des caractéristiques de chacunes, un espace atelier, un autre pouvant profiter aux enfants, un poulailler mais également un puit.\nVous l'aurez compris, cette dame a de grandes qualités (moulures, belles cheminées, chauffage central bois, haut plafonds...) et avec certains travaux (rafraichissement, électricité...) vous aurez le plaisir lui refaire vivre sa gloire d'antan.\nVenez la découvrir sans tarder\n  Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site  _riskAndTech_label ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_2633bb8b2d1e9c9eeac43f1ea3f068c3.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_1b42b2c8487a5d1ebdf98bed579e8972.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_0edd69cd873dcd1d5e21324ff33f2103.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_b5b25d65bd1cc569b51d95b7cf59b8ca.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_205146d9f7acd6ce09ae000e2ce64f41.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_b868c389ff17d3a00659f83a0874b144.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_ee1f4d429e9de348dcd5935a4aefec18.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_94381eb9ff675b67e48acc4452607e8e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_39ef368faa97967d4202ff40c9cea0e8.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_d76f8cfd9155ef59fd8cb05eaaa5c976.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_2633bb8b2d1e9c9eeac43f1ea3f068c3.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_1b42b2c8487a5d1ebdf98bed579e8972.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_0edd69cd873dcd1d5e21324ff33f2103.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_b5b25d65bd1cc569b51d95b7cf59b8ca.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_205146d9f7acd6ce09ae000e2ce64f41.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_b868c389ff17d3a00659f83a0874b144.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_ee1f4d429e9de348dcd5935a4aefec18.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_94381eb9ff675b67e48acc4452607e8e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_39ef368faa97967d4202ff40c9cea0e8.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/19b6a6aa78f7ed800e36d9d798a4a412/photo_d76f8cfd9155ef59fd8cb05eaaa5c976.jpg"], "gps": [42.9825951, 2.0063646], "id": 816}, {"types": "Maison", "town": "Alet les Bains", "postcode": "11580", "price": 350000, "agent": "L'Immo Chez Toit", "ref": "VMA10001531", "bedrooms": 4, "rooms": 4, "plot": 26800, "size": 185, "link_url": "https://www.limmocheztoit.fr/1531-vous-voulez-profitez-d-une-agreable-maison-sur-les-hauteurs.html", "description": "Cette ravissante maison des années 70 baigne dans la luminosité.\nElle est fonctionnelle et les travaux réalisés sont de qualité.\nLe coin jour qui donne sur le jardin, vous permettra de recevoir vos proches aisément et de concocter de bons plats dans la cuisine fonctionnelle et agréable de cette maison.\nDe l'autre côté de l'entrée, vous pourrez travailler dans le garage ou vous rendre côté nuit.\nDans celui-ci, il y a un bureau avec arrivée d'eau et évier, mais aussi , 3 confortables chambres et une salle d'eau.\nUne seconde salle d'eau pourrait être créée, l'espace est déjà existant.\nIl reste toutefois quelques travaux à termier malgré ceux déjà réalisés : nouvelle microstation, mise aux normes de l'électricité, cuisine neuve, pompe à chaleur neuve...\nConcernant l'extérieur, vous pourrez aménager différents espaces en fonction de vos besoins et envies, grâce aux 2.6 hectares en restanque : un espace dédié au potager, un autre à vos animaux...\nN'hésitez plus cette maison vous attend Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site  Géorisques ", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_587a18e6a73b340ce275572095ebbf86_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_bb458070974a12c4dfbec059b9f41081_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_374a19bf43cc2fafa961ead1438799e7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_9e279fdad512634ddc7313bf1ea2c1c2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_da2f2eb24782fc35e53d011f67a79ee9.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_099a81c57ca34b6eb71d847906e081e8.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_c36a5bbf4bd7467161dfa35c6ba110ca.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_f70f95a7a757092e1992c144001d132e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_36bc51f93331081ed603c5296bdb1b7c.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_587a18e6a73b340ce275572095ebbf86_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_bb458070974a12c4dfbec059b9f41081_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_374a19bf43cc2fafa961ead1438799e7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_9e279fdad512634ddc7313bf1ea2c1c2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_da2f2eb24782fc35e53d011f67a79ee9.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_099a81c57ca34b6eb71d847906e081e8.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_c36a5bbf4bd7467161dfa35c6ba110ca.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_f70f95a7a757092e1992c144001d132e.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/94aa6abcd300547f60d7d2d14f2a6e8f/photo_36bc51f93331081ed603c5296bdb1b7c.jpg"], "gps": [42.9967236, 2.255835], "id": 817}, {"types": "Maison", "town": "Mirepoix", "postcode": "09500", "price": 389000, "agent": "L'Immo Chez Toit", "ref": "VPR10003281", "bedrooms": 10, "rooms": 11, "plot": null, "size": 400, "link_url": "https://www.limmocheztoit.fr/3281-vous-voulez-une-demeure-pleine-d-authenticite.html", "description": "Dans un village proche de Mirepoix, vous aurez le plaisir de découvrir un bâti unique composé de quatre maisons vous  offrant de multiples possibilités.\nChaque maison possède sa particularité, son charme et une entrée indépendante.\nVous pouvez utiliser une partie pour y vivre avec vos proches, louer une autre partie, exploiter la 3ème comme location saisonnière et la 4ème peut servir pour héberger votre famille.\nLes maisons en elles-mêmes ne peuvent pas se décrire il faut les découvrir et explorer les pièces bercées de lumière, les beaux parquets, les moulures et autres jolies suprises.\nUne véranda pleine de charme s'ouvre sur le jardin de plus de 800m² en restanque.\nVous pouvez créer un potager sur un palier, mettre une piscine hors sol sur l'autre, et même profiter du petit chemin qui dessert ces jardins pour aller au poulailler.\nIdéalement placée à quelques pas du village, vous pourrez profiter des commodités.\nVenez découvrir un lieu d'une belle authenticité pour les amoureux de l'ancien.", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_c6b24c8c0bedd3b086cdf0490aec1b56.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_94ac38aeceb370a7207d441b7349159d.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_8926aeded84e43a2da39fb9030744ad2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_1c1edf7d2b4af7fd942143c34fd0e4ea.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_10e2a8f2ee751e02a9d49906b66cbe85.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_f2bac7bd7b17c235feef15e26bf8f6c5.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_86255e391a46f5dae2786d3b348ae0f3.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_c177c0ea16070a042fa22c90b72eba76.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_730fad57fc4f5d8f9378746db3c1e184.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_6f4e02bb2502d0f72c15f0456770cc09.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_f64103920978610db4a73525adcca7e4.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_c6464c12d55e8defaa00d3da6489b960.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_4e3786e3637badac10112388ceceb1d7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_aee6ba764545bb1abd1a0733c2ad237a.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_ccc1035632d14ceaa958e7e7fcb5b086.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_c6b24c8c0bedd3b086cdf0490aec1b56.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_94ac38aeceb370a7207d441b7349159d.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_8926aeded84e43a2da39fb9030744ad2.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_1c1edf7d2b4af7fd942143c34fd0e4ea.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_10e2a8f2ee751e02a9d49906b66cbe85.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_f2bac7bd7b17c235feef15e26bf8f6c5.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_86255e391a46f5dae2786d3b348ae0f3.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_c177c0ea16070a042fa22c90b72eba76.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_730fad57fc4f5d8f9378746db3c1e184.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_6f4e02bb2502d0f72c15f0456770cc09.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_f64103920978610db4a73525adcca7e4.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_c6464c12d55e8defaa00d3da6489b960.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_4e3786e3637badac10112388ceceb1d7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_aee6ba764545bb1abd1a0733c2ad237a.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/b8ed9d265dc063711aa4bb20648af48a/photo_ccc1035632d14ceaa958e7e7fcb5b086.jpg"], "gps": [43.0880677, 1.874318], "id": 818}, {"types": "Maison", "town": "Eguilles", "postcode": "13510", "price": 690000, "agent": "L'Immo Chez Toit", "ref": "VMA10003264", "bedrooms": 3, "rooms": 6, "plot": null, "size": 163, "link_url": "https://www.limmocheztoit.fr/3264-vous-voulez-savourer-la-douceur-du-sud.html", "description": "Vous avez pour projet d'avoir une résidence secondaire ? de faire un investissement locatif en plus de votre résidence principale? \nAvec ce ravissant ensemble, de nombreuses possibilités s'offrent à vous.\nLa maison principale se compose d'un confortable séjour, une agréable cuisine/salle à manger, deux chambres dont une avec dressing ainsi q'une belle salle de bain avec douche et baignoire pour le plaisir de tous.\nEn plus de ce joli bien, vous aurez le plaisir de découvrir un T2 pouvant être ouvert sur la maison principale.\nPour parfaire l'ensemble, il y a un t1 bis où l'aménagement des pièces est optimisé.\nA découvrir sans tarder.\n \n \nl y a des écoles maternelles et élémentaires à proximité : l'École Élémentaire du Cros, l'École Maternelle le Cros et l'École Élémentaire Léonce Artaud. Niveau transports en commun, on trouve la gare Aix-en-Provence dans un rayon de 10 km. Les autoroutes A8, A51 et A7 et la nationale N296 sont accessibles à moins de 9 km. Il y a de nombreux restaurants et un bureau de poste à proximité du logement.", "photos": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_9aeb9988b9e8f1f4040a8a07aab6fa41_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_0886a6efe696555176adcc0183cd8c23_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_0f6eb6c1e4f26728df1a79292cabaed7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_4bf753f07bdda62a5dbf262bfc950bcd.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_1f50d64ff2c71c3791ebd43976f16ea6.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_c0a4ae22d7d30394bff1c7f4019abd9e_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_ca3417fa0a3e90127422dd5d044b97d6.jpg"], "photos_hosted": ["https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_9aeb9988b9e8f1f4040a8a07aab6fa41_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_0886a6efe696555176adcc0183cd8c23_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_0f6eb6c1e4f26728df1a79292cabaed7.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_4bf753f07bdda62a5dbf262bfc950bcd.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_1f50d64ff2c71c3791ebd43976f16ea6.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_c0a4ae22d7d30394bff1c7f4019abd9e_Inc_0.jpg", "https://immo-cheztoit.staticlbi.com/original/images/biens/1/722e3a33b419bdd6560032906dc144aa/photo_ca3417fa0a3e90127422dd5d044b97d6.jpg"], "gps": [43.5687248, 5.3543957], "id": 819}]
+[
+  {
+    "types": "Terrain",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 12000,
+    "agent": "Ami Immobilier",
+    "ref": "5316",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": 531,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5316-terrains/",
+    "description": "Terrain constructible de 531m² .Viabilité en limite de propriété.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_1650.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_1650.png"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Terrain",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 25000,
+    "agent": "Ami Immobilier",
+    "ref": "5487",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": 900,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5487-terrains/",
+    "description": "APPROXIMATE LOCATION - Pays d’olmes TERRAIN constructible de 900m² viabiliser en limite.Assainissement autonome à installer.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0151.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0151.png"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Terrain",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 26000,
+    "agent": "Ami Immobilier",
+    "ref": "5622",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": 691,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5448-terrains/",
+    "description": "APPROXIMATE LOCATION - Pays d’olmes Terrain constructible de 700 m² à 880 m² viabilité et bornée.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20210727_124516.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20210727_124637.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20210727_124642.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20210727_124516.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20210727_124637.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20210727_124642.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 40000,
+    "agent": "Ami Immobilier",
+    "ref": "5720",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5720-maison-sault/",
+    "description": "APPROXIMATE LOCATION - Idéal pied à terre.Maison près de sites de randonnée comprenant, pièce à vivre unique,mezzanine,une alcove,salle d’eau,wc,terrasse.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_123458-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_122652-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_123209-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_123218-1-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_123458-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_122652-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_123209-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_123218-1-scaled.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 40000,
+    "agent": "Ami Immobilier",
+    "ref": "5671",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": 600,
+    "size": 80,
+    "link_url": "https://www.ami09.com/produit/5671-maison-cathare/",
+    "description": "APPROXIMATE LOCATION - Proche Montségur.Exposition sud,Grange indépendante sur 600m² de terrain bordé par rivière.Transformable en habitation de 80m²,électricité,eau en limite de parcelle.Zone blanche.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_094951-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095115-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095138-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095434-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095305-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095507-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_094951-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095115-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095138-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095434-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095305-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/02/20220204_095507-scaled.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Immeuble",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 40000,
+    "agent": "Ami Immobilier",
+    "ref": "5689",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5689-immeuble-cathare/",
+    "description": "APPROXIMATE LOCATION - Immeuble à rénover comprenant deux appartements T3+ grand garage.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_141618.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_141805.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_141836.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_142222.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_141618.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_141805.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_141836.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_142222.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 40000,
+    "agent": "Ami Immobilier",
+    "ref": "3036",
+    "bedrooms": 4,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/3036-maison/",
+    "description": "Maison de village toutes commodités cuisine, buanderie, séjour salon, 4 chambres, salle de bains, 2 pièces annexes, grenier.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF5246.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF5248.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF5249.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF5252.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF5246.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF5248.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF5249.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF5252.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Terrain",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 40000,
+    "agent": "Ami Immobilier",
+    "ref": "5558",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": 1200,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5558-maison/",
+    "description": "BELCAIRE Terrain de 1200m² plat exposition sud,viabilisé eau égout.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/20210311_150819-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/20210311_150819-scaled.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Carcassonne",
+    "postcode": "11000",
+    "price": 50000,
+    "agent": "Ami Immobilier",
+    "ref": "5736",
+    "bedrooms": 2,
+    "rooms": 6,
+    "plot": null,
+    "size": 80,
+    "link_url": "https://www.ami09.com/produit/5736-maison-carcassonne-11000/",
+    "description": "Carcassonne Centre ville Maison avec garage comprenant RC grande pièce ,wc.1er étage cuisine équipée séjour,salon,wc.2ème étage deux chambres,salle d’eau,wc.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_115126.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114305.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114027.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114438.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_115126.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114305.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114027.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230404_114438.jpg"
+    ],
+    "gps": [
+      43.2130358,
+      2.3491069
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Puivert",
+    "postcode": "11230",
+    "price": 50000,
+    "agent": "Ami Immobilier",
+    "ref": "5738",
+    "bedrooms": 2,
+    "rooms": 3,
+    "plot": null,
+    "size": 55,
+    "link_url": "https://www.ami09.com/produit/5738-maison-puivert-11230/",
+    "description": "Maison de village Limite Aude-Ariège, maison de village, mitoyenne 2 cotés, ni cour, ni jardin. Comprend : pièce à vivre  cuisine, salle à manger salon, salle d’eau, toilettes. A l’étage : 2 chambres, espace rangements et grenier. Idéal pour maison de vacances, pied à terre.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/facade-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4394.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4395.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4397.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4399.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4401.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4404.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/facade-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4394.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4395.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4397.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4399.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4401.png",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_4404.png"
+    ],
+    "gps": [
+      42.9199133,
+      2.0464486
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 50000,
+    "agent": "Ami Immobilier",
+    "ref": "5628",
+    "bedrooms": 3,
+    "rooms": 6,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5628-maison-belesta-09300/",
+    "description": "BELESTA Maison de village comprenant coin cuisine,séjour salon,salle d’eau wc .A l’étage un grand salon,une chambre alcove,Au second une grande chambre et une chambre alcove ,grenier aménageable.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_154238.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_154315.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_154725.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_154817.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_155033.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_155132.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_155238.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_155447.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_154238.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_154315.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_154725.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_154817.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_155033.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_155132.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_155238.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20210716_155447.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Terrain",
+    "town": "Puivert",
+    "postcode": "11230",
+    "price": 50000,
+    "agent": "Ami Immobilier",
+    "ref": "5466",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": 2300,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5466-terrains/",
+    "description": "Sur le site de PUIVERT TERRAIN constructible de 2300m² exposition sud avec jolie vue,eau,edf,égout en limite de parcelle.",
+    "photos": [],
+    "photos_hosted": [],
+    "gps": [
+      42.9199133,
+      2.0464486
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Esperaza",
+    "postcode": "11260",
+    "price": 59000,
+    "agent": "Ami Immobilier",
+    "ref": "5726",
+    "bedrooms": 2,
+    "rooms": 3,
+    "plot": null,
+    "size": 37,
+    "link_url": "https://www.ami09.com/produit/5726-maison-esperaza-11260/",
+    "description": "Espéraza  Idéal pied à terre Maison confortable bien rénovée comprenant pièce à vivre unique,une chambre,salle d’eau wc,une chambre avec accès par un escalier japonais.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_110438-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_103311-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_103317-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_103415-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_103422-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_110438-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_103311-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_103317-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_103415-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/20230214_103422-scaled.jpg"
+    ],
+    "gps": [
+      42.933793,
+      2.2207631
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 60000,
+    "agent": "Ami Immobilier",
+    "ref": "5743",
+    "bedrooms": 2,
+    "rooms": 3,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5743-maison-belesta-09300/",
+    "description": "Dans un cadre bucolique Maison de hameau atypique avec dépendances terrasse.Comprenant une pièce à vivre unique avec cheminée four à pain,deux chambres,grenier aménageable,salle d’eau,wc.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191508-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191500.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191108.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191121.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191235.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191601.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191508-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191500.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191108.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191121.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191235.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230503_191601.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Camurac",
+    "postcode": "11340",
+    "price": 60000,
+    "agent": "Ami Immobilier",
+    "ref": "5719",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5719-maison-camurac/",
+    "description": "Sur le site de CAMURAC Dépendance de 60m²  avec jardinet.Eau,électricité,égout,charpente bon état,toiture neuve,possibilité de transformer en habitation.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_121913-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221119_151811-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221119_151749-1-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221220_121913-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221119_151811-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/20221119_151749-1-scaled.jpg"
+    ],
+    "gps": [
+      42.7968727,
+      1.9178977
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Montsegur",
+    "postcode": "09300",
+    "price": 60000,
+    "agent": "Ami Immobilier",
+    "ref": "5715",
+    "bedrooms": 2,
+    "rooms": 6,
+    "plot": null,
+    "size": 104,
+    "link_url": "https://www.ami09.com/produit/5715-proche-montsegur/",
+    "description": "Proche Montségur maison de village comprenant cuisine, séjour avec cheminée insert, deux chambres, salle de bains, wc indépendant, dressing, buanderie, garage avec portail automatisé, terrasse et jardinet.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/11/20221118_143314-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_150720.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_150934.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_150946.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_151305.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_151149.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_151326.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/11/20221118_143314-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_150720.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_150934.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_150946.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_151305.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_151149.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221116_151326.jpg"
+    ],
+    "gps": [
+      42.8707548,
+      1.8337452
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 60000,
+    "agent": "Ami Immobilier",
+    "ref": "5698",
+    "bedrooms": 2,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5698-maison-sault/",
+    "description": "APPROXIMATE LOCATION - Maison de village A RENOVER avec cours et jardin attenant,comprenant grande pièce à vivre avec cheminée,deux chambres,grenier aménageable.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/07/20220623_144420-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/20220623_144137-1-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/07/20220623_144420-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/20220623_144137-1-scaled.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 60000,
+    "agent": "Ami Immobilier",
+    "ref": "5706",
+    "bedrooms": 2,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5560-maison/",
+    "description": "APPROXIMATE LOCATION - Maison comprenant pièce à vivre unique avec coin cuisine équipée séjour salon avec poêle bois,2 chambres,salle d’eau,wc,garage.Attenant dépendance avec 2 niveaux + garage.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0318.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0315-1.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0318.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0315-1.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Lavelanet",
+    "postcode": "09300",
+    "price": 65000,
+    "agent": "Ami Immobilier",
+    "ref": "5559",
+    "bedrooms": 4,
+    "rooms": null,
+    "plot": null,
+    "size": 115,
+    "link_url": "https://www.ami09.com/produit/5559-maison-lavelanet/",
+    "description": "Centre ville Maison comprenant hall,cuisine équipée,séjour,quatre chambres,salle de bains,wc. Loué 450 euros /mois. IDEAL INVESTISSEUR",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/06/100_0199.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/100_0201.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/100_0203.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/100_0207.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/06/100_0199.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/100_0201.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/100_0203.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/100_0207.png"
+    ],
+    "gps": [
+      42.9332121,
+      1.8487179
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 66000,
+    "agent": "Ami Immobilier",
+    "ref": "5723",
+    "bedrooms": 3,
+    "rooms": 4,
+    "plot": null,
+    "size": 85,
+    "link_url": "https://www.ami09.com/produit/5723-maison-belesta/",
+    "description": "Maison de village comprenant hall d’entrée,pièce à vivre avec cheminée insert,trois chambres,salle d’eau,wc,grenier,buanderie,garage.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103144.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103100.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103125.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103226.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103248.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103317.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103425.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103144.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103100.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103125.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103226.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103248.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103317.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220826_103425.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 68000,
+    "agent": "Ami Immobilier",
+    "ref": "5740",
+    "bedrooms": 1,
+    "rooms": 3,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5740-maison-belcaire-11340/",
+    "description": "Maison de village agréable exposition sud jolie vue comprenant pièce à vivre unique avec coin cuisine équipée,salons,salle de bains wc,une chambre.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163709.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163515.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163320.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163409.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163438.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163556.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163621.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163709.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163515.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163320.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163409.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163438.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163556.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230427_163621.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 70000,
+    "agent": "Ami Immobilier",
+    "ref": "5652",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": 400,
+    "link_url": "https://www.ami09.com/produit/5652-maison-sault/",
+    "description": "APPROXIMATE LOCATION - Ensemble de deux granges en pierre transformables en habitation,grand volumes soit 400m² de batî avec une cour intérieure.Branchements réalisés eau,électricité,assainissement,égout devant le bien.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130453.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_131007.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_131045.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130746.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130735.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130554.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130618.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130704.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130453.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_131007.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_131045.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130746.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130735.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130554.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130618.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/10/IMG_20211023_130704.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Montbel",
+    "postcode": "09600",
+    "price": 73000,
+    "agent": "Ami Immobilier",
+    "ref": "3022",
+    "bedrooms": 3,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/3022-maison/",
+    "description": "A 10 km du Lac de MONTBEL Maison de village Entièrement rénovée Pièce à vivre avec cuisine équipée séjour cheminée,3 chambres, salle d’eau. DPE vierge consommations non exploitables.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF4977.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF4978.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF4981.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF4986.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF4977.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF4978.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF4981.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/DSCF4986.jpg"
+    ],
+    "gps": [
+      42.9757839,
+      1.9770635
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 74000,
+    "agent": "Ami Immobilier",
+    "ref": "5724",
+    "bedrooms": 2,
+    "rooms": 3,
+    "plot": null,
+    "size": 80,
+    "link_url": "https://www.ami09.com/produit/5724-maison-cathare/",
+    "description": "APPROXIMATE LOCATION - Dans un cadre nature idéal pied à terre Maison avec garage et cour clos de mur .A l’étage coin cuisine séjour,une chambre,salle d’eau,wc.Au 2ème une grande chambre mansardée.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161757.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161825.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161914.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_162110.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161948.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_162227.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_162144.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161812.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_162019.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161757.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161825.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161914.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_162110.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161948.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_162227.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_162144.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_161812.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/IMG_20211007_162019.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 75000,
+    "agent": "Ami Immobilier",
+    "ref": "5682",
+    "bedrooms": 3,
+    "rooms": null,
+    "plot": null,
+    "size": 143,
+    "link_url": "https://www.ami09.com/produit/5682-maison-cathare/",
+    "description": "Maison de village grand volume comprenant hall,cuisine coin repas,séjour salon,trois chambres,salle d’eau,wc,grand garage,terrasse,grand grenier.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_e805e471ef07f1ce77a0a07a7e71ae63.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_0e71dcd0e0cfa1ae58a52272f6d72d74.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_143505.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_143534.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_143600.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_144015.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_144211.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_e805e471ef07f1ce77a0a07a7e71ae63.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_0e71dcd0e0cfa1ae58a52272f6d72d74.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_143505.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_143534.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_143600.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_144015.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220601_144211.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 79000,
+    "agent": "Ami Immobilier",
+    "ref": "5705",
+    "bedrooms": 8,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5633-maison-sault/",
+    "description": "APPROXIMATE LOCATION - Grande maison de village comprenant hall cuisine avec coin repas salon avec cheminée, une pièce annexe .1er étage quatre chambres salle d’eau wc. 2 ème étage quatre chambres,salle d’eau.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/09/20210903_155238-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/20210903_155318-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/20210903_155338-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/20210903_155617-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/09/20210903_155238-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/20210903_155318-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/20210903_155338-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/09/20210903_155617-scaled.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 80000,
+    "agent": "Ami Immobilier",
+    "ref": "5704",
+    "bedrooms": 3,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5704-maison-sault/",
+    "description": "APPROXIMATE LOCATION - Maison de village avec jardinet. Exposition sud Comprenant hall,cuisine,séjour salon,trois chambres,salle d’eau,wc,cave,dépendances.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_112511-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114122-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114213-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114246-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114309-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114338-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114354-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114407-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_112511-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114122-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114213-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114246-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114309-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114338-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114354-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220721_114407-scaled.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Mirepoix",
+    "postcode": "09500",
+    "price": 85000,
+    "agent": "Ami Immobilier",
+    "ref": "5659",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": 300,
+    "size": 50,
+    "link_url": "https://www.ami09.com/produit/5659-maison-mirepoix/",
+    "description": "A proximité de Mirepoix Ideal pied à terre Maison en pierre indépendante jardin non attenant de 300m² comprenant pièce à vivre avec coin cuisine séjour,mezzanine,garage,",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_093022-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092818-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092707-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092726-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092846-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092935-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_093022-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092818-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092707-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092726-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092846-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/20211029_092935-scaled.jpg"
+    ],
+    "gps": [
+      43.0880677,
+      1.874318
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 100000,
+    "agent": "Ami Immobilier",
+    "ref": "5678",
+    "bedrooms": 3,
+    "rooms": 5,
+    "plot": null,
+    "size": 104,
+    "link_url": "https://www.ami09.com/produit/5678-maison-sault/",
+    "description": "APPROXIMATE LOCATION - Maison de village avec jardinet clos Exposition sud comprenant cuisine,séjour salon avec cheminée,trois chambres,salle de bains,wc,dressing,combles,garage,chauffage central fioul.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/04/20220209_163009-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/20220209_163048-2-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/20220209_163058-2-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/20220209_163108-2-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/04/20220209_163009-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/20220209_163048-2-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/20220209_163058-2-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/20220209_163108-2-scaled.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Immeuble",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 100000,
+    "agent": "Ami Immobilier",
+    "ref": "5520",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5520-immeubles/",
+    "description": "APPROXIMATE LOCATION - Immeuble de rapport comprenant 4 appartements dépendance et cour,3 T3 et 1 T2.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0875.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0876.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0880.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0884.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0885.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0886.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0875.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0876.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0880.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0884.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0885.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0886.png"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 105000,
+    "agent": "Ami Immobilier",
+    "ref": "5690",
+    "bedrooms": 6,
+    "rooms": null,
+    "plot": 300,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5690-maison-cathare/",
+    "description": "APPROXIMATE LOCATION - Grande maison de caractère avec garage et jardin clos de mur comprenant RC: séjour 18m²,salon 28m² avec cheminée,garage de 68m²,cave,cuisiné d’été.1er cuisine de 16m²,séjour salon avec cheminée insert 38m²,2 chambres,salle de bains.2 ème 4 chambres,1 pièce passante,grenier,pièces annexes,cuisine d’été,terrasse de 35m².Chauffage central fioul.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_1540572.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153256-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_1534241.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153321-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_1532012.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153628-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153701-logo3.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153612.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153820-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153739-logo1.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_1540572.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153256-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_1534241.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153321-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_1532012.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153628-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153701-logo3.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153612.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153820-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_20220615_153739-logo1.png"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 110000,
+    "agent": "Ami Immobilier",
+    "ref": "5731",
+    "bedrooms": 2,
+    "rooms": 3,
+    "plot": null,
+    "size": 9264,
+    "link_url": "https://www.ami09.com/produit/5731-maison-belesta/",
+    "description": "Maison agréable à vivre avec cuisine équipée à l’américaine séjour salon ( 48m²) avec poêle à granulés, véranda,wc,terrasse.A l’étage une chambre avec salle d’eau,wc,une chambre,salle d’eau,coin salon,grenier.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150756-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150718-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150731-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150743-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/photo_94a386d263ad713c8f231d93758b0b28.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/photo_338814ce4a5e68966f88b065fc6bb2a4.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/photo_c3f80fb2b9f735b6904aeaa872a79222.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150844-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/photo_01ea3248fd1b6f0ae02a0764371cc23b.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150756-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150718-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150731-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150743-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/photo_94a386d263ad713c8f231d93758b0b28.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/photo_338814ce4a5e68966f88b065fc6bb2a4.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/photo_c3f80fb2b9f735b6904aeaa872a79222.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20230314_150844-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/photo_01ea3248fd1b6f0ae02a0764371cc23b.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 110000,
+    "agent": "Ami Immobilier",
+    "ref": "5684",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5684-maison-cathare/",
+    "description": "APPROXIMATE LOCATION - Immeuble indépendant avec parking et jardin attenant comprenant deux appartements T3 ,RC ,garage et cave.Appartement cuisine,séjour,deux chambres,salle de bains,wc,chauffage central gaz de ville.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115600-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115404-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115312-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115421-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115517-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115600-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115404-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115312-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115421-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/20220219_115517-scaled.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Immeuble",
+    "town": "Lavelanet",
+    "postcode": "09300",
+    "price": 113000,
+    "agent": "Ami Immobilier",
+    "ref": "5733",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": 208,
+    "link_url": "https://www.ami09.com/produit/5733-immeuble-lavelanet/",
+    "description": "LAVELANET Investisseurs  Immeuble comprenant trois appartements et un local commercial de 20 m².En rez de chaussé Appartement un T2 avec cour,Au 1er étage Appartement  T3 . Au 2e étage Appartement  T3 avec une grande terrasse.Toiture neuve.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_172755.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_173056.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_173127.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_173641.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_173933.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174018.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174052.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174247.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174323.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174511.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_172755.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_173056.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_173127.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_173641.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_173933.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174018.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174052.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174247.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174323.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/IMG_20230329_174511.jpg"
+    ],
+    "gps": [
+      42.9332121,
+      1.8487179
+    ]
+  },
+  {
+    "types": "Immeuble",
+    "town": "Puivert",
+    "postcode": "11230",
+    "price": 119000,
+    "agent": "Ami Immobilier",
+    "ref": "5717",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5717-maison-puivert/",
+    "description": "Petit immeuble comprenant deux appartements T2 + garage.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20210609_144140-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSC5161.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSC5165.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/cuisine-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMAG3691-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20210927_164257-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMAG4764-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20210926_141243-1-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20210609_144140-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSC5161.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSC5165.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/cuisine-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMAG3691-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20210927_164257-1-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMAG4764-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20210926_141243-1-scaled.jpg"
+    ],
+    "gps": [
+      42.9199133,
+      2.0464486
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 120000,
+    "agent": "Ami Immobilier",
+    "ref": "5744",
+    "bedrooms": 3,
+    "rooms": 5,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5744-maison-belcaire-11340/",
+    "description": "Belle maison avec de belles prestations, garage deux voitures + pièce annexe comprenant au rez de chaussée une grande entrée avec placard,buanderie.1er étage grande chambre parentale avec salle d’eau,wc,grand cellier,grande pièce à vivre unique avec coin cuisine équipée salon séjour accès sur balcon .2 ème étage deux grandes chambres,salle d’eau,wc, tout à l’égout. Vous serez charmé ! A visite.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_161138.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_162532.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_161040.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_160812.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155611.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155627.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155747.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155930.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155955.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_160323.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_160356.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_161305.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_161333.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_161138.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_162532.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_161040.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_160812.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155611.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155627.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155747.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155930.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_155955.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_160323.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_160356.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_161305.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_20230505_161333.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Montsegur",
+    "postcode": "09300",
+    "price": 120000,
+    "agent": "Ami Immobilier",
+    "ref": "5716",
+    "bedrooms": 4,
+    "rooms": 7,
+    "plot": null,
+    "size": 132,
+    "link_url": "https://www.ami09.com/produit/5716-maison-montsegur/",
+    "description": "Proche Montségur Maison de village avec terrain et dépendance attenante ,comprenant hall,cuisine avec cheminée foyer ouvert, véranda,séjour,cellier,cave,quatre chambres,un bureau,salle d’eau wc,chauffage central fioul.Couverture toiture neuve.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/photo_289beafccdd3e23846eb02501f40f8a5.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/photo_5ac74ed42188f261b707456df3147bd9.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110339.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_105927.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110804.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110006.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110243.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110529.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/photo_289beafccdd3e23846eb02501f40f8a5.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/photo_5ac74ed42188f261b707456df3147bd9.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110339.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_105927.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110804.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110006.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110243.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/12/IMG_20221221_110529.jpg"
+    ],
+    "gps": [
+      42.8707548,
+      1.8337452
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Quillan",
+    "postcode": "11500",
+    "price": 124000,
+    "agent": "Ami Immobilier",
+    "ref": "5713",
+    "bedrooms": 3,
+    "rooms": 4,
+    "plot": 2500,
+    "size": 93,
+    "link_url": "https://www.ami09.com/produit/5713-maison-quillan/",
+    "description": "Maison confortable avec terrain non attenant arboré de 2500m² dépendance .comprenant RC Pièce à vivre avec coin cuisine équipée séjour salon(32m²) 1ER étage Deux chambres,salle de bains,wc indépendant.2éme étage Une chambre avec salle de bains,dressing.Foncier 933euros",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_155818-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/DSC7619-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/DSC7608-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/DSC7611-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_113201-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_110440-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_113243-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_085541-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_085703-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_090230-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_112248-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_155818-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/DSC7619-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/DSC7608-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/DSC7611-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_113201-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_110440-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_113243-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_085541-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_085703-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_090230-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/11/IMG_20221020_112248-scaled.jpg"
+    ],
+    "gps": [
+      42.876584699999995,
+      2.1941008666750825
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Montsegur",
+    "postcode": "09300",
+    "price": 130000,
+    "agent": "Ami Immobilier",
+    "ref": "5714",
+    "bedrooms": 4,
+    "rooms": 5,
+    "plot": 8200,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5679-maison-proche-montsegur/",
+    "description": "Maison indépendante en pierres sur 2800m² de terrain + une parcelle de 5400m² non attenante.Comprenant pièce à vivre avec cheminée, deux pièces annexes rangement,quatre chambres,salle de bains,wc, dépendance de 60m² au sol sur deux niveaux,chauffage central par pompe à chaleur.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_143551.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_144306.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_144519.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_143608.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_144019.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_144124.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_143754.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_143551.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_144306.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_144519.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_143608.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_144019.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_144124.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_143754.jpg"
+    ],
+    "gps": [
+      42.8707548,
+      1.8337452
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Quillan",
+    "postcode": "11500",
+    "price": 130000,
+    "agent": "Ami Immobilier",
+    "ref": "5480",
+    "bedrooms": 3,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5480-maison/",
+    "description": "QUILLAN Maison avec jardin clos dans quartier calme comprenant hall,cuisine équipée,séjour,salon,3 chambres,salle de bains,buanderie,garage,pièces annexes.DPE vierge consommations non exploitables.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0444.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0446.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0449.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0453.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0460.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0444.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0446.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0449.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0453.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/100_0460.png"
+    ],
+    "gps": [
+      42.876584699999995,
+      2.1941008666750825
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Montsegur",
+    "postcode": "09300",
+    "price": 135000,
+    "agent": "Ami Immobilier",
+    "ref": "5735",
+    "bedrooms": 3,
+    "rooms": 5,
+    "plot": 600,
+    "size": 85,
+    "link_url": "https://www.ami09.com/produit/5735-maison-proche-montsegur-09300/",
+    "description": "Exposition sud avec jolie vue.Maison avec jardin attenant de 600m² comprenant pièce à vivre unique avec coin cuisine équipée coin repas salon poêle bois,terrasse,trois chambres,un bureau,salle de bains,wc,garage",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_182741.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_182801.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_183452.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_182933.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_183012.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_183203.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_183031.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_182741.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_182801.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_183452.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_182933.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_183012.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_183203.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230407_183031.jpg"
+    ],
+    "gps": [
+      42.8707548,
+      1.8337452
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Foix",
+    "postcode": "09000",
+    "price": 149000,
+    "agent": "Ami Immobilier",
+    "ref": "5728",
+    "bedrooms": 3,
+    "rooms": 5,
+    "plot": 540,
+    "size": 106,
+    "link_url": "https://www.ami09.com/produit/5728-maison-foix/",
+    "description": "Maison de village en pierres d’une surface de 106 m2 habitables, avec jardin attenant d’env 540 m².      Comprenant : Au rez de jardin : cuisine, séjour, 3 chambres de 18, 19 et 19.50 m², 1 salle de bains, toilettes.Au 1er étage : palier, 2 pièces pouvant devenir deux chambres supplémentaires.En sous-sol : 3 pièces servant de débarras, atelier, cave et chaufferie. Toiture en bon état, simple vitrage, chauffage insert et central, de bons planchers, cumulus.\nTravaux de mise au goût du jour à prévoir.Le calme et la tranquillité aux portes de Foix A visiter !",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2864.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2866.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2869.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2858.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2855.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2860.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2864.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2866.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2869.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2858.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2855.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_2860.png"
+    ],
+    "gps": [
+      42.9638998,
+      1.6053807
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 150000,
+    "agent": "Ami Immobilier",
+    "ref": "5707",
+    "bedrooms": 3,
+    "rooms": 4,
+    "plot": null,
+    "size": 110,
+    "link_url": "https://www.ami09.com/produit/5707-maison-belesta/",
+    "description": "Maison dans un cadre nature jolie vue .Comprenant grande pièce à vivre avec coin cuisine équipée,trois chambres,deux wc,combles,dépendance attenante,abris de voiture,jardinet.Chauffage par poêle de masse.Menuiseries double vitrage, volets bois.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144638.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_00cf725a55d512d899aa8e962ea09713.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144209.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_151407.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144308.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144746.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144712.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144727.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144827.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_145115.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_145319.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_145421.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_145455.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144638.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_00cf725a55d512d899aa8e962ea09713.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144209.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_151407.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144308.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144746.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144712.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144727.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_144827.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_145115.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_145319.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_145421.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_20220830_145455.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Montsegur",
+    "postcode": "09300",
+    "price": 155000,
+    "agent": "Ami Immobilier",
+    "ref": "5734",
+    "bedrooms": 5,
+    "rooms": 7,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5734-maison-proche-montsegur-09300/",
+    "description": "Grande maison confortable avec cuisine équipée séjour salon poêle bois,arrière cuisine,buanderie,salle d’eau,wc,cinq chambres,salle d’eau,wc,garage,grande pièce aménageable.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114614.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114523.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114641.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114710.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114849.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114945.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_115027.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_115358.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_115705.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_115930.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114614.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114523.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114641.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114710.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114849.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_114945.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_115027.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_115358.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_115705.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230313_115930.jpg"
+    ],
+    "gps": [
+      42.8707548,
+      1.8337452
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Ax les thermes",
+    "postcode": "09110",
+    "price": 160000,
+    "agent": "Ami Immobilier",
+    "ref": "5742",
+    "bedrooms": 2,
+    "rooms": 3,
+    "plot": null,
+    "size": 55,
+    "link_url": "https://www.ami09.com/produit/5742-maison-proche-ax-les-thermes-09110/",
+    "description": "Un petit bijou Maison indépendante sur 441m² de terrain avec belle vue exposition sud comprenant pièce à vivre unique avec coin cuisine équipée coin repas salon,salle d’eau,wc,deux chambres,chauffage poêle à granulés. Vous serez charmé ! A visite.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120318.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120524-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120011-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_115942-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120148-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120028-1-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120318.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120524-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120011-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_115942-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120148-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/20230421_120028-1-scaled.jpg"
+    ],
+    "gps": [
+      42.7193597,
+      1.8379765
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 160000,
+    "agent": "Ami Immobilier",
+    "ref": "5668",
+    "bedrooms": 3,
+    "rooms": 6,
+    "plot": 670,
+    "size": 1066,
+    "link_url": "https://www.ami09.com/produit/5668-maison-belesta-09300/",
+    "description": "Maison indépendante sur 670m² de terrain clos comprenant hall, cuisine, séjour, deux chambres, salle d’eau à l’italienne. wc. En sous-sol une chambre, cabinet de toilettes, une pièce annexe aménageable, buanderie chaufferie central fioul, garage.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/photo_cea2bebf56849267ac7e03f266f23ff2.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/photo_2e934e7d6f149dc5d558be1e975dace5.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_091651.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_091738-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_091335.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_091831.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_092117.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/photo_cea2bebf56849267ac7e03f266f23ff2.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/photo_2e934e7d6f149dc5d558be1e975dace5.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_091651.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_091738-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_091335.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_091831.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20220216_092117.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 160000,
+    "agent": "Ami Immobilier",
+    "ref": "5722",
+    "bedrooms": 6,
+    "rooms": 8,
+    "plot": null,
+    "size": 197,
+    "link_url": "https://www.ami09.com/produit/5722-maison-belesta/",
+    "description": "BELESTA  village tous commerces  Maison entièrement rénovée bonnes prestations.Comprenant hall cuisine équipée avec cheminée insert ,buanderie,séjour salon,wc,six chambres,deux salle d’eau,trois wc,garage,terrasse,jardinet,dépendance chauffage central.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113007.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_114552.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_112935.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113344.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113434.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113459.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113637.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_114144.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113007.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_114552.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_112935.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113344.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113434.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113459.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_113637.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/01/IMG_20220905_114144.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 175000,
+    "agent": "Ami Immobilier",
+    "ref": "5732",
+    "bedrooms": 5,
+    "rooms": 9,
+    "plot": 1400,
+    "size": 157,
+    "link_url": "https://www.ami09.com/produit/5732-maison-cathare/",
+    "description": "BELESTA  Belle Maison indépendante sur 1400m² de terrain clos et arboré comprenant cuisine ,séjour salon avec cheminée,bureau,cinq chambres,wc,salle d’eau,terrasses,garage,chauffage central fioul.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175643-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175011-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175027-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_180525-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175351-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_174702-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175102-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175115-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210616_122019-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/d5f89a4861bbee3a75f5a1c3f3f1d634.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175207-scaled-1.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175643-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175011-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175027-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_180525-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175351-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_174702-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175102-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175115-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210616_122019-scaled-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/d5f89a4861bbee3a75f5a1c3f3f1d634.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/03/20210618_175207-scaled-1.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 180000,
+    "agent": "Ami Immobilier",
+    "ref": "5695",
+    "bedrooms": 5,
+    "rooms": 7,
+    "plot": 600,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5695-maison-sault/",
+    "description": "APPROXIMATE LOCATION - Maison de village avec terrain attenant grand volume comprenant pièce à vivre unique avec cheminée et poêle bois.1er étage trois chambres,salle d’eau wc.2ème étage trois chambres salle de bains wc.3 étage comble mansardés aménageables.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_110626-logo1.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_105504-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_ac6a1eef8adc4352340f3cab415bc17b.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_111139-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_111153-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_018c89f053f8b343dd19f1285993c367.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_c9d354831667e5c2e28ab201714d3f73.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_105602-logo.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_110626-logo1.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_105504-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_ac6a1eef8adc4352340f3cab415bc17b.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_111139-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_111153-logo.png",
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_018c89f053f8b343dd19f1285993c367.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/photo_c9d354831667e5c2e28ab201714d3f73.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/06/IMG_20220614_105602-logo.png"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Chalet",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 185000,
+    "agent": "Ami Immobilier",
+    "ref": "5700",
+    "bedrooms": 1,
+    "rooms": null,
+    "plot": 9870,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5700-chalet-sault/",
+    "description": "APPROXIMATE LOCATION - Dans un cadre nature Chalet sur 9870m² de terrain ( une partie constructible) avec terrasse exposition sud, jolie vue.Comprenant grande pièce à vivre avec cuisine équipée séjour salon avec un poêle à bois,salle d’eau,WC séparé. A l’étage grande chambre possibilité d’une deuxième. Un abri de jardin.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_c35514e0ee754f104a42fe0913458220.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_42f174bb8b5fecf75f69668a2eb01784.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_319071d1f29ab43f8c2f2b4c536bfb6f.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_9d6f48b3b83ea3be14a6c45147e6c240.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_24144bb27109e63476f39d1912f4b6bb.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_bd3f093aa86f4e8da643581dfa0acc09.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_c35514e0ee754f104a42fe0913458220.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_42f174bb8b5fecf75f69668a2eb01784.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_319071d1f29ab43f8c2f2b4c536bfb6f.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_9d6f48b3b83ea3be14a6c45147e6c240.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_24144bb27109e63476f39d1912f4b6bb.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/photo_bd3f093aa86f4e8da643581dfa0acc09.jpg"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 185000,
+    "agent": "Ami Immobilier",
+    "ref": "5681",
+    "bedrooms": 3,
+    "rooms": 4,
+    "plot": 55,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5681-maison-cathare/",
+    "description": "APPROXIMATE LOCATION - Maison indépendante de 86m² sur 1200m² de terrain.Exposition sud,jolie vue.Comprenant hall,cuisine séjour salon,trois chambres,salle de bains,wc,garage,chauffage central fioul + Habitation indépendante de 55m² coin cuisine équipée séjour,une chambres,salle d’eau wc ,buanderie.Dépendance de 80m².",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_172014.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171535.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171855.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_112932.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171600.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171749.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171655.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171715.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_112452.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_112702.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_112803.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_113034.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_113525.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_172014.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171535.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171855.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_112932.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171600.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171749.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171655.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20220426_171715.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_112452.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_112702.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_112803.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_113034.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/04/IMG_20221018_113525.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Lavelanet",
+    "postcode": "09300",
+    "price": 195000,
+    "agent": "Ami Immobilier",
+    "ref": "1734",
+    "bedrooms": 3,
+    "rooms": null,
+    "plot": 1412,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/1734-maison-cathare/",
+    "description": "LAVELANET Maison indépendante avec jardin 1412m² de terrain cuisine,séjour avec cheminée insert,balcon,trois chambres,bureau,salle de bains,salle d’eau,wc,buanderie,garage,chauffage électrique.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/04/DSCI00015.png",
+      "https://www.ami09.com/wp-content/uploads/2021/04/DSCI00143.png",
+      "https://www.ami09.com/wp-content/uploads/2021/04/DSCI01012.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/04/DSCI00015.png",
+      "https://www.ami09.com/wp-content/uploads/2021/04/DSCI00143.png",
+      "https://www.ami09.com/wp-content/uploads/2021/04/DSCI01012.png"
+    ],
+    "gps": [
+      42.9332121,
+      1.8487179
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 200000,
+    "agent": "Ami Immobilier",
+    "ref": "5624",
+    "bedrooms": 7,
+    "rooms": null,
+    "plot": 800,
+    "size": 250,
+    "link_url": "https://www.ami09.com/produit/5623-maison-cathare/",
+    "description": "APPROXIMATE LOCATION - Proche Montségur, Maison de Maître avec de beaux  volumes à exploiter, 250m² habitables,exposition sud.Comprenant vaste hall avec un très bel escalier central; trois pièces à vivre : cuisine, séjour salon avec cheminée ouverte, pièce annexe, le tout donnant sur terrasse et jardin, cave, 7 chambres, salle de bains,deux  wc,trois pièces annexes  qui peuvent s’aménager, garage, charpente en bon état couverture neuve.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/07/Façade-jardin.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/entrée.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/Cuisine.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/pallier.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/SAM.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/Chambre.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/07/Façade-jardin.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/entrée.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/Cuisine.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/pallier.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/SAM.png",
+      "https://www.ami09.com/wp-content/uploads/2021/07/Chambre.png"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Chalabre",
+    "postcode": "11230",
+    "price": 210000,
+    "agent": "Ami Immobilier",
+    "ref": "5709",
+    "bedrooms": 4,
+    "rooms": 6,
+    "plot": 1200,
+    "size": 160,
+    "link_url": "https://www.ami09.com/produit/5642-maison-cathare/",
+    "description": "Belle maison en pierre mitoyenne, composée de 2 bâtisses traversantes donnant sur cour et son garage + 1 200 m2 de terrain non attenant (constructible) Se compose : entrée couloir traversant, cuisine équipée, séjour salon, salle d’eau, toilettes. Au 1er étage : palier répartiteur, salle d’eau, toilettes, 4 chambres dont une en suite avec salle d’eau (à terminer) Au 2e étage : Grenier sur la totalité de la maison avec une belle hauteur sous toiture.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG-20230327-WA0004.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211007_181024.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211007_181130-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211007_181004.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211104_173947.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211104_174110.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211104_174243.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG-20230327-WA0004.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211007_181024.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211007_181130-1.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211007_181004.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211104_173947.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211104_174110.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/12/IMG_20211104_174243.jpg"
+    ],
+    "gps": [
+      42.9825951,
+      2.0063646
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Carcassonne",
+    "postcode": "11000",
+    "price": 215000,
+    "agent": "Ami Immobilier",
+    "ref": "5711",
+    "bedrooms": 4,
+    "rooms": null,
+    "plot": 330,
+    "size": 115,
+    "link_url": "https://www.ami09.com/produit/5711-maison-carcassonne/",
+    "description": "Maison en pierre rénovée bonnes prestations,avec jardin comprenant cuisine équipée séjour salon ( 44m² ),terrasse avec jacuzzi,une grande chambre avec espace bureau,salle d’eau,wc,trois chambres,salle d’eau,wc,buanderie,garage .A deux minutes de l’autoroute, proximité de tous commerces.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_170549-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165503-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165535-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165544-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165617-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165652-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165722-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165827-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_170549-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165503-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165535-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165544-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165617-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165652-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165722-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/09/20220829_165827-scaled.jpg"
+    ],
+    "gps": [
+      43.2130358,
+      2.3491069
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belesta",
+    "postcode": "09300",
+    "price": 250000,
+    "agent": "Ami Immobilier",
+    "ref": "5730",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": 107,
+    "link_url": "https://www.ami09.com/produit/5730-maison-belesta-09300/",
+    "description": "BELESTA Dans un cadre nature avec jolie vue.Maison en pierre indépendante très belle rénovation.Grande pièce à vivre cuisiné équipée à l’américaine séjour salon poêle bois godin,buanderie,wc indépendant,une chambre,grande mezzanine avec quatre couchages voir plus ,terrasse,parking.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_113246.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_113654.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112331.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112543.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112530.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_113039.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112151.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_113137.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112346.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112452.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112844.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112916.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112705.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_113246.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_113654.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112331.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112543.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112530.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_113039.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112151.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_113137.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112346.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112452.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112844.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112916.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/04/IMG_20230322_112705.jpg"
+    ],
+    "gps": [
+      42.9029283,
+      1.9340613
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Saint quentin la tour",
+    "postcode": "09500",
+    "price": 296000,
+    "agent": "Ami Immobilier",
+    "ref": "4060",
+    "bedrooms": 5,
+    "rooms": 7,
+    "plot": 2558,
+    "size": 140,
+    "link_url": "https://www.ami09.com/produit/st-quentin-la-tour/",
+    "description": "A 10 min des commerces, la tranquillité, secteur recherché.Belle Maison de village en pierres mitoyenne des deux côtés d’une surface habitable de 140 m2 sur terrain attenant d’une superficie de 2558 m².",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3845.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3847.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3843.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3818.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3856.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3851.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3848.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3822.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3825.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3829.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3845.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3847.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3843.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3818.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3856.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3851.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3848.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3822.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3825.png",
+      "https://www.ami09.com/wp-content/uploads/2022/08/IMG_3829.png"
+    ],
+    "gps": [
+      43.0328307,
+      1.900377
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Puivert",
+    "postcode": "11230",
+    "price": 330000,
+    "agent": "Ami Immobilier",
+    "ref": "5697",
+    "bedrooms": 5,
+    "rooms": null,
+    "plot": 800,
+    "size": 217,
+    "link_url": "https://www.ami09.com/produit/5697-maison-a-proximite-de-puivert/",
+    "description": "A proximité de PUIVERT et du lac de MONTBEL Maison en pierres avec beaucoup de charme de très beaux volumes,jardin arboré de 800m² bordé par rivière.Comprenant hall,cuisine,séjour salon (de 40m²),un atelier,buanderie ,cave.Etage palier,,cinq chambres donc une chambre parentale avec salle de bains wc de 33m².salle d’eau,wc,une pièce aménageable de 25m²+dépendance attenante.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_5e5fa8260ebe71e0f08c02f3867ea241.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_f33d68c0310f94b24eeca2030d588e7c.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_6d9c493f5be788828537242b78d9db18.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_5045ca1b4ad4d8b010390819f5796758.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_7a63db1e562cb9ed221efbe1822ab1dd.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_04451e9bcbf140d1b4f6f4c0d412ea02.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_efd0c6063fef003b917c13dd18d75c92.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_6598839783b3c9928ddc5e20588beb1c.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_fab5b417bb55fd76815707ce09d5d667.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_5e5fa8260ebe71e0f08c02f3867ea241.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_f33d68c0310f94b24eeca2030d588e7c.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_6d9c493f5be788828537242b78d9db18.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_5045ca1b4ad4d8b010390819f5796758.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_7a63db1e562cb9ed221efbe1822ab1dd.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_04451e9bcbf140d1b4f6f4c0d412ea02.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_efd0c6063fef003b917c13dd18d75c92.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_6598839783b3c9928ddc5e20588beb1c.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/07/photo_fab5b417bb55fd76815707ce09d5d667.jpg"
+    ],
+    "gps": [
+      42.9199133,
+      2.0464486
+    ]
+  },
+  {
+    "types": "Corps de ferme",
+    "town": "Mazeres",
+    "postcode": "09270",
+    "price": 371000,
+    "agent": "Ami Immobilier",
+    "ref": "5727",
+    "bedrooms": 3,
+    "rooms": 5,
+    "plot": null,
+    "size": 224,
+    "link_url": "https://www.ami09.com/produit/5727-corps-de-ferme-mazeres-09270/",
+    "description": "En pleine nature, le calme et pourtant à 10 minutes de tous commerces (dont Pamiers)… Maison de campagne de 224 m2 habitables sur terrain arboré d’env. 1 ha 13 a 67 ca, un puits (niveau constant), exposé Sud et sa carrière de 40 x 20. Aucun vis-à-vis, loin de toutes nuisances et une belle vue sur les Pyrénées. Se compose : Séjour/salon (35 m2) avec cheminée insert, cuisine équipée séparée. 1er étage : salle de bains (18m2), 1 chambre (22 m2), 2 toilettes et grand espace exploitable de (95 m2) 2éme étage : loft chambre de (55 m2) Studio de 55 m2 attenant à l’habitation (chambre, salle d’eau, salon) Diverses dépendances : hangar (70m2), box et porcherie (65 m2), comble au-dessus du studio (60 m2), étable (95 m2). Ensemble devenu rare, à visiter !",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/02/photo_2bcbc347c10f7e96bf983ff95ca976a0.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/Resized_Resized_20201112_090432_997387393229881.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/Resized_Resized_20200424_090031_997662727635145.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/Resized_20210529_093928001.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4460.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4479.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4465.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4467.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4471.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4473.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/02/photo_2bcbc347c10f7e96bf983ff95ca976a0.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/Resized_Resized_20201112_090432_997387393229881.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/Resized_Resized_20200424_090031_997662727635145.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/Resized_20210529_093928001.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4460.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4479.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4465.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4467.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4471.png",
+      "https://www.ami09.com/wp-content/uploads/2023/02/IMG_4473.png"
+    ],
+    "gps": [
+      43.2501677,
+      1.6776298
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Foix",
+    "postcode": "09000",
+    "price": 375000,
+    "agent": "Ami Immobilier",
+    "ref": "5687",
+    "bedrooms": 4,
+    "rooms": 7,
+    "plot": null,
+    "size": 167,
+    "link_url": "https://www.ami09.com/produit/5687-maison-foix/",
+    "description": "En Ariège sur un  SITE DOMINANT, à proximité de FOIX, MAISON IDEALE pour être autonome dans le temps, avec 3 hectares attenants, 1 hectare de prairie, deux hectares de bois,eau de source. Comprenant : hall, bureau, cuisine équipée, buanderie, séjour salon avec cheminée, quatre chambres, une salle d’eau, une salle de bains, deux wc, terrasses tout autour de la maison, garage atelier 56 m², pièces annexes, dépendances, chauffage central gaz, assainissement autonome.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/05/EEyPSn-E-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/YEpfbfJQ-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/7jW3t7Xs-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/zw2o0T3Q-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/LNri2TNg-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/dLLhKZZY-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/ndfo_FRU-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/9UBB6P1g-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/05/EEyPSn-E-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/YEpfbfJQ-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/7jW3t7Xs-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/zw2o0T3Q-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/LNri2TNg-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/dLLhKZZY-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/ndfo_FRU-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/05/9UBB6P1g-scaled.jpg"
+    ],
+    "gps": [
+      42.9638998,
+      1.6053807
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Mirepoix",
+    "postcode": "09500",
+    "price": 385000,
+    "agent": "Ami Immobilier",
+    "ref": "5745",
+    "bedrooms": 5,
+    "rooms": 8,
+    "plot": 1126,
+    "size": 18939,
+    "link_url": "https://www.ami09.com/produit/5745-maison-mirepoix-09500/",
+    "description": "     ",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5253.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5255.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/photo_9a152b6bb1a311f95f7c3e0aeab101a4.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5217.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5219.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5220.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5224.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5228.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5233.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5237.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5242.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5243.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5246.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5249.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5253.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5255.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/photo_9a152b6bb1a311f95f7c3e0aeab101a4.jpg",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5217.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5219.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5220.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5224.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5228.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5233.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5237.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5242.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5243.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5246.png",
+      "https://www.ami09.com/wp-content/uploads/2023/05/IMG_5249.png"
+    ],
+    "gps": [
+      43.0880677,
+      1.874318
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Montsegur",
+    "postcode": "09300",
+    "price": 395000,
+    "agent": "Ami Immobilier",
+    "ref": "5340",
+    "bedrooms": 4,
+    "rooms": null,
+    "plot": 6266,
+    "size": 200,
+    "link_url": "https://www.ami09.com/produit/5340-maison/",
+    "description": "Sur le chemin de Montségur demeure de caractère sur un site historique, dans un cadre bucolique, avant tout un lieu où il fait bon vivre. 600m² bâtis et restaurés dans l’ensemble dont 200m² aménagés en habitation, soit une cuisine équipée, séjour salon, 4 chambres, salle d’eau, wc, buanderie chaufferie (fioul). De grands espaces aménageables, des dépendances, un parc de toute beauté, le tout bordé d’eau.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5020.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5016.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5017.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5024.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5027.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5028.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5047.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5056.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5063.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5072.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5073.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5020.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5016.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5017.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5024.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5027.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5028.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5047.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5056.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5063.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5072.jpg",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5073.jpg"
+    ],
+    "gps": [
+      42.8707548,
+      1.8337452
+    ]
+  },
+  {
+    "types": "Propriété",
+    "town": "Montsegur",
+    "postcode": "09300",
+    "price": 395000,
+    "agent": "Ami Immobilier",
+    "ref": "5340",
+    "bedrooms": 4,
+    "rooms": null,
+    "plot": 6266,
+    "size": 200,
+    "link_url": "https://www.ami09.com/produit/5340-proprietes/",
+    "description": "Sur le chemin de Montségur demeure de caractère sur un site historique, dans un cadre bucolique, avant tout un lieu où il fait bon vivre. 600m² bâtis et restaurés dans l’ensemble dont 200m² aménagés en habitation, soit une cuisine équipée, séjour salon, 4 chambres, salle d’eau, wc, buanderie chaufferie (fioul). De grands espaces aménageables, des dépendances, un parc de toute beauté, le tout bordé d’eau.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5020.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5024.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5032.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5047.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5059.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5061.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5063.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5070.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5073.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5020.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5024.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5032.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5047.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5059.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5061.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5063.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5070.png",
+      "https://www.ami09.com/wp-content/uploads/2021/01/IMG_5073.png"
+    ],
+    "gps": [
+      42.8707548,
+      1.8337452
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Belcaire",
+    "postcode": "11340",
+    "price": 400000,
+    "agent": "Ami Immobilier",
+    "ref": "5219",
+    "bedrooms": null,
+    "rooms": null,
+    "plot": null,
+    "size": null,
+    "link_url": "https://www.ami09.com/produit/5219-sault/",
+    "description": "APPROXIMATE LOCATION - Affaire exceptionnelle touristique ,hôtellerie,restauration,mur et fond de commerce en activité et en progression constante.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2021/03/IMG_7291.png",
+      "https://www.ami09.com/wp-content/uploads/2021/03/IMG_7289.png",
+      "https://www.ami09.com/wp-content/uploads/2021/03/IMG_7288.png",
+      "https://www.ami09.com/wp-content/uploads/2021/03/IMG_7286.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2021/03/IMG_7291.png",
+      "https://www.ami09.com/wp-content/uploads/2021/03/IMG_7289.png",
+      "https://www.ami09.com/wp-content/uploads/2021/03/IMG_7288.png",
+      "https://www.ami09.com/wp-content/uploads/2021/03/IMG_7286.png"
+    ],
+    "gps": [
+      42.8163554,
+      1.9603877
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": "Lavelanet",
+    "postcode": "09300",
+    "price": 430000,
+    "agent": "Ami Immobilier",
+    "ref": "5721",
+    "bedrooms": 3,
+    "rooms": null,
+    "plot": 2300,
+    "size": 273,
+    "link_url": "https://www.ami09.com/produit/5721-maison-entre-lavelanet-mirepoix/",
+    "description": "Entre LAVELANET /MIREPOIX Maison en pierre indépendante sur 2300m² de terrain bordé par rivière.Habitables 273m²+130m² aménageables,quatre garage.Comprenant entré,cuisine équipée,séjour salon,trois chambres,deux salles d’eau,wc.Une pièce de 70m² aménageable+ appartement T3 de 90m².Chauffage électrique et bois.",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0046.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0041.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0043.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0047.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0015.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0017.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0019.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0023.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0032.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0034.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0037.png"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0046.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0041.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0043.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0047.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0015.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0017.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0019.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0023.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0032.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0034.png",
+      "https://www.ami09.com/wp-content/uploads/2022/12/DSCI0037.png"
+    ],
+    "gps": [
+      42.9332121,
+      1.8487179
+    ]
+  },
+  {
+    "types": "Maison",
+    "town": null,
+    "postcode": null,
+    "price": 500000,
+    "agent": "Ami Immobilier",
+    "ref": "5669",
+    "bedrooms": 4,
+    "rooms": null,
+    "plot": 982,
+    "size": 216,
+    "link_url": "https://www.ami09.com/produit/5669-au-pied-des-pyrenees/",
+    "description": "Au pied des Pyrénées,dans un cadre nature belles prestations,un centre d’accueil pouvant recevoir jusqu’à 20 personnes.Comprenant entré,deux grandes salles,chaufferie,salle d’eau,wc. Etage une belle pièce à vivre avec cuisine séjour,quatre chambres avec chacune salle d’eau et wc,Mezzanine,espace salon,salle de détente,wc.Dépendance,terrasse.Terrain constructible de 500m².Surface totale du bâtiment 336m² rez de chaussée 82m² local professionnel, 38m² chaufferie + annexe,  habitation.216 m² .",
+    "photos": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_114908-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113221-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_114753-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113614-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113634-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113725-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113645-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113952-scaled.jpg"
+    ],
+    "photos_hosted": [
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_114908-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113221-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_114753-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113614-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113634-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113725-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113645-scaled.jpg",
+      "https://www.ami09.com/wp-content/uploads/2022/08/20220201_113952-scaled.jpg"
+    ],
+    "gps": null
+  }
+]
