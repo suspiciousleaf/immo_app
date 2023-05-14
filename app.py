@@ -3,6 +3,8 @@
 import json
 import time
 
+from pprint import pprint
+
 from unidecode import unidecode # This library is used frequently to remove accepts from letters (used frequently in French), as some listings use accents correctly and some don't. 
 
 from scraper_ami09 import ami09_get_listings
@@ -10,6 +12,7 @@ from scraper_api import api_get_listings
 from scraper_arthur_immo import arthur_immo_get_listings
 from scraper_aude import aude_immo_get_listings
 from scraper_beaux import beaux_get_listings
+from scraper_c21 import c21_get_listings
 from scraper_cimm import cimm_get_listings
 from scraper_europe_sud import europe_sud_get_listings
 from scraper_iad import iad_immo_get_listings
@@ -54,6 +57,11 @@ try:
 except:
     beaux_listings = []
     failed_scrapes.append("Beaux Villages")
+try:
+    c21_listings = c21_get_listings(host_photos=False) # host photos not needed 
+except:
+    c21_listings = []
+    failed_scrapes.append("Century 21")
 try:
     cimm_listings = cimm_get_listings() # host photos not needed due to public API use for Cimm
 except:
@@ -124,6 +132,7 @@ all_listings = (
     arthur_immo_listings +
     aude_immo_listings + 
     beaux_listings +
+    c21_listings +
     cimm_listings + 
     europe_sud_listings +
     iad_listings +
@@ -144,9 +153,9 @@ all_listings = (
 property_types = {
     "Maison": {'Autre', 'Batiment', 'Cafe', 'Chalet', 'Chambre', 'Chateau', 'Domaine', 'Gite', 'Grange', 'Hotel', 'Investissement', 'Local', 'Maison', 'Mas', 'Peniche', 'Propriete', 'Remise', 'Restaurant', 'Villa', 'Ferme', 'Longere', 'Demeure', 'Pavillon', 'Corps', "Residence"},
 
-    "Commerce": {'Agence', 'Ateliers', 'Bar', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Haras', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier', "Local commercial"},
+    "Commerce": {'Agence', 'Ateliers', 'Bar', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Divers','Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Haras', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier', "Local commercial"},
 
-    "Appartement": {"Apartment", "Studio", "Duplex", "Appartment", "Appartement", "Appart’hôtel"}
+    "Appartement": {"Apartment", "Studio", "Duplex", "Appartment", "Appartement", "Appart’hôtel", "Appart'hotel"}
 }
 
 uncategorized_types = []
@@ -159,7 +168,7 @@ for listing in all_listings:
         listing["types"] = "Maison"
     if len(listing["types"].split()) > 1:
         listing["types"] = listing["types"].split()[0]
-    # "temp_type" is used to store the type of property. If it is unknown and is corrected to "other", the original listing type can stll be accessed and categorised later.
+    # "temp_type" is used to store the type of property. If it is unknown and is corrected to "Other", the original listing type can stll be accessed and categorised later.
         temp_type = listing["types"].split()[0]
     for property_type, values in property_types.items():
         if temp_type in values:
@@ -176,7 +185,8 @@ for listing in all_listings:
         pass
 
 if uncategorized_types:
-    print("\nThe following uncategorized property types were found:", uncategorized_types)
+    print("\nThe following uncategorized property types were found:")
+    pprint(uncategorized_types)
 
 # The code below takes the final list of dictionaries and saves it as a json.
 
@@ -193,9 +203,7 @@ print(f"Total time elapsed: {time_taken:.2f}s")
 
 # Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos, not including Beaux Villages
 
-# Agents to possibly add: Sphere, Century21, Eureka
-
-# safti returned duplicate property listing https://www.safti.fr/annonces/achat/Maison/la-pomarede-11400/839453
+# Agents to possibly add: Sphere, Century21, Eureka, https://www.squarehabitat.fr/
 
 # Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
 
