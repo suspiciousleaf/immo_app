@@ -18,6 +18,15 @@ def cimm_get_listings():
 
     cimm_listings = [cimm_create_listing(listing).__dict__ for listing in cimm_listing["results"]]
     
+    # Terrain listings often show the plot area in place of the building area, this swaps them back over.
+    for listing in cimm_listings:
+        if listing["types"] == "Terrain":
+            if listing["size"] and listing["plot"] == None:
+                listing["plot"] = listing["size"]
+                listing["size"] = None
+
+    cimm_listings.sort(key=lambda x: x["price"])
+
     t1 = time.time()
     time_taken = t1-t0
     print(f"\nTime elapsed for Cimm Immobilier: {time_taken:.2f}s")

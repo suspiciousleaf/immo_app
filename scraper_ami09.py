@@ -3,6 +3,7 @@ import time
 import math
 import json
 import concurrent.futures
+import re
 
 from pprint import pprint
 import grequests    # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
@@ -161,21 +162,30 @@ def get_listing_details(page, url, host_photos):
 
 
         # Get location
-        location_div = soup.find("h1").get_text()
+        town = None
+        top_table_div = soup.find_all("table", class_="main_tableau_acf")[0].contents
+        for item in top_table_div:
+            if "Lieu:" in item.get_text():
+                town = unidecode(item.get_text().replace("Lieu:", "").capitalize())
+
+        location_div = soup.find("h1").get_text().replace("—", "-").replace("–", "-")
         if location_div[-5:].isdigit():
             postcode = location_div[-5:]
             location_div = location_div[:-5]
         else:
             postcode = None
         
-        # print(location_div)
-
+        # print("\n", location_div)
         # print("Postcode:", postcode)
 
-        if location_div.count("-") > 0:
-            town = location_div.split("-")[-1].strip().capitalize()
-        else:
-            town = None
+        if not town:
+            if location_div.count("-") > 0:
+                try:
+                    town = unidecode(location_div.split("-")[-1].strip().capitalize())
+                except:
+                    pass
+            else:
+                town = None
 
         # print("Town:", town)
 
@@ -197,6 +207,7 @@ def get_listing_details(page, url, host_photos):
 
         # Get property details
         details_div = soup.find_all("table", class_="main_tableau_acf")[1].contents
+        # print(details_div)
         bedrooms = None
         try:
             for item in details_div:
@@ -218,15 +229,32 @@ def get_listing_details(page, url, host_photos):
 
         # print("Rooms:", rooms)
 
-        # Parcel size not privided in listings
-        plot = None
+        # Description
 
+        description_outer = soup.find("div", class_="et_pb_wc_description")
+        description = description_outer.find("div", class_="et_pb_module_inner").p.get_text()
+        
+        # print(description)
+        plot = None
         try:
             for item in details_div:
                 if "Surface terrain" in item.get_text():
                     plot = int("".join([num for num in item.get_text() if num.isdigit() and num.isascii()]))
         except:
             pass
+
+        # If plot hasn't been found in details_div, the regex below tries to capture it in the description
+        if not plot:
+            try:
+                regex = r"terrain.*?(\d+)m²"
+
+                match = re.search(regex, description, re.IGNORECASE)
+
+                if match:
+                    plot = int(match.group(1))
+            except:
+                pass
+
         # print("Plot:", plot, "m²")
 
         #Property size
@@ -239,12 +267,6 @@ def get_listing_details(page, url, host_photos):
             pass
         # print("Size:", size, "m²")
 
-        # Description
-
-        description_outer = soup.find("div", class_="et_pb_wc_description")
-        description = description_outer.find("div", class_="et_pb_module_inner").p.get_text()
-        
-        # print(description)
 
         # Photos
         photos = []
@@ -284,22 +306,23 @@ def get_listing_details(page, url, host_photos):
         listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)  
 
         return listing.__dict__
-    except:
+    except Exception as e:
+        # print(e)
         return url
     
 cwd = os.getcwd()
 
-# pprint(get_listing_details(requests.get("https://www.ami09.com/produit/5678-maison-sault/"), "https://www.ami09.com/produit/5678-maison-sault/", False))
+# get_listing_details(requests.get("https://www.ami09.com/produit/5316-terrains/"), "https://www.ami09.com/produit/5316-terrains/", False)
 
-# pprint(get_listing_details(requests.get("https://www.ami09.com/produit/5744-maison-belcaire-11340/"), "https://www.ami09.com/produit/5744-maison-belcaire-11340/", True))
+# get_listing_details(requests.get("https://www.ami09.com/produit/5744-maison-belcaire-11340/"), "https://www.ami09.com/produit/5744-maison-belcaire-11340/", False)
 
 # ami09_get_listings()
 #ami09_get_links(1)
 
 # Time elapsed for Ami Immobilier: 24.16s async photo grab
-# Time elapsed for Ami Immobilier: 145.64853525161743 threading photo grab
+# Time elapsed for Ami Immobilier: 145.64853525161743 multi-threading photo grab
 
-# ami09_listings = ami09_get_listings(host_photos=True)
+# ami09_listings = ami09_get_listings(host_photos=False)
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(ami09_listings, outfile, ensure_ascii=False)
