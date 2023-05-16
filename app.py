@@ -14,6 +14,7 @@ from scraper_aude import aude_immo_get_listings
 from scraper_beaux import beaux_get_listings
 from scraper_c21 import c21_get_listings
 from scraper_cimm import cimm_get_listings
+from scraper_eureka import eureka_immo_get_listings
 from scraper_europe_sud import europe_sud_get_listings
 from scraper_iad import iad_immo_get_listings
 from scraper_immo_chez_toit import immo_chez_toit_get_listings
@@ -67,6 +68,11 @@ try:
 except:
     cimm_listings = []
     failed_scrapes.append("Cimm Immobilier")
+try:
+    eureka_immo_listings = eureka_immo_get_listings(host_photos=False)
+except:
+    eureka_immo_listings = []
+    failed_scrapes.append("Eureka Immobilier")
 try:
     europe_sud_listings = europe_sud_get_listings(host_photos=False)
 except:
@@ -134,6 +140,7 @@ all_listings = (
     beaux_listings +
     c21_listings +
     cimm_listings + 
+    eureka_immo_listings +
     europe_sud_listings +
     iad_listings +
     immo_chez_toit_listings +
@@ -153,7 +160,7 @@ all_listings = (
 property_types = {
     "Maison": {'Autre', 'Batiment', 'Cafe', 'Chalet', 'Chambre', 'Chateau', 'Domaine', 'Gite', 'Grange', 'Hotel', 'Investissement', 'Local', 'Maison', 'Mas', 'Peniche', 'Propriete', 'Remise', 'Restaurant', 'Villa', 'Ferme', 'Longere', 'Demeure', 'Pavillon', 'Corps', "Residence"},
 
-    "Commerce": {'Agence', 'Ateliers', 'Bar', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Chocolaterie', 'Divers','Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Haras', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier', "Local commercial"},
+    "Commerce": {'Agence', 'Ateliers', 'Bar', 'Bazar', 'Tabac', 'Bergerie', 'Boucherie', 'Bureau', 'Cave', 'Chocolaterie', 'Divers','Entrepots', 'Epicerie', 'Fleuriste', 'Fonds', 'Fonds-de-commerce', 'Garage', 'Haras', 'Locaux', 'Parking', 'Pret', 'Hangar', 'Atelier', "Local commercial"},
 
     "Appartement": {"Apartment", "Studio", "Duplex", "Appartment", "Appartement", "Appart’hôtel", "Appart'hotel"}
 }
@@ -203,7 +210,7 @@ print(f"Total time elapsed: {time_taken:.2f}s")
 
 # Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos, not including Beaux Villages
 
-# Agents to possibly add: Sphere, Century21, Eureka, https://www.squarehabitat.fr/
+# Agents to possibly add: Sphere, 
 
 # Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
 

@@ -13,6 +13,7 @@ agent_dict = {
       'beaux': 'Beaux Villages',
       'c21': 'Century 21',
       'cimm': 'Cimm Immobilier',
+      'eureka': 'Eureka Immobilier',
       "europe": "Europe Sud Immobilier",
       "iad": "IAD Immobilier",
       'jammes': 'Cabinet Jammes',

@@ -103,7 +103,7 @@ def c21_get_listings(host_photos=False):
 
         for listing_ref in listing_photos_to_delete_local:
             try:
-                shutil.rmtree(f'{cwd}/static/images/aude/{listing_ref}', ignore_errors=True) 
+                shutil.rmtree(f'{cwd}/static/images/c21/{listing_ref}', ignore_errors=True) 
             except:
                 pass
 
