@@ -7,6 +7,8 @@ from pprint import pprint
 
 from unidecode import unidecode # This library is used frequently to remove accepts from letters (used frequently in French), as some listings use accents correctly and some don't. 
 
+t0 = time.time()
+
 from scraper_ami09 import ami09_get_listings
 from scraper_api import api_get_listings
 from scraper_arthur_immo import arthur_immo_get_listings
@@ -26,9 +28,6 @@ from scraper_safti import safti_get_listings
 from scraper_selection_habitat import selection_get_listings
 from scraper_sextant import sextant_get_listings
 from scraper_time_stone import time_stone_get_listings
-
-
-t0 = time.time()
 
 # The code below will run the imported scraper for each agent, host_photos will determine if the photos for each listing are downloaded, resized, and compressed for local hosting. Try/except is used to prevent an error with a single scraper causing the whole program to fail to run. Faults are reported to the failed_scrapes list, and finally to the console.
 

@@ -262,7 +262,7 @@ def get_listing_details(page, url, host_photos):
         try:
             for item in details_div:
                 if "habitable" in item.get_text():
-                    size = int("".join([num for num in item.get_text() if num.isdigit() and num.isascii()]))
+                    size = int(float(item.get_text()[item.get_text().find(":")+1:item.get_text().find(" m²")]))
         except:
             pass
         # print("Size:", size, "m²")
@@ -314,7 +314,7 @@ cwd = os.getcwd()
 
 # get_listing_details(requests.get("https://www.ami09.com/produit/5316-terrains/"), "https://www.ami09.com/produit/5316-terrains/", False)
 
-# get_listing_details(requests.get("https://www.ami09.com/produit/5744-maison-belcaire-11340/"), "https://www.ami09.com/produit/5744-maison-belcaire-11340/", False)
+# get_listing_details(requests.get("https://www.ami09.com/produit/5668-maison-belesta-09300/"), "https://www.ami09.com/produit/5731-maison-belesta/", False)
 
 # ami09_get_listings()
 #ami09_get_links(1)
