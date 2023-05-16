@@ -208,7 +208,7 @@ def richardson_get_links(page):
 
 def get_listing_details(page, url, host_photos):
     
-    # try:
+    try:
         agent = "Richardson Immobilier"
         soup = BeautifulSoup(page.content, "html.parser", from_encoding='UTF-8')
         link_url = url
@@ -224,7 +224,7 @@ def get_listing_details(page, url, host_photos):
         
         # Get ref
         ref = "".join([num for num in str(prop_type_div) if num.isdigit()])
-        #print("Ref:", ref)
+        # print("Ref:", ref)
 
         # # Get location
         try: 
@@ -359,14 +359,14 @@ def get_listing_details(page, url, host_photos):
         listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
         return listing.__dict__
 
-    # except:
-    #     return url
+    except:
+        return url
 
 cwd = os.getcwd()
 
 #pprint(richardson_get_links(1))
 
-# failed_urls = ["http://www.richardsonimmobilier.com/vente-villa-Haute-Vallee-4101.cgi?00001LQUI4101"]
+# failed_urls = ["http://www.richardsonimmobilier.com/vente-terrain-Haute-Vallee-1651.cgi?00019LQUI1651"]
 
 # for test_url in failed_urls:
 #     get_listing_details(requests.get(test_url), test_url, False)
