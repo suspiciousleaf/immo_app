@@ -18,7 +18,7 @@ from json_search import agent_dict
 from models import Listing
 from utilities import get_gps, get_data
 
-try:
+try:    # listings.json
     try:
         with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
@@ -28,7 +28,7 @@ try:
 except:
     listings_json = []
 
-try:
+try:    # postcodes_gps_dict
     try:
         with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
             gps_dict= json.load(infile)
@@ -36,8 +36,22 @@ try:
         with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
             gps_dict= json.load(infile)
 except:
-    print("gps_dictnot found")
+    print("gps_dict not found")
     gps_dict= []
+
+try:    # town_list
+    with open("ville_list_clean.json", "r", encoding="utf8") as infile:
+        town_list = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r", encoding="utf8") as infile:
+        town_list = json.load(infile)
+
+try:    # postcodes_dict
+    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
+        postcodes_dict = json.load(infile)
+except:
+    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8") as infile:
+        postcodes_dict = json.load(infile)
 
 num_dict = {
     "un" : "1",
@@ -194,7 +208,7 @@ def richardson_get_links(page):
 
 def get_listing_details(page, url, host_photos):
     
-    try:
+    # try:
         agent = "Richardson Immobilier"
         soup = BeautifulSoup(page.content, "html.parser", from_encoding='UTF-8')
         link_url = url
@@ -214,10 +228,20 @@ def get_listing_details(page, url, host_photos):
 
         # # Get location
         try: 
-            town = unidecode(str(soup.find('div', class_="SIZE3-50").b.contents[0]).replace("EXCLUSIF ", "").replace("SECTEUR ", "").capitalize())
+            town = unidecode(str(soup.find('div', class_="SIZE3-50").b.contents[0]).replace("EXCLUSIF ", "").replace("SECTEUR ", "").replace("St", "saint").capitalize())
         except:
             town = None
         postcode = None
+        if town:
+            try:
+                if town.casefold() in town_list:
+                    postcode = [key for key in postcodes_dict.keys() if town.casefold() in postcodes_dict[key]][0]
+            except:
+                pass
+
+        # print(town)
+        # print(postcode)
+        # print(ref)
 
         # Get price
         price_div = soup.find("span", class_="SIZE4-50").b.contents[0]
@@ -335,17 +359,17 @@ def get_listing_details(page, url, host_photos):
         listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
         return listing.__dict__
 
-    except:
-        return url
+    # except:
+    #     return url
 
 cwd = os.getcwd()
 
 #pprint(richardson_get_links(1))
 
-# print(get_listing_details(requests.get("http://www.richardsonimmobilier.com/vente-propriete-3405.cgi?00008LQUI3405"), "http://www.richardsonimmobilier.com/vente-propriete-3405.cgi?00008LQUI3405", False))
+# failed_urls = ["http://www.richardsonimmobilier.com/vente-villa-Haute-Vallee-4101.cgi?00001LQUI4101"]
 
-# pprint(get_listing_details("http://www.richardsonimmobilier.com/vente-propriete-Pays-de-Sault-3691.cgi?00006LQUI3691").__dict__)
-# get_listing_details("http://www.richardsonimmobilier.com/vente-terrain-Haute-Vallee-3684.cgi?00012LQUI3684")
+# for test_url in failed_urls:
+#     get_listing_details(requests.get(test_url), test_url, False)
 
 # richardson_listings = richardson_get_listings()
 
