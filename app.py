@@ -165,7 +165,7 @@ property_types = {
 }
 
 uncategorized_types = []
-i = 0
+
 for listing in all_listings:
     listing["types"] = unidecode(listing["types"].capitalize())
     temp_type = listing["types"]
@@ -183,8 +183,7 @@ for listing in all_listings:
         uncategorized_types.append({"types": listing["types"], "url": listing["link_url"]})
         listing["types_original"] = listing["types"]
         listing["types"] = "Other"  
-    listing["id"] = i
-    i += 1
+    
     try:
         listing["town"] = unidecode(listing["town"])    # Try/except is used as some listings return a town of None, which errors unidecode
     except:
