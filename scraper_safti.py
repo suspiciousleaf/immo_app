@@ -3,7 +3,7 @@
 
 import os
 import time
-import math
+# import math
 import json
 import concurrent.futures
 
@@ -11,13 +11,13 @@ from pprint import pprint
 import grequests    # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
 import requests
 from bs4 import BeautifulSoup
-import shutil
+# import shutil
 from unidecode import unidecode
 
-from async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
+# from async_image_downloader import make_photos_dir, dl_comp_photo
+# from json_search import agent_dict
 from models import Listing
-from utilities import get_gps, get_data
+from utilities import get_data # get_gps
 
 try:
     try:
@@ -95,7 +95,7 @@ def get_listing_details(page, url):
 
         properties_json = raw_json["props"]["pageProps"]["properties"]
         listings = []
-    
+
         for item in properties_json:
             if item["underCompromise"] == False and item["sold"] == False:
                 agent = "Safti"
@@ -119,12 +119,12 @@ def get_listing_details(page, url):
                     types = "Commerce"
 
                 # print("property scraped")
+                listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
+
+                listings.append(listing.__dict__)
+
             else:
                 pass
-
-            listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
-
-            listings.append(listing.__dict__)
 
         return listings
     except:
@@ -147,8 +147,11 @@ def remove_duplicates(listings):
 
 cwd = os.getcwd()
 
+# test_url = 'https://www.safti.fr/votre-conseiller-safti/nathalie-francois'
+
+# get_listing_details(requests.get(test_url), test_url)
+
 # safti_listings = safti_get_listings()
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(safti_listings, outfile, ensure_ascii=False)
-
