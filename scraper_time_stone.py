@@ -97,8 +97,6 @@ def time_stone_get_listings(host_photos=False):
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         response_objects = executor.map(requests.get, (link for link in links_to_scrape))   # Threaded scraping
-        # for object in response_objects:
-            # print(type(object))
         results = executor.map(get_listing_details, (item for item in response_objects), links_to_scrape, [host_photos for x in links_to_scrape]) # Threaded parsing w/photo scraping
         for result in results:
             if type(result) == str:
