@@ -4,11 +4,11 @@ import json
 import time
 
 from pprint import pprint
-
 from unidecode import unidecode # This library is used frequently to remove accepts from letters (used frequently in French), as some listings use accents correctly and some don't. 
 
 t0 = time.time()
 
+from image_sold_checker import sold_image_check
 from scraper_ami09 import ami09_get_listings
 from scraper_api import api_get_listings
 from scraper_arthur_immo import arthur_immo_get_listings
@@ -30,6 +30,14 @@ from scraper_sextant import sextant_get_listings
 from scraper_time_stone import time_stone_get_listings
 
 # The code below will run the imported scraper for each agent, host_photos will determine if the photos for each listing are downloaded, resized, and compressed for local hosting. Try/except is used to prevent an error with a single scraper causing the whole program to fail to run. Faults are reported to the failed_scrapes list, and finally to the console.
+
+try:
+    with open("times_run_since_last_image_scan_counter.json", "r", encoding="utf8") as infile:
+        times_run_since_last_image_scan = json.load(infile)
+except:
+    times_run_since_last_image_scan = {
+        "counter" : 5
+    }
 
 failed_scrapes = []
 try:
@@ -154,7 +162,6 @@ all_listings = (
 )
 
 # The combined listings have a huge range of property categories, the code below reduces the total categories down to six. House, apartment, multi-lodging buildings, commercial property, empty land, and "other". Any listings that don't fit into the first five are reclassified as "other", and the original type is saved to "types_original" so it can be examined and classified later.
-# # It also adds a sequential ID number to each listing, reset for all listings each time the program is run.
 
 property_types = {
     "Maison": {'Autre', 'Batiment', 'Cafe', 'Chalet', 'Chambre', 'Chateau', 'Domaine', 'Gite', 'Grange', 'Hotel', 'Investissement', 'Local', 'Maison', 'Mas', 'Peniche', 'Propriete', 'Remise', 'Restaurant', 'Villa', 'Ferme', 'Longere', 'Demeure', 'Pavillon', 'Corps', "Residence"},
@@ -193,10 +200,27 @@ if uncategorized_types:
     print("\nThe following uncategorized property types were found:")
     pprint(uncategorized_types)
 
-# The code below takes the final list of dictionaries and saves it as a json.
+# This counts up each time the scraper is run, and will run the function that scans main images for "Sold" etc text to remove those listings once every five times the scraper runs
 
+number_listings_before_image_scan = len(all_listings)
+if times_run_since_last_image_scan["counter"] >= 5:
+    try:
+        print("\nImage scan function running, this will take approx 90 seconds")
+        all_listings = sold_image_check(all_listings)
+        times_run_since_last_image_scan["counter"] = 0
+        print(f"Number of listings removed by image scan: {number_listings_before_image_scan - len(all_listings)}")
+    except Exception as e:
+        print(f"Image filter failed: {e}")
+else:
+    times_run_since_last_image_scan["counter"] += 1
+
+# The code below takes the final list of dictionaries and saves it as a json.
 with open("listings.json", "w", encoding="utf-8") as outfile:
     json.dump(all_listings, outfile, ensure_ascii=False)
+
+# This saves the updated counter for the image scan
+with open("times_run_since_last_image_scan_counter.json", "w", encoding="utf-8") as outfile:
+    json.dump(times_run_since_last_image_scan, outfile, ensure_ascii=False)
 
 print("\n\nTotal listings: ", len(all_listings))
 print("COMPLETE")
@@ -206,9 +230,5 @@ t1 = time.time()
 time_taken = t1-t0
 print(f"Total time elapsed: {time_taken:.2f}s")
 
-# Time elapsed: 156.5646300315857 Full scrape with blank listings.json, not including photos, not including Beaux Villages
 
-# Agents to possibly add: Sphere, 
-
-# Use OCR on primary photos to check if sold etc. Needed for M&M, Cimm, Jammes, Arthur, maybe others
 

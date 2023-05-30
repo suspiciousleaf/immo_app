@@ -51,10 +51,10 @@ def sextant_get_listings(host_photos=False):
     print("Pages:", pages)
 
     results_pages = [f"https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page={i}&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=0" for i in range(1, pages + 1)]
-    resp = get_data(results_pages)
     links = []
 
     with concurrent.futures.ThreadPoolExecutor() as executor:   
+        resp = get_data(results_pages)
         results = executor.map(sextant_get_links, (item["response"] for item in resp))
         for result in results:
             links += result
