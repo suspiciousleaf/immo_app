@@ -45,7 +45,7 @@ except:
     gps_dict = []
 
 
-def sextant_get_listings(host_photos=False):
+def sextant_get_listings(sold_url_list, host_photos=False):
     t0 = time.time()
     URL = "https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=1&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=0"
     page = requests.get(URL)
@@ -68,6 +68,7 @@ def sextant_get_listings(host_photos=False):
         results = executor.map(sextant_get_links, (item["response"] for item in resp))
         for result in results:
             links += result
+    links = [link for link in links if link not in sold_url_list]
 
     print("Number of unique listing URLs found:", len(links))
 

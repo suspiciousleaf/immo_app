@@ -46,7 +46,7 @@ except:
     gps_dict = []
 
 
-def safti_get_listings():
+def safti_get_listings(sold_url_list):
     t0 = time.time()
 
     print("\nSafti scraper beginning...")
@@ -99,6 +99,10 @@ def safti_get_listings():
         pprint(failed_scrape_links)
 
     new_listings = remove_duplicates(new_listings)
+
+    new_listings = [
+        listing for listing in new_listings if listing["link_url"] not in sold_url_list
+    ]
 
     print(f"Listings found: {len(new_listings)}")
 

@@ -10,6 +10,13 @@ from utilities import get_data
 # with open("listings.json", "r", encoding="utf8") as infile:
 #     listings = json.load(infile)
 
+# This loads urls that have previously been excluded due to being unavailable, and adds newly excluded urls to that list. This is to prevent them from being removed, and then added again next time the scraper runs.
+try:
+    with open("sold_urls.json", "r", encoding="utf8") as infile:
+        sold_urls = json.load(infile)
+except:
+    sold_urls = {"urls": []}
+
 
 def check_image_sold(image, agent):  # returns True if sold
     # Many agents use a specific colour to write "Vendu" etc over the listing first image, with no other indication that it is unavailable. The code below counts how many pixels in the image are approx that colour (with a narrow margin due to jpg compression) and calculates their percentage of the whole image. Anything above 0.1% is taken as positive.
@@ -98,7 +105,7 @@ def filter_listings(raw_listings, available_listings):
     return valid_listings
 
 
-def remove_unavailable(test_listings, agent):
+def remove_unavailable(test_listings, agent, sold_photo_urls):
     # all_images = get_image_data_from(test_listings)
 
     # This will hold all unavailable listing urls
@@ -130,6 +137,9 @@ def remove_unavailable(test_listings, agent):
     # pprint(available_listings)
 
     # print(f"Valid listings found for {agent}: {len(valid_listings)} / {len(test_listings)}")
+
+    if sold_listings:
+        sold_photo_urls.extend(sold_listings)
 
     t1 = time.perf_counter()
 
@@ -165,6 +175,8 @@ def sold_image_check(listings):
                 # Creates the list of listings to be tested
                 test_listings.append(listing)
 
+    # This is used to store the urls of photos of unavailable properties
+    sold_photo_urls = []
     for agent in agents:
         temp_list = []
         for listing in test_listings:
@@ -173,11 +185,21 @@ def sold_image_check(listings):
                 temp_list.append(listing)
         try:
             # Filter listings to be tested
-            available_listings.extend(remove_unavailable(temp_list, agent))
+            available_listings.extend(
+                remove_unavailable(temp_list, agent, sold_photo_urls)
+            )
         except Exception as e:
             # If error, passes whole list and reports
             available_listings.extend(temp_list)
             print(f"{agent} filter failed: {e}")
+
+    for listing in test_listings:
+        if listing["photos"][0] in sold_photo_urls:
+            if listing["link_url"] not in sold_urls["urls"]:
+                sold_urls["urls"].append(listing["link_url"])
+
+    with open("sold_urls.json", "w", encoding="utf-8") as outfile:
+        json.dump(sold_urls, outfile, ensure_ascii=False)
 
     return available_listings
 
@@ -185,6 +207,6 @@ def sold_image_check(listings):
 # print(len(listings))
 
 # available_listings = sold_image_check(listings)
-# print(len(available_listings))
-# with open("listings_clean.json", "w" , encoding="utf-8") as outfile:
-#    json.dump(available_listings, outfile, ensure_ascii=False)
+# # print(len(available_listings))
+# with open("listings_clean.json", "w", encoding="utf-8") as outfile:
+#     json.dump(available_listings, outfile, ensure_ascii=False)

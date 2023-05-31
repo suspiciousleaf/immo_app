@@ -45,7 +45,7 @@ except:
     gps_dict = []
 
 
-def arthur_immo_get_listings(host_photos=False):
+def arthur_immo_get_listings(sold_url_list, host_photos=False):
     t0 = time.time()
 
     URL = "https://www.lavelanet-arthurimmo.com/recherche,basic.htm?transactions=acheter&page=1"
@@ -69,6 +69,8 @@ def arthur_immo_get_listings(host_photos=False):
     resp = get_data(all_search_pages)
     for item in resp:
         links += arthur_immo_get_links(item["response"])
+
+    links = [link for link in links if link not in sold_url_list]
 
     print("Number of unique listing URLs found:", len(links))
 
