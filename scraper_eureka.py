@@ -3,14 +3,15 @@ import time
 import json
 import concurrent.futures
 
-from pprint import pprint
-import grequests    # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
+# This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
+import grequests
 import requests
+from pprint import pprint
 from bs4 import BeautifulSoup
 import shutil
 from unidecode import unidecode
 
-from async_image_downloader import make_photos_dir, dl_comp_photo
+# from async_image_downloader import make_photos_dir, dl_comp_photo
 from json_search import agent_dict
 from models import Listing
 from utilities import get_gps, get_data
@@ -20,7 +21,9 @@ try:
         with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
+        with open(
+            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
+        ) as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
@@ -30,7 +33,11 @@ try:
         with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
             gps_dict = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+        with open(
+            "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json",
+            "r",
+            encoding="utf8",
+        ) as infile:
             gps_dict = json.load(infile)
 except:
     print("gps_dict not found")
@@ -40,36 +47,43 @@ try:
     with open("ville_list_clean.json", "r", encoding="utf8") as infile:
         town_list = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r", encoding="utf8") as infile:
+    with open(
+        "/home/suspiciousleaf/immo_app/ville_list_clean.json", "r", encoding="utf8"
+    ) as infile:
         town_list = json.load(infile)
 
 try:
     with open("postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open(
+        "/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8"
+    ) as infile:
         postcodes_dict = json.load(infile)
 
-def eureka_immo_get_listings(host_photos=False):
 
+def eureka_immo_get_listings(host_photos=False):
     t0 = time.time()
     # Total number of listings isn't given on the page, but is around 90 listings. This wouldequate to 9 pages of listings. The code below will scrape 15 pages of listings at ocne rather than counting through pages until the listings stop. This takes appprox 1 second instead of 3 seconds. If the total listings scraped approaches 15 pages worth, a note will be printed to "pages" can be adjusted.
 
-
     pages = 15
-    all_search_pages = [f"https://www.eureka-immo11.com/a-vendre/{i}" for i in range(1, pages+1)]
+    all_search_pages = [
+        f"https://www.eureka-immo11.com/a-vendre/{i}" for i in range(1, pages + 1)
+    ]
 
     links = []
     resp = get_data(all_search_pages)
     for item in resp:
-        links  += eureka_immo_get_links(item["response"])
+        links += eureka_immo_get_links(item["response"])
 
     print("\nEureka Immobilier number of listings:", len(links))
 
-    if len(links) > (pages*10 - 20):
+    if len(links) > (pages * 10 - 20):
         print("Eureka Immo increase 'pages' variable")
 
-    listings = [listing for listing in listings_json if listing["agent"] == "Eureka Immobilier"]
+    listings = [
+        listing for listing in listings_json if listing["agent"] == "Eureka Immobilier"
+    ]
 
     links_old = []
     for listing in listings:
@@ -94,7 +108,9 @@ def eureka_immo_get_listings(host_photos=False):
 
         for listing_ref in listing_photos_to_delete_local:
             try:
-                shutil.rmtree(f'{cwd}/static/images/eureka/{listing_ref}', ignore_errors=True) 
+                shutil.rmtree(
+                    f"{cwd}/static/images/eureka/{listing_ref}", ignore_errors=True
+                )
             except:
                 pass
 
@@ -102,10 +118,14 @@ def eureka_immo_get_listings(host_photos=False):
     counter_fail = 0
     failed_scrape_links = []
 
-
-    with concurrent.futures.ThreadPoolExecutor() as executor: 
-        resp_to_scrape = get_data(links_to_scrape)  
-        results = executor.map(get_listing_details, (item["response"] for item in resp_to_scrape), links_to_scrape, [host_photos for x in links_to_scrape])
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        resp_to_scrape = get_data(links_to_scrape)
+        results = executor.map(
+            get_listing_details,
+            (item["response"] for item in resp_to_scrape),
+            links_to_scrape,
+            [host_photos for x in links_to_scrape],
+        )
         for result in results:
             if type(result) == str:
                 failed_scrape_links.append(result)
@@ -122,25 +142,29 @@ def eureka_immo_get_listings(host_photos=False):
         pprint(failed_scrape_links)
 
     listings.sort(key=lambda x: x["price"])
-        
+
     t1 = time.time()
 
-    time_taken = t1-t0
+    time_taken = t1 - t0
     print(f"Time elapsed for Eureka Immobilier: {time_taken:.2f}s")
 
     return listings
 
+
 def eureka_immo_get_links(page):
-  
     eureka_immo_soup = BeautifulSoup(page.content, "html.parser")
 
     links_raw = set()
-    for link in eureka_immo_soup.find_all('button', class_="btn-listing btn-primary"):
-            links_raw.add("https://www.eureka-immo11.com" + link.get('onclick').replace("'", "").replace("location.href=", ""))
+    for link in eureka_immo_soup.find_all("button", class_="btn-listing btn-primary"):
+        links_raw.add(
+            "https://www.eureka-immo11.com"
+            + link.get("onclick").replace("'", "").replace("location.href=", "")
+        )
 
-    links = list(links_raw)       
+    links = list(links_raw)
 
     return links
+
 
 def get_listing_details(page, url, host_photos):
     try:
@@ -150,7 +174,12 @@ def get_listing_details(page, url, host_photos):
 
         # Get type
 
-        types = unidecode(soup.find("div", class_="bienTitle themTitle").get_text(strip=True).split(" ")[0].replace("\n", ""))
+        types = unidecode(
+            soup.find("div", class_="bienTitle themTitle")
+            .get_text(strip=True)
+            .split(" ")[0]
+            .replace("\n", "")
+        )
         # print("Type:", types)
 
         # Get price
@@ -171,7 +200,7 @@ def get_listing_details(page, url, host_photos):
         rooms = None
         size = None
         plot = None
-        details_div = soup.find('div', id="dataContent")
+        details_div = soup.find("div", id="dataContent")
         details_list = details_div.find_all("p", class_="data")
         for item in details_list:
             item_parsed = item.get_text("|", strip=True).split("|")
@@ -180,12 +209,30 @@ def get_listing_details(page, url, host_photos):
             elif "Nombre de pièces" in item_parsed:
                 rooms = int(item_parsed[1])
             elif "Surface habitable (m²)" in item_parsed:
-                size = int(float(item_parsed[1].replace("m²", "").replace(" ", "").replace(",", ".")))
+                size = int(
+                    float(
+                        item_parsed[1]
+                        .replace("m²", "")
+                        .replace(" ", "")
+                        .replace(",", ".")
+                    )
+                )
             elif "surface terrain" in item_parsed:
                 if "ha" in item_parsed[1].casefold():
-                    plot = 10000 * int(float("".join([num for num in item_parsed[1] if num.isnumeric()])))
-                else:    
-                    plot = int(float(item_parsed[1].replace("m²", "").replace(" ", "").replace(",", ".")))
+                    plot = 10000 * int(
+                        float(
+                            "".join([num for num in item_parsed[1] if num.isnumeric()])
+                        )
+                    )
+                else:
+                    plot = int(
+                        float(
+                            item_parsed[1]
+                            .replace("m²", "")
+                            .replace(" ", "")
+                            .replace(",", ".")
+                        )
+                    )
             elif "Code postal" in item_parsed:
                 postcode = item_parsed[1]
 
@@ -198,7 +245,11 @@ def get_listing_details(page, url, host_photos):
 
         # Town information is stored inconsistently. This first checks the links at the top, if no luck then checks the h1 tag, and if still no luck will use the postcode (which is stored more consistently) to set the town as the top result for that postcode
         location_div = soup.find("ol", class_="breadcrumb").contents
-        town = unidecode([item.get_text() for item in location_div if item != "\n"][1].replace("-", " "))
+        town = unidecode(
+            [item.get_text() for item in location_div if item != "\n"][1].replace(
+                "-", " "
+            )
+        )
         if town.casefold() not in town_list:
             town_div = soup.find("div", class_="bienTitle themTitle").h1
             for item in town_div.strings:
@@ -213,7 +264,11 @@ def get_listing_details(page, url, host_photos):
         # print("Postcode:", postcode)
 
         # Description
-        description = soup.find("p", itemprop="description").get_text(strip=True).replace("\xa0\n", "")
+        description = (
+            soup.find("p", itemprop="description")
+            .get_text(strip=True)
+            .replace("\xa0\n", "")
+        )
         # print(description)
 
         # Photos
@@ -229,7 +284,9 @@ def get_listing_details(page, url, host_photos):
 
         gps = None
         if type(town) == str:
-            if (postcode + ";" + town.casefold()) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
+            if (
+                postcode + ";" + town.casefold()
+            ) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
                 gps = gps_dict[postcode + ";" + town.casefold()]
             else:
                 try:
@@ -237,10 +294,27 @@ def get_listing_details(page, url, host_photos):
                 except:
                     gps = None
 
-        listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
+        listing = Listing(
+            types,
+            town,
+            postcode,
+            price,
+            agent,
+            ref,
+            bedrooms,
+            rooms,
+            plot,
+            size,
+            link_url,
+            description,
+            photos,
+            photos_hosted,
+            gps,
+        )
         return listing.__dict__
     except:
         return url
+
 
 cwd = os.getcwd()
 
@@ -257,6 +331,3 @@ cwd = os.getcwd()
 
 # with open("api.json", "w", encoding="utf8") as outfile:
 #     json.dump(eureka_immo_listings, outfile, ensure_ascii=False)
-
-# Fix location scraping, search api.json "cabbage" for failed results. Get title h1 without the price inside the span tag
-

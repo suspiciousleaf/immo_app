@@ -5,7 +5,8 @@ import math
 import json
 import asyncio
 
-import grequests    # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
+# This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
+import grequests
 from pyppeteer import launch
 from pprint import pprint
 import requests
@@ -20,7 +21,9 @@ try:
         with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
+        with open(
+            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
+        ) as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
@@ -29,7 +32,9 @@ try:
     with open("postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open(
+        "/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8"
+    ) as infile:
         postcodes_dict = json.load(infile)
 
 try:
@@ -37,14 +42,18 @@ try:
         with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
             gps_dict = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+        with open(
+            "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json",
+            "r",
+            encoding="utf8",
+        ) as infile:
             gps_dict = json.load(infile)
 except:
     print("gps_dict not found")
     gps_dict = []
 
-def beaux_get_listings():
 
+def beaux_get_listings():
     t0 = time.perf_counter()
 
     URL = "https://beauxvillages.com/fr/nos-biens_fr?option=com_iproperty&view=allproperties&id=0&layout=&autocomplete=Aude%2CAri%C3%A8ge%2CH%C3%A9rault%2CPyr%C3%A9n%C3%A9es-Orientales%2CHaute-Garonne%2CAude&filter_province=Aude%2CAri%C3%A8ge%2CH%C3%A9rault%2CPyr%C3%A9n%C3%A9es-Orientales%2CHaute-Garonne&filter_county=Aude&filter_order=p.price&filter_order_Dir=ASC&commit=&5a7fb023d0edd8037757cf17e9634828=1&Itemid=10504793"
@@ -57,15 +66,27 @@ def beaux_get_listings():
     num_props = num_props_div[2]
     per_page = num_props_div[1]
     print(f"\nBeaux Villages number of listings: {num_props}")
-    pages = math.ceil(num_props/per_page)
-    print(f"Pages: {pages} \nFinding urls now, this will take approx 15 seconds.")  # This retrieves the total number of listings, and the number of search page results
+    pages = math.ceil(num_props / per_page)
+    # This retrieves the total number of listings, and the number of search page results
+    print(f"Pages: {pages} \nFinding urls now, this will take approx 15 seconds.")
 
-    search_urls = list(set([f"https://beauxvillages.com/fr/nos-biens_fr?option=com_iproperty&view=allproperties&id=0&layout=&autocomplete=Aude%2CAri%C3%A8ge%2CH%C3%A9rault%2CPyr%C3%A9n%C3%A9es-Orientales%2CHaute-Garonne%2CAude&filter_province=Aude%2CAri%C3%A8ge%2CH%C3%A9rault%2CPyr%C3%A9n%C3%A9es-Orientales%2CHaute-Garonne&filter_county=Aude&filter_order=p.price&filter_order_Dir=ASC&commit=&5a7fb023d0edd8037757cf17e9634828=1&Itemid=10504793&start={i*per_page}" for i in range(pages)]))
+    search_urls = list(
+        set(
+            [
+                f"https://beauxvillages.com/fr/nos-biens_fr?option=com_iproperty&view=allproperties&id=0&layout=&autocomplete=Aude%2CAri%C3%A8ge%2CH%C3%A9rault%2CPyr%C3%A9n%C3%A9es-Orientales%2CHaute-Garonne%2CAude&filter_province=Aude%2CAri%C3%A8ge%2CH%C3%A9rault%2CPyr%C3%A9n%C3%A9es-Orientales%2CHaute-Garonne&filter_county=Aude&filter_order=p.price&filter_order_Dir=ASC&commit=&5a7fb023d0edd8037757cf17e9634828=1&Itemid=10504793&start={i*per_page}"
+                for i in range(pages)
+            ]
+        )
+    )
 
     # This will return the url of all available listings
-    links = asyncio.get_event_loop().run_until_complete(scrape_all_search_pages(search_urls))   
+    links = asyncio.get_event_loop().run_until_complete(
+        scrape_all_search_pages(search_urls)
+    )
 
-    listings = [listing for listing in listings_json if listing["agent"] == "Beaux Villages"]
+    listings = [
+        listing for listing in listings_json if listing["agent"] == "Beaux Villages"
+    ]
 
     links_old = []
     for listing in listings:
@@ -74,19 +95,22 @@ def beaux_get_listings():
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
-    
+
     links_dead = [link for link in links_old if link not in links]
     print("Old listings to remove:", len(links_dead))
-
 
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
-    
+
     results = []
     if links_to_scrape:
-        print(f"Scraping {len(links_to_scrape)} links, this will take approx {len(links_to_scrape)/2} seconds")
-        results = asyncio.get_event_loop().run_until_complete(run_scrape(links_to_scrape))
+        print(
+            f"Scraping {len(links_to_scrape)} links, this will take approx {len(links_to_scrape)/2} seconds"
+        )
+        results = asyncio.get_event_loop().run_until_complete(
+            run_scrape(links_to_scrape)
+        )
 
     for result in results:
         if type(result) == str:
@@ -104,27 +128,27 @@ def beaux_get_listings():
         pprint(failed_scrape_links)
 
     listings.sort(key=lambda x: x["price"])
-        
+
     t1 = time.perf_counter()
 
-    time_taken = t1-t0
+    time_taken = t1 - t0
     print(f"Time elapsed for Beaux Villages: {time_taken:.2f}s")
 
     return listings
 
-async def scrape_page_links(url, browser): 
 
+async def scrape_page_links(url, browser):
     page = await browser.newPage()
     await page.goto(url)
-    await page.waitForSelector('.ip-property-thumb-holder')
-    elements = await page.querySelectorAll('.ip-property-thumb-holder')
+    await page.waitForSelector(".ip-property-thumb-holder")
+    elements = await page.querySelectorAll(".ip-property-thumb-holder")
     links = []
     for element in elements:
         try:
-            link = await element.querySelectorEval('a', 'e => e.href')
+            link = await element.querySelectorEval("a", "e => e.href")
             links.append(link)
 
-         # If the property is "sold", the property href will not exist, but the thumbnail is still present with the class ip-property-thumb-holder. This code will allow the specific error of the missing href to pass, but will raise an exception for any other fault
+        # If the property is "sold", the property href will not exist, but the thumbnail is still present with the class ip-property-thumb-holder. This code will allow the specific error of the missing href to pass, but will raise an exception for any other fault
         except Exception as e:
             if str(e) == 'Error: failed to find element matching selector "a"':
                 pass
@@ -133,6 +157,7 @@ async def scrape_page_links(url, browser):
 
     await page.close()
     return links
+
 
 async def scrape_all_search_pages(search_urls):
     browser = await launch(headless=True)
@@ -147,8 +172,8 @@ async def scrape_all_search_pages(search_urls):
     await browser.close()
     return all_links
 
-async def get_listing_details(url, semaphore, browser):
 
+async def get_listing_details(url, semaphore, browser):
     async with semaphore:
         try:
             page = await browser.newPage()
@@ -158,7 +183,9 @@ async def get_listing_details(url, semaphore, browser):
 
             # Set up the request interception handler
             # try:
-            page.on('request', lambda request: asyncio.ensure_future(block_images(request)))
+            page.on(
+                "request", lambda request: asyncio.ensure_future(block_images(request))
+            )
             # except NetworkError as e:
             #     print(f"AAAAA Error occurred: {e}")
 
@@ -166,19 +193,21 @@ async def get_listing_details(url, semaphore, browser):
             page.setDefaultNavigationTimeout(60000)
 
             await page.goto(url)
-            
+
             # Waits until this selector has been rendered as it contains most of the data, then runs the parser
-            await page.waitForSelector('.result-r') 
+            await page.waitForSelector(".result-r")
             html = await page.content()
             agent = "Beaux Villages"
             link_url = url
-        
-            soup = BeautifulSoup(html, 'html.parser')
+
+            soup = BeautifulSoup(html, "html.parser")
 
             label_div = soup.find_all("div", "label-r")
             result_div = soup.find_all("div", "result-r")
             label_list = [item.get_text().strip() for item in label_div]
-            result_list = [item.get_text().replace("m2", "").strip() for item in result_div]
+            result_list = [
+                item.get_text().replace("m2", "").strip() for item in result_div
+            ]
 
             town = None
             postcode = None
@@ -237,18 +266,21 @@ async def get_listing_details(url, semaphore, browser):
 
             # print(price)
 
-            description = soup.find("div", class_="span_8 pull-left description-col").get_text(separator="\n", strip=True)
+            description = soup.find(
+                "div", class_="span_8 pull-left description-col"
+            ).get_text(separator="\n", strip=True)
             # pprint(description)
 
             for postcode_key, towns in postcodes_dict.items():
                 if town.casefold() in towns:
                     postcode = postcode_key
                     break
-            
+
             gps = None
             try:
                 if type(town) == str:
-                    if (postcode + ";" + town.casefold()) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
+                    # Check if town is in premade database of GPS locations, if not searches for GPS
+                    if (postcode + ";" + town.casefold()) in gps_dict:
                         gps = gps_dict[postcode + ";" + town.casefold()]
                     else:
                         try:
@@ -256,7 +288,9 @@ async def get_listing_details(url, semaphore, browser):
                         except:
                             gps = None
             except:
-                print(f"Town and postcode information not correctly found. Information as scraped: \nTown: {town}, Postcode: {postcode}, GPS: {gps}, URL: {url}")
+                print(
+                    f"Town and postcode information not correctly found. Information as scraped: \nTown: {town}, Postcode: {postcode}, GPS: {gps}, URL: {url}"
+                )
 
             photos = []
             try:
@@ -269,7 +303,23 @@ async def get_listing_details(url, semaphore, browser):
 
             photos_hosted = photos
 
-            listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)  
+            listing = Listing(
+                types,
+                town,
+                postcode,
+                price,
+                agent,
+                ref,
+                bedrooms,
+                rooms,
+                plot,
+                size,
+                link_url,
+                description,
+                photos,
+                photos_hosted,
+                gps,
+            )
 
             # print("Listing scraped", time.time())
             return listing.__dict__
@@ -280,8 +330,8 @@ async def get_listing_details(url, semaphore, browser):
         finally:
             await page.close()
 
-async def run_scrape(links_to_scrape):
 
+async def run_scrape(links_to_scrape):
     # Semaphore used to limit the number of active coroutines. Above 20 results in some connections being closed by the remote host and scrapes failing. No semaphore usually results in all links failing. Semaphore = 10 resulted in the best time across 100 links, approx 96 seconds. Semaphore = 1 takes 286 seconds (since it's no longer asynchronous), 5 and 20 both around 100 seconds.
 
     semaphore = asyncio.Semaphore(10)
@@ -289,22 +339,25 @@ async def run_scrape(links_to_scrape):
     tasks = []
 
     for link in links_to_scrape:
-        tasks.append(asyncio.ensure_future(get_listing_details(link, semaphore, browser)))
+        tasks.append(
+            asyncio.ensure_future(get_listing_details(link, semaphore, browser))
+        )
     listings = await asyncio.gather(*tasks)
 
     await browser.close()
     return listings
 
+
 # This function will block any request for images or CSS from the page loading. Reduces time required by approx 25%
-async def block_images(request):    
-    if request.resourceType in ['image', 'stylesheet']:
+async def block_images(request):
+    if request.resourceType in ["image", "stylesheet"]:
         await request.abort()
     else:
         await request.continue_()
 
-    
     # await request.continue_()
     # await request.abort()
+
 
 # Time taken to scrape 50 links 10 semaphore: 43.56s images and CSS blocked
 # Time taken to scrape 50 links 10 semaphore: 57.72s downloading everything
