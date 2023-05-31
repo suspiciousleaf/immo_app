@@ -1,5 +1,22 @@
 class Listing:
-    def __init__(self, types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps):
+    def __init__(
+        self,
+        types,
+        town,
+        postcode,
+        price,
+        agent,
+        ref,
+        bedrooms,
+        rooms,
+        plot,
+        size,
+        link_url,
+        description,
+        photos,
+        photos_hosted,
+        gps,
+    ):
         self.types = types
         self.town = town
         self.postcode = postcode
@@ -15,4 +32,3 @@ class Listing:
         self.photos = photos
         self.photos_hosted = photos_hosted
         self.gps = gps
-

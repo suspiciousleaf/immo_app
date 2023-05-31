@@ -4,9 +4,11 @@ import math
 import json
 import concurrent.futures
 
-from pprint import pprint
-import grequests    # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
+
+# This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
+import grequests
 import requests
+from pprint import pprint
 from bs4 import BeautifulSoup
 import shutil
 from unidecode import unidecode
@@ -21,7 +23,9 @@ try:
         with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
+        with open(
+            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
+        ) as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
@@ -31,14 +35,18 @@ try:
         with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
             gps_dict = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+        with open(
+            "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json",
+            "r",
+            encoding="utf8",
+        ) as infile:
             gps_dict = json.load(infile)
 except:
     print("gps_dict not found")
     gps_dict = []
 
-def api_get_listings(host_photos=False):
 
+def api_get_listings(host_photos=False):
     t0 = time.time()
 
     URL = "http://www.pyrenees-immobilier.com/fr/annonces-immobilieres-p-r12-1.html#page=1"
@@ -46,17 +54,20 @@ def api_get_listings(host_photos=False):
 
     api_soup = BeautifulSoup(page.content, "html.parser")
 
-    num_props = int(api_soup.find('span', id="NbBien").get_text())
+    num_props = int(api_soup.find("span", id="NbBien").get_text())
     print("\nApi Immo number of listings:", num_props)
     pages = math.ceil(num_props / 10)
     print("Pages:", pages)
 
     links = []
 
-    results_pages = [f"http://www.pyrenees-immobilier.com/fr/annonces-immobilieres-p-r12-{i}.html#page={i}" for i in range(1, pages + 1)]
+    results_pages = [
+        f"http://www.pyrenees-immobilier.com/fr/annonces-immobilieres-p-r12-{i}.html#page={i}"
+        for i in range(1, pages + 1)
+    ]
     resp = get_data(results_pages)
     for item in resp:
-        links  += api_get_links(item["response"])
+        links += api_get_links(item["response"])
 
     print("Number of unique listing URLs found:", len(links))
 
@@ -85,7 +96,9 @@ def api_get_listings(host_photos=False):
 
         for listing_ref in listing_photos_to_delete_local:
             try:
-                shutil.rmtree(f'{cwd}/static/images/api/{listing_ref}', ignore_errors=True)
+                shutil.rmtree(
+                    f"{cwd}/static/images/api/{listing_ref}", ignore_errors=True
+                )
             except:
                 pass
 
@@ -93,11 +106,18 @@ def api_get_listings(host_photos=False):
     counter_fail = 0
     failed_scrape_links = []
 
-    #   async scraping is too fast, results in many 503 responses. Threading is just slow enough to get all the responses, and async still works for the photos
+    #   async scraping is too fast, results in many 503 responses. Multi-threading is just slow enough to get all the responses, and async still works for the photos
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        response_objects = executor.map(requests.get, (link for link in links_to_scrape))   # Threaded scraping
-        results = executor.map(get_listing_details, (item for item in response_objects), links_to_scrape, [host_photos for x in links_to_scrape]) # Threaded parsing w/photo scraping
+        response_objects = executor.map(
+            requests.get, (link for link in links_to_scrape)
+        )
+        results = executor.map(
+            get_listing_details,
+            (item for item in response_objects),
+            links_to_scrape,
+            [host_photos for x in links_to_scrape],
+        )
         for result in results:
             if type(result) == str:
                 failed_scrape_links.append(result)
@@ -117,39 +137,43 @@ def api_get_listings(host_photos=False):
 
     t1 = time.time()
 
-    time_taken = t1-t0
+    time_taken = t1 - t0
     print(f"Time elapsed for A.P.I: {time_taken:.2f}s")
-        
+
     return listings
 
-def api_get_links(page):
 
+def api_get_links(page):
     api_soup = BeautifulSoup(page.content, "html.parser")
 
     links_raw = set()
-    for link in api_soup.find_all('a'):
-            links_raw.add(link.get('href'))
+    for link in api_soup.find_all("a"):
+        links_raw.add(link.get("href"))
     links_raw.discard(None)
-    links = [link for link in links_raw if "http://www.pyrenees-immobilier.com/fr/vente" in link]        
-    
+    links = [
+        link
+        for link in links_raw
+        if "http://www.pyrenees-immobilier.com/fr/vente" in link
+    ]
+
     return links
 
-def get_listing_details(page, url, host_photos):
 
+def get_listing_details(page, url, host_photos):
     try:
         agent = "A.P.I."
-        soup = BeautifulSoup(page.content, "html.parser") 
-        link_url = url 
+        soup = BeautifulSoup(page.content, "html.parser")
+        link_url = url
 
-        #print("\n\nNext property\n")
+        # print("\n\nNext property\n")
 
         # Get type
-        
-        types = soup.find('div', class_="type").get_text()
+
+        types = soup.find("div", class_="type").get_text()
         # print("Type:", types)
 
         # Get location
-        postcode_div = soup.find('h1').get_text()
+        postcode_div = soup.find("h1").get_text()
         postcode_div = postcode_div.split()
         postcode_string = [line for line in postcode_div if "(" in line][0]
         postcode = "".join([num for num in postcode_string if num.isdigit()])
@@ -159,13 +183,13 @@ def get_listing_details(page, url, host_photos):
         # print("Town:", town)
 
         # Get price
-        price_div = soup.find('div', class_="price-all").get_text()
+        price_div = soup.find("div", class_="price-all").get_text()
         price = int("".join([num for num in price_div if num.isdigit()]))
         # print("Price:", price, "€")
 
         # Get ref
 
-        details_div = soup.find('div', class_="detail-bien-specs").get_text()
+        details_div = soup.find("div", class_="detail-bien-specs").get_text()
         details_div = details_div.split("\n")
         prop_ref = [line for line in details_div if "Ref" in line and len(line) < 10][0]
         ref = "".join([num for num in prop_ref if num.isdigit()])
@@ -193,17 +217,23 @@ def get_listing_details(page, url, host_photos):
 
         # Plot size
         try:
-            plot = [line for line in details_div if "Terrain" in line and "Type" not in line][0]
-            plot = int("".join([num for num in plot if num.isdigit() and num.isascii()]))
+            plot = [
+                line for line in details_div if "Terrain" in line and "Type" not in line
+            ][0]
+            plot = int(
+                "".join([num for num in plot if num.isdigit() and num.isascii()])
+            )
         except:
             plot = None
 
         # print("Plot:", plot, "m²")
 
-        #Property size
+        # Property size
         try:
             size = [line for line in details_div if "Surface" in line][0]
-            size = int("".join([num for num in size if num.isdigit() and num.isascii()]))
+            size = int(
+                "".join([num for num in size if num.isdigit() and num.isascii()])
+            )
         except:
             size = None
 
@@ -212,7 +242,12 @@ def get_listing_details(page, url, host_photos):
         # Description
 
         description = soup.find("div", class_="detail-bien-desc-content").get_text()
-        description = description.replace("Tweet", "").replace("Nous contacter", "").replace("Être averti d'une baisse de prix", "").replace("\n\n", "")
+        description = (
+            description.replace("Tweet", "")
+            .replace("Nous contacter", "")
+            .replace("Être averti d'une baisse de prix", "")
+            .replace("\n\n", "")
+        )
         # print(description)
 
         # Photos
@@ -224,7 +259,7 @@ def get_listing_details(page, url, host_photos):
         # pprint(photos)
 
         if host_photos:
-            agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
+            agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
 
             make_photos_dir(ref, cwd, agent_abbr)
 
@@ -235,7 +270,9 @@ def get_listing_details(page, url, host_photos):
             resp = get_data(photos, header=False)
             for item in resp:
                 try:
-                    photos_hosted.append(dl_comp_photo(item["response"], ref, i, cwd, agent_abbr))
+                    photos_hosted.append(
+                        dl_comp_photo(item["response"], ref, i, cwd, agent_abbr)
+                    )
                     i += 1
                 except:
                     failed += 1
@@ -247,19 +284,37 @@ def get_listing_details(page, url, host_photos):
 
         gps = None
         if type(town) == str:
-            if (postcode + ";" + town.casefold()) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS
+            # Check if town is in premade database of GPS locations, if not searches for GPS
+            if (postcode + ";" + town.casefold()) in gps_dict:
                 gps = gps_dict[postcode + ";" + town.casefold()]
             else:
                 try:
                     gps = get_gps(town, postcode)
                 except:
                     gps = None
-    
-        listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)
-        
+
+        listing = Listing(
+            types,
+            town,
+            postcode,
+            price,
+            agent,
+            ref,
+            bedrooms,
+            rooms,
+            plot,
+            size,
+            link_url,
+            description,
+            photos,
+            photos_hosted,
+            gps,
+        )
+
         return listing.__dict__
     except:
         return url
+
 
 cwd = os.getcwd()
 

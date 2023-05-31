@@ -6,14 +6,18 @@ import concurrent.futures
 import re
 
 from pprint import pprint
-import grequests    # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
+
+# This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
+import grequests
 import requests
 from bs4 import BeautifulSoup
 import shutil
 from unidecode import unidecode
 
 from async_image_downloader import make_photos_dir, dl_comp_photo
-from location_fix import fix_location   # This is necessary for Richardson and Ami, as both have poor quality and inconsistent location data
+
+# This is necessary for Richardson and Ami, as both have poor quality and inconsistent location data
+from location_fix import fix_location
 from json_search import agent_dict
 from models import Listing
 from utilities import get_gps, get_data
@@ -23,7 +27,9 @@ try:
         with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8") as infile:
+        with open(
+            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
+        ) as infile:
             listings_json = json.load(infile)
 except:
     listings_json = []
@@ -32,7 +38,9 @@ try:
     with open("postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
-    with open("/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open(
+        "/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8"
+    ) as infile:
         postcodes_dict = json.load(infile)
 
 try:
@@ -40,14 +48,18 @@ try:
         with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
             gps_dict = json.load(infile)
     except:
-        with open("/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+        with open(
+            "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json",
+            "r",
+            encoding="utf8",
+        ) as infile:
             gps_dict = json.load(infile)
 except:
     print("gps_dict not found")
     gps_dict = []
 
-def ami09_get_listings(host_photos=False):
 
+def ami09_get_listings(host_photos=False):
     t0 = time.time()
 
     URL = "https://www.ami09.com/immobilier-pays-de-sault/?product-page=1"
@@ -55,21 +67,28 @@ def ami09_get_listings(host_photos=False):
 
     ami09_soup = BeautifulSoup(page.content, "html.parser")
 
-    num_props = int(ami09_soup.find('p', class_="woocommerce-result-count").get_text().split()[-2])
+    num_props = int(
+        ami09_soup.find("p", class_="woocommerce-result-count").get_text().split()[-2]
+    )
     print("\nAmi Immobilier number of listings:", num_props)
     pages = math.ceil(num_props / 12)
     print("Pages:", pages)
 
-    all_search_pages = [f"https://www.ami09.com/immobilier-pays-de-sault/?product-page={i}" for i in range(1, pages + 1)]
+    all_search_pages = [
+        f"https://www.ami09.com/immobilier-pays-de-sault/?product-page={i}"
+        for i in range(1, pages + 1)
+    ]
 
     links = []
     resp = get_data(all_search_pages)
     for item in resp:
-        links  += ami09_get_links(item["response"])
+        links += ami09_get_links(item["response"])
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [listing for listing in listings_json if listing["agent"] == "Ami Immobilier"]
+    listings = [
+        listing for listing in listings_json if listing["agent"] == "Ami Immobilier"
+    ]
 
     links_old = []
     for listing in listings:
@@ -93,7 +112,9 @@ def ami09_get_listings(host_photos=False):
 
         for listing_ref in listing_photos_to_delete_local:
             try:
-                shutil.rmtree(f'{cwd}/static/images/ami/{listing_ref}', ignore_errors=True)
+                shutil.rmtree(
+                    f"{cwd}/static/images/ami/{listing_ref}", ignore_errors=True
+                )
             except:
                 pass
 
@@ -102,8 +123,13 @@ def ami09_get_listings(host_photos=False):
     failed_scrape_links = []
     resp_to_scrape = get_data(links_to_scrape)
 
-    with concurrent.futures.ThreadPoolExecutor() as executor:    
-        results = executor.map(get_listing_details, (item["response"] for item in resp_to_scrape), links_to_scrape, [host_photos for x in resp_to_scrape])
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        results = executor.map(
+            get_listing_details,
+            (item["response"] for item in resp_to_scrape),
+            links_to_scrape,
+            [host_photos for x in resp_to_scrape],
+        )
         for result in results:
             if type(result) == str:
                 failed_scrape_links.append(result)
@@ -120,25 +146,28 @@ def ami09_get_listings(host_photos=False):
         pprint(failed_scrape_links)
 
     listings.sort(key=lambda x: x["price"])
-        
+
     t1 = time.time()
 
-    time_taken = t1-t0
+    time_taken = t1 - t0
     print(f"Time elapsed for Ami Immobilier: {time_taken:.2f}s")
 
     return listings
 
-def ami09_get_links(page,):
 
+def ami09_get_links(
+    page,
+):
     ami09_soup = BeautifulSoup(page.content, "html.parser")
 
     links_raw = set()
-    for link in ami09_soup.find_all('a'):
-            links_raw.add(link.get('href'))
+    for link in ami09_soup.find_all("a"):
+        links_raw.add(link.get("href"))
     links_raw.discard(None)
-    links = [link for link in links_raw if "https://www.ami09.com/produit" in link]        
+    links = [link for link in links_raw if "https://www.ami09.com/produit" in link]
 
     return links
+
 
 def get_listing_details(page, url, host_photos):
     try:
@@ -146,12 +175,14 @@ def get_listing_details(page, url, host_photos):
         soup = BeautifulSoup(page.content, "html.parser")
         link_url = url
 
-        #print("\n\nNext property\n")
+        # print("\n\nNext property\n")
 
-        #print(URL)
+        # print(URL)
         # Get type
-        types_div = soup.find('h1').get_text()
-        types_div_cleaned = types_div.replace("-", ";").replace("–", ";").replace("—", ";")
+        types_div = soup.find("h1").get_text()
+        types_div_cleaned = (
+            types_div.replace("-", ";").replace("–", ";").replace("—", ";")
+        )
         if types_div_cleaned.count(";") == 2:
             types = types_div_cleaned.split(";")[1].strip().capitalize()
         else:
@@ -159,7 +190,6 @@ def get_listing_details(page, url, host_photos):
         if types[-1] == "s":
             types = types[:-1]
         # print("Type:", types)
-
 
         # Get location
         town = None
@@ -174,7 +204,7 @@ def get_listing_details(page, url, host_photos):
             location_div = location_div[:-5]
         else:
             postcode = None
-        
+
         # print("\n", location_div)
         # print("Postcode:", postcode)
 
@@ -190,7 +220,7 @@ def get_listing_details(page, url, host_photos):
         # print("Town:", town)
 
         # Get ref
-        ref_div = soup.find('table', class_="main_tableau_acf").get_text()
+        ref_div = soup.find("table", class_="main_tableau_acf").get_text()
         ref = "".join([num for num in ref_div if num.isdigit()])
         # print("ref:", ref)
 
@@ -201,7 +231,7 @@ def get_listing_details(page, url, host_photos):
         # print("ref:", ref)
 
         # Get price
-        price_div = soup.find('span', class_="woocommerce-Price-amount").get_text()
+        price_div = soup.find("span", class_="woocommerce-Price-amount").get_text()
         price = int("".join([num for num in price_div if num.isdigit()]))
         # print("Price:", price, "€")
 
@@ -212,18 +242,22 @@ def get_listing_details(page, url, host_photos):
         try:
             for item in details_div:
                 if "chambres" in item.get_text():
-                    bedrooms = int("".join([num for num in item.get_text() if num.isdigit()]))
+                    bedrooms = int(
+                        "".join([num for num in item.get_text() if num.isdigit()])
+                    )
         except:
             pass
         # print("Bedrooms:", bedrooms)
-                
+
         # Rooms
         # pprint(details_div)
         rooms = None
         try:
             for item in details_div:
                 if "pièces" in item.get_text():
-                    rooms = int("".join([num for num in item.get_text() if num.isdigit()]))
+                    rooms = int(
+                        "".join([num for num in item.get_text() if num.isdigit()])
+                    )
         except:
             pass
 
@@ -232,14 +266,24 @@ def get_listing_details(page, url, host_photos):
         # Description
 
         description_outer = soup.find("div", class_="et_pb_wc_description")
-        description = description_outer.find("div", class_="et_pb_module_inner").p.get_text()
-        
+        description = description_outer.find(
+            "div", class_="et_pb_module_inner"
+        ).p.get_text()
+
         # print(description)
         plot = None
         try:
             for item in details_div:
                 if "Surface terrain" in item.get_text():
-                    plot = int("".join([num for num in item.get_text() if num.isdigit() and num.isascii()]))
+                    plot = int(
+                        "".join(
+                            [
+                                num
+                                for num in item.get_text()
+                                if num.isdigit() and num.isascii()
+                            ]
+                        )
+                    )
         except:
             pass
 
@@ -257,16 +301,22 @@ def get_listing_details(page, url, host_photos):
 
         # print("Plot:", plot, "m²")
 
-        #Property size
+        # Property size
         size = None
         try:
             for item in details_div:
                 if "habitable" in item.get_text():
-                    size = int(float(item.get_text()[item.get_text().find(":")+1:item.get_text().find(" m²")]))
+                    size = int(
+                        float(
+                            item.get_text()[
+                                item.get_text().find(":")
+                                + 1 : item.get_text().find(" m²")
+                            ]
+                        )
+                    )
         except:
             pass
         # print("Size:", size, "m²")
-
 
         # Photos
         photos = []
@@ -276,8 +326,7 @@ def get_listing_details(page, url, host_photos):
             photos.append(element.get("href"))
 
         if host_photos:
-
-            agent_abbr = [i for i in agent_dict if agent_dict[i]==agent][0]
+            agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
 
             make_photos_dir(ref, cwd, agent_abbr)
 
@@ -289,12 +338,14 @@ def get_listing_details(page, url, host_photos):
             resp = get_data(photos, header=False)
             for item in resp:
                 try:
-                    photos_hosted.append(dl_comp_photo(item["response"], ref, i, cwd, agent_abbr))
+                    photos_hosted.append(
+                        dl_comp_photo(item["response"], ref, i, cwd, agent_abbr)
+                    )
                     i += 1
                 except:
                     photos_failed.append(item["link"])
                     failed += 1
-            
+
             if failed:
                 print(f"{failed} photos failed to scrape")
                 pprint(photos_failed)
@@ -302,14 +353,31 @@ def get_listing_details(page, url, host_photos):
             photos_hosted = photos
 
         gps = None
-       
-        listing = Listing(types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos, photos_hosted, gps)  
+
+        listing = Listing(
+            types,
+            town,
+            postcode,
+            price,
+            agent,
+            ref,
+            bedrooms,
+            rooms,
+            plot,
+            size,
+            link_url,
+            description,
+            photos,
+            photos_hosted,
+            gps,
+        )
 
         return listing.__dict__
     except Exception as e:
         # print(e)
         return url
-    
+
+
 cwd = os.getcwd()
 
 # get_listing_details(requests.get("https://www.ami09.com/produit/5316-terrains/"), "https://www.ami09.com/produit/5316-terrains/", False)
@@ -317,7 +385,7 @@ cwd = os.getcwd()
 # get_listing_details(requests.get("https://www.ami09.com/produit/5668-maison-belesta-09300/"), "https://www.ami09.com/produit/5731-maison-belesta/", False)
 
 # ami09_get_listings()
-#ami09_get_links(1)
+# ami09_get_links(1)
 
 # Time elapsed for Ami Immobilier: 24.16s async photo grab
 # Time elapsed for Ami Immobilier: 145.64853525161743 multi-threading photo grab
