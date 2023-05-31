@@ -1,9 +1,9 @@
 import os
 import time
+import re
 import math
 import json
 import concurrent.futures
-
 
 # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
 import grequests
@@ -13,10 +13,10 @@ from bs4 import BeautifulSoup
 import shutil
 from unidecode import unidecode
 
-from async_image_downloader import make_photos_dir, dl_comp_photo
+from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
 from json_search import agent_dict
 from models import Listing
-from utilities import get_gps, get_data
+from utilities.utilities import get_gps, get_data
 
 try:
     try:
@@ -42,40 +42,43 @@ try:
         ) as infile:
             gps_dict = json.load(infile)
 except:
-    print("gps_dict not found")
+    print("gps_dictnot found")
     gps_dict = []
 
 
-def api_get_listings(host_photos=False):
+def jammes_get_listings(sold_url_list, host_photos=False):
     t0 = time.time()
-
-    URL = "http://www.pyrenees-immobilier.com/fr/annonces-immobilieres-p-r12-1.html#page=1"
+    URL = "https://www.cabinet-jammes.com/fr/liste.htm?page=1"
     page = requests.get(URL)
 
-    api_soup = BeautifulSoup(page.content, "html.parser")
+    jammes_soup = BeautifulSoup(page.content, "html.parser")
 
-    num_props = int(api_soup.find("span", id="NbBien").get_text())
-    print("\nApi Immo number of listings:", num_props)
-    pages = math.ceil(num_props / 10)
+    num_props_div = jammes_soup.find("span", class_="NbBien")
+    num_props = int(num_props_div.find(string=True))
+    print("\nJammes Immo number of listings:", num_props)
+    pages = math.ceil(num_props / 12)
     print("Pages:", pages)
 
-    links = []
-
     results_pages = [
-        f"http://www.pyrenees-immobilier.com/fr/annonces-immobilieres-p-r12-{i}.html#page={i}"
+        "https://www.cabinet-jammes.com/fr/liste.htm?page=" + str(i)
         for i in range(1, pages + 1)
     ]
     resp = get_data(results_pages)
+    links = []
     for item in resp:
-        links += api_get_links(item["response"])
+        links += jammes_get_links(item["response"])
+
+    links = [link for link in links if link not in sold_url_list]
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [listing for listing in listings_json if listing["agent"] == "A.P.I."]
+    listings = [
+        listing for listing in listings_json if listing["agent"] == "Cabinet Jammes"
+    ]
 
     links_old = []
     for listing in listings:
-        if listing["agent"] == "A.P.I.":
+        if listing["agent"] == "Cabinet Jammes":
             links_old.append(listing["link_url"])
     # print("Listings found from prevous scrape:", len(links_old))
 
@@ -97,7 +100,7 @@ def api_get_listings(host_photos=False):
         for listing_ref in listing_photos_to_delete_local:
             try:
                 shutil.rmtree(
-                    f"{cwd}/static/images/api/{listing_ref}", ignore_errors=True
+                    f"{cwd}/static/images/jammes/{listing_ref}", ignore_errors=True
                 )
             except:
                 pass
@@ -105,8 +108,6 @@ def api_get_listings(host_photos=False):
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
-
-    #   async scraping is too fast, results in many 503 responses. Multi-threading is just slow enough to get all the responses, and async still works for the photos
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         response_objects = executor.map(
@@ -138,22 +139,22 @@ def api_get_listings(host_photos=False):
     t1 = time.time()
 
     time_taken = t1 - t0
-    print(f"Time elapsed for A.P.I: {time_taken:.2f}s")
+    print(f"Time elapsed for Cabinet Jammes: {time_taken:.2f}s")
 
     return listings
 
 
-def api_get_links(page):
-    api_soup = BeautifulSoup(page.content, "html.parser")
+def jammes_get_links(page):
+    jammes_soup = BeautifulSoup(page.content, "html.parser")
 
     links_raw = set()
-    for link in api_soup.find_all("a"):
+    for link in jammes_soup.find_all("a"):
         links_raw.add(link.get("href"))
     links_raw.discard(None)
     links = [
         link
         for link in links_raw
-        if "http://www.pyrenees-immobilier.com/fr/vente" in link
+        if "https://www.cabinet-jammes.com/fr/detail.htm" in link
     ]
 
     return links
@@ -161,102 +162,110 @@ def api_get_links(page):
 
 def get_listing_details(page, url, host_photos):
     try:
-        agent = "A.P.I."
+        agent = "Cabinet Jammes"
         soup = BeautifulSoup(page.content, "html.parser")
         link_url = url
 
         # print("\n\nNext property\n")
 
         # Get type
-
-        types = soup.find("div", class_="type").get_text()
-        # print("Type:", types)
+        prop_type_div = soup.find("h2", class_="detail-bien-type")
+        prop_type = prop_type_div.find(string=True)
+        # print("Type:", prop_type)
+        types = prop_type
 
         # Get location
-        postcode_div = soup.find("h1").get_text()
-        postcode_div = postcode_div.split()
-        postcode_string = [line for line in postcode_div if "(" in line][0]
-        postcode = "".join([num for num in postcode_string if num.isdigit()])
-        # print("Postcode:", postcode)
+        location_div = soup.find("h2", class_="detail-bien-ville")
+        location_raw = location_div.find(string=True).strip().split()
+        location_postcode = location_raw.pop(-1).strip("(").strip(")")
+        location_town = " ".join(location_raw)
+        town = unidecode(location_town.capitalize().replace("-", " "))
+        postcode = location_postcode
 
-        town = unidecode(soup.find("div", class_="ville").get_text().capitalize())
-        # print("Town:", town)
+        # print("Town:", location_town)
+        # print("Postcode:", location_postcode)
 
         # Get price
-        price_div = soup.find("div", class_="price-all").get_text()
-        price = int("".join([num for num in price_div if num.isdigit()]))
+        price_div = soup.find("div", class_="detail-bien-prix")
+        price = price_div.find(string=re.compile("€"))
+        price = int(price.replace(" ", "").strip("€"))
         # print("Price:", price, "€")
 
         # Get ref
 
-        details_div = soup.find("div", class_="detail-bien-specs").get_text()
-        details_div = details_div.split("\n")
-        prop_ref = [line for line in details_div if "Ref" in line and len(line) < 10][0]
-        ref = "".join([num for num in prop_ref if num.isdigit()])
+        # Page returns two identical spans with itemprop="productID", one with a hidden ref and one with the 4 digit visible ref. No way to differentiate between the two. The second one has the desired  ref, so I turned it into a list, pulled the second item on the list (with the correct ref), then list comprehension to extract the digits, and join them into a string to get the correct ref.
 
-        # print("ref:", ref)
+        prop_ref_div = soup.find_all("span", itemprop="productID")
+        prop_ref = list(prop_ref_div)
+        prop_ref = "".join([char for char in str(prop_ref[1]) if char.isnumeric()])
+        ref = prop_ref
+
+        # print("ref:", prop_ref)
 
         # Get property details
+        # This returns a whole chunk of text for the property specs that gets separated to find the number of bedrooms, rooms, house size and land size. It's done in a janky way that Amy will hate
 
-        try:
-            bedrooms = [line for line in details_div if "Chambres" in line][0]
-            bedrooms = int("".join([num for num in bedrooms if num.isdigit()]))
-        except:
+        details_div = list(soup.find("div", class_="detail-bien-specs"))
+        details = str(details_div[1])
+        details = details.split("\n")
+
+        # Chambres
+
+        bedrooms = "".join([cham for cham in details if "chambre(s)" in cham]).split()
+        bedrooms = bedrooms[bedrooms.index("chambre(s)") - 1]
+        # if not bedrooms.isnumeric():
+        #     bedrooms = "Unknown"
+        if bedrooms.isnumeric():
+            bedrooms = int(bedrooms)
+        else:
             bedrooms = None
-
         # print("Bedrooms:", bedrooms)
 
         # Rooms
-        try:
-            rooms = [line for line in details_div if "Pièces" in line][0]
-            rooms = int("".join([num for num in rooms if num.isdigit()]))
-        except:
-            rooms = None
 
+        rooms = "".join([rooms for rooms in details if "pièce(s)" in rooms]).split()
+        rooms = rooms[rooms.index("pièce(s)") - 1]
+        # if not rooms.isnumeric():
+        #     rooms = "Unknown"
+        if rooms.isnumeric():
+            rooms = int(rooms)
+        else:
+            rooms = None
         # print("Rooms:", rooms)
 
         # Plot size
-        try:
-            plot = [
-                line for line in details_div if "Terrain" in line and "Type" not in line
-            ][0]
-            plot = int(
-                "".join([num for num in plot if num.isdigit() and num.isascii()])
-            )
-        except:
-            plot = None
 
+        plot = "".join([plot for plot in details if "terrain" in plot]).split()
+        if plot[-2].isnumeric():
+            plot = int(plot[-2])
+        else:
+            plot = None
         # print("Plot:", plot, "m²")
 
         # Property size
-        try:
-            size = [line for line in details_div if "Surface" in line][0]
-            size = int(
-                "".join([num for num in size if num.isdigit() and num.isascii()])
-            )
-        except:
-            size = None
 
-        # print("Size:", size, "m²")
+        size = "".join([size for size in details if "surface" in size]).split()
+        if size[-2].isnumeric():
+            size = int(size[-2])
+        else:
+            size = None
 
         # Description
 
-        description = soup.find("div", class_="detail-bien-desc-content").get_text()
-        description = (
-            description.replace("Tweet", "")
-            .replace("Nous contacter", "")
-            .replace("Être averti d'une baisse de prix", "")
-            .replace("\n\n", "")
-        )
-        # print(description)
+        description = soup.find("span", itemprop="description").get_text()
+        description = "".join(description.splitlines())
+        # pprint(description)
 
         # Photos
-        photos = []
-        photos_div = soup.find_all("img", class_="photo-large")
-        for element in photos_div:
-            if "https://assets.adaptimmo.com/" in element.get("src"):
-                photos.append(element.get("src"))
-        # pprint(photos)
+        # Finds the links to full res photos for each listing, removes the "amp;" so the links work, and returns them as a list
+
+        photos_div = []
+        for link in soup.find_all("img", class_="photo-big"):
+            photos_div.append(link)
+        photos_div = [str(link) for link in photos_div]
+        photos = [link[link.find("data-src=") + 10 :] for link in photos_div]
+        photos = [link.replace("amp;", "") for link in photos]
+        photos = [link.replace('"/>', "") for link in photos]
 
         if host_photos:
             agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
@@ -264,6 +273,7 @@ def get_listing_details(page, url, host_photos):
             make_photos_dir(ref, cwd, agent_abbr)
 
             photos_hosted = []
+            photos_failed = []
             i = 0
             failed = 0
 
@@ -275,10 +285,12 @@ def get_listing_details(page, url, host_photos):
                     )
                     i += 1
                 except:
+                    photos_failed.append(item["link"])
                     failed += 1
 
             if failed:
                 print(f"{failed} photos failed to scrape")
+                pprint(photos_failed)
         else:
             photos_hosted = photos
 
@@ -312,17 +324,20 @@ def get_listing_details(page, url, host_photos):
         )
 
         return listing.__dict__
+
     except:
         return url
 
 
 cwd = os.getcwd()
 
-# get_listing_details(requests.get("http://www.pyrenees-immobilier.com/fr/vente-grange-castillon-en-couserans-p-r7-0900416111.html"), "http://www.pyrenees-immobilier.com/fr/vente-grange-castillon-en-couserans-p-r7-0900416111.html", False)
-
-# api_listings = api_get_listings(host_photos=False)
+# jammes_listings = jammes_get_listings(host_photos=False)
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
-#     json.dump(api_listings, outfile, ensure_ascii=False)
+#     json.dump(jammes_listings, outfile, ensure_ascii=False)
 
-# Time elapsed for A.P.I: 44.31s without photos
+
+# Time elapsed for Cabinet Jammes: 14.5 Multi threading, no photos
+# Time elapsed for Cabinet Jammes: 172.85744714736938 Single threading with photos
+# Time elapsed for Cabinet Jammes: 89.54897403717041 Async with photos
+# Time elapsed for Cabinet Jammes: 98.5943374633789 Multi threading with photos

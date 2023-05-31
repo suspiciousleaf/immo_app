@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 
 from models import Listing
-from utilities import get_data
+from utilities.utilities import get_data
 
 try:
     try:

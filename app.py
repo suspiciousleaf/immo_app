@@ -10,26 +10,26 @@ from unidecode import unidecode
 
 t0 = time.time()
 
-from image_sold_checker import sold_image_check
-from scraper_ami09 import ami09_get_listings
-from scraper_api import api_get_listings
-from scraper_arthur_immo import arthur_immo_get_listings
-from scraper_aude import aude_immo_get_listings
-from scraper_beaux import beaux_get_listings
-from scraper_c21 import c21_get_listings
-from scraper_cimm import cimm_get_listings
-from scraper_eureka import eureka_immo_get_listings
-from scraper_europe_sud import europe_sud_get_listings
-from scraper_iad import iad_immo_get_listings
-from scraper_immo_chez_toit import immo_chez_toit_get_listings
-from scraper_jammes import jammes_get_listings
-from scraper_mm import mm_immo_get_listings
-from scraper_nestenn import nestenn_immo_get_listings
-from scraper_richardson import richardson_get_listings
-from scraper_safti import safti_get_listings
-from scraper_selection_habitat import selection_get_listings
-from scraper_sextant import sextant_get_listings
-from scraper_time_stone import time_stone_get_listings
+from utilities.image_sold_checker import sold_image_check
+from scrapers.scraper_ami09 import ami09_get_listings
+from scrapers.scraper_api import api_get_listings
+from scrapers.scraper_arthur_immo import arthur_immo_get_listings
+from scrapers.scraper_aude import aude_immo_get_listings
+from scrapers.scraper_beaux import beaux_get_listings
+from scrapers.scraper_c21 import c21_get_listings
+from scrapers.scraper_cimm import cimm_get_listings
+from scrapers.scraper_eureka import eureka_immo_get_listings
+from scrapers.scraper_europe_sud import europe_sud_get_listings
+from scrapers.scraper_iad import iad_immo_get_listings
+from scrapers.scraper_immo_chez_toit import immo_chez_toit_get_listings
+from scrapers.scraper_jammes import jammes_get_listings
+from scrapers.scraper_mm import mm_immo_get_listings
+from scrapers.scraper_nestenn import nestenn_immo_get_listings
+from scrapers.scraper_richardson import richardson_get_listings
+from scrapers.scraper_safti import safti_get_listings
+from scrapers.scraper_selection_habitat import selection_get_listings
+from scrapers.scraper_sextant import sextant_get_listings
+from scrapers.scraper_time_stone import time_stone_get_listings
 
 # The code below will run the imported scraper for each agent, host_photos will determine if the photos for each listing are downloaded, resized, and compressed for local hosting. Try/except is used to prevent an error with a single scraper causing the whole program to fail to run. Faults are reported to the failed_scrapes list, and finally to the console.
 

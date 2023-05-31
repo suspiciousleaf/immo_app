@@ -7,7 +7,7 @@ from unidecode import unidecode
 
 # from geopy.geocoders import Nominatim
 
-from utilities import get_gps
+from utilities.utilities import get_gps
 
 # import requests
 
