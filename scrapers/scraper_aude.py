@@ -3,7 +3,6 @@ import time
 import math
 import json
 import concurrent.futures
-import re
 
 # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
 import grequests
@@ -13,10 +12,10 @@ from bs4 import BeautifulSoup
 import shutil
 from unidecode import unidecode
 
-from async_image_downloader import make_photos_dir, dl_comp_photo
+from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
 from json_search import agent_dict
 from models import Listing
-from utilities import get_gps, get_data
+from utilities.utilities import get_gps, get_data
 
 try:
     try:
@@ -42,45 +41,43 @@ try:
         ) as infile:
             gps_dict = json.load(infile)
 except:
-    print("gps_dictnot found")
+    print("gps_dict not found")
     gps_dict = []
 
 
-def mm_immo_get_listings(sold_url_list, host_photos=False):
+def aude_immo_get_listings(host_photos=False):
     t0 = time.time()
 
-    URL = "https://www.mmimmobilier.com/fr/annonces/acheter-p-r70-4-1.html"
+    URL = "https://www.audeimmobilier.com/recherche/1"
     page = requests.get(URL)
 
-    mm_immo_soup = BeautifulSoup(page.content, "html.parser")
+    aude_immo_soup = BeautifulSoup(page.content, "html.parser")
+    num_props_div = aude_immo_soup.find("div", class_="resultatFounded")
+    # Extracts the digits for number of properties from the HTML
+    num_props = int("".join([num for num in str(num_props_div) if num.isnumeric()]))
 
-    num_props_div = mm_immo_soup.find("span", class_="NbBien")
-    num_props = int(num_props_div.find(string=True))
-    print("\nM&M Immo number of listings:", num_props)
+    print("\nAude Immobilier number of listings:", num_props)
     pages = math.ceil(num_props / 10)
     print("Pages:", pages)
 
     all_search_pages = [
-        f"https://www.mmimmobilier.com/fr/annonces/acheter-p-r70-4-{i}.html"
-        for i in range(1, pages + 1)
+        f"https://www.audeimmobilier.com/recherche/{i}" for i in range(1, pages + 1)
     ]
 
     links = []
     resp = get_data(all_search_pages)
     for item in resp:
-        links += mm_immo_get_links(item["response"])
-
-    links = [link for link in links if link not in sold_url_list]
+        links += aude_immo_get_links(item["response"])
 
     print("Number of unique listing URLs found:", len(links))
 
     listings = [
-        listing for listing in listings_json if listing["agent"] == "M&M Immobilier"
+        listing for listing in listings_json if listing["agent"] == "Aude Immobilier"
     ]
 
     links_old = []
     for listing in listings:
-        if listing["agent"] == "M&M Immobilier":
+        if listing["agent"] == "Aude Immobilier":
             links_old.append(listing["link_url"])
     # print("Listings found from prevous scrape:", len(links_old))
 
@@ -102,7 +99,7 @@ def mm_immo_get_listings(sold_url_list, host_photos=False):
         for listing_ref in listing_photos_to_delete_local:
             try:
                 shutil.rmtree(
-                    f"{cwd}/static/images/mm/{listing_ref}", ignore_errors=True
+                    f"{cwd}/static/images/aude/{listing_ref}", ignore_errors=True
                 )
             except:
                 pass
@@ -111,13 +108,12 @@ def mm_immo_get_listings(sold_url_list, host_photos=False):
     counter_fail = 0
     failed_scrape_links = []
 
+    resp_to_scrape = get_data(links_to_scrape)
+
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        response_objects = executor.map(
-            requests.get, (link for link in links_to_scrape)
-        )
         results = executor.map(
             get_listing_details,
-            (item for item in response_objects),
+            (item["response"] for item in resp_to_scrape),
             links_to_scrape,
             [host_photos for x in links_to_scrape],
         )
@@ -141,22 +137,23 @@ def mm_immo_get_listings(sold_url_list, host_photos=False):
     t1 = time.time()
 
     time_taken = t1 - t0
-    print(f"Time elapsed for M&M Immobilier: {time_taken:.2f}s")
+    print(f"Time elapsed for Aude Immobilier: {time_taken:.2f}s")
 
     return listings
 
+    # print("Number of unique listing URLs found:", len(links))
 
-def mm_immo_get_links(page):
-    mm_immo_soup = BeautifulSoup(page.content, "html.parser")
+
+def aude_immo_get_links(page):
+    aude_immo_soup = BeautifulSoup(page.content, "html.parser")
+
     links_raw = set()
-    for link in mm_immo_soup.find_all("a"):
+    for link in aude_immo_soup.find_all("a"):
         links_raw.add(link.get("href"))
 
     links_raw.discard(None)
     links = [
-        link
-        for link in links_raw
-        if "https://www.mmimmobilier.com/fr/annonce/vente" in link
+        link for link in links_raw if "https://www.audeimmobilier.com/vente/" in link
     ]
 
     return links
@@ -164,115 +161,114 @@ def mm_immo_get_links(page):
 
 def get_listing_details(page, url, host_photos):
     try:
-        agent = "M&M Immobilier"
+        agent = "Aude Immobilier"
         link_url = url
         soup = BeautifulSoup(page.content, "html.parser")
 
-        # print("\n\nNext property\n")
-
         # Get type
-        prop_type_div = soup.find("h1", class_="detail-bien-type")
-        prop_type = prop_type_div.find(string=True)
-        # print("Type:", prop_type)
-        types = prop_type
+
+        prop_type_div = soup.find("li", class_="container_ImgSlider_Mdl")
+        for child in prop_type_div.descendants:
+            if child.name == "img":
+                types = child["alt"].split()[1].strip(",")
 
         # Get location
-        location_div = soup.find("h2", class_="detail-bien-ville")
-        location_raw = location_div.find(string=True).strip().split()
-        location_postcode = location_raw.pop(-1).strip("(").strip(")")
-        location_town = " ".join(location_raw).capitalize()
-        town = unidecode(
-            location_town.replace("Region ", "")
-            .replace(" centre ville", "")
-            .replace("-", " ")
-            .replace("Val du faby", "Esperaza")
-            .replace("Quercorb", "Puivert")
-        )
-        postcode = location_postcode
+        location_div = str(soup.find("div", class_="elementDtTitle"))
+        location_raw = location_div[
+            location_div.find("<h1>") + 4 : location_div.find("</h1>")
+        ].split()
+        postcode = location_raw.pop(-1).strip("(").strip(")")
+        town = " ".join(location_raw).replace("La ville de ", "")
+        town = unidecode(town.replace("-", " ")).capitalize()
 
         # print("Town:", town)
         # print("Postcode:", postcode)
 
         # Get price
-        price_div = soup.find("div", class_="detail-bien-prix")
-        price = price_div.find(string=re.compile("€"))
-        price = int(price.replace(" ", "").strip("€"))
+        price_div = soup.find("p", class_="price")
+        price = int("".join([num for num in str(price_div) if num.isdigit()]))
         # print("Price:", price, "€")
 
         # Get ref
-
-        # This is all copied from Jammes, comments could be incorrect
-        # Page returns two identical spans with itemprop="productID", one with a hidden ref and one with the 4 digit visible ref. No way to differentiate between the two. The second one has the desired  ref, so I turned it into a list, pulled the second item on the list (with the correct ref), then list comprehension to extract the digits, and join them into a string to get the correct ref.
-
-        prop_ref_div = soup.find_all("span", itemprop="productID")
-        prop_ref = list(prop_ref_div)
-        prop_ref = "".join([char for char in str(prop_ref[1]) if char.isnumeric()])
+        prop_ref_div = soup.find_all("p", class_="ref")
+        prop_ref = "".join([num for num in str(prop_ref_div) if num.isdigit()])
         ref = prop_ref
 
         # print("ref:", ref)
 
-        # Get description
+        # # Get property details
+        # # This returns a whole chunk of text for the property specs that gets separated to find the number of bedrooms, rooms, house size and land size. It's done in a janky way that Amy will hate
 
-        description = soup.find("span", itemprop="description").get_text()
-        description = "".join(description.splitlines())
+        # details_div = str(soup.find('div', id="dataContent"))
+        # print(details_div)
+        # details = details_div.split("\n")
+        # pprint(details)
+
+        details_div = soup.find("div", id="dataContent").get_text()
+        details = details_div.split("\n")
+        # pprint(details)
+
+        # Chambres
+        bedrooms = "".join([line for line in details if "chambre(s)" in line])
+        bedrooms = "".join([num for num in bedrooms if num.isnumeric()])
+
+        if bedrooms.isnumeric():
+            bedrooms = int(bedrooms)
+        else:
+            bedrooms = None
+        # print("Bedrooms:", bedrooms)
+
+        # Rooms
+        rooms = "".join([rooms for rooms in details if "pièces" in rooms])
+        rooms = "".join([num for num in rooms if num.isnumeric()])
+
+        if rooms.isnumeric():
+            rooms = int(rooms)
+        else:
+            rooms = None
+        # print("Rooms:", rooms)
+
+        # # Plot size
+
+        plot = "".join([plot for plot in details if "surface terrain" in plot])
+        plot = "".join([plot for plot in plot if plot.isnumeric()])
+        plot = plot[:-1]
+
+        if plot.isnumeric():
+            plot = int(plot)
+        else:
+            plot = None
+        # print("Plot:", plot, "m²")
+
+        # #Property size
+        size = str([size for size in details if "Surface habitable (m²)" in size])
+        try:
+            #  This converts to "." decimal notation, and rounds to an int
+            size = round(float(size[size.index(":") + 2 : -5].replace(",", ".")))
+            # print(size)
+        except:
+            size = None
+
+        # print("Size:", size, "m²")
+
+        # Description
+        description_div = soup.find("div", class_="offreContent")
+
+        for child in description_div.children:
+            if child.name == "p":
+                description = str(child.contents[0])
 
         # print(description)
 
-        # Property details
-
-        details_div = soup.find("div", class_="detail-bien-specs")
-        details_div = details_div.find_all("li")
-
-        # Chambres
-        try:
-            for bedrooms_line in details_div:
-                if "chambre(s)" in bedrooms_line.get_text():
-                    bedrooms = int(bedrooms_line.get_text().split()[0])
-        except:
-            bedrooms = None
-
-        # print("Bedrooms:", bedrooms)
-
-        #     # Rooms
-        try:
-            for rooms_line in details_div:
-                if "pièce(s)" in rooms_line.get_text():
-                    rooms = int(rooms_line.get_text().split()[0])
-        except:
-            rooms = None
-
-        # print("Rooms:", rooms)
-
-        # Plot size
-
-        try:
-            for plot_line in details_div:
-                if "terrain" in str(plot_line):
-                    plot = int(plot_line.get_text().split()[0])
-        except:
-            plot = None
-
-        # print("Plot:", plot, "m²")
-
-        # Property size
-        try:
-            for size_line in details_div:
-                if "surface" in str(size_line):
-                    size = int(size_line.get_text().split()[0])
-        except:
-            size = None
-        # print("Size:", size, "m²")
-
         # Photos
-        # Finds the links to full res photos for each listing, removes the "amp;" so the links work, and returns them as a list
-
+        # Finds the links to full res photos for each listing and returns them as a list
         photos = []
-        photos_div = soup.find("div", class_="large-flap-container")
-        photos_div = photos_div.find_all("img")
-        for child in photos_div:
-            if "anti-cheat" not in child.get("src"):
-                if "www.mmimmobilier.com" not in child.get("src"):
-                    photos.append(child.get("src"))
+        photos_div = soup.find("ul", class_="slider_Mdl")
+        # print(photos_div)
+        for child in photos_div.descendants:
+            if child.name == "img":
+                photos.append("https:" + child["data-src"])
+        # pprint(photos)
 
         if host_photos:
             agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
@@ -294,7 +290,6 @@ def get_listing_details(page, url, host_photos):
                 except:
                     photos_failed.append(item["link"])
                     failed += 1
-
             if failed:
                 print(f"{failed} photos failed to scrape")
                 pprint(photos_failed)
@@ -329,7 +324,6 @@ def get_listing_details(page, url, host_photos):
             photos_hosted,
             gps,
         )
-
         return listing.__dict__
     except:
         return url
@@ -337,17 +331,13 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
-# pprint(get_listing_details(requests.get("https://www.mmimmobilier.com/fr/annonce/vente-gite-puivert-p-r7-110271545.html"), "https://www.mmimmobilier.com/fr/annonce/vente-gite-puivert-p-r7-110271545.html", False))
 
+# pprint(get_listing_details("https://www.audeimmobilier.com/vente/11-aude/243-bouisse/maison-de-village-renovee-avec-jardin/1215-maison").__dict__)
+# get_listing_details("https://www.audeimmobilier.com/vente/11-aude/243-bouisse/maison-de-village-renovee-avec-jardin/1215-maison")
 
-# pprint(mm_immo_get_links(1))
-# pprint(len(mm_immo_get_links(1)))
+# aude_immo_listings = aude_immo_get_listings(host_photos=False)
 
-# mm_immo_get_listings()
+# with open("api.json", "w", encoding="utf8") as outfile:
+#     json.dump(aude_immo_listings, outfile, ensure_ascii=False)
 
-# mm_listings = mm_immo_get_listings(host_photos=False)
-
-# with open("api.json", "w", encoding="utf-8") as outfile:
-#     json.dump(mm_listings, outfile, ensure_ascii=False)
-
-# Time elapsed for M&M Immobilier: 15.01s 68 listings without photos
+# Time elapsed for Aude Immobilier: 4.56s 47 links without photos

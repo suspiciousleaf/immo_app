@@ -5,7 +5,7 @@ import concurrent.futures
 
 from PIL import Image
 
-from utilities import get_data
+from utilities.utilities import get_data
 
 # with open("listings.json", "r", encoding="utf8") as infile:
 #     listings = json.load(infile)

@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 
 from models import Listing
-from utilities import get_gps
+from utilities.utilities import get_gps
 
 try:
     try:

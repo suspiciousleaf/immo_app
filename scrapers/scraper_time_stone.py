@@ -12,10 +12,10 @@ from bs4 import BeautifulSoup
 import shutil
 from unidecode import unidecode
 
-from async_image_downloader import make_photos_dir, dl_comp_photo
+from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
 from json_search import agent_dict
 from models import Listing
-from utilities import get_gps, get_data
+from utilities.utilities import get_gps, get_data
 
 #   The code below looks for a json holding previous scraped info, and will import it if present. The previous json is imported so the scraper can check if a property listing has already been scraped, and if it has it will skip over that listing to save time. Any listings that were previously scraped and are no longer present on the agent website will be deleted, and any new listings found will be scraped and added. This is all done using the URL, so changes within a listing (eg price, photos) will not be updated. The website is only there to give an overview of all available properties, so users will view the property on the agent website if interested and will see any updates there.
 

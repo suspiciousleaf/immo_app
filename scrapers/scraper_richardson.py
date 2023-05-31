@@ -13,13 +13,13 @@ from bs4 import BeautifulSoup
 import shutil
 from unidecode import unidecode
 
-from async_image_downloader import make_photos_dir, dl_comp_photo
+from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
 
 # This is necessary for Richardson and Ami, as both have poor quality and inconsistent location data
-from location_fix import fix_location
+from utilities.location_fix import fix_location
 from json_search import agent_dict
 from models import Listing
-from utilities import get_gps, get_data
+from utilities.utilities import get_gps, get_data
 
 try:  # listings.json
     try:
