@@ -47,7 +47,7 @@ except:
     gps_dict = []
 
 
-def time_stone_get_listings(host_photos=False):
+def time_stone_get_listings(sold_url_list, host_photos=False):
     t0 = time.time()
     URL = "https://www.timeandstoneimmobilier.com/fr/liste.htm?page=1"
     page = requests.get(URL)
@@ -68,6 +68,8 @@ def time_stone_get_listings(host_photos=False):
     resp = get_data(results_pages)
     for item in resp:
         links += time_stone_get_links(item["response"])
+
+    links = [link for link in links if link not in sold_url_list]
 
     print("Number of unique listing URLs found:", len(links))
 

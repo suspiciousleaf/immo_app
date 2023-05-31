@@ -10,7 +10,7 @@ from models import Listing
 # This scraper is different - Cimm have an accessible API so each time it runs, all properties are scraped and returned, and images are used from their server rather than downloaded and hosted locally. The whole process takes approx 2.5 seconds, so no real benefit for async etc.
 
 
-def cimm_get_listings():
+def cimm_get_listings(sold_url_list):
     t0 = time.time()
 
     URL = "https://api.cimm.com/api/realties?agencies=12444"
@@ -28,6 +28,10 @@ def cimm_get_listings():
             if listing["size"] and listing["plot"] == None:
                 listing["plot"] = listing["size"]
                 listing["size"] = None
+
+    cimm_listings = [
+        listing for listing in cimm_listings if listing["link_url"] not in sold_url_list
+    ]
 
     cimm_listings.sort(key=lambda x: x["price"])
 

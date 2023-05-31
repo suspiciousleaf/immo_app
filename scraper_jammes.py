@@ -46,7 +46,7 @@ except:
     gps_dict = []
 
 
-def jammes_get_listings(host_photos=False):
+def jammes_get_listings(sold_url_list, host_photos=False):
     t0 = time.time()
     URL = "https://www.cabinet-jammes.com/fr/liste.htm?page=1"
     page = requests.get(URL)
@@ -67,6 +67,8 @@ def jammes_get_listings(host_photos=False):
     links = []
     for item in resp:
         links += jammes_get_links(item["response"])
+
+    links = [link for link in links if link not in sold_url_list]
 
     print("Number of unique listing URLs found:", len(links))
 

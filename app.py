@@ -39,7 +39,16 @@ try:
     ) as infile:
         times_run_since_last_image_scan = json.load(infile)
 except:
+    # If not found, will run the image scan
     times_run_since_last_image_scan = {"counter": 5}
+
+try:
+    with open("sold_urls.json", "r", encoding="utf8") as infile:
+        sold_urls = json.load(infile)
+except:
+    sold_urls = {"urls": []}
+
+sold_url_list = sold_urls["urls"]
 
 failed_scrapes = []
 try:
@@ -54,7 +63,7 @@ except:
     api_listings = []
     failed_scrapes.append("A.P.I.")
 try:
-    arthur_immo_listings = arthur_immo_get_listings(host_photos=False)
+    arthur_immo_listings = arthur_immo_get_listings(sold_url_list, host_photos=False)
 except:
     arthur_immo_listings = []
     failed_scrapes.append("Arthur Immo")
@@ -76,7 +85,7 @@ except:
     failed_scrapes.append("Century 21")
 try:
     # host photos not needed due to public API use for Cimm
-    cimm_listings = cimm_get_listings()
+    cimm_listings = cimm_get_listings(sold_url_list)
 except:
     cimm_listings = []
     failed_scrapes.append("Cimm Immobilier")
@@ -101,12 +110,12 @@ except:
     immo_chez_toit_listings = []
     failed_scrapes.append("L'Immo Chez Toit")
 try:
-    jammes_listings = jammes_get_listings(host_photos=False)
+    jammes_listings = jammes_get_listings(sold_url_list, host_photos=False)
 except:
     jammes_listings = []
     failed_scrapes.append("Cabinet Jammes")
 try:
-    mm_immo_listings = mm_immo_get_listings(host_photos=False)
+    mm_immo_listings = mm_immo_get_listings(sold_url_list, host_photos=False)
 except:
     mm_immo_listings = []
     failed_scrapes.append("M&M Immobilier")
@@ -122,8 +131,8 @@ except:
     richardson_listings = []
     failed_scrapes.append("Richardson Immobilier")
 try:
-    # host photos optionnot needed
-    safti_listings = safti_get_listings()
+    # host photos option not needed
+    safti_listings = safti_get_listings(sold_url_list)
 except:
     safti_listings = []
     failed_scrapes.append("Safti")
@@ -133,12 +142,12 @@ except:
     selection_listings = []
     failed_scrapes.append("Selection Habitat")
 try:
-    sextant_listings = sextant_get_listings(host_photos=False)
+    sextant_listings = sextant_get_listings(sold_url_list, host_photos=False)
 except:
     sextant_listings = []
     failed_scrapes.append("Sextant")
 try:
-    time_stone_listings = time_stone_get_listings(host_photos=False)
+    time_stone_listings = time_stone_get_listings(sold_url_list, host_photos=False)
 except:
     time_stone_listings = []
     failed_scrapes.append("Time & Stone Immobilier")
@@ -307,5 +316,3 @@ t1 = time.time()
 
 time_taken = t1 - t0
 print(f"Total time elapsed: {time_taken:.2f}s")
-
-# TODO: Save URLs of listings that have been removed by the image pixel scan so they don't get added back in next time the scraper runs
