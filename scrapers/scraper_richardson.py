@@ -373,24 +373,41 @@ def get_listing_details(page, url, host_photos):
 
         # Photos
         # Finds the links to full res photos for each listing and returns them as a list
-        photos_div = str(soup.find_all("img", class_="photomH")).split()
+
+        photos_div = str(soup.find_all("td", class_="CENTERT")).split()
+        # print(photos_div)
         photos = [
             "http://www.richardsonimmobilier.com/"
             + entry.replace('"', "").replace("src=", "")
             for entry in photos_div
             if "src=" in entry
         ]
-
-        if len(photos) > 0:
+        # print(photos)
+        if photos:  # len(photos) > 0:
             pass
         else:
-            photos_div = str(soup.find_all("img", class_="photomrH")).split()
+            photos_div = str(soup.find_all("img", class_="photomH")).split()
+            # print(photos_div)
             photos = [
                 "http://www.richardsonimmobilier.com/"
                 + entry.replace('"', "").replace("src=", "")
                 for entry in photos_div
                 if "src=" in entry
             ]
+
+            if photos:  # len(photos) > 0:
+                pass
+            else:
+                photos_div = str(soup.find_all("img", class_="photomrH")).split()
+                photos = [
+                    "http://www.richardsonimmobilier.com/"
+                    + entry.replace('"', "").replace("src=", "")
+                    for entry in photos_div
+                    if "src=" in entry
+                ]
+        photos = sorted(list(set(photos)))
+        # print("\n", link_url, " ")
+        # pprint(photos)
 
         if host_photos:
             agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
@@ -457,7 +474,9 @@ cwd = os.getcwd()
 
 # pprint(richardson_get_links(1))
 
-# failed_urls = ["http://www.richardsonimmobilier.com/vente-terrain-Haute-Vallee-1651.cgi?00019LQUI1651"]
+# failed_urls = [
+#     "http://www.richardsonimmobilier.com/vente-maison-Haute-Vallee-3750.cgi?00518LQUI3750"
+# ]
 
 # for test_url in failed_urls:
 #     get_listing_details(requests.get(test_url), test_url, False)
@@ -467,4 +486,4 @@ cwd = os.getcwd()
 # with open("api.json", "w", encoding='utf8') as outfile:
 #     json.dump(richardson_listings, outfile, ensure_ascii=False)
 
-# Time elapsed for Richardson Immobilier: 10.44s 104 listings exclusing photos
+# Time elapsed for Richardson Immobilier: 10.44s 104 listings excluding photos
