@@ -8,7 +8,7 @@ Many agents are individual offices and there is no consistency between their adv
 <br>
 
 # Live version
-The live site including front end can be accessed [here](https://immoproject.netlify.app/).
+The live site including front end can be accessed [here](https://immobee.netlify.app/).
 
 <br>
 
