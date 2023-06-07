@@ -30,7 +30,7 @@ headers = {
 
 try:
     try:
-        with open("listings.json", "r", encoding="utf8") as infile:
+        with open("api.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
         with open(
@@ -175,7 +175,7 @@ def get_listing_details(page, url, host_photos):
         agent = "IAD Immobilier"
         link_url = url
         soup = BeautifulSoup(page.content, "html.parser")
-
+        # print(soup)
         # Price
         price = int(
             soup.find("div", class_="adPrice text-darkblue text-h3")
@@ -363,8 +363,9 @@ def get_listing_details(page, url, host_photos):
             photos_hosted,
             gps,
         )
-
+        # print(listing.__dict__)
         return listing.__dict__
+
     except:
         return url
 

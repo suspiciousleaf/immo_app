@@ -99,7 +99,7 @@ def search_call():
     min_size_req = try_min(request.args.get("min_size"))
     max_size_req = try_max(request.args.get("max_size"))
 
-    dep_list_req = try_csv(request.args.get("dep"))
+    depts_list_req = try_csv(request.args.get("depts"))
     search_radius_req = try_min(request.args.get("search_radius"))
     inc_none_location_req = not request.args.get("inc_none_location") == "false"
     towns_req = try_csv(request.args.get("town"))
@@ -111,7 +111,7 @@ def search_call():
         keyword_list=keyword_list_req,
         type_list=type_list_req,
         agent_list=agent_list_req,
-        dep_list=dep_list_req,
+        depts_list=depts_list_req,
         towns=towns_req,
         inc_none_location=inc_none_location_req,
         search_radius=search_radius_req,

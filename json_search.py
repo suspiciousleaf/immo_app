@@ -179,13 +179,13 @@ def get_distance(origin, destination):
     return distance(origin, destination).km
 
 
-def filter_department(results, dep_list):
+def filter_department(results, depts_list):
     # print("filter_department ran")
-    if dep_list:
+    if depts_list:
         return [
             x
             for x in results
-            if type(x["postcode"]) == str and x["postcode"][:2] in dep_list
+            if type(x["postcode"]) == str and x["postcode"][:2] in depts_list
         ]
     else:
         return results
@@ -286,7 +286,7 @@ def search(
     type_list=None,
     agent_list=None,
     keyword_list=None,
-    dep_list=None,
+    depts_list=None,
     inc_none_location=False,
     towns=None,
     search_radius=0,
@@ -328,7 +328,7 @@ def search(
     results_list = filter_size(results_list, inc_none_size, min_size, max_size)
     if print_filter_results:
         print("After size filter:", len(results_list))
-    results_list = filter_department(results_list, dep_list)
+    results_list = filter_department(results_list, depts_list)
     if print_filter_results:
         print("After department filter:", len(results_list))
     results_list = filter_keywords(results_list, keyword_list)
@@ -347,7 +347,7 @@ def search(
 print_filter_results = False
 
 
-# results_list = (search(listings, dep_list = ["11", "66", "09"]))
+# results_list = (search(listings, depts_list = ["11", "66", "09"]))
 # print("\nNumber of results:", len(results_list), "\n")
 
 
