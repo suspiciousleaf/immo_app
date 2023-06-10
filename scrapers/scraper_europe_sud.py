@@ -46,7 +46,7 @@ except:
 
 
 def europe_sud_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     search_pages = [
         f"https://www.europe-sud-immobilier.com/a-vendre/{i}" for i in range(1, 15)
@@ -131,7 +131,7 @@ def europe_sud_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Europe Sud Immobilier: {time_taken:.2f}s")

@@ -47,7 +47,7 @@ except:
 
 
 def mm_immo_get_listings(sold_url_list, host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     URL = "https://www.mmimmobilier.com/fr/annonces/acheter-p-r70-4-1.html"
     page = requests.get(URL)
@@ -138,7 +138,7 @@ def mm_immo_get_listings(sold_url_list, host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for M&M Immobilier: {time_taken:.2f}s")

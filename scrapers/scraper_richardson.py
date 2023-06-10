@@ -106,7 +106,7 @@ def find_chamb(string):
 
 
 def richardson_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     richardson_categories = [
         "vente-villa.cgi?000T",
@@ -238,7 +238,7 @@ def richardson_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Richardson Immobilier: {time_taken:.2f}s")

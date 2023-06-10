@@ -46,7 +46,7 @@ except:
 
 
 def sextant_get_listings(sold_url_list, host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
     URL = "https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=1&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=0"
     page = requests.get(URL)
 
@@ -134,7 +134,7 @@ def sextant_get_listings(sold_url_list, host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Sextant: {time_taken:.2f}s")

@@ -46,7 +46,7 @@ except:
 
 
 def nestenn_immo_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     URL = "https://immobilier-lavelanet.nestenn.com/?action=listing&transaction=acheter&sort=prix&page=1"
     page = requests.get(URL)
@@ -133,7 +133,7 @@ def nestenn_immo_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Nestenn: {time_taken:.2f}s")

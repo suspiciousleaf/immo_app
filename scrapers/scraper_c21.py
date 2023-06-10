@@ -63,7 +63,7 @@ except:
 
 
 def c21_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     URL = "https://www.century21.fr/annonces/f/achat-maison-appartement-terrain-parking-immeuble-divers/d-09_ariege-11_aude/?cible=d-11_aude"
     page = requests.get(URL)
@@ -171,7 +171,7 @@ def c21_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Century 21: {time_taken:.2f}s")

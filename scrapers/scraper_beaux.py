@@ -321,7 +321,7 @@ async def get_listing_details(url, semaphore, browser):
                 gps,
             )
 
-            # print("Listing scraped", time.time())
+            # print("Listing scraped", time.perf_counter())
             return listing.__dict__
         except Exception as e:
             # print(f"Failed url: {url}")

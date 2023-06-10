@@ -45,7 +45,7 @@ except:
 
 
 def immo_chez_toit_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
     # Total number of listings isn't given on the page, so scans through pages until a page returns fewer than 10 listings, then stops
     final_page = False
     links = []
@@ -124,7 +124,7 @@ def immo_chez_toit_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for L'Immo Chez Toit: {time_taken:.2f}s")
