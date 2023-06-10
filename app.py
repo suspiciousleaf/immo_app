@@ -8,7 +8,7 @@ from pprint import pprint
 # This library is used frequently to remove accepts from letters (used frequently in French), as some listings use accents correctly and some don't.
 from unidecode import unidecode
 
-t0 = time.time()
+t0 = time.perf_counter()
 
 from utilities.image_sold_checker import sold_image_check
 from scrapers.scraper_ami09 import ami09_get_listings
@@ -20,6 +20,7 @@ from scrapers.scraper_c21 import c21_get_listings
 from scrapers.scraper_cimm import cimm_get_listings
 from scrapers.scraper_eureka import eureka_immo_get_listings
 from scrapers.scraper_europe_sud import europe_sud_get_listings
+from scrapers.scraper_human import human_get_listings
 from scrapers.scraper_iad import iad_immo_get_listings
 from scrapers.scraper_immo_chez_toit import immo_chez_toit_get_listings
 from scrapers.scraper_jammes import jammes_get_listings
@@ -100,6 +101,11 @@ except:
     europe_sud_listings = []
     failed_scrapes.append("Europe Sud Immobilier")
 try:
+    human_listings = human_get_listings()
+except:
+    human_listings = []
+    failed_scrapes.append("Human Immobilier")
+try:
     iad_listings = iad_immo_get_listings(host_photos=False)
 except:
     iad_listings = []
@@ -165,6 +171,7 @@ all_listings = (
     + cimm_listings
     + eureka_immo_listings
     + europe_sud_listings
+    + human_listings
     + iad_listings
     + immo_chez_toit_listings
     + jammes_listings
@@ -226,6 +233,7 @@ property_types = {
         "Fonds-de-commerce",
         "Garage",
         "Haras",
+        "Local",
         "Locaux",
         "Parking",
         "Pret",
@@ -312,7 +320,7 @@ with open(
 print("\n\nTotal listings: ", len(all_listings))
 print("COMPLETE")
 
-t1 = time.time()
+t1 = time.perf_counter()
 
 time_taken = t1 - t0
 print(f"Total time elapsed: {time_taken:.2f}s")

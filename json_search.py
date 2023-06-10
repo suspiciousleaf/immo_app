@@ -16,6 +16,7 @@ agent_dict = {
     "cimm": "Cimm Immobilier",
     "eureka": "Eureka Immobilier",
     "europe": "Europe Sud Immobilier",
+    "human": "Human Immobilier",
     "iad": "IAD Immobilier",
     "jammes": "Cabinet Jammes",
     "l'immo": "L'Immo Chez Toit",
