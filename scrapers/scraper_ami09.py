@@ -131,7 +131,7 @@ def ami09_get_listings(host_photos=False):
             [host_photos for x in resp_to_scrape],
         )
         for result in results:
-            if type(result) == str:
+            if isinstance(result, str):
                 failed_scrape_links.append(result)
                 counter_fail += 1
             else:

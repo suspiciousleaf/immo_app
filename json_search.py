@@ -186,7 +186,7 @@ def filter_department(results, depts_list):
         return [
             x
             for x in results
-            if type(x["postcode"]) == str and x["postcode"][:2] in depts_list
+            if isinstance(x["postcode"], str) and x["postcode"][:2] in depts_list
         ]
     else:
         return results

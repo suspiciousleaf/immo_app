@@ -84,7 +84,7 @@ def safti_get_listings(sold_url_list):
             links_to_scrape,
         )
         for result in results:
-            if type(result) == str:
+            if isinstance(result, str):
                 failed_scrape_links.append(result)
                 counter_fail += 1
             else:

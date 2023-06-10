@@ -108,7 +108,7 @@ def immo_chez_toit_get_listings(host_photos=False):
             [host_photos for x in resp_to_scrape],
         )
         for result in results:
-            if type(result) == str:
+            if isinstance(result, str):
                 failed_scrape_links.append(result)
                 counter_fail += 1
             else:
@@ -308,7 +308,7 @@ def get_listing_details(page, url, host_photos):
             photos_hosted = photos
 
         gps = None
-        if type(town) == str:
+        if isinstance(town, str):
             # Check if town is in premade database of GPS locations, if not searches for GPS
             if (postcode + ";" + town.casefold()) in gps_dict:
                 gps = gps_dict[postcode + ";" + town.casefold()]
