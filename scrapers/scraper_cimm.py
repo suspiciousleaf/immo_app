@@ -11,7 +11,7 @@ from models import Listing
 
 
 def cimm_get_listings(sold_url_list):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     URL = "https://api.cimm.com/api/realties?agencies=12444"
     page = requests.get(URL)
@@ -35,7 +35,7 @@ def cimm_get_listings(sold_url_list):
 
     cimm_listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
     time_taken = t1 - t0
     print(f"\nTime elapsed for Cimm Immobilier: {time_taken:.2f}s")
 

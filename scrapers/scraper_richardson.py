@@ -106,7 +106,7 @@ def find_chamb(string):
 
 
 def richardson_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     richardson_categories = [
         "vente-villa.cgi?000T",
@@ -120,8 +120,8 @@ def richardson_get_listings(host_photos=False):
     all_search_pages = []
 
     url_full = [
-        "http://www.richardsonimmobilier.com/" + richardson_categories[i]
-        for i in range(len(richardson_categories))
+        f"http://www.richardsonimmobilier.com/{category}"
+        for category in richardson_categories
     ]
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -147,11 +147,12 @@ def richardson_get_listings(host_photos=False):
 
     links_inc_sold = []
     unique_listing_set = set()
+
     # This code checks for duplicate properties that appear in multiple categories
-    for i in range(len(links_inc_duplicates)):
-        if links_inc_duplicates[i][-4:] not in unique_listing_set:
-            links_inc_sold.append(links_inc_duplicates[i])
-        unique_listing_set.add(links_inc_duplicates[i][-4:])
+    for link in links_inc_duplicates:
+        if link[-4:] not in unique_listing_set:
+            links_inc_sold.append(link)
+        unique_listing_set.add(link[-4:])
 
     # The line below removes and listings which are marked "Sold", "Sous compromis", etc
     links = []
@@ -222,7 +223,7 @@ def richardson_get_listings(host_photos=False):
             [host_photos for x in links_to_scrape],
         )
         for result in results:
-            if type(result) == str:
+            if isinstance(result, str):
                 failed_scrape_links.append(result)
                 counter_fail += 1
             else:
@@ -238,7 +239,7 @@ def richardson_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Richardson Immobilier: {time_taken:.2f}s")
@@ -437,7 +438,7 @@ def get_listing_details(page, url, host_photos):
             photos_hosted = photos
 
         gps = None
-        if type(postcode) == str and type(town) == str:
+        if isinstance(postcode, str) and isinstance(town, str):
             # Check if town is in premade database of GPS locations, if not searches for GPS
             if (postcode + ";" + town.casefold()) in gps_dict:
                 gps = gps_dict[postcode + ";" + town.casefold()]

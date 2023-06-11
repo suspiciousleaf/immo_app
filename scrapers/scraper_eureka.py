@@ -63,7 +63,7 @@ except:
 
 
 def eureka_immo_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
     # Total number of listings isn't given on the page, but is around 90 listings. This wouldequate to 9 pages of listings. The code below will scrape 15 pages of listings at ocne rather than counting through pages until the listings stop. This takes appprox 1 second instead of 3 seconds. If the total listings scraped approaches 15 pages worth, a note will be printed to "pages" can be adjusted.
 
     pages = 15
@@ -127,7 +127,7 @@ def eureka_immo_get_listings(host_photos=False):
             [host_photos for x in links_to_scrape],
         )
         for result in results:
-            if type(result) == str:
+            if isinstance(result, str):
                 failed_scrape_links.append(result)
                 counter_fail += 1
             else:
@@ -143,7 +143,7 @@ def eureka_immo_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Eureka Immobilier: {time_taken:.2f}s")
@@ -283,7 +283,7 @@ def get_listing_details(page, url, host_photos):
         # pprint(photos)
 
         gps = None
-        if type(town) == str:
+        if isinstance(town, str):
             if (
                 postcode + ";" + town.casefold()
             ) in gps_dict:  # Check if town is in premade database of GPS locations, if not searches for GPS

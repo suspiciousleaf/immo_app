@@ -16,9 +16,10 @@ agent_dict = {
     "cimm": "Cimm Immobilier",
     "eureka": "Eureka Immobilier",
     "europe": "Europe Sud Immobilier",
+    "human": "Human Immobilier",
     "iad": "IAD Immobilier",
-    "jammes": "Cabinet Jammes",
     "l'immo": "L'Immo Chez Toit",
+    "jammes": "Cabinet Jammes",
     "mm": "M&M Immobilier",
     "nestenn": "Nestenn",
     "richardson": "Richardson Immobilier",
@@ -185,7 +186,7 @@ def filter_department(results, depts_list):
         return [
             x
             for x in results
-            if type(x["postcode"]) == str and x["postcode"][:2] in depts_list
+            if isinstance(x["postcode"], str) and x["postcode"][:2] in depts_list
         ]
     else:
         return results

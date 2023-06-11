@@ -68,7 +68,7 @@ except:
 
 
 def selection_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
     URL = "https://www.selectionhabitat.com/ajax/ListeBien.php?ope=1&page=1&ListeViewBienForm=text&lieu=D%C2%A411%C2%A4Aude+(11)%C2%A40.7517563608706%C2%A40.0415626093272%C2%A40%7CD%C2%A409%C2%A4Ari%C3%A8ge+(09)%C2%A40.7493157360778%C2%A40.0251932867004%C2%A40%7CD%C2%A466%C2%A4Pyr%C3%A9n%C3%A9es-Orientales+(66)%C2%A40.7435327970408%C2%A40.0443244340435%C2%A40&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=394&DataConfig=JsConfig.GGMap.Liste&Pagination=0"
     page = requests.get(URL)
 
@@ -140,7 +140,7 @@ def selection_get_listings(host_photos=False):
             [host_photos for x in links_to_scrape],
         )
         for result in results:
-            if type(result) == str:
+            if isinstance(result, str):
                 failed_scrape_links.append(result)
                 counter_fail += 1
             else:
@@ -156,7 +156,7 @@ def selection_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for selection: {time_taken:.2f}s")
@@ -334,7 +334,7 @@ def get_listing_details(page, url, host_photos):
             photos_hosted = photos
 
         gps = None
-        if type(town) == str:
+        if isinstance(town, str):
             try:
                 # Check if town is in premade database of GPS locations, if not searches for GPS
                 if (postcode + ";" + town.casefold()) in gps_dict:
