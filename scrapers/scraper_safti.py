@@ -47,7 +47,7 @@ except:
 
 
 def safti_get_listings(sold_url_list):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     print("\nSafti scraper beginning...")
 
@@ -84,7 +84,7 @@ def safti_get_listings(sold_url_list):
             links_to_scrape,
         )
         for result in results:
-            if type(result) == str:
+            if isinstance(result, str):
                 failed_scrape_links.append(result)
                 counter_fail += 1
             else:
@@ -108,7 +108,7 @@ def safti_get_listings(sold_url_list):
 
     new_listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Safti: {time_taken:.2f}s")

@@ -46,7 +46,7 @@ except:
 
 
 def europe_sud_get_listings(host_photos=False):
-    t0 = time.time()
+    t0 = time.perf_counter()
 
     search_pages = [
         f"https://www.europe-sud-immobilier.com/a-vendre/{i}" for i in range(1, 15)
@@ -115,7 +115,7 @@ def europe_sud_get_listings(host_photos=False):
                 [host_photos for x in resp_to_scrape],
             )
             for result in results:
-                if type(result) == str:
+                if isinstance(result, str):
                     failed_scrape_links.append(result)
                     counter_fail += 1
                 else:
@@ -131,7 +131,7 @@ def europe_sud_get_listings(host_photos=False):
 
     listings.sort(key=lambda x: x["price"])
 
-    t1 = time.time()
+    t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Europe Sud Immobilier: {time_taken:.2f}s")
@@ -312,7 +312,7 @@ def get_listing_details(page, url, host_photos):
             photos_hosted = photos
 
         gps = None
-        if type(town) == str:
+        if isinstance(town, str):
             # Check if town is in premade database of GPS locations, if not searches for GPS
             if (postcode + ";" + town.casefold()) in gps_dict:
                 gps = gps_dict[postcode + ";" + town.casefold()]

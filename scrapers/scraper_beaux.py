@@ -113,7 +113,7 @@ def beaux_get_listings():
         )
 
     for result in results:
-        if type(result) == str:
+        if isinstance(result, str):
             failed_scrape_links.append(result)
             counter_fail += 1
         else:
@@ -278,7 +278,7 @@ async def get_listing_details(url, semaphore, browser):
 
             gps = None
             try:
-                if type(town) == str:
+                if isinstance(town, str):
                     # Check if town is in premade database of GPS locations, if not searches for GPS
                     if (postcode + ";" + town.casefold()) in gps_dict:
                         gps = gps_dict[postcode + ";" + town.casefold()]
@@ -321,7 +321,7 @@ async def get_listing_details(url, semaphore, browser):
                 gps,
             )
 
-            # print("Listing scraped", time.time())
+            # print("Listing scraped", time.perf_counter())
             return listing.__dict__
         except Exception as e:
             # print(f"Failed url: {url}")

@@ -8,7 +8,7 @@ from pprint import pprint
 # This library is used frequently to remove accepts from letters (used frequently in French), as some listings use accents correctly and some don't.
 from unidecode import unidecode
 
-t0 = time.time()
+t0 = time.perf_counter()
 
 from utilities.image_sold_checker import sold_image_check
 from scrapers.scraper_ami09 import ami09_get_listings
@@ -20,6 +20,7 @@ from scrapers.scraper_c21 import c21_get_listings
 from scrapers.scraper_cimm import cimm_get_listings
 from scrapers.scraper_eureka import eureka_immo_get_listings
 from scrapers.scraper_europe_sud import europe_sud_get_listings
+from scrapers.scraper_human import human_get_listings
 from scrapers.scraper_iad import iad_immo_get_listings
 from scrapers.scraper_immo_chez_toit import immo_chez_toit_get_listings
 from scrapers.scraper_jammes import jammes_get_listings
@@ -48,6 +49,18 @@ try:
 except:
     sold_urls = {"urls": []}
 
+try:
+    try:
+        with open("listings.json", "r", encoding="utf8") as infile:
+            listings = json.load(infile)
+    except:
+        with open(
+            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
+        ) as infile:
+            listings = json.load(infile)
+except:
+    listings = []
+
 sold_url_list = sold_urls["urls"]
 
 failed_scrapes = []
@@ -55,101 +68,140 @@ try:
     # Must be True as host website blocks leeching for many photos
     ami09_listings = ami09_get_listings(host_photos=True)
 except:
-    ami09_listings = []
+    ami09_listings = [
+        listing for listing in listings if listing["agent"] == "Ami Immobilier"
+    ]
     failed_scrapes.append("Ami Immobilier")
 try:
     api_listings = api_get_listings(host_photos=False)
 except:
-    api_listings = []
+    api_listings = [listing for listing in listings if listing["agent"] == "A.P.I."]
     failed_scrapes.append("A.P.I.")
 try:
     arthur_immo_listings = arthur_immo_get_listings(sold_url_list, host_photos=False)
 except:
-    arthur_immo_listings = []
+    arthur_immo_listings = [
+        listing for listing in listings if listing["agent"] == "Arthur Immo"
+    ]
     failed_scrapes.append("Arthur Immo")
 try:
     aude_immo_listings = aude_immo_get_listings(host_photos=False)
 except:
-    aude_immo_listings = []
+    aude_immo_listings = [
+        listing for listing in listings if listing["agent"] == "Aude Immobilier"
+    ]
     failed_scrapes.append("Aude Immobilier")
 try:
     # host photos option not needed
     beaux_listings = beaux_get_listings()
 except:
-    beaux_listings = []
+    beaux_listings = [
+        listing for listing in listings if listing["agent"] == "Beaux Villages"
+    ]
     failed_scrapes.append("Beaux Villages")
 try:
     c21_listings = c21_get_listings(host_photos=False)
 except:
-    c21_listings = []
+    c21_listings = [listing for listing in listings if listing["agent"] == "Century 21"]
     failed_scrapes.append("Century 21")
 try:
     # host photos not needed due to public API use for Cimm
     cimm_listings = cimm_get_listings(sold_url_list)
 except:
-    cimm_listings = []
+    cimm_listings = [
+        listing for listing in listings if listing["agent"] == "Cimm Immobilier"
+    ]
     failed_scrapes.append("Cimm Immobilier")
 try:
     eureka_immo_listings = eureka_immo_get_listings(host_photos=False)
 except:
-    eureka_immo_listings = []
+    eureka_immo_listings = [
+        listing for listing in listings if listing["agent"] == "Eureka Immobilier"
+    ]
     failed_scrapes.append("Eureka Immobilier")
 try:
     europe_sud_listings = europe_sud_get_listings(host_photos=False)
 except:
-    europe_sud_listings = []
+    europe_sud_listings = [
+        listing for listing in listings if listing["agent"] == "Europe Sud Immobilier"
+    ]
     failed_scrapes.append("Europe Sud Immobilier")
+try:
+    human_listings = human_get_listings()
+except:
+    human_listings = [
+        listing for listing in listings if listing["agent"] == "Human Immobilier"
+    ]
+    failed_scrapes.append("Human Immobilier")
 try:
     iad_listings = iad_immo_get_listings(host_photos=False)
 except:
-    iad_listings = []
+    iad_listings = [
+        listing for listing in listings if listing["agent"] == "IAD Immobilier"
+    ]
     failed_scrapes.append("IAD Immobilier")
 try:
     immo_chez_toit_listings = immo_chez_toit_get_listings(host_photos=False)
 except:
-    immo_chez_toit_listings = []
+    immo_chez_toit_listings = [
+        listing for listing in listings if listing["agent"] == "L'Immo Chez Toit"
+    ]
     failed_scrapes.append("L'Immo Chez Toit")
 try:
     jammes_listings = jammes_get_listings(sold_url_list, host_photos=False)
 except:
-    jammes_listings = []
+    jammes_listings = [
+        listing for listing in listings if listing["agent"] == "Cabinet Jammes"
+    ]
     failed_scrapes.append("Cabinet Jammes")
 try:
     mm_immo_listings = mm_immo_get_listings(sold_url_list, host_photos=False)
 except:
-    mm_immo_listings = []
+    mm_immo_listings = [
+        listing for listing in listings if listing["agent"] == "M&M Immobilier"
+    ]
     failed_scrapes.append("M&M Immobilier")
 try:
     nestenn_listings = nestenn_immo_get_listings(host_photos=False)
 except:
-    nestenn_listings = []
+    nestenn_listings = [
+        listing for listing in listings if listing["agent"] == "Nestenn"
+    ]
     failed_scrapes.append("Nestenn")
 try:
     # Must be True as host website uses HTTP instead of HTTPS, can't embed images
     richardson_listings = richardson_get_listings(host_photos=True)
 except:
-    richardson_listings = []
+    richardson_listings = [
+        listing for listing in listings if listing["agent"] == "Richardson Immobilier"
+    ]
     failed_scrapes.append("Richardson Immobilier")
 try:
     # host photos option not needed
     safti_listings = safti_get_listings(sold_url_list)
 except:
-    safti_listings = []
+    safti_listings = [listing for listing in listings if listing["agent"] == "Safti"]
     failed_scrapes.append("Safti")
 try:
     selection_listings = selection_get_listings(host_photos=False)
 except:
-    selection_listings = []
+    selection_listings = [
+        listing for listing in listings if listing["agent"] == "Selection Habitat"
+    ]
     failed_scrapes.append("Selection Habitat")
 try:
     sextant_listings = sextant_get_listings(sold_url_list, host_photos=False)
 except:
-    sextant_listings = []
+    sextant_listings = [
+        listing for listing in listings if listing["agent"] == "Sextant"
+    ]
     failed_scrapes.append("Sextant")
 try:
     time_stone_listings = time_stone_get_listings(sold_url_list, host_photos=False)
 except:
-    time_stone_listings = []
+    time_stone_listings = [
+        listing for listing in listings if listing["agent"] == "Time & Stone Immobilier"
+    ]
     failed_scrapes.append("Time & Stone Immobilier")
 
 if failed_scrapes:
@@ -165,6 +217,7 @@ all_listings = (
     + cimm_listings
     + eureka_immo_listings
     + europe_sud_listings
+    + human_listings
     + iad_listings
     + immo_chez_toit_listings
     + jammes_listings
@@ -226,6 +279,7 @@ property_types = {
         "Fonds-de-commerce",
         "Garage",
         "Haras",
+        "Local",
         "Locaux",
         "Parking",
         "Pret",
@@ -312,7 +366,7 @@ with open(
 print("\n\nTotal listings: ", len(all_listings))
 print("COMPLETE")
 
-t1 = time.time()
+t1 = time.perf_counter()
 
 time_taken = t1 - t0
 print(f"Total time elapsed: {time_taken:.2f}s")
