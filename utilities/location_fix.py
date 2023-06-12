@@ -43,7 +43,8 @@ except:
 town_list = [item for sublist in postcodes_dict.values() for item in sublist]
 
 
-def fix_location(listing):
+def fix_location(listing: dict) -> dict:
+    """Secondary location search necessary for some listing agents"""
     if listing["town"] != None:
         listing["town"] = unidecode(listing["town"].capitalize())
         for postcode, town in postcodes_dict.items():
