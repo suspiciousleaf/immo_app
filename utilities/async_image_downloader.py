@@ -22,7 +22,8 @@ except:
     listings_json = []
 
 
-def make_photos_dir(ref, cwd, agent):
+def make_photos_dir(ref: str, cwd, agent: str):
+    """Creates a directory to save the downloaded photos in, a solfder for the agent and a folder for each listing within that."""
     try:
         # Checks if the "agent" folder exists for the listing and creates it if not present
         os.mkdir(f"{cwd}/static/images/{agent}")
@@ -37,9 +38,9 @@ def make_photos_dir(ref, cwd, agent):
         pass
 
 
-# This function goes to am image URL, downloads the image, compresses it, creates a folder for it with the name as the ref of the property listing, and saves the image to that folder with sequential name 0, 1, 2 etc.
+# This function goes to an image URL, downloads the image, compresses it, creates a folder for it with the name as the ref of the property listing, and saves the image to that folder with sequential name 0, 1, 2 etc.
 def dl_comp_photo(response, ref, filename, cwd, agent):
-    # print("dl_comp_photo ran")
+    """Takes image as bytes, converts the image to RGB, resizes, saves, and returns the url where it will be hosted on PythonAnywhere"""
 
     image_path = f"static/images/{agent}/{ref}"
     img = response.content
