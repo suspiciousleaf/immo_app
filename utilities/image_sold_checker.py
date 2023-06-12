@@ -18,7 +18,7 @@ except:
     sold_urls = {"urls": []}
 
 
-def check_image_sold(image, agent):  # returns True if sold
+def check_image_sold(image, agent: str) -> tuple():  # returns True if sold
     # Many agents use a specific colour to write "Vendu" etc over the listing first image, with no other indication that it is unavailable. The code below counts how many pixels in the image are approx that colour (with a narrow margin due to jpg compression) and calculates their percentage of the whole image. Anything above 0.1% is taken as positive.
 
     # Convert from bytes response object
@@ -105,7 +105,7 @@ def filter_listings(raw_listings, available_listings):
     return valid_listings
 
 
-def remove_unavailable(test_listings, agent, sold_photo_urls):
+def remove_unavailable(test_listings: list, agent, sold_photo_urls) -> list:
     # all_images = get_image_data_from(test_listings)
 
     # This will hold all unavailable listing urls
@@ -148,7 +148,8 @@ def remove_unavailable(test_listings, agent, sold_photo_urls):
     return valid_listings
 
 
-def sold_image_check(listings):
+def sold_image_check(listings: list) -> list:
+    """Checks first image of listings to check for "Vendu" text overlay"""
     # List of agents who require the first image to be scanned to check if the listing is under offer / sold
     agents = [
         "Arthur Immo",

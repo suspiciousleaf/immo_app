@@ -13,14 +13,18 @@ headers = {
 }
 
 
-def get_gps(town, postcode=""):
+def get_gps(town: str, postcode: str = "") -> list[float]:
+    """Returns GPS coordinates of location in list. Town obligatory, postcode optional, country assumed France"""
     geolocator = Nominatim(user_agent="property-scraper")
     location = geolocator.geocode(town + " " + postcode + " France")
     gps = [location.latitude, location.longitude]
     return gps
 
 
-def get_data(links, header=True, prox=False):
+def get_data(links: list[str], header: bool = True, prox: bool = False) -> list[dict]:
+    """Async HTTP requests, input list of urls, returns list of dictionaries {"link": url, "response": response object}.
+    header: use hardcoded headers
+    prox: use list of proxies to make requests"""
     if prox:
         if header:
             reqs = [

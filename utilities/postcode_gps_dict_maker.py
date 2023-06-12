@@ -22,8 +22,8 @@ postcodes = [
 # print(postcodes)
 
 
-# This will make a json withe postcodes as keys to town names as values
 def postcode_dict_maker():
+    """This will make a json with postcodes as keys and town names as values"""
     breaks = []
     for i in range(len(postcodes)):
         if postcodes[i].isnumeric():
@@ -43,8 +43,8 @@ def postcode_dict_maker():
 # postcode_dict_maker()
 
 
-# This will make a json file with all town names only
 def create_town_list():
+    """This will make a json file with all recognised town names only"""
     town_list = [item for item in postcodes if item.isnumeric() == False]
 
     with open("ville_list_clean.json", "w", encoding="utf-8") as outfile:
@@ -62,8 +62,8 @@ except:
     )
 
 
-# Run this to create a dictionary with postcode;town, GPS as key, value and export as json
 def create_gps_dict():
+    """Run this to create a dictionary with postcode;town, GPS as key, value and export as json"""
     failed_list = []
     postcode_list = []
     i = 0
@@ -84,7 +84,7 @@ def create_gps_dict():
             failed_list.append(pc)
             print(f"Number: {i} failed.")
     if failed_list:
-        # This will return any towns that failed to find a GPS coordinate, so it can be done manuall afterwards.
+        # This will return any towns that failed to find a GPS coordinate, so it can be done manually afterwards.
         pprint(failed_list)
 
     with open("postcodes_gps_dict.json", "w", encoding="utf-8") as outfile:
