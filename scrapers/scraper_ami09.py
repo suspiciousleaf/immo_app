@@ -60,6 +60,7 @@ except:
 
 
 def ami09_get_listings(host_photos=False):
+    """Scrapes www.ami09.com and returns a list of available listings as dictionaries"""
     t0 = time.perf_counter()
 
     URL = "https://www.ami09.com/immobilier-pays-de-sault/?product-page=1"
