@@ -270,8 +270,9 @@ def get_listing_details(page, url, host_photos):
         description = description_outer.find(
             "div", class_="et_pb_module_inner"
         ).p.get_text()
-
+        description = [description]
         # print(description)
+
         plot = None
         try:
             for item in details_div:
@@ -293,7 +294,7 @@ def get_listing_details(page, url, host_photos):
             try:
                 regex = r"terrain.*?(\d+)m²"
 
-                match = re.search(regex, description, re.IGNORECASE)
+                match = re.search(regex, description[0], re.IGNORECASE)
 
                 if match:
                     plot = int(match.group(1))
@@ -381,7 +382,8 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
-# get_listing_details(requests.get("https://www.ami09.com/produit/5316-terrains/"), "https://www.ami09.com/produit/5316-terrains/", False)
+# test_url = "https://www.ami09.com/produit/5730-maison-belesta-09300/"
+# get_listing_details(requests.get(test_url), test_url, False)
 
 # get_listing_details(requests.get("https://www.ami09.com/produit/5668-maison-belesta-09300/"), "https://www.ami09.com/produit/5731-maison-belesta/", False)
 
@@ -392,6 +394,10 @@ cwd = os.getcwd()
 # Time elapsed for Ami Immobilier: 145.64853525161743 multi-threading photo grab
 
 # ami09_listings = ami09_get_listings(host_photos=False)
+
+# for listing in ami09_listings:
+#     print(listing["description"])
+
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(ami09_listings, outfile, ensure_ascii=False)
