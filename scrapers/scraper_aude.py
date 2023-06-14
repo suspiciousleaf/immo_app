@@ -252,11 +252,7 @@ def get_listing_details(page, url, host_photos):
         # print("Size:", size, "m²")
 
         # Description
-        description_div = soup.find("div", class_="offreContent")
-
-        for child in description_div.children:
-            if child.name == "p":
-                description = str(child.contents[0])
+        description = [soup.find("div", class_="offreContent").p.contents[0]]
 
         # print(description)
 
@@ -331,6 +327,12 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
+# test_urls = [
+#     "https://www.audeimmobilier.com/vente/11-aude/1-limoux/propriete-de-41-ha-avec-superbe-vue/1258-propriete"
+# ]
+
+# for test_url in test_urls:
+#     get_listing_details(requests.get(test_url), test_url, False)
 
 # pprint(get_listing_details("https://www.audeimmobilier.com/vente/11-aude/243-bouisse/maison-de-village-renovee-avec-jardin/1215-maison").__dict__)
 # get_listing_details("https://www.audeimmobilier.com/vente/11-aude/243-bouisse/maison-de-village-renovee-avec-jardin/1215-maison")
