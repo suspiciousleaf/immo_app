@@ -266,7 +266,8 @@ def get_listing_details(page, url, host_photos):
         # print("Size:", size, "m²")
 
         # Description
-        description = soup.find("p", itemprop="description").get_text()
+        description_raw = soup.find("p", itemprop="description").get_text().split("\n")
+        description = [string.strip() for string in description_raw if string.strip()]
 
         # print(description)
 
@@ -342,6 +343,10 @@ def get_listing_details(page, url, host_photos):
 
 
 cwd = os.getcwd()
+
+# test_url = "https://www.limmocheztoit.fr/3264-vous-voulez-savourer-la-douceur-du-sud.html"
+
+# get_listing_details(requests.get(test_url), test_url, False)
 
 # immo_listings = immo_chez_toit_get_listings(host_photos=False)
 
