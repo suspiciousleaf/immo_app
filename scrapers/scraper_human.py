@@ -285,8 +285,13 @@ def get_listing_details(page, url, host_photos):
         # print("Size:", size, "m²")
 
         # Description
-        description = soup.find("div", class_="descriptif").p.get_text()
-        # print(description)
+        description = (
+            soup.find("div", class_="descriptif")
+            .p.get_text()
+            .replace("\r", "")
+            .split("\n")
+        )
+        # pprint(description)
 
         # Photos
         # Finds the links to full res photos for each listing and returns them as a list
@@ -404,6 +409,9 @@ proxy = {
     "http": "http://51.158.189.189:8080",
 }
 
+# test_url = (
+#     "https://www.human-immobilier.fr/annonce-achat-maison-ferrieres-sur-ariege_513-231"
+# )
 # get_listing_details(requests.get(test_url, proxies=proxy), test_url, False)
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
