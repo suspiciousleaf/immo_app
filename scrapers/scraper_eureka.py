@@ -264,12 +264,17 @@ def get_listing_details(page, url, host_photos):
         # print("Postcode:", postcode)
 
         # Description
-        description = (
-            soup.find("p", itemprop="description")
-            .get_text(strip=True)
-            .replace("\xa0\n", "")
-        )
-        # print(description)
+        try:
+            description_raw = (
+                soup.find("p", itemprop="description")
+                .get_text(strip=True)
+                .replace("\xa0", "")
+                .split("\n")
+            )
+            description = [string.strip() for string in description_raw if string]
+        except:
+            description = []
+        # pprint(description)
 
         # Photos
         # Finds the links to full res photos for each listing and returns them as a list
@@ -321,11 +326,12 @@ cwd = os.getcwd()
 
 # pprint(get_listing_details("https://www.audeimmobilier.com/vente/11-aude/243-bouisse/maison-de-village-renovee-avec-jardin/1215-maison").__dict__)
 
-# failed_urls = ['https://www.eureka-immo11.com/449-a-vendre-villa-de-plain-pied-jardin-garage-piscine-limoux.html',
-#  'https://www.eureka-immo11.com/448-a-vendre-garage-centre-ville-limoux.html']
-# for test_url in failed_urls:
-# test_url = "https://www.eureka-immo11.com/353-terrain-eco-lieu-de-7-hectares-sur-les-hauteurs-de-limoux.html"
-# get_listing_details(requests.get(test_url), test_url, False)
+# test_urls = [
+#     "https://www.eureka-immo11.com/255-a-vendre-chateau-sur-un-parc-de-8224m2-minervois.html"
+# ]
+
+# for test_url in test_urls:
+#     get_listing_details(requests.get(test_url), test_url, False)
 
 # eureka_immo_listings = eureka_immo_get_listings(host_photos=False)
 
