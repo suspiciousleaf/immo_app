@@ -187,7 +187,7 @@ def c21_get_links(page):
         links_raw.add(link.get("href"))
     links_raw.discard(None)
     links = [
-        f"https://www.century21.fr/{link}"
+        f"https://www.century21.fr{link}"
         for link in links_raw
         if "/trouver_logement/detail/" in link
     ]

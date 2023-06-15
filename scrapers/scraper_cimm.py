@@ -16,10 +16,10 @@ def cimm_get_listings(sold_url_list):
     URL = "https://api.cimm.com/api/realties?agencies=12444"
     page = requests.get(URL)
 
-    cimm_listing = json.loads(page.content)
+    cimm_listing = json.loads(page.content.decode("utf-8"))
 
     cimm_listings = [
-        cimm_create_listing(listing).__dict__ for listing in cimm_listing["results"]
+        cimm_create_listing(listing) for listing in cimm_listing["results"]
     ]
 
     # Terrain listings often show the plot area in place of the building area, this swaps them back over.
@@ -64,12 +64,13 @@ def cimm_create_listing(listing):
     else:
         size = int(listing["inhabitable_surface"])
     link_url = "https://cimm.com/bien/" + listing["slug"]
-    description = (
-        unidecode(listing["fr_text"].replace("\r", "").replace("\n", ""))
-        .replace("A2", "²")
-        .replace("A(c)", "e")
-        .replace("\\", "")
-    )
+    try:
+        description_raw = (
+            listing["fr_text"].replace("\r", "").replace("\\", "").split("\n")
+        )
+        description = [string for string in description_raw if string]
+    except:
+        description = []
 
     photos = []
     photos.append(listing["photo"])
@@ -93,7 +94,15 @@ def cimm_create_listing(listing):
         photos,
         photos_hosted,
         gps,
-    )
+    ).__dict__
 
 
-# cimm_get_listings()
+# try:
+#     with open("sold_urls.json", "r", encoding="utf8") as infile:
+#         sold_url_list = json.load(infile)
+# except:
+#     sold_url_list = {"urls": []}
+
+# cimm_listings = cimm_get_listings(sold_url_list)
+# for listing in cimm_listings:
+#     print(listing["description"])
