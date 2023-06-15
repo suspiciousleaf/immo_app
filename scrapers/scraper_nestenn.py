@@ -191,8 +191,8 @@ def get_listing_details(page, url, host_photos):
 
         # Get description
 
-        description = soup.find("p", class_="square_text_p").get_text()
-        description = "".join(description.splitlines()).strip()
+        description_raw = soup.find("p", class_="square_text_p").get_text().splitlines()
+        description = [string.strip() for string in description_raw if string.strip()]
 
         # print(description)
 
