@@ -252,8 +252,8 @@ def get_listing_details(page, url, host_photos):
 
         # Description
 
-        description = soup.find("span", itemprop="description").get_text()
-        description = "".join(description.splitlines())
+        description = soup.find("span", itemprop="description").get_text().splitlines()
+
         # pprint(description)
 
         # Photos
@@ -330,6 +330,11 @@ def get_listing_details(page, url, host_photos):
 
 
 cwd = os.getcwd()
+
+test_url = "https://www.cabinet-jammes.com/fr/detail.htm?cle=11036326&monnaie=2"
+
+get_listing_details(requests.get(test_url), test_url, False)
+
 
 # jammes_listings = jammes_get_listings(host_photos=False)
 
