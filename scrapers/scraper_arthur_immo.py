@@ -266,7 +266,7 @@ def get_listing_details(page, url, host_photos):
         description_list = []
         for item in description_div:
             if len(item.get_text()) > 3:
-                description_list.extend(item.get_text().replace("\r", "").split("\n"))
+                description_list.extend(item.get_text().splitlines())
 
         description = [elem.strip() for elem in description_list if elem.strip()]
 

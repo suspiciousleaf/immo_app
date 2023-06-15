@@ -248,9 +248,7 @@ def get_listing_details(page, url, host_photos):
             if isinstance(item, Tag):
                 for element in item.contents:
                     if len(element.get_text()) > 3:
-                        description_list.extend(
-                            element.get_text().replace("\r", "").split("\n")
-                        )
+                        description_list.extend(element.get_text().splitlines())
 
         for i, item in enumerate(description_list):
             if "PYRENEES IMMOBILIER (API)" in item:

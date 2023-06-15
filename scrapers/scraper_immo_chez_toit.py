@@ -266,7 +266,7 @@ def get_listing_details(page, url, host_photos):
         # print("Size:", size, "m²")
 
         # Description
-        description_raw = soup.find("p", itemprop="description").get_text().split("\n")
+        description_raw = soup.find("p", itemprop="description").get_text().splitlines()
         description = [string.strip() for string in description_raw if string.strip()]
 
         # print(description)

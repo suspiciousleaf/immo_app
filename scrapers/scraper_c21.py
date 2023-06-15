@@ -234,7 +234,7 @@ def get_listing_details(page, url, host_photos):
                     class_="tw-flex tw-flex-col md:tw-block md:tw-text-center md:tw-flex md:tw-flex-col",
                 )
                 .get_text()
-                .split("\n")
+                .splitlines()
             )
             # pprint(location_div)
             for item in location_div:

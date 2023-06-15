@@ -269,9 +269,11 @@ def get_listing_details(page, url, host_photos):
                 soup.find("p", itemprop="description")
                 .get_text(strip=True)
                 .replace("\xa0", "")
-                .split("\n")
+                .splitlines()
             )
-            description = [string.strip() for string in description_raw if string]
+            description = [
+                string.strip() for string in description_raw if string.strip()
+            ]
         except:
             description = []
         # pprint(description)

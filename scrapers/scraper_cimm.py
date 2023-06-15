@@ -65,9 +65,7 @@ def cimm_create_listing(listing):
         size = int(listing["inhabitable_surface"])
     link_url = "https://cimm.com/bien/" + listing["slug"]
     try:
-        description_raw = (
-            listing["fr_text"].replace("\r", "").replace("\\", "").split("\n")
-        )
+        description_raw = listing["fr_text"].replace("\\", "").splitlines()
         description = [string for string in description_raw if string]
     except:
         description = []

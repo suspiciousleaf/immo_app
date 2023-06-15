@@ -205,7 +205,7 @@ def get_listing_details(page, url, host_photos):
         # pprint(details)
 
         details_div = soup.find("div", id="dataContent").get_text()
-        details = details_div.split("\n")
+        details = details_div.splitlines()
         # pprint(details)
 
         # Chambres
