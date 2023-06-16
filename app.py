@@ -10,6 +10,7 @@ from unidecode import unidecode
 
 t0 = time.perf_counter()
 
+from json_search import agent_dict
 from utilities.image_sold_checker import sold_image_check
 from scrapers.scraper_ami09 import ami09_get_listings
 from scrapers.scraper_api import api_get_listings
@@ -300,7 +301,23 @@ property_types = {
 
 uncategorized_types = []
 
+
+def key_from_value(agent_name_full, agent_dict=agent_dict):
+    for agent_name_short, value in agent_dict.items():
+        if value == agent_name_full:
+            return agent_name_short
+    return None
+
+
+def create_ref(agent_name_full, ref):
+    agent_name_short = key_from_value(agent_name_full)
+    if agent_name_short and ref:
+        return f"{agent_name_short}-{ref}"
+    return None
+
+
 for listing in all_listings:
+    listing["id"] = create_ref(listing["agent"], listing["ref"])
     listing["types"] = unidecode(listing["types"].capitalize())
     temp_type = listing["types"]
     # Maison is the most common type, and some descriptions have "maison" as the second word (eg jolie maison), so the split line would cause the maison to be lost, leaving the type as jolie in the example
