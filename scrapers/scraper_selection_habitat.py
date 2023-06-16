@@ -291,8 +291,12 @@ def get_listing_details(page, url, host_photos):
         description_div = description_div.find_all("p")
         for desc in description_div:
             if len(desc.get_text()) > 200:
-                description = desc.get_text()
-        # print(description)
+                description_raw = desc.get_text().replace("\r", "").splitlines()
+                description = [
+                    string.strip() for string in description_raw if string.strip()
+                ]
+                break
+        # pprint(description)
 
         # Photos
         # Finds the links to full res photos for each listing, removes the "amp;" so the links work, and returns them as a list
@@ -373,7 +377,9 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
-# get_listing_details(requests.get("https://www.selectionhabitat.com/fr/annonce/vente-maison-pamiers-p-r7-09007190152.html"), "https://www.selectionhabitat.com/fr/annonce/vente-maison-pamiers-p-r7-09007190152.html", False)
+# test_url = "https://www.selectionhabitat.com/fr/annonce/vente-maison-pamiers-p-r7-09007190152.html"
+
+# get_listing_details(requests.get(test_url), test_url, False)
 
 
 # selection_get_links(requests.get(f"https://www.selectionhabitat.com/fr/annonces-immobilieres-p-r12-1.html#ope=1&page=1&ListeViewBienForm=text&lieu=D%C2%A411%C2%A4Aude+(11)%C2%A40.7517563608706%C2%A40.0415626093272%C2%A40|D%C2%A409%C2%A4Ari%C3%A8ge+(09)%C2%A40.7493157360778%C2%A40.0251932867004%C2%A40|D%C2%A466%C2%A4Pyr%C3%A9n%C3%A9es-Orientales+(66)%C2%A40.7435327970408%C2%A40.0443244340435%C2%A40"))
