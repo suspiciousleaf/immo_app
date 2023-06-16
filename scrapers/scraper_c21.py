@@ -262,9 +262,7 @@ def get_listing_details(page, url, host_photos):
                 .split()
             )
             for word in description_joined:
-                # print(word)
                 if unidecode(word.casefold()) in town_list:
-                    print(word.casefold())
                     town = unidecode(word.capitalize())
                     postcode = [
                         i

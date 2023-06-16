@@ -4,11 +4,11 @@ import math
 from flask import Flask, send_file
 from flask import request
 
-from json_search import search
+from json_search import search, agent_dict
 
 # The imports below are to get the listing data, as well as two dictionaries that are used. The path of the file is different when hosted locally or on PythonAnywhere, so the try/except allows the files to be imported correctly regardless of whether the program is run locally or when hosted.
 
-try:
+try:  # listings.json
     with open("listings.json", "r", encoding="utf8") as infile:
         listings = json.load(infile)
 except:
@@ -16,7 +16,7 @@ except:
         "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
     ) as infile:
         listings = json.load(infile)
-try:
+try:  # postcodes_dict.json
     with open("postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
@@ -45,6 +45,12 @@ def add_header(response):
 @app.route("/postcode_dict/", methods=["GET"])
 def postcodes():
     return postcodes_dict
+
+
+# Dictionary of agent abbreviated names : full agent names
+@app.route("/agent_dict/", methods=["GET"])
+def agents():
+    return agent_dict
 
 
 # The path below is to receive the search query and parameters, and call the search function from json_search.py

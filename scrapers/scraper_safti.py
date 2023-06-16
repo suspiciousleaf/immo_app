@@ -7,8 +7,8 @@ import json
 import concurrent.futures
 
 # This must be imported as it is imported with get_gps, and if requests is imported before grequests it will cause recursion error
-import grequests
-import requests
+# import grequests
+# import requests
 from pprint import pprint
 from bs4 import BeautifulSoup
 
