@@ -287,7 +287,14 @@ def get_listing_details(page, url, host_photos):
 
         # Description
 
-        description = soup.find("span", itemprop="description").get_text()
+        description_raw = (
+            soup.find("span", itemprop="description").get_text().split("\r\n")
+        )
+        description = [
+            string.replace("\n", "").strip()
+            for string in description_raw
+            if string.replace("\n", "").strip()
+        ]
         # pprint(description)
 
         # Photos
