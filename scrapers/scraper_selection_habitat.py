@@ -201,6 +201,7 @@ def get_listing_details(page, url, host_photos):
         size = None
         postcode = None
         ref = None
+        types = None
 
         for element in details_list:
             if "Type" in element:
@@ -210,6 +211,8 @@ def get_listing_details(page, url, host_photos):
                     .replace("constructible", "")
                     .strip()
                 )
+                if types == "Type":
+                    types = None
             elif "Ville" in element:
                 town = unidecode(
                     element.casefold()
@@ -371,13 +374,14 @@ def get_listing_details(page, url, host_photos):
         # pprint(listing.__dict__)
         return listing.__dict__
 
-    except:
+    except Exception as e:
+        # print(e)
         return url
 
 
 cwd = os.getcwd()
 
-# test_url = "https://www.selectionhabitat.com/fr/annonce/vente-maison-pamiers-p-r7-09007190152.html"
+# test_url = "https://www.selectionhabitat.com/fr/annonce/vente-chateau-carcassonne-p-r7-1201218826.html"
 
 # get_listing_details(requests.get(test_url), test_url, False)
 

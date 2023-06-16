@@ -5,6 +5,8 @@ line to run.txt
 listings - Copy 21.03.2023.json
 example_data.txt
 immo list.txt
+response.html
+listings_descr_strings.json
 Example_layout.png
 expected format.txt
 test.py
