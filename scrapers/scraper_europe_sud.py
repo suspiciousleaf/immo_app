@@ -172,7 +172,9 @@ def get_listing_details(page, url, host_photos):
                 town = unidecode(item.get_text().replace("-", " ")).capitalize()
 
         # Description
-        description = soup.find("p", itemprop="description").get_text()
+        description_raw = soup.find("p", itemprop="description").get_text().splitlines()
+        description = [string.strip() for string in description_raw if string.strip()]
+        # pprint(description)
 
         postcode_div = soup.find("h2").get_text()
         # The pattern below will identify a string of 5 numbers inside brackets that begins with any of the 5 chosen groups. Group 1 then returns the whole string of numbers
@@ -347,7 +349,13 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
-# pprint(get_listing_details(requests.get("https://www.europe-sud-immobilier.com/1786-chateau-de-caractere.html"), "https://www.europe-sud-immobilier.com/1786-chateau-de-caractere.html", False))
+# get_listing_details(
+#     requests.get(
+#         "https://www.europe-sud-immobilier.com/1786-chateau-de-caractere.html"
+#     ),
+#     "https://www.europe-sud-immobilier.com/1786-chateau-de-caractere.html",
+#     False,
+# )
 
 # europe_sud_listings = europe_sud_get_listings(host_photos=False)
 

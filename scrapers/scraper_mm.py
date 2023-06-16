@@ -213,8 +213,10 @@ def get_listing_details(page, url, host_photos):
 
         # Get description
 
-        description = soup.find("span", itemprop="description").get_text()
-        description = "".join(description.splitlines())
+        description_raw = (
+            soup.find("span", itemprop="description").get_text().splitlines()
+        )
+        description = [string.strip() for string in description_raw if string.strip()]
 
         # print(description)
 
@@ -337,7 +339,9 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
-# pprint(get_listing_details(requests.get("https://www.mmimmobilier.com/fr/annonce/vente-gite-puivert-p-r7-110271545.html"), "https://www.mmimmobilier.com/fr/annonce/vente-gite-puivert-p-r7-110271545.html", False))
+# test_url = "https://www.mmimmobilier.com/fr/annonce/vente-propriete-mouthoumet-p-r7-110271654.html"
+
+# get_listing_details(requests.get(test_url), test_url, False)
 
 
 # pprint(mm_immo_get_links(1))

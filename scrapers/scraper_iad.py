@@ -8,7 +8,7 @@ import concurrent.futures
 import grequests
 import requests
 from pprint import pprint
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 import shutil
 from unidecode import unidecode
 
@@ -284,9 +284,22 @@ def get_listing_details(page, url, host_photos):
 
         # # Get description
 
-        description = soup.find(
+        description = []
+        description_list = []
+        description_content = soup.find(
             "div", class_="js-translatable-slots-content"
-        ).get_text()
+        ).p.contents
+        for item in description_content:
+            if isinstance(item, NavigableString):
+                description_list.append(str(item))
+        description = [
+            string
+            for string in description_list
+            if not any(
+                elem in string for elem in ["www.iadfrance.fr", "Honoraires d’agence"]
+            )
+        ]
+
         # print(description)
 
         # # Property details
@@ -366,15 +379,20 @@ def get_listing_details(page, url, host_photos):
         # print(listing.__dict__)
         return listing.__dict__
 
-    except:
+    except Exception as e:
+        print(e, url)
         return url
 
 
 cwd = os.getcwd()
 
-# pprint(
-# get_listing_details(requests.get("https://www.iadfrance.fr/annonce/terrain-vente-0-piece-la-cassaigne-435m2/r1216294", headers=headers), "https://www.iadfrance.fr/annonce/terrain-vente-0-piece-la-cassaigne-435m2/r1216294", False)#)
-# pprint(get_listing_details("https://immobilier-lavelanet.iad.com/terrain-a-vendre-belesta-5245-m2-pour-lotissement-ideal-investisseurs-ref-33828908").__dict__)
+
+# test_url = (
+#     "https://www.iadfrance.fr/annonce/maison-vente-4-pieces-treilles-170m2/r1294999"
+# )
+
+# get_listing_details(requests.get(test_url, headers=headers), test_url, False)
+
 
 # iad_get_links()
 

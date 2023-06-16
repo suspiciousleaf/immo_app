@@ -9,7 +9,7 @@ import concurrent.futures
 import grequests
 import requests
 from pprint import pprint
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString, Tag
 import shutil
 from unidecode import unidecode
 
@@ -239,15 +239,31 @@ def get_listing_details(page, url, host_photos):
 
         # print("Size:", size, "m²")
 
-        # Description
+        description_list = []
+        description_raw = soup.find("div", class_="detail-bien-desc-content").p.contents
+        for item in description_raw:
+            # print(type(item))
+            if isinstance(item, NavigableString):
+                description_list.append(item)
+            if isinstance(item, Tag):
+                for element in item.contents:
+                    if len(element.get_text()) > 3:
+                        description_list.extend(element.get_text().splitlines())
 
-        description = soup.find("div", class_="detail-bien-desc-content").get_text()
-        description = (
-            description.replace("Tweet", "")
-            .replace("Nous contacter", "")
-            .replace("Être averti d'une baisse de prix", "")
-            .replace("\n\n", "")
-        )
+        for i, item in enumerate(description_list):
+            if "PYRENEES IMMOBILIER (API)" in item:
+                try:
+                    description_list[i] = item[
+                        : item.find("PYRENEES IMMOBILIER (API)") - 7
+                    ]
+                except:
+                    pass
+
+        description = [
+            elem.strip()
+            for elem in description_list
+            if elem.strip() and "www.georisques.gouv.fr" not in elem
+        ]
         # print(description)
 
         # Photos
@@ -312,13 +328,19 @@ def get_listing_details(page, url, host_photos):
         )
 
         return listing.__dict__
-    except:
+    except Exception as e:
+        # print(e)
         return url
 
 
 cwd = os.getcwd()
 
-# get_listing_details(requests.get("http://www.pyrenees-immobilier.com/fr/vente-grange-castillon-en-couserans-p-r7-0900416111.html"), "http://www.pyrenees-immobilier.com/fr/vente-grange-castillon-en-couserans-p-r7-0900416111.html", False)
+# test_urls = [
+#     "http://www.pyrenees-immobilier.com/fr/vente-maison-foix-p-r7-0900418033.html"
+# ]
+
+# for test_url in test_urls:
+#     get_listing_details(requests.get(test_url), test_url, False)
 
 # api_listings = api_get_listings(host_photos=False)
 

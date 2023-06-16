@@ -1,17 +1,17 @@
 import json
 from unidecode import unidecode
 
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+# try:
+#     try:
+#         with open("listings.json", "r", encoding="utf8") as infile:
+#             listings_json = json.load(infile)
+#     except:
+#         with open(
+#             "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
+#         ) as infile:
+#             listings_json = json.load(infile)
+# except:
+#     listings_json = []
 
 try:
     try:
@@ -97,7 +97,7 @@ def fix_location(listing: dict) -> dict:
                     pass
             # Check every word in description to find valid town names if the above line didn't find valid gps
             if not listing["gps"]:
-                for word in listing["description"].split():
+                for word in "".join(listing["description"]).split():
                     if word.casefold() in town_list:
                         listing["town"] = word.capitalize()
                         listing["postcode"] = [
@@ -113,17 +113,13 @@ def fix_location(listing: dict) -> dict:
                 listing["town"] = "Belcaire"
                 listing["postcode"] = "11340"
                 listing["gps"] = [42.8163554, 1.9603877]
-                listing["description"] = (
-                    "APPROXIMATE LOCATION - " + listing["description"]
-                )
+                listing["description"].insert(0, "LOCALISATION APPROXIMATIVE")
 
             if listing["town"] == "Cathare":
                 listing["town"] = "Belesta"
                 listing["postcode"] = "09300"
                 listing["gps"] = [42.9029283, 1.9340613]
-                listing["description"] = (
-                    "APPROXIMATE LOCATION - " + listing["description"]
-                )
+                listing["description"].insert(0, "LOCALISATION APPROXIMATIVE")
 
         # Any remaining properties have spurious values wiped
         if listing["town"].casefold() not in town_list:

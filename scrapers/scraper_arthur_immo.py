@@ -262,20 +262,13 @@ def get_listing_details(page, url, host_photos):
         # print("Size:", size, "m²")
 
         # Description
-        # Finds the main block, removes all the <b> etc tags, split and join to remove excess whitespace, and unidecode to remove accents
-        description_div = str(soup.find("div", class_="text-[#969A9D]"))
-        description = description_div[
-            description_div.find("<b>") + 3 : description_div.find("</p>")
-        ]
-        description = (
-            description.replace("<b>", "")
-            .replace("<br>", "")
-            .replace("</b>", "")
-            .replace("<br/>", "")
-            .replace("</br>", "")
-        )
-        description = unidecode(" ".join(description.split()))
-        # print(description)
+        description_div = soup.find("div", class_="text-[#969A9D]").p.contents
+        description_list = []
+        for item in description_div:
+            if len(item.get_text()) > 3:
+                description_list.extend(item.get_text().splitlines())
+
+        description = [elem.strip() for elem in description_list if elem.strip()]
 
         # Photos
         # Photos are stored on a different page and hosted on another website. This finds the website and generates the links without visiting the main image page, or hosting website.
@@ -358,17 +351,29 @@ def get_listing_details(page, url, host_photos):
             gps,
         )
         return listing.__dict__
-    except:
+    except Exception as e:
+        # print(e)
         return url
 
 
 cwd = os.getcwd()
 
 
-# #pprint(arthur_immo_get_links(1))
-# print(get_listing_details("https://www.arthurimmobilier.com/vente/11-arthur/78-bram/belle-maison-vigneronne-avec-piscine-et-jardin-prestige/)1249-maison"))
+# test_urls = [
+#     "https://www.lavelanet-arthurimmo.com/annonces/achat/maison/dreuilhe-09300/26841133.htm"
+# ]
 
-# arthur_listings = arthur_immo_get_listings(host_photos=False)
+# for test_url in test_urls:
+#     get_listing_details(requests.get(test_url), test_url, False)
+
+
+# try:
+#     with open("sold_urls.json", "r", encoding="utf8") as infile:
+#         sold_url_list = json.load(infile)
+# except:
+#     sold_url_list = {"urls": []}
+
+# arthur_listings = arthur_immo_get_listings(sold_url_list, host_photos=False)
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(arthur_listings, outfile, ensure_ascii=False)

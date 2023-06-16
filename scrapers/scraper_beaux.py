@@ -265,10 +265,14 @@ async def get_listing_details(url, semaphore, browser):
             price = int("".join([x for x in price_raw if x.isnumeric()]))
 
             # print(price)
-
-            description = soup.find(
-                "div", class_="span_8 pull-left description-col"
-            ).get_text(separator="\n", strip=True)
+            try:
+                description = (
+                    soup.find("div", class_="span_8 pull-left description-col")
+                    .get_text(separator="\n", strip=True)
+                    .splitlines()
+                )
+            except:
+                description - []
             # pprint(description)
 
             for postcode_key, towns in postcodes_dict.items():
@@ -354,9 +358,6 @@ async def block_images(request):
         await request.abort()
     else:
         await request.continue_()
-
-    # await request.continue_()
-    # await request.abort()
 
 
 # Time taken to scrape 50 links 10 semaphore: 43.56s images and CSS blocked
