@@ -146,9 +146,14 @@ def get_listing_details(page, url):
                 rooms = item["roomNumber"]
                 price = item["price"]
                 bedrooms = item["bedroomNumber"]
-                description = (
+                description_raw = (
                     item["description"].replace("<br/>", "\n").replace("<br />", "\n")
-                )
+                ).splitlines()
+                description = [
+                    string.replace("\n", "").strip()
+                    for string in description_raw
+                    if string.replace("\n", "").strip()
+                ]
                 photos = [list_item["urlPhotoLarge"] for list_item in item["photos"]]
                 photos_hosted = photos
                 gps = [item["lat"], item["lng"]]
@@ -202,7 +207,7 @@ def remove_duplicates(listings):
 
 cwd = os.getcwd()
 
-# test_url = 'https://www.safti.fr/votre-conseiller-safti/nathalie-francois'
+# test_url = "https://www.safti.fr/votre-conseiller-safti/jean-philippe-magrino"
 
 # get_listing_details(requests.get(test_url), test_url)
 
