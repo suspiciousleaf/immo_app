@@ -260,8 +260,8 @@ def get_listing_details(page, url, host_photos):
         # Description
         # Returns the description with HTML removed, split into a list separated on the original line breaks.
 
-        description = soup.find("p", itemprop="description").get_text()
-        description = "".join(description.splitlines())
+        description_raw = soup.find("p", itemprop="description").get_text().splitlines()
+        description = [string.strip() for string in description_raw if string.strip()]
         # pprint(description)
 
         # Photos
@@ -341,6 +341,10 @@ def get_listing_details(page, url, host_photos):
 
 
 cwd = os.getcwd()
+
+# test_url = "https://www.timeandstoneimmobilier.com/fr/detail.htm?cle=11037181&monnaie=2"
+
+# get_listing_details(requests.get(test_url), test_url, False)
 
 # pprint(get_listing_details("https://www.timeandstoneimmobilier.com/fr/detail.htm?cle=11037181&monnaie=2", "Hello"))
 
