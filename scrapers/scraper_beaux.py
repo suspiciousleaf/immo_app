@@ -266,11 +266,16 @@ async def get_listing_details(url, semaphore, browser):
 
             # print(price)
             try:
-                description = (
+                description = []
+                description_raw = (
                     soup.find("div", class_="span_8 pull-left description-col")
                     .get_text(separator="\n", strip=True)
                     .splitlines()
                 )
+                for line in description_raw:
+                    if "Géorisques" in line:
+                        break
+                    description.append(line)
             except:
                 description - []
             # pprint(description)
