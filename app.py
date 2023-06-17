@@ -34,6 +34,7 @@ from scrapers.scraper_time_stone import time_stone_get_listings
 # Import from json_search must be below scraper imports due to grequests recursion error if imported before requests
 from json_search import agent_dict
 from utilities.image_sold_checker import sold_image_check
+from utilities.utilities import property_types
 
 # The code below will run the imported scraper for each agent, host_photos will determine if the photos for each listing are downloaded, resized, and compressed for local hosting. Try/except is used to prevent an error with a single scraper causing the whole program to fail to run. Faults are reported to the failed_scrapes list, and finally to the console.
 
@@ -234,72 +235,6 @@ all_listings = (
 )
 
 # The combined listings have a huge range of property categories, the code below reduces the total categories down to six. House, apartment, multi-lodging buildings, commercial property, empty land, and "other". Any listings that don't fit into the first five are reclassified as "other", and the original type is saved to "types_original" so it can be examined and classified later.
-
-property_types = {
-    "Maison": {
-        "Autre",
-        "Batiment",
-        "Cafe",
-        "Chalet",
-        "Chambre",
-        "Chateau",
-        "Domaine",
-        "Gite",
-        "Grange",
-        "Hotel",
-        "Investissement",
-        "Local",
-        "Maison",
-        "Mas",
-        "Peniche",
-        "Propriete",
-        "Remise",
-        "Restaurant",
-        "Villa",
-        "Ferme",
-        "Longere",
-        "Demeure",
-        "Pavillon",
-        "Corps",
-        "Residence",
-    },
-    "Commerce": {
-        "Agence",
-        "Ateliers",
-        "Bar",
-        "Bazar",
-        "Tabac",
-        "Bergerie",
-        "Boucherie",
-        "Bureau",
-        "Cave",
-        "Chocolaterie",
-        "Divers",
-        "Entrepots",
-        "Epicerie",
-        "Fleuriste",
-        "Fonds",
-        "Fonds-de-commerce",
-        "Garage",
-        "Haras",
-        "Local",
-        "Locaux",
-        "Parking",
-        "Pret",
-        "Hangar",
-        "Atelier",
-        "Local commercial",
-    },
-    "Appartement": {
-        "Apartment",
-        "Studio",
-        "Duplex",
-        "Appartment",
-        "Appartement",
-        "Appart’hôtel",
-        "Appart'hotel",
-    },
-}
 
 uncategorized_types = []
 

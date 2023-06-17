@@ -273,7 +273,7 @@ async def get_listing_details(url, semaphore, browser):
                     .splitlines()
                 )
                 for line in description_raw:
-                    if "Géorisques" in line:
+                    if "Géorisques" or "Plus de détails" in line:
                         break
                     description.append(line)
             except:
