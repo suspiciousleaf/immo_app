@@ -3,7 +3,7 @@
 import json
 from pprint import pprint
 
-with open("api.json", "r", encoding="utf-8") as infile:
+with open("listings.json", "r", encoding="utf-8") as infile:
     listings = json.load(infile)
 
 types = set()
