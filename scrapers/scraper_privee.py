@@ -1,12 +1,12 @@
-import grequests
+import time
+import json
+import concurrent.futures
 
-# import requests
+import grequests
 from bs4 import BeautifulSoup
 from pprint import pprint
-import json
-import time
-import concurrent.futures
 from unidecode import unidecode
+
 from models import Listing
 from utilities.utilities import get_gps, get_data, property_types
 
@@ -234,6 +234,12 @@ def get_details(prop_soup, types):
     if types == "Terrain" and details_dict["size"] and not details_dict["plot"]:
         details_dict["plot"] = details_dict["size"]
         details_dict["size"] = None
+    if (
+        types == "Terrain"
+        and details_dict["size"]
+        and details_dict["size"] == details_dict["plot"]
+    ):
+        details_dict["size"] = None
 
     return details_dict
 
@@ -311,7 +317,7 @@ def privee_get_listings():
     for item in resp:
         links.extend(privee_get_links(item["response"]))
 
-    print("Number of unique listing URLs found:", len(links))
+    print("\nPropriétés Privées number of unique listing URLs found:", len(links))
 
     listings = [
         listing for listing in listings_json if listing["agent"] == "Propriétés Privées"
@@ -366,10 +372,10 @@ def privee_get_listings():
     return listings
 
 
-privee_listings = privee_get_listings()
+# privee_listings = privee_get_listings()
 
-with open("api.json", "w", encoding="utf-8") as outfile:
-    json.dump(privee_listings, outfile, ensure_ascii=False)
+# with open("api.json", "w", encoding="utf-8") as outfile:
+#     json.dump(privee_listings, outfile, ensure_ascii=False)
 
 
 # with open(

@@ -22,6 +22,7 @@ agent_dict = {
     "jammes": "Cabinet Jammes",
     "mm": "M&M Immobilier",
     "nestenn": "Nestenn",
+    "privee": "Propriétés Privées",
     "richardson": "Richardson Immobilier",
     "safti": "Safti",
     "selection": "Selection Habitat",
