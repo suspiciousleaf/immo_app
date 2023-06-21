@@ -11,6 +11,7 @@ agent_dict = {
     "api": "A.P.I.",
     "arthur": "Arthur Immo",
     "aude": "Aude Immobilier",
+    "bac": "BAC Immobilier",
     "beaux": "Beaux Villages",
     "c21": "Century 21",
     "cimm": "Cimm Immobilier",

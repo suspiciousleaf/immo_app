@@ -5,7 +5,7 @@ import time
 
 from pprint import pprint
 
-# This library is used frequently to remove accepts from letters (used frequently in French), as some listings use accents correctly and some don't.
+# This library is used to remove accents from letters (used frequently in French), as some listings use accents correctly and some don't.
 from unidecode import unidecode
 
 t0 = time.perf_counter()
@@ -14,6 +14,7 @@ from scrapers.scraper_ami09 import ami09_get_listings
 from scrapers.scraper_api import api_get_listings
 from scrapers.scraper_arthur_immo import arthur_immo_get_listings
 from scrapers.scraper_aude import aude_immo_get_listings
+from scrapers.scraper_bac import bac_get_listings
 from scrapers.scraper_beaux import beaux_get_listings
 from scrapers.scraper_c21 import c21_get_listings
 from scrapers.scraper_cimm import cimm_get_listings
@@ -100,6 +101,13 @@ def main():
             listing for listing in listings if listing["agent"] == "Aude Immobilier"
         ]
         failed_scrapes.append("Aude Immobilier")
+    try:
+        bac_listings = bac_get_listings()
+    except:
+        bac_listings = [
+            listing for listing in listings if listing["agent"] == "BAC Immobilier"
+        ]
+        failed_scrapes.append("BAC Immobilier")
     try:
         # host photos option not needed
         beaux_listings = beaux_get_listings()
@@ -238,6 +246,7 @@ def main():
         + api_listings
         + arthur_immo_listings
         + aude_immo_listings
+        + bac_listings
         + beaux_listings
         + c21_listings
         + cimm_listings
