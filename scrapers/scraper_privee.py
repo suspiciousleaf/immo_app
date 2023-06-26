@@ -309,12 +309,12 @@ def privee_get_listings():
         "https://www.proprietes-privees.com/negociateur/laurent.vernhet",
         "https://www.proprietes-privees.com/negociateur/samuel.gros",
         "https://www.proprietes-privees.com/negociateur/francois.deseynes",
-        "https://www.proprietes-privees.com/negociateur/francois.deseynes",
     ]
 
     links = []
     resp = get_data(agent_urls, prox=True)
     for item in resp:
+        # print(item["link"], item["response"].status_code)
         links.extend(privee_get_links(item["response"]))
 
     print("\nPropriétés Privées number of unique listing URLs found:", len(links))
