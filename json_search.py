@@ -89,7 +89,7 @@ def filter_keywords(results, keyword_list):
             for keyword in keyword_list:
                 if (
                     unidecode(keyword).casefold()
-                    not in unidecode("".join(result["description"])).casefold()
+                    not in unidecode(" ".join(result["description"])).casefold()
                 ):
                     valid = False
             if valid == True:
