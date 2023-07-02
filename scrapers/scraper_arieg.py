@@ -16,7 +16,7 @@ from utilities.utilities import get_gps, get_data
 
 try:
     try:
-        with open("api.json", "r", encoding="utf8") as infile:
+        with open("listings.json", "r", encoding="utf8") as infile:
             listings_json = json.load(infile)
     except:
         with open(
