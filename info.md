@@ -7,9 +7,10 @@
 - A.P.I. - Adapt Immo
 - Cabinet Jammes - adapt immo
 - M&M Immobilier - adapt immo
-- Selection Habita - adapt immot
+- Selection Habitat - adapt immo
 - Sextant - adapt immo
 - Time and Stone Immobilier - adapt immo
+- Arieg'Immo - adapt immo
   
 - Aude Immobilier - la boite immo
 - Eureka Immobilier - la boite immo

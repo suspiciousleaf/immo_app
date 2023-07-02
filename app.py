@@ -12,6 +12,7 @@ t0 = time.perf_counter()
 
 from scrapers.scraper_ami09 import ami09_get_listings
 from scrapers.scraper_api import api_get_listings
+from scrapers.scraper_arieg import arieg_get_listings
 from scrapers.scraper_arthur_immo import arthur_immo_get_listings
 from scrapers.scraper_aude import aude_immo_get_listings
 from scrapers.scraper_bac import bac_get_listings
@@ -85,6 +86,13 @@ def main():
     except:
         api_listings = [listing for listing in listings if listing["agent"] == "A.P.I."]
         failed_scrapes.append("A.P.I.")
+    try:
+        arieg_listings = arieg_get_listings()
+    except:
+        arieg_listings = [
+            listing for listing in listings if listing["agent"] == "Arieg'Immo"
+        ]
+        failed_scrapes.append("Arieg'Immo")
     try:
         arthur_immo_listings = arthur_immo_get_listings(
             sold_url_list, host_photos=False
@@ -244,6 +252,7 @@ def main():
     all_listings = (
         ami09_listings
         + api_listings
+        + arieg_listings
         + arthur_immo_listings
         + aude_immo_listings
         + bac_listings
@@ -359,7 +368,6 @@ if __name__ == "__main__":
     main()
 
 # TODO!: Add pagination back end
-# Ariege immo not included ?
 
 # Sextant number of listings: 78
 # Pages: 7

@@ -9,6 +9,7 @@ from geopy.distance import distance
 agent_dict = {
     "ami": "Ami Immobilier",
     "api": "A.P.I.",
+    "arieg": "Arieg'Immo",
     "arthur": "Arthur Immo",
     "aude": "Aude Immobilier",
     "bac": "BAC Immobilier",
