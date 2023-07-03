@@ -112,6 +112,10 @@ def search_call():
 
     keyword_list_req = try_csv(request.args.get("keywords"))
 
+    page_req = request.args.get("page")
+
+    refs_req = try_csv(request.args.get("refs"))
+
     return search(
         listings=listings,
         keyword_list=keyword_list_req,
@@ -135,6 +139,8 @@ def search_call():
         inc_none_size=inc_none_size_req,
         min_size=min_size_req,
         max_size=max_size_req,
+        page=page_req,
+        refs=refs_req,
     )
 
 
