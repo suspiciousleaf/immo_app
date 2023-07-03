@@ -1,5 +1,6 @@
 import json
 import math
+import time
 
 from pprint import pprint
 from unidecode import unidecode
@@ -66,6 +67,14 @@ try:
 except:
     with open("/home/suspiciousleaf/immo_app/ville_list_clean.json", "r") as infile:
         town_list_clean = json.load(infile)
+
+
+def filter_refs(listings, refs):
+    results = []
+    for listing in listings:
+        if listing["id"] in refs:
+            results.append(listing)
+    return results
 
 
 def filter_price(results, min_price, max_price):
@@ -287,6 +296,7 @@ def filter_location(results, towns, search_radius, inc_none_location):
 
 def search(
     listings,
+    refs=None,
     type_list=None,
     agent_list=None,
     keyword_list=None,
@@ -308,7 +318,10 @@ def search(
     inc_none_size=True,
     min_size=0,
     max_size=math.inf,
+    page=None,
 ):
+    if refs:
+        return filter_refs(listings, refs)
     if print_filter_results:
         print("Full results list length:", len(listings))
     results_list = filter_price(listings, min_price, max_price)
@@ -343,6 +356,8 @@ def search(
     )
     if print_filter_results:
         print("After location filter:", len(results_list))
+    if page:
+        results_list = results_list[(page - 1) * 12 : page * 12]
 
     return results_list
 
@@ -350,11 +365,26 @@ def search(
 # If this is set to true, console will log how many valid listings are found after applying each filter. Used for debugging
 print_filter_results = False
 
+# refs = [
+#     "time-1269",
+#     "time-1292",
+#     "privee-329586APAU",
+#     "privee-312265LVER",
+#     "human-450-452",
+#     "human-141-4794",
+#     "c21-28079",
+#     "c21-3706",
+#     "beaux-CAAC283550E",
+#     "beaux-TAAPR342",
+#     "api-14783",
+#     "api-14795",
+# ]
 
-# results_list = (search(listings, depts_list = ["11", "66", "09"]))
+# t0 = time.perf_counter()
+# results_list = search(listings, refs)
 # print("\nNumber of results:", len(results_list), "\n")
+# t1 = time.perf_counter()
+# print(f"Time taken: {t1-t0:.2f}s")
 
 
-# print(num)
-# print(types)
-# print(list_agents)
+# Front end sorting is done with: price agent size plot (ref)
