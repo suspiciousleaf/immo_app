@@ -69,14 +69,6 @@ except:
         town_list_clean = json.load(infile)
 
 
-def filter_refs(listings, refs):
-    results = []
-    for listing in listings:
-        if listing["id"] in refs:
-            results.append(listing)
-    return results
-
-
 def filter_price(results, min_price, max_price):
     # print("filter_price ran")
     return [x for x in results if min_price <= x["price"] <= max_price]
@@ -294,9 +286,9 @@ def filter_location(results, towns, search_radius, inc_none_location):
         return results
 
 
+# This is the main search function. It will filter the results and return a list of dictionaries with the listing id, price, size, plot, and agent. The front end can then use this to sort results as required, and request the exact listings for each page using the id. This allows front end pagination with minimal local storage use, and allows searches to persist after leaving the page or closing the browser.
 def search(
     listings,
-    refs=None,
     type_list=None,
     agent_list=None,
     keyword_list=None,
@@ -318,10 +310,7 @@ def search(
     inc_none_size=True,
     min_size=0,
     max_size=math.inf,
-    page=None,
 ):
-    if refs:
-        return filter_refs(listings, refs)
     if print_filter_results:
         print("Full results list length:", len(listings))
     results_list = filter_price(listings, min_price, max_price)
@@ -356,10 +345,29 @@ def search(
     )
     if print_filter_results:
         print("After location filter:", len(results_list))
-    if page:
-        results_list = results_list[(page - 1) * 12 : page * 12]
 
-    return results_list
+    mini_listings = []
+
+    for listing in results_list:
+        mini_listing = {
+            "price": listing["price"],
+            "id": listing["id"],
+            "agent": listing["agent"],
+            "size": listing["size"],
+            "plot": listing["plot"],
+        }
+        mini_listings.append(mini_listing)
+
+    return mini_listings
+
+
+# This function will take a list of listing ids, and will return the full dictionary for each listing id. This allows for front end pagination and means the main search only needs to run once, and reduces the bandwidth required.
+def listings_id_search(listings, refs):
+    results = []
+    for listing in listings:
+        if listing["id"] in refs:
+            results.append(listing)
+    return results
 
 
 # If this is set to true, console will log how many valid listings are found after applying each filter. Used for debugging

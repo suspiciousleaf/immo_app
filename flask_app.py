@@ -4,7 +4,7 @@ import math
 from flask import Flask, send_file
 from flask import request
 
-from json_search import search, agent_dict
+from json_search import search, listings_id_search, agent_dict
 
 # The imports below are to get the listing data, as well as two dictionaries that are used. The path of the file is different when hosted locally or on PythonAnywhere, so the try/except allows the files to be imported correctly regardless of whether the program is run locally or when hosted.
 
@@ -53,30 +53,40 @@ def agents():
     return agent_dict
 
 
+# This  will check if a valid value is given for fields which define a maximum value, and will return infinite if not found
+def try_max(input):
+    try:
+        return int(input)
+    except:
+        return math.inf
+
+
+# This  will check if a valid value is given for fields which define a minimum value, and will return 0 if not found
+def try_min(input):
+    try:
+        return int(input)
+    except:
+        return 0
+
+
+# This will check for fields expected to be in csv format, location names etc
+def try_csv(input):
+    try:
+        return input.split(",")
+    except:
+        pass
+
+
+@app.route("/full_listings", methods=["GET"])
+def full_listing_ids():
+    refs_req = try_csv(request.args.get("id"))
+
+    return listings_id_search(listings=listings, refs=refs_req)
+
+
 # The path below is to receive the search query and parameters, and call the search function from json_search.py
 @app.route("/search_results", methods=["GET"])
 def search_call():
-    # This  will check if a valid value is given for fields which define a maximum value, and will return infinite if not found
-    def try_max(input):
-        try:
-            return int(input)
-        except:
-            return math.inf
-
-    # This  will check if a valid value is given for fields which define a minimum value, and will return 0 if not found
-    def try_min(input):
-        try:
-            return int(input)
-        except:
-            return 0
-
-    # This will check for fields expected to be in csv format, location names etc
-    def try_csv(input):
-        try:
-            return input.split(",")
-        except:
-            pass
-
     # The code below extracts the search parameters from the query and validates them using the above functions, then calls the search function with those parameters as arguments
 
     inc_none_beds_req = not request.args.get("inc_none_beds") == "false"
@@ -112,10 +122,6 @@ def search_call():
 
     keyword_list_req = try_csv(request.args.get("keywords"))
 
-    page_req = request.args.get("page")
-
-    refs_req = try_csv(request.args.get("refs"))
-
     return search(
         listings=listings,
         keyword_list=keyword_list_req,
@@ -139,8 +145,6 @@ def search_call():
         inc_none_size=inc_none_size_req,
         min_size=min_size_req,
         max_size=max_size_req,
-        page=page_req,
-        refs=refs_req,
     )
 
 
