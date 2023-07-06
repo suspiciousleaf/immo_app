@@ -72,182 +72,184 @@ def main():
 
     sold_url_list = sold_urls["urls"]
 
-    failed_scrapes = []
+    failed_scrapes = {}
     try:
         # Must be True as host website blocks leeching for many photos
         ami09_listings = ami09_get_listings(host_photos=True)
-    except:
+    except Exception as e:
         ami09_listings = [
             listing for listing in listings if listing["agent"] == "Ami Immobilier"
         ]
-        failed_scrapes.append("Ami Immobilier")
+        failed_scrapes["Ami Immobilier"] = e
     try:
         api_listings = api_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         api_listings = [listing for listing in listings if listing["agent"] == "A.P.I."]
-        failed_scrapes.append("A.P.I.")
+        failed_scrapes["A.P.I."] = e
     try:
         arieg_listings = arieg_get_listings()
-    except:
+    except Exception as e:
         arieg_listings = [
             listing for listing in listings if listing["agent"] == "Arieg'Immo"
         ]
-        failed_scrapes.append("Arieg'Immo")
+        failed_scrapes["Arieg'Immo"] = e
     try:
         arthur_immo_listings = arthur_immo_get_listings(
             sold_url_list, host_photos=False
         )
-    except:
+    except Exception as e:
         arthur_immo_listings = [
             listing for listing in listings if listing["agent"] == "Arthur Immo"
         ]
-        failed_scrapes.append("Arthur Immo")
+        failed_scrapes["Arthur Immo"] = e
     try:
         aude_immo_listings = aude_immo_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         aude_immo_listings = [
             listing for listing in listings if listing["agent"] == "Aude Immobilier"
         ]
-        failed_scrapes.append("Aude Immobilier")
+        failed_scrapes["Aude Immobilier"] = e
     try:
         bac_listings = bac_get_listings()
-    except:
+    except Exception as e:
         bac_listings = [
             listing for listing in listings if listing["agent"] == "BAC Immobilier"
         ]
-        failed_scrapes.append("BAC Immobilier")
+        failed_scrapes["BAC Immobilier"] = e
     try:
         # host photos option not needed
         beaux_listings = beaux_get_listings()
-    except:
+    except Exception as e:
         beaux_listings = [
             listing for listing in listings if listing["agent"] == "Beaux Villages"
         ]
-        failed_scrapes.append("Beaux Villages")
+        failed_scrapes["Beaux Villages"] = e
     try:
         c21_listings = c21_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         c21_listings = [
             listing for listing in listings if listing["agent"] == "Century 21"
         ]
-        failed_scrapes.append("Century 21")
+        failed_scrapes["Century 21"] = e
     try:
         # host photos not needed due to public API use for Cimm
         cimm_listings = cimm_get_listings(sold_url_list)
-    except:
+    except Exception as e:
         cimm_listings = [
             listing for listing in listings if listing["agent"] == "Cimm Immobilier"
         ]
-        failed_scrapes.append("Cimm Immobilier")
+        failed_scrapes["Cimm Immobilier"] = e
     try:
         eureka_immo_listings = eureka_immo_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         eureka_immo_listings = [
             listing for listing in listings if listing["agent"] == "Eureka Immobilier"
         ]
-        failed_scrapes.append("Eureka Immobilier")
+        failed_scrapes["Eureka Immobilier"] = e
     try:
         europe_sud_listings = europe_sud_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         europe_sud_listings = [
             listing
             for listing in listings
             if listing["agent"] == "Europe Sud Immobilier"
         ]
-        failed_scrapes.append("Europe Sud Immobilier")
+        failed_scrapes["Europe Sud Immobilier"] = e
     try:
         human_listings = human_get_listings()
-    except:
+    except Exception as e:
         human_listings = [
             listing for listing in listings if listing["agent"] == "Human Immobilier"
         ]
-        failed_scrapes.append("Human Immobilier")
+        failed_scrapes["Human Immobilier"] = e
     try:
         iad_listings = iad_immo_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         iad_listings = [
             listing for listing in listings if listing["agent"] == "IAD Immobilier"
         ]
-        failed_scrapes.append("IAD Immobilier")
+        failed_scrapes["IAD Immobilier"] = e
     try:
         immo_chez_toit_listings = immo_chez_toit_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         immo_chez_toit_listings = [
             listing for listing in listings if listing["agent"] == "L'Immo Chez Toit"
         ]
-        failed_scrapes.append("L'Immo Chez Toit")
+        failed_scrapes["L'Immo Chez Toit"] = e
     try:
         jammes_listings = jammes_get_listings(sold_url_list, host_photos=False)
-    except:
+    except Exception as e:
         jammes_listings = [
             listing for listing in listings if listing["agent"] == "Cabinet Jammes"
         ]
-        failed_scrapes.append("Cabinet Jammes")
+        failed_scrapes["Cabinet Jammes"] = e
     try:
         mm_immo_listings = mm_immo_get_listings(sold_url_list, host_photos=False)
-    except:
+    except Exception as e:
         mm_immo_listings = [
             listing for listing in listings if listing["agent"] == "M&M Immobilier"
         ]
-        failed_scrapes.append("M&M Immobilier")
+        failed_scrapes["M&M Immobilier"] = e
     try:
         nestenn_listings = nestenn_immo_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         nestenn_listings = [
             listing for listing in listings if listing["agent"] == "Nestenn"
         ]
-        failed_scrapes.append("Nestenn")
+        failed_scrapes["Nestenn"] = e
     try:
         privee_listings = privee_get_listings()
-    except:
+    except Exception as e:
         privee_listings = [
             listing for listing in listings if listing["agent"] == "Propriétés Privées"
         ]
-        failed_scrapes.append("Propriétés Privées")
+        failed_scrapes["Propriétés Privées"] = e
     try:
         # Must be True as host website uses HTTP instead of HTTPS, can't embed images
         richardson_listings = richardson_get_listings(host_photos=True)
-    except:
+    except Exception as e:
         richardson_listings = [
             listing
             for listing in listings
             if listing["agent"] == "Richardson Immobilier"
         ]
-        failed_scrapes.append("Richardson Immobilier")
+        failed_scrapes["Richardson Immobilier"] = e
     try:
         # host photos option not needed
         safti_listings = safti_get_listings(sold_url_list)
-    except:
+    except Exception as e:
         safti_listings = [
             listing for listing in listings if listing["agent"] == "Safti"
         ]
-        failed_scrapes.append("Safti")
+        failed_scrapes["Safti"] = e
     try:
         selection_listings = selection_get_listings(host_photos=False)
-    except:
+    except Exception as e:
         selection_listings = [
             listing for listing in listings if listing["agent"] == "Selection Habitat"
         ]
-        failed_scrapes.append("Selection Habitat")
+        failed_scrapes["Selection Habitat"] = e
     try:
         sextant_listings = sextant_get_listings(sold_url_list)
-    except:
+    except Exception as e:
         sextant_listings = [
             listing for listing in listings if listing["agent"] == "Sextant"
         ]
-        failed_scrapes.append("Sextant")
+        failed_scrapes["Sextant"] = e
     try:
         time_stone_listings = time_stone_get_listings(sold_url_list, host_photos=False)
-    except:
+    except Exception as e:
         time_stone_listings = [
             listing
             for listing in listings
             if listing["agent"] == "Time & Stone Immobilier"
         ]
-        failed_scrapes.append("Time & Stone Immobilier")
+        failed_scrapes["Time & Stone Immobilier"] = e
 
+    # If any of the whole scrapers fail to run, the previously scraped links will be passed through, and the scraper name and exception will be passed into a dictionary. If anything is in the dictionary after they have all run, the below message will be printed.
     if failed_scrapes:
-        print(f"The following agent(s) failed to scrape entirely: {failed_scrapes}")
+        print(f"The following agent(s) failed to scrape entirely:\n")
+        pprint(failed_scrapes)
 
     all_listings = (
         ami09_listings
@@ -366,6 +368,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# TODO: change failed_scrapes list to be a list of dictionaries as [{"agent": Exception}]
