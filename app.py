@@ -230,7 +230,7 @@ def main():
         ]
         failed_scrapes.append("Selection Habitat")
     try:
-        sextant_listings = sextant_get_listings(sold_url_list, host_photos=False)
+        sextant_listings = sextant_get_listings(sold_url_list)
     except:
         sextant_listings = [
             listing for listing in listings if listing["agent"] == "Sextant"
@@ -367,20 +367,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-# TODO!: Add pagination back end
 
-# Sextant number of listings: 78
-# Pages: 7
-# Number of unique listing URLs found: 17
-# New listings to add: 6
-# Old listings to remove: 2
-# Successfully scraped: 0/6
-# Failed to scrape: 6/6
-# Failed URLs:
-# ['https://www.sextantfrance.fr/fr/annonce/vente-villa-quillan-p-r7-75011146591.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-leran-p-r7-75011146479.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-appartement-quillan-p-r7-75011146565.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-hameau-puivert-p-r7-75011146476.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-saint-louis-et-parahou-p-r7-75011146359.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-axat-p-r7-75011146477.html']
-# Time elapsed for Sextant: 3.72s
+# TODO: change failed_scrapes list to be a list of dictionaries as [{"agent": Exception}]
