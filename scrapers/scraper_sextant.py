@@ -1,4 +1,3 @@
-import os
 import time
 import math
 import json
@@ -9,11 +8,8 @@ import grequests
 import requests
 from pprint import pprint
 from bs4 import BeautifulSoup
-import shutil
 from unidecode import unidecode
 
-from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
 from models import Listing
 from utilities.utilities import get_gps, get_data
 
@@ -45,7 +41,7 @@ except:
     gps_dict = []
 
 
-def sextant_get_listings(sold_url_list, host_photos=False):
+def sextant_get_listings(sold_url_list):
     t0 = time.perf_counter()
     URL = "https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=1&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=0"
     page = requests.get(URL)
@@ -68,7 +64,7 @@ def sextant_get_listings(sold_url_list, host_photos=False):
         results = executor.map(sextant_get_links, (item["response"] for item in resp))
         for result in results:
             links += result
-    links = [link for link in links if link not in sold_url_list]
+    # links = [link for link in links if link not in sold_url_list]
 
     print("Number of unique listing URLs found:", len(links))
 
@@ -87,21 +83,10 @@ def sextant_get_listings(sold_url_list, host_photos=False):
     print("Old listings to remove:", len(links_dead))
     # pprint(links_dead)
 
-    listing_photos_to_delete_local = []
-
     if links_dead:
         for listing in listings:
             if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
                 listings.remove(listing)
-
-        for listing_ref in listing_photos_to_delete_local:
-            try:
-                shutil.rmtree(
-                    f"{cwd}/static/images/sextant/{listing_ref}", ignore_errors=True
-                )
-            except:
-                pass
 
     counter_success = 0
     counter_fail = 0
@@ -115,7 +100,6 @@ def sextant_get_listings(sold_url_list, host_photos=False):
             get_listing_details,
             (item for item in response_objects),
             links_to_scrape,
-            [host_photos for x in links_to_scrape],
         )
         for result in results:
             if isinstance(result, str):
@@ -156,7 +140,7 @@ def sextant_get_links(page):
     return links
 
 
-def get_listing_details(page, url, host_photos):
+def get_listing_details(page, url):
     try:
         agent = "Sextant"
         soup = BeautifulSoup(page.content, "html.parser")
@@ -169,25 +153,25 @@ def get_listing_details(page, url, host_photos):
         # This dictionary allows access to a script tag that hosts much of the important data. The previous method of scraping these details as used on other agents that use the same template (Jammes, Time & Stone, and other - Adapt Immo) are being left in in case this method proves unreliable. The script tag is just identified as the last script tag in find_all, so might be unreliable when used on all listings. This way each piece of information can be commented in.out if errors are found in listing data.
 
         key_dict = {
-            "type_key": 2,
-            "town_key": 4,
-            "postcode_key": 5,
-            "price_key": 9,
-            "rooms_key": 11,
-            "bedrooms_key": 12,
-            "ref_key": 14,
+            "type_key": "libelle_famille_bien",
+            "town_key": "libelle_ville_bien",
+            "postcode_key": "code_postal_bien",
+            "price_key": "prix_bien",
+            "rooms_key": "pieces_bien",
+            "bedrooms_key": "chambres_bien",
+            "ref_key": "mandat_bien",
         }
 
-        prop_type_div = soup.find_all("script")[-1].get_text()
-        prop_type_div = prop_type_div[
-            prop_type_div.find("'dimension") : prop_type_div.find("});") - 7
+        details_dict_raw = soup.find_all("script")[-1].get_text()
+        details_dict_raw = details_dict_raw[
+            details_dict_raw.find(", {") + 3 : details_dict_raw.find("'});") - 7
         ]
 
         details_dict = {}
-        for item in prop_type_div.split(","):
+        for item in details_dict_raw.split(","):
             key, value = item.split(":")
             details_dict[
-                int(key.replace("'", "").replace("dimension", "").strip())
+                key.replace("'", "").replace("dimension", "").strip()
             ] = value.strip().strip("'")
         # pprint(details_dict)
 
@@ -224,7 +208,7 @@ def get_listing_details(page, url, host_photos):
 
         # Get price
 
-        # price_div = soup.find('div', class_="detail-bien-prix").get_text()
+        # price_div = soup.find("div", class_="detail-bien-prix").get_text()
         # price = int("".join([x for x in price_div if x.isdigit()]))
 
         # print("Price:", price, "€")
@@ -233,57 +217,77 @@ def get_listing_details(page, url, host_photos):
 
         # Page returns two identical spans with itemprop="productID", one with a hidden ref and one with the 4 digit visible ref. No way to differentiate between the two. The second one has the desired  ref, so I turned it into a list, pulled the second item on the list (with the correct ref), then list comprehension to extract the digits, and join them into a string to get the correct ref.
 
-        # prop_ref_div = soup.find_all('span', itemprop="productID")
+        # prop_ref_div = soup.find_all("span", itemprop="productID")
         # prop_ref = list(prop_ref_div)
         # ref = "".join([char for char in str(prop_ref[1]) if char.isnumeric()])
 
         # print("ref:", ref)
 
-        # Get property details
-        # This returns a whole chunk of text for the property specs that gets separated to find the number of bedrooms, rooms, house size and land size.
+        # # Get property details
+        # # This returns a whole chunk of text for the property specs that gets separated to find the number of bedrooms, rooms, house size and land size.
 
-        details_div = list(soup.find("div", class_="detail-bien-specs"))
-        details = str(details_div[1])
-        details = details.split("\n")
+        details_div_raw = soup.find("div", class_="detail-bien-specs")
+        details_div = details_div_raw.findAll("li")
+        # pprint(details_div)
 
-        # Chambres
+        # # Plot size
+        # # Property and plot sizes are not available from the script tag dictionary method above, so are scraped as usual.
 
-        # bedrooms = "".join([cham for cham in details if "chambre(s)" in cham]).split()
-        # bedrooms = bedrooms[bedrooms.index("chambre(s)")-1]
+        plot = None
+        size = None
+
+        for item in details_div:
+            if "terrain" in str(item):
+                try:
+                    plot = int(
+                        "".join(
+                            [
+                                num
+                                for num in item.get_text()
+                                if num.isnumeric() and num.isascii()
+                            ]
+                        )
+                    )
+                except:
+                    pass
+            elif "surface" in str(item):
+                try:
+                    size = int(
+                        float(
+                            "".join(
+                                [
+                                    num
+                                    for num in item.get_text()
+                                    if num.isnumeric() and num.isascii()
+                                ]
+                            )
+                        )
+                    )
+                except:
+                    pass
+
+        # print("Plot:", plot, "m²")
+        # print("Size:", size, "m²")
+
+        # # Chambres
+
+        # bedrooms = "".join([cham for cham in details_div if "chambre(s)" in cham]).split()
+        # bedrooms = bedrooms[bedrooms.index("chambre(s)") - 1]
         # if bedrooms.isnumeric():
         #     bedrooms = int(bedrooms)
         # else:
         #     bedrooms = None
-        # print("Bedrooms:", bedrooms)
+        # # print("Bedrooms:", bedrooms)
 
-        # Rooms
+        # # Rooms
 
         # rooms = "".join([rooms for rooms in details if "pièce(s)" in rooms]).split()
-        # rooms = rooms[rooms.index("pièce(s)")-1]
+        # rooms = rooms[rooms.index("pièce(s)") - 1]
         # if rooms.isnumeric():
         #     rooms = int(rooms)
         # else:
         #     rooms = None
-        # print("Rooms:", rooms)
-
-        # Plot size
-        # Property and plot sizes are not available from the script tag dictionary method above, so are scraped as usual.
-
-        plot = "".join([plot for plot in details if "terrain" in plot]).split()
-        if plot[-2].isnumeric():
-            plot = int(plot[-2])
-        else:
-            plot = None
-        # print("Plot:", plot, "m²")
-
-        # Property size
-
-        size = "".join([size for size in details if "surface" in size]).split()
-        if size[-2].isnumeric():
-            size = int(size[-2])
-        else:
-            size = None
-        # print("Size:", size, "m²")
+        # # print("Rooms:", rooms)
 
         # Description
 
@@ -309,32 +313,7 @@ def get_listing_details(page, url, host_photos):
         photos = [link.replace('"/>', "") for link in photos]
         # pprint(photos)
 
-        if host_photos:
-            agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
-
-            make_photos_dir(ref, cwd, agent_abbr)
-
-            photos_hosted = []
-            photos_failed = []
-            i = 0
-            failed = 0
-
-            resp = get_data(photos)
-            for item in resp:
-                try:
-                    photos_hosted.append(
-                        dl_comp_photo(item["response"], ref, i, cwd, agent_abbr)
-                    )
-                    i += 1
-                except:
-                    photos_failed.append(item["link"])
-                    failed += 1
-
-            if failed:
-                print(f"{failed} photos failed to scrape")
-                pprint(photos_failed)
-        else:
-            photos_hosted = photos
+        photos_hosted = photos
 
         gps = None
         if isinstance(town, str):
@@ -367,31 +346,42 @@ def get_listing_details(page, url, host_photos):
 
         return listing.__dict__
 
-    except:
+    except Exception as e:
+        # print(e)
         return url
 
 
-cwd = os.getcwd()
+# test_urls = [
+#     'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-saint-louis-et-parahou-p-r7-75011146359.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-ville-quillan-p-r7-75011146635.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-appartement-quillan-p-r7-75011146565.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-hameau-pecharic-et-le-py-p-r7-75011146637.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-esperaza-p-r7-75011146630.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-bessede-de-sault-p-r7-75011146087.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-quillan-p-r7-75011144376.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-nebias-p-r7-75011144372.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-puilaurens-p-r7-75011145856.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-quillan-p-r7-75011142383.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-caudies-de-fenouilledes-p-r7-75011139164.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-lapradelle-p-r7-75011137375.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-ville-quillan-p-r7-75011138915.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-campagne-salvezines-p-r7-7501193876.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-esperaza-p-r7-7501178348.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-a-renover-caudies-de-fenouilledes-p-r7-7501172791.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-a-renover-saint-paul-de-fenouillet-p-r7-7501167777.html'
+# ]
 
-get_listing_details(
-    requests.get(
-        "https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html"
-    ),
-    "https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html",
-    False,
-)
+# get_listing_details(
+#     requests.get(test_urls[0]),
+#     test_urls[0]
+# )
 
-
-# links = []
-# for i in range(1, 8):
-#     links += sextant_get_links(requests.get(f"https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page={i}&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=1"))
-# print(len(links))
 
 # sextant_get_links(requests.get(f"https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=9&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=1"))
 
-# sextant_get_listings(False)
 
-# sextant_listings = sextant_get_listings(host_photos=False)
+# sextant_listings = sextant_get_listings()
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(sextant_listings, outfile, ensure_ascii=False)
