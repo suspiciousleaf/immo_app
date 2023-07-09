@@ -361,38 +361,18 @@ def search(
     return mini_listings
 
 
-# This function will take a list of listing ids, and will return the full dictionary for each listing id. This allows for front end pagination and means the main search only needs to run once, and reduces the bandwidth required.
+# This function will take a list of listing ids, and will return the full dictionary for each listing id. This allows for front end pagination and means the main search only needs to run once, and reduces the bandwidth required. Results are returned in the order requested so sorting can be done on front end.
 def listings_id_search(listings, refs):
-    results = []
-    for listing in listings:
-        if listing["id"] in refs:
-            results.append(listing)
-    return results
+    results = [listing for listing in listings if listing["id"] in refs]
+    return sorted(results, key=lambda x: refs.index(x["id"]))
 
 
 # If this is set to true, console will log how many valid listings are found after applying each filter. Used for debugging
 print_filter_results = False
 
-# refs = [
-#     "time-1269",
-#     "time-1292",
-#     "privee-329586APAU",
-#     "privee-312265LVER",
-#     "human-450-452",
-#     "human-141-4794",
-#     "c21-28079",
-#     "c21-3706",
-#     "beaux-CAAC283550E",
-#     "beaux-TAAPR342",
-#     "api-14783",
-#     "api-14795",
-# ]
 
 # t0 = time.perf_counter()
 # results_list = search(listings, refs)
 # print("\nNumber of results:", len(results_list), "\n")
 # t1 = time.perf_counter()
 # print(f"Time taken: {t1-t0:.2f}s")
-
-
-# Front end sorting is done with: price agent size plot (ref)
