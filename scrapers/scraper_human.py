@@ -286,6 +286,7 @@ def get_listing_details(page, url, host_photos):
 
         # Description
         description = soup.find("div", class_="descriptif").p.get_text().splitlines()
+        description = [line for line in description if line]
         # pprint(description)
 
         # Photos

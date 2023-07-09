@@ -220,7 +220,8 @@ def get_listing_details(page, url, host_photos):
         description = []
         for item in description_div:
             if item:
-                description.append(item.replace("\n", "").strip())
+                if item.replace("\n", "").strip():
+                    description.append(item.replace("\n", "").strip())
 
         # pprint(description)
 

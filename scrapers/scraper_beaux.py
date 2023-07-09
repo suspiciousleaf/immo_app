@@ -275,7 +275,8 @@ async def get_listing_details(url, semaphore, browser):
                 for line in description_raw:
                     if "Géorisques" or "Plus de détails" in line:
                         break
-                    description.append(line)
+                    if line:
+                        description.append(line)
             except:
                 description - []
             # pprint(description)
