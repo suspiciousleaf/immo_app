@@ -236,6 +236,7 @@ def get_listing_details(page, url):
 
         # Description
         description = soup.find("div", class_="offreContent").p.get_text().splitlines()
+        description = [line for line in description if line]
 
         # print(description)
 
