@@ -152,28 +152,41 @@ def get_listing_details(page, url):
 
         # This dictionary allows access to a script tag that hosts much of the important data. The previous method of scraping these details as used on other agents that use the same template (Jammes, Time & Stone, and other - Adapt Immo) are being left in in case this method proves unreliable. The script tag is just identified as the last script tag in find_all, so might be unreliable when used on all listings. This way each piece of information can be commented in.out if errors are found in listing data.
 
-        key_dict = {
-            "type_key": "libelle_famille_bien",
-            "town_key": "libelle_ville_bien",
-            "postcode_key": "code_postal_bien",
-            "price_key": "prix_bien",
-            "rooms_key": "pieces_bien",
-            "bedrooms_key": "chambres_bien",
-            "ref_key": "mandat_bien",
-        }
-
         details_dict_raw = soup.find_all("script")[-1].get_text()
         details_dict_raw = details_dict_raw[
             details_dict_raw.find(", {") + 3 : details_dict_raw.find("'});") - 7
         ]
 
+        if "dimension" in details_dict_raw:
+            key_dict = {
+                "type_key": "2",
+                "town_key": "4",
+                "postcode_key": "5",
+                "price_key": "9",
+                "rooms_key": "11",
+                "bedrooms_key": "12",
+                "ref_key": "14",
+            }
+        else:
+            key_dict = {
+                "type_key": "libelle_famille_bien",
+                "town_key": "libelle_ville_bien",
+                "postcode_key": "code_postal_bien",
+                "price_key": "prix_bien",
+                "rooms_key": "pieces_bien",
+                "bedrooms_key": "chambres_bien",
+                "ref_key": "mandat_bien",
+            }
+
         details_dict = {}
         for item in details_dict_raw.split(","):
-            key, value = item.split(":")
-            details_dict[
-                key.replace("'", "").replace("dimension", "").strip()
-            ] = value.strip().strip("'")
-        # pprint(details_dict)
+            try:
+                key, value = item.split(":")
+                details_dict[
+                    key.replace("'", "").replace("dimension", "").strip()
+                ] = value.strip().strip("'")
+            except:
+                pass
 
         types = details_dict[key_dict["type_key"]].capitalize()
         ref = details_dict[key_dict["ref_key"]]
@@ -343,7 +356,7 @@ def get_listing_details(page, url):
             photos_hosted,
             gps,
         )
-
+        # pprint(listing.__dict__)
         return listing.__dict__
 
     except Exception as e:
@@ -352,33 +365,16 @@ def get_listing_details(page, url):
 
 
 # test_urls = [
-#     'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-saint-louis-et-parahou-p-r7-75011146359.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-ville-quillan-p-r7-75011146635.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-appartement-quillan-p-r7-75011146565.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-hameau-pecharic-et-le-py-p-r7-75011146637.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-esperaza-p-r7-75011146630.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-bessede-de-sault-p-r7-75011146087.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-quillan-p-r7-75011144376.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-nebias-p-r7-75011144372.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-puilaurens-p-r7-75011145856.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-quillan-p-r7-75011142383.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-en-pierre-montfort-sur-boulzane-p-r7-75011142962.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-caudies-de-fenouilledes-p-r7-75011139164.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-lapradelle-p-r7-75011137375.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-ville-quillan-p-r7-75011138915.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-campagne-salvezines-p-r7-7501193876.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-esperaza-p-r7-7501178348.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-a-renover-caudies-de-fenouilledes-p-r7-7501172791.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-a-renover-saint-paul-de-fenouillet-p-r7-7501167777.html'
+#     "https://www.sextantfrance.fr/fr/annonce/vente-villa-quillan-p-r7-75011147118.html",
+#     "https://www.sextantfrance.fr/fr/annonce/vente-maison-de-hameau-puivert-p-r7-75011147116.html",
+#     "https://www.sextantfrance.fr/fr/annonce/vente-maison-bessede-de-sault-p-r7-75011147016.html",
+#     "https://www.sextantfrance.fr/fr/annonce/vente-maison-quillan-p-r7-75011147115.html",
+#     "https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-puilaurens-p-r7-75011147017.html",
+#     "https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-saint-louis-et-parahou-p-r7-75011147117.html",
 # ]
 
-# get_listing_details(
-#     requests.get(test_urls[0]),
-#     test_urls[0]
-# )
-
-
-# sextant_get_links(requests.get(f"https://arnaud-masip.sextantfrance.fr/ajax/ListeBien.php?numnego=75011397&page=9&TypeModeListeForm=pict&ope=1&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=0&DataConfig=JsConfig.GGMap.Liste&Pagination=1"))
+# for test_url in test_urls:
+#     get_listing_details(requests.get(test_url), test_url)
 
 
 # sextant_listings = sextant_get_listings()
