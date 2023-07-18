@@ -295,7 +295,10 @@ def main():
 
     for listing in all_listings:
         listing["id"] = create_ref(listing["agent"], listing["ref"])
-        listing["types"] = unidecode(listing["types"].capitalize())
+        try:
+            listing["types"] = unidecode(listing["types"].capitalize())
+        except:
+            listing["types"] = "Other"
         temp_type = listing["types"]
         # Maison is the most common type, and some descriptions have "maison" as the second word (eg jolie maison), so the split line would cause the maison to be lost, leaving the type as jolie in the example
         if "maison" in listing["types"].casefold():
@@ -371,3 +374,14 @@ if __name__ == "__main__":
 
 
 # TODO Remove class use
+
+# Sextant Failed URLs:
+# ['https://www.sextantfrance.fr/fr/annonce/vente-villa-quillan-p-r7-75011147118.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-hameau-puivert-p-r7-75011147116.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-bessede-de-sault-p-r7-75011147016.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-quillan-p-r7-75011147115.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-puilaurens-p-r7-75011147017.html',
+#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-saint-louis-et-parahou-p-r7-75011147117.html']
+
+# Safti Failed URLs:
+# ['https://www.safti.fr/votre-conseiller-safti/sylvie-jubault']

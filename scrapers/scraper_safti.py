@@ -186,7 +186,8 @@ def get_listing_details(page, url):
                 pass
 
         return listings
-    except:
+    except Exception as e:
+        # print(e)
         return url
 
 
@@ -207,7 +208,7 @@ def remove_duplicates(listings):
 
 cwd = os.getcwd()
 
-# test_url = "https://www.safti.fr/votre-conseiller-safti/jean-philippe-magrino"
+# test_url = "https://www.safti.fr/votre-conseiller-safti/sylvie-jubault"
 
 # get_listing_details(requests.get(test_url), test_url)
 
