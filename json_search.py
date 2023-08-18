@@ -281,7 +281,7 @@ def filter_location(results, towns, search_radius, inc_none_location):
                                     location_results.append(result)
                             except:
                                 pass
-        return location_results
+        return list(set(location_results))
     else:
         return results
 
