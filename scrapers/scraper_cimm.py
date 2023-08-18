@@ -44,7 +44,7 @@ def cimm_get_listings(sold_url_list):
 
 def cimm_create_listing(listing):
     types = listing["realty_family"].capitalize()
-    town = unidecode(listing["real_city"]).capitalize()
+    town = unidecode(listing["real_city"]).capitalize().replace("-", " ")
     postcode = listing["real_cp"]
     price = int(listing["price"])
     agent = "Cimm Immobilier"
