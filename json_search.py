@@ -204,7 +204,7 @@ def filter_location(results, towns, search_radius, inc_none_location):
             for result in results:
                 # Adds any listings with a town name None, or name not in list of valid town names
                 if inc_none_location == True:
-                    if result["town"] == None:
+                    if result["town"] == None and result not in location_results:
                         location_results.append(result)
                     else:
                         if (
@@ -218,6 +218,7 @@ def filter_location(results, towns, search_radius, inc_none_location):
                                 .replace("l'isle en dodon", "l' isle en dodon")
                             )
                             not in town_list_clean
+                            and result not in location_results
                         ):
                             location_results.append(result)
                         else:
@@ -238,6 +239,7 @@ def filter_location(results, towns, search_radius, inc_none_location):
                                         ),
                                     )
                                     <= search_radius
+                                    and result not in location_results
                                 ):
                                     location_results.append(result)
                             except:
@@ -277,11 +279,12 @@ def filter_location(results, towns, search_radius, inc_none_location):
                                         ),
                                     )
                                     <= search_radius
+                                    and result not in location_results
                                 ):
                                     location_results.append(result)
                             except:
                                 pass
-        return list(set(location_results))
+        return location_results
     else:
         return results
 
