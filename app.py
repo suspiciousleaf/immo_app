@@ -385,3 +385,8 @@ if __name__ == "__main__":
 
 # Safti Failed URLs:
 # ['https://www.safti.fr/votre-conseiller-safti/sylvie-jubault']
+
+
+#! Nestenn sold links appearing in search results: https://immobilier-lavelanet.nestenn.com/maison-2012-vue-lac-de-montbel-ref-37611829
+
+# Maybe add: https://www.stephaneplazaimmobilier.com/

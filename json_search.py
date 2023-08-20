@@ -202,88 +202,88 @@ def filter_location(results, towns, search_radius, inc_none_location):
         location_results = []
         for town in towns:
             for result in results:
-                # Adds any listings with a town name None, or name not in list of valid town names
-                if inc_none_location == True:
-                    if result["town"] == None and result not in location_results:
-                        location_results.append(result)
-                    else:
-                        if (
-                            unidecode(
-                                result["town"]
-                                .casefold()
-                                .replace("-", " ")
-                                .replace("l hers", "l'hers")
-                                .replace("d olmes", "d'olmes")
-                                .replace("val du faby", "esperaza")
-                                .replace("l'isle en dodon", "l' isle en dodon")
-                            )
-                            not in town_list_clean
-                            and result not in location_results
-                        ):
+                if result not in location_results:
+                    # Adds any listings with a town name None, or name not in list of valid town names
+                    if inc_none_location == True:
+                        if result["town"] == None:
                             location_results.append(result)
                         else:
-                            try:
-                                if (
-                                    get_distance(
-                                        town.casefold(),
-                                        unidecode(
-                                            result["town"]
-                                            .casefold()
-                                            .replace("-", " ")
-                                            .replace("l hers", "l'hers")
-                                            .replace("d olmes", "d'olmes")
-                                            .replace("val du faby", "esperaza")
-                                            .replace(
-                                                "l'isle en dodon", "l' isle en dodon"
-                                            )
-                                        ),
-                                    )
-                                    <= search_radius
-                                    and result not in location_results
-                                ):
-                                    location_results.append(result)
-                            except:
-                                pass
-                elif inc_none_location == False:
-                    if result["town"] == None:
-                        pass
-                    else:
-                        if (
-                            unidecode(
-                                result["town"]
-                                .casefold()
-                                .replace("-", " ")
-                                .replace("l hers", "l'hers")
-                                .replace("d olmes", "d'olmes")
-                                .replace("val du faby", "esperaza")
-                                .replace("l'isle en dodon", "l' isle en dodon")
-                            )
-                            not in town_list_clean
-                        ):
+                            if (
+                                unidecode(
+                                    result["town"]
+                                    .casefold()
+                                    .replace("-", " ")
+                                    .replace("l hers", "l'hers")
+                                    .replace("d olmes", "d'olmes")
+                                    .replace("val du faby", "esperaza")
+                                    .replace("l'isle en dodon", "l' isle en dodon")
+                                )
+                                not in town_list_clean
+                            ):
+                                location_results.append(result)
+                            else:
+                                try:
+                                    if (
+                                        get_distance(
+                                            town.casefold(),
+                                            unidecode(
+                                                result["town"]
+                                                .casefold()
+                                                .replace("-", " ")
+                                                .replace("l hers", "l'hers")
+                                                .replace("d olmes", "d'olmes")
+                                                .replace("val du faby", "esperaza")
+                                                .replace(
+                                                    "l'isle en dodon",
+                                                    "l' isle en dodon",
+                                                )
+                                            ),
+                                        )
+                                        <= search_radius
+                                    ):
+                                        location_results.append(result)
+                                except:
+                                    pass
+                    elif inc_none_location == False:
+                        if result["town"] == None:
                             pass
                         else:
-                            try:
-                                if (
-                                    get_distance(
-                                        town.casefold(),
-                                        unidecode(
-                                            result["town"]
-                                            .casefold()
-                                            .replace("-", " ")
-                                            .replace("l hers", "l'hers")
-                                            .replace("d olmes", "d'olmes")
-                                            .replace("val du faby", "esperaza")
-                                            .replace(
-                                                "l'isle en dodon", "l' isle en dodon"
-                                            )
-                                        ),
-                                    )
-                                    <= search_radius
-                                    and result not in location_results
-                                ):
-                                    location_results.append(result)
-                            except:
+                            if (
+                                unidecode(
+                                    result["town"]
+                                    .casefold()
+                                    .replace("-", " ")
+                                    .replace("l hers", "l'hers")
+                                    .replace("d olmes", "d'olmes")
+                                    .replace("val du faby", "esperaza")
+                                    .replace("l'isle en dodon", "l' isle en dodon")
+                                )
+                                not in town_list_clean
+                            ):
                                 pass
+                            else:
+                                try:
+                                    if (
+                                        get_distance(
+                                            town.casefold(),
+                                            unidecode(
+                                                result["town"]
+                                                .casefold()
+                                                .replace("-", " ")
+                                                .replace("l hers", "l'hers")
+                                                .replace("d olmes", "d'olmes")
+                                                .replace("val du faby", "esperaza")
+                                                .replace(
+                                                    "l'isle en dodon",
+                                                    "l' isle en dodon",
+                                                )
+                                            ),
+                                        )
+                                        <= search_radius
+                                    ):
+                                        location_results.append(result)
+                                except:
+                                    pass
         return location_results
     else:
         return results
