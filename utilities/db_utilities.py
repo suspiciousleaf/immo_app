@@ -381,6 +381,6 @@ def add_sold_urls_to_database(db, cursor, sold_urls):
         print(f"Failed to insert sold urls: {str(e)}")
 
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     ssh = open_SSH_tunnel()
     close_SSH_tunnel(ssh)
