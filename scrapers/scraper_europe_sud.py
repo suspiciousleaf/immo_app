@@ -14,7 +14,9 @@ from unidecode import unidecode
 
 from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
 from models import Listing
-from utilities.utility_holder import get_gps, get_data, agent_dict
+from utilities.utility_holder import get_gps, get_data
+from utilities.agent_dict import agent_dict
+
 
 try:
     try:
