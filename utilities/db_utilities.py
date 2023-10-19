@@ -2,6 +2,9 @@ import mysql.connector
 from pprint import pprint
 import os
 import subprocess
+from dotenv import load_dotenv
+
+load_dotenv()
 
 ssh_password = os.environ.get("PA_SSH_PASS")
 db_password = os.environ.get("PA_DB_PASS")
@@ -378,23 +381,6 @@ def add_sold_urls_to_database(db, cursor, sold_urls):
         print(f"Failed to insert sold urls: {str(e)}")
 
 
-#! Write code to add newly scraped listings to database
-
-
-if __name__ == "__main__":
+if __name__ == "__main__"
     ssh = open_SSH_tunnel()
     close_SSH_tunnel(ssh)
-
-
-# old_listing_urls_dict = {agent: {} for agent in agent_dict.values()}
-
-
-# for result in old_listing_urls:
-#     old_listing_urls_dict[result["agent"]].update({result["link_url"]: result["ref"]})
-
-# # pprint(old_listing_urls_dict["A.P.I."])
-
-# results = api_get_listings(old_listing_urls_dict["A.P.I."], host_photos=False)
-
-# # pprint(results["listings"])
-# # pprint(results["urls_to_remove"])
