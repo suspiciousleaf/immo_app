@@ -1,5 +1,8 @@
 # Running this program will run all of the scrapers. If a listings.json file is found it will add newly found listings and remove ones that are no longer present on the agent websites. If no listings.json file is present, it will build one from scratch. Typical time to run an update is 1 minute, building a new one is around 3 minutes. If no photos are hosted, it can be as little as 90 seconds.
+from gevent import monkey
 
+monkey.patch_all(thread=False, select=False)
+import grequests
 import json
 import time
 
@@ -10,6 +13,16 @@ from unidecode import unidecode
 
 t0 = time.perf_counter()
 
+from utilities.db_utilities import (
+    get_current_listing_urls,
+    select_sold_urls,
+    add_listings,
+    delete_listings_by_url_list,
+    add_sold_urls_to_database,
+    open_SSH_tunnel,
+    close_SSH_tunnel,
+)
+from utilities.agent_dict import agent_dict
 from scrapers.scraper_ami09 import ami09_get_listings
 from scrapers.scraper_api import api_get_listings
 from scrapers.scraper_arieg import arieg_get_listings
@@ -32,269 +45,283 @@ from scrapers.scraper_richardson import richardson_get_listings
 from scrapers.scraper_safti import safti_get_listings
 from scrapers.scraper_selection_habitat import selection_get_listings
 from scrapers.scraper_sextant import sextant_get_listings
+from scrapers.scraper_steph import steph_get_listings
 from scrapers.scraper_time_stone import time_stone_get_listings
 
 # Import from json_search must be below scraper imports due to grequests recursion error if imported before requests
-from json_search import agent_dict
 from utilities.image_sold_checker import sold_image_check
-from utilities.utilities import property_types
+from utilities.utility_holder import property_types
+from utilities.async_image_downloader import sync_local_remote_image_directories
 
-# The code below will run the imported scraper for each agent, host_photos will determine if the photos for each listing are downloaded, resized, and compressed for local hosting. Try/except is used to prevent an error with a single scraper causing the whole program to fail to run. Faults are reported to the failed_scrapes list, and finally to the console.
 
-
-def main():
+try:
     try:
         with open(
             "times_run_since_last_image_scan_counter.json", "r", encoding="utf8"
         ) as infile:
             times_run_since_last_image_scan = json.load(infile)
+        running_local = True
     except:
-        # If not found, will run the image scan
-        times_run_since_last_image_scan = {"counter": 5}
+        running_local = False
+        with open(
+            "/home/suspiciousleaf/immo_app/times_run_since_last_image_scan_counter.json",
+            "r",
+            encoding="utf8",
+        ) as infile:
+            times_run_since_last_image_scan = json.load(infile)
+except:
+    times_run_since_last_image_scan = {"counter": 5}
 
-    try:
-        with open("sold_urls.json", "r", encoding="utf8") as infile:
-            sold_urls = json.load(infile)
-    except:
-        sold_urls = {"urls": []}
+# The code below will run the imported scraper for each agent, host_photos will determine if the photos for each listing are downloaded, resized, and compressed for local hosting. Try/except is used to prevent an error with a single scraper causing the whole program to fail to run. Faults are reported to the failed_scrapes list, and finally to the console.
 
-    try:
-        try:
-            with open("listings.json", "r", encoding="utf8") as infile:
-                listings = json.load(infile)
-        except:
-            with open(
-                "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-            ) as infile:
-                listings = json.load(infile)
-    except:
-        listings = []
 
-    sold_url_list = sold_urls["urls"]
+def main():
+    if running_local:
+        ssh = open_SSH_tunnel()
+
+    old_listing_urls = get_current_listing_urls()
+    old_listing_urls_dict = {agent: {} for agent in agent_dict.values()}
+
+    for result in old_listing_urls:
+        old_listing_urls_dict[result["agent"]][result["link_url"]] = result["ref"]
+
+    sold_urls_set = select_sold_urls()
 
     failed_scrapes = {}
+
     try:
         # Must be True as host website blocks leeching for many photos
-        ami09_listings = ami09_get_listings(host_photos=True)
-    except Exception as e:
-        ami09_listings = [
-            listing for listing in listings if listing["agent"] == "Ami Immobilier"
-        ]
-        failed_scrapes["Ami Immobilier"] = e
-    try:
-        api_listings = api_get_listings(host_photos=False)
-    except Exception as e:
-        api_listings = [listing for listing in listings if listing["agent"] == "A.P.I."]
-        failed_scrapes["A.P.I."] = e
-    try:
-        arieg_listings = arieg_get_listings()
-    except Exception as e:
-        arieg_listings = [
-            listing for listing in listings if listing["agent"] == "Arieg'Immo"
-        ]
-        failed_scrapes["Arieg'Immo"] = e
-    try:
-        arthur_immo_listings = arthur_immo_get_listings(
-            sold_url_list, host_photos=False
+        ami09_listings = ami09_get_listings(
+            old_listing_urls_dict["Ami Immobilier"], host_photos=True
         )
     except Exception as e:
-        arthur_immo_listings = [
-            listing for listing in listings if listing["agent"] == "Arthur Immo"
-        ]
+        ami09_listings = {"listings": [], "urls_to_remove": []}
+        failed_scrapes["Ami Immobilier"] = e
+
+    try:
+        api_listings = api_get_listings(
+            old_listing_urls_dict["A.P.I."], host_photos=False
+        )
+    except Exception as e:
+        api_listings = {"listings": [], "urls_to_remove": []}
+        failed_scrapes["A.P.I."] = e
+
+    try:
+        arieg_listings = arieg_get_listings(old_listing_urls_dict["Arieg'Immo"])
+    except Exception as e:
+        arieg_listings = {"listings": [], "urls_to_remove": []}
+        failed_scrapes["Arieg'Immo"] = e
+
+    try:
+        arthur_immo_listings = arthur_immo_get_listings(
+            old_listing_urls_dict["Arthur Immo"], sold_urls_set, host_photos=False
+        )
+    except Exception as e:
+        arthur_immo_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Arthur Immo"] = e
+
     try:
-        aude_immo_listings = aude_immo_get_listings(host_photos=False)
+        aude_immo_listings = aude_immo_get_listings(
+            old_listing_urls_dict["Aude Immobilier"], host_photos=False
+        )
     except Exception as e:
-        aude_immo_listings = [
-            listing for listing in listings if listing["agent"] == "Aude Immobilier"
-        ]
+        aude_immo_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Aude Immobilier"] = e
+
     try:
-        bac_listings = bac_get_listings()
+        bac_listings = bac_get_listings(old_listing_urls_dict["BAC Immobilier"])
     except Exception as e:
-        bac_listings = [
-            listing for listing in listings if listing["agent"] == "BAC Immobilier"
-        ]
+        bac_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["BAC Immobilier"] = e
+
     try:
         # host photos option not needed
-        beaux_listings = beaux_get_listings()
+        beaux_listings = beaux_get_listings(old_listing_urls_dict["Beaux Villages"])
     except Exception as e:
-        beaux_listings = [
-            listing for listing in listings if listing["agent"] == "Beaux Villages"
-        ]
+        beaux_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Beaux Villages"] = e
+
     try:
-        c21_listings = c21_get_listings(host_photos=False)
+        c21_listings = c21_get_listings(
+            old_listing_urls_dict["Century 21"], host_photos=False
+        )
     except Exception as e:
-        c21_listings = [
-            listing for listing in listings if listing["agent"] == "Century 21"
-        ]
+        c21_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Century 21"] = e
+
     try:
         # host photos not needed due to public API use for Cimm
-        cimm_listings = cimm_get_listings(sold_url_list)
+        cimm_listings = cimm_get_listings(
+            old_listing_urls_dict["Cimm Immobilier"], sold_urls_set
+        )
     except Exception as e:
-        cimm_listings = [
-            listing for listing in listings if listing["agent"] == "Cimm Immobilier"
-        ]
+        cimm_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Cimm Immobilier"] = e
+
     try:
-        eureka_immo_listings = eureka_immo_get_listings(host_photos=False)
+        eureka_immo_listings = eureka_immo_get_listings(
+            old_listing_urls_dict["Eureka Immobilier"]
+        )
     except Exception as e:
-        eureka_immo_listings = [
-            listing for listing in listings if listing["agent"] == "Eureka Immobilier"
-        ]
+        eureka_immo_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Eureka Immobilier"] = e
+
     try:
-        europe_sud_listings = europe_sud_get_listings(host_photos=False)
+        europe_sud_listings = europe_sud_get_listings(
+            old_listing_urls_dict["Europe Sud Immobilier"], host_photos=False
+        )
     except Exception as e:
-        europe_sud_listings = [
-            listing
-            for listing in listings
-            if listing["agent"] == "Europe Sud Immobilier"
-        ]
+        europe_sud_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Europe Sud Immobilier"] = e
+
     try:
-        human_listings = human_get_listings()
+        human_listings = human_get_listings(old_listing_urls_dict["Human Immobilier"])
     except Exception as e:
-        human_listings = [
-            listing for listing in listings if listing["agent"] == "Human Immobilier"
-        ]
+        human_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Human Immobilier"] = e
+
     try:
-        iad_listings = iad_immo_get_listings(host_photos=False)
+        iad_listings = iad_immo_get_listings(
+            old_listing_urls_dict["IAD Immobilier"], host_photos=False
+        )
     except Exception as e:
-        iad_listings = [
-            listing for listing in listings if listing["agent"] == "IAD Immobilier"
-        ]
+        iad_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["IAD Immobilier"] = e
+
     try:
-        immo_chez_toit_listings = immo_chez_toit_get_listings(host_photos=False)
+        immo_chez_toit_listings = immo_chez_toit_get_listings(
+            old_listing_urls_dict["L'Immo Chez Toit"], host_photos=False
+        )
     except Exception as e:
-        immo_chez_toit_listings = [
-            listing for listing in listings if listing["agent"] == "L'Immo Chez Toit"
-        ]
+        immo_chez_toit_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["L'Immo Chez Toit"] = e
+
     try:
-        jammes_listings = jammes_get_listings(sold_url_list, host_photos=False)
+        jammes_listings = jammes_get_listings(
+            old_listing_urls_dict["Cabinet Jammes"], sold_urls_set, host_photos=False
+        )
     except Exception as e:
-        jammes_listings = [
-            listing for listing in listings if listing["agent"] == "Cabinet Jammes"
-        ]
+        jammes_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Cabinet Jammes"] = e
+
     try:
-        mm_immo_listings = mm_immo_get_listings(sold_url_list, host_photos=False)
+        mm_immo_listings = mm_immo_get_listings(
+            old_listing_urls_dict["M&M Immobilier"], sold_urls_set, host_photos=False
+        )
     except Exception as e:
-        mm_immo_listings = [
-            listing for listing in listings if listing["agent"] == "M&M Immobilier"
-        ]
+        mm_immo_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["M&M Immobilier"] = e
+
     try:
-        nestenn_listings = nestenn_immo_get_listings(host_photos=False)
+        nestenn_listings = nestenn_immo_get_listings(
+            old_listing_urls_dict["Nestenn"], host_photos=False
+        )
     except Exception as e:
-        nestenn_listings = [
-            listing for listing in listings if listing["agent"] == "Nestenn"
-        ]
+        nestenn_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Nestenn"] = e
+
     try:
-        privee_listings = privee_get_listings()
+        privee_listings = privee_get_listings(
+            old_listing_urls_dict["Propriétés Privées"]
+        )
     except Exception as e:
-        privee_listings = [
-            listing for listing in listings if listing["agent"] == "Propriétés Privées"
-        ]
+        privee_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Propriétés Privées"] = e
+
     try:
         # Must be True as host website uses HTTP instead of HTTPS, can't embed images
-        richardson_listings = richardson_get_listings(host_photos=True)
+        richardson_listings = richardson_get_listings(
+            old_listing_urls_dict["Richardson Immobilier"], host_photos=True
+        )
     except Exception as e:
-        richardson_listings = [
-            listing
-            for listing in listings
-            if listing["agent"] == "Richardson Immobilier"
-        ]
+        richardson_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Richardson Immobilier"] = e
+
     try:
         # host photos option not needed
-        safti_listings = safti_get_listings(sold_url_list)
+        safti_listings = safti_get_listings(
+            old_listing_urls_dict["Safti"], sold_urls_set
+        )
     except Exception as e:
-        safti_listings = [
-            listing for listing in listings if listing["agent"] == "Safti"
-        ]
+        safti_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Safti"] = e
+
     try:
-        selection_listings = selection_get_listings(host_photos=False)
+        selection_listings = selection_get_listings(
+            old_listing_urls_dict["Selection Habitat"], host_photos=False
+        )
     except Exception as e:
-        selection_listings = [
-            listing for listing in listings if listing["agent"] == "Selection Habitat"
-        ]
+        selection_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Selection Habitat"] = e
+
     try:
-        sextant_listings = sextant_get_listings(sold_url_list)
+        sextant_listings = sextant_get_listings(
+            old_listing_urls_dict["Sextant"], sold_urls_set
+        )
     except Exception as e:
-        sextant_listings = [
-            listing for listing in listings if listing["agent"] == "Sextant"
-        ]
+        sextant_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Sextant"] = e
+
     try:
-        time_stone_listings = time_stone_get_listings(sold_url_list, host_photos=False)
+        steph_listings = steph_get_listings(old_listing_urls_dict["Stéphane Plaza"])
     except Exception as e:
-        time_stone_listings = [
-            listing
-            for listing in listings
-            if listing["agent"] == "Time & Stone Immobilier"
-        ]
-        failed_scrapes["Time & Stone Immobilier"] = e
+        steph_listings = {"listings": [], "urls_to_remove": []}
+        failed_scrapes["Stéphane Plaza"] = e
+
+    try:
+        time_stone_listings = time_stone_get_listings(
+            old_listing_urls_dict["Time and Stone Immobilier"],
+            sold_urls_set,
+            host_photos=False,
+        )
+    except Exception as e:
+        time_stone_listings = {"listings": [], "urls_to_remove": []}
+        failed_scrapes["Time and Stone Immobilier"] = e
 
     # If any of the whole scrapers fail to run, the previously scraped links will be passed through, and the scraper name and exception will be passed into a dictionary. If anything is in the dictionary after they have all run, the below message will be printed.
     if failed_scrapes:
-        print(f"The following agent(s) failed to scrape entirely:\n")
+        print(f"\n\nThe following agent(s) failed to scrape entirely:\n")
         pprint(failed_scrapes)
 
-    all_listings = (
-        ami09_listings
-        + api_listings
-        + arieg_listings
-        + arthur_immo_listings
-        + aude_immo_listings
-        + bac_listings
-        + beaux_listings
-        + c21_listings
-        + cimm_listings
-        + eureka_immo_listings
-        + europe_sud_listings
-        + human_listings
-        + iad_listings
-        + immo_chez_toit_listings
-        + jammes_listings
-        + mm_immo_listings
-        + nestenn_listings
-        + privee_listings
-        + richardson_listings
-        + safti_listings
-        + selection_listings
-        + sextant_listings
-        + time_stone_listings
-    )
+    listing_agents = [
+        ami09_listings,
+        api_listings,
+        arieg_listings,
+        arthur_immo_listings,
+        aude_immo_listings,
+        bac_listings,
+        beaux_listings,
+        c21_listings,
+        cimm_listings,
+        eureka_immo_listings,
+        europe_sud_listings,
+        human_listings,
+        iad_listings,
+        immo_chez_toit_listings,
+        jammes_listings,
+        mm_immo_listings,
+        nestenn_listings,
+        privee_listings,
+        richardson_listings,
+        safti_listings,
+        selection_listings,
+        sextant_listings,
+        steph_listings,
+        time_stone_listings,
+    ]
+
+    all_listings = []
+    listings_to_remove = []
+
+    for agent in listing_agents:
+        all_listings.extend(agent["listings"])
+        listings_to_remove.extend(agent["urls_to_remove"])
 
     # The combined listings have a huge range of property categories, the code below reduces the total categories down to six. House, apartment, multi-lodging buildings, commercial property, empty land, and "other". Any listings that don't fit into the first five are reclassified as "other", and the original type is saved to "types_original" so it can be examined and classified later.
 
     uncategorized_types = []
 
-    def key_from_value(agent_name_full, agent_dict=agent_dict):
-        for agent_name_short, value in agent_dict.items():
-            if value == agent_name_full:
-                return agent_name_short
-        return None
-
-    def create_ref(agent_name_full, ref):
-        agent_name_short = key_from_value(agent_name_full)
-        if agent_name_short and ref:
-            return f"{agent_name_short}-{ref}"
-        return None
-
     for listing in all_listings:
-        listing["id"] = create_ref(listing["agent"], listing["ref"])
         try:
             listing["types"] = unidecode(listing["types"].capitalize())
         except:
@@ -334,25 +361,36 @@ def main():
         print("\nThe following uncategorized property types were found:")
         pprint(uncategorized_types)
 
+    # Add newly scrape listings to database if present.
+    if all_listings:
+        add_listings(all_listings)
+
     # This counts up each time the scraper is run, and will run the function that scans main images for "Sold" etc text to remove those listings once every five times the scraper runs
 
-    number_listings_before_image_scan = len(all_listings)
     if times_run_since_last_image_scan["counter"] >= 5:
         try:
             print("\nImage scan function running, this will take approx 90 seconds")
-            all_listings = sold_image_check(all_listings)
+            listing_urls_to_remove = sold_image_check(all_listings)
+            if listing_urls_to_remove:
+                listings_to_remove.extend(listing_urls_to_remove)
+                add_sold_urls_to_database(listing_urls_to_remove)
             times_run_since_last_image_scan["counter"] = 0
             print(
-                f"Number of listings removed by image scan: {number_listings_before_image_scan - len(all_listings)}"
+                f"Number of listings removed by image scan: {len(listing_urls_to_remove)}"
             )
         except Exception as e:
             print(f"Image filter failed: {e}")
     else:
-        times_run_since_last_image_scan["counter"] += 1
+        pass  # times_run_since_last_image_scan["counter"] += 1
 
-    # The code below takes the final list of dictionaries and saves it as a json.
-    with open("listings.json", "w", encoding="utf-8") as outfile:
-        json.dump(all_listings, outfile, ensure_ascii=False)
+    # Any listings no longer online, or detected as sold by the image scanner, are removed from the database
+    if listings_to_remove:
+        delete_listings_by_url_list(listings_to_remove)
+
+    if running_local:
+        close_SSH_tunnel(ssh)
+
+    sync_local_remote_image_directories()
 
     # This saves the updated counter for the image scan
     with open(
@@ -360,7 +398,8 @@ def main():
     ) as outfile:
         json.dump(times_run_since_last_image_scan, outfile, ensure_ascii=False)
 
-    print("\n\nTotal listings: ", len(all_listings))
+    print("\n\nTotal listings added: ", len(all_listings))
+    print("\n\nTotal listings removed: ", len(listings_to_remove))
     print("COMPLETE")
 
     t1 = time.perf_counter()
@@ -373,20 +412,16 @@ if __name__ == "__main__":
     main()
 
 
-# TODO Remove class use
-
-# Sextant Failed URLs:
-# ['https://www.sextantfrance.fr/fr/annonce/vente-villa-quillan-p-r7-75011147118.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-hameau-puivert-p-r7-75011147116.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-bessede-de-sault-p-r7-75011147016.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-quillan-p-r7-75011147115.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-village-puilaurens-p-r7-75011147017.html',
-#  'https://www.sextantfrance.fr/fr/annonce/vente-maison-de-caractere-saint-louis-et-parahou-p-r7-75011147117.html']
-
-# Safti Failed URLs:
-# ['https://www.safti.fr/votre-conseiller-safti/sylvie-jubault']
-
-
 #! Nestenn sold links appearing in search results: https://immobilier-lavelanet.nestenn.com/maison-2012-vue-lac-de-montbel-ref-37611829
 
-# Maybe add: https://www.stephaneplazaimmobilier.com/
+# Maybe add:
+
+# TODO
+
+
+#! Check if agents_dict can be moved to utilities file, see what the search function expects to receive from search query, see what front end sends, etc.
+
+
+# TODO Century21 can return town and postcode but no GPS from scraper, eg 'https://www.century21.fr/trouver_logement/detail/6602900456/'
+
+# New immo to add? https://www.hdc-immo.com/

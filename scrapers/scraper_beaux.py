@@ -14,19 +14,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 
 from models import Listing
-from utilities.utilities import get_gps
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+from utilities.utility_holder import get_gps
 
 try:
     with open("postcodes_dict.json", "r", encoding="utf8") as infile:
@@ -53,7 +41,7 @@ except:
     gps_dict = []
 
 
-def beaux_get_listings():
+def beaux_get_listings(old_listing_urls_dict):
     t0 = time.perf_counter()
 
     URL = "https://beauxvillages.com/fr/nos-biens_fr?option=com_iproperty&view=allproperties&id=0&layout=&autocomplete=Aude%2CAri%C3%A8ge%2CH%C3%A9rault%2CPyr%C3%A9n%C3%A9es-Orientales%2CHaute-Garonne%2CAude&filter_province=Aude%2CAri%C3%A8ge%2CH%C3%A9rault%2CPyr%C3%A9n%C3%A9es-Orientales%2CHaute-Garonne&filter_county=Aude&filter_order=p.price&filter_order_Dir=ASC&commit=&5a7fb023d0edd8037757cf17e9634828=1&Itemid=10504793"
@@ -84,14 +72,7 @@ def beaux_get_listings():
         scrape_all_search_pages(search_urls)
     )
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Beaux Villages"
-    ]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Beaux Villages":
-            links_old.append(listing["link_url"])
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -104,6 +85,7 @@ def beaux_get_listings():
     failed_scrape_links = []
 
     results = []
+    listings = []
     if links_to_scrape:
         print(
             f"Scraping {len(links_to_scrape)} links, this will take approx {len(links_to_scrape)/2} seconds"
@@ -127,14 +109,12 @@ def beaux_get_listings():
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Beaux Villages: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 async def scrape_page_links(url, browser):
@@ -182,12 +162,9 @@ async def get_listing_details(url, semaphore, browser):
             await page.setRequestInterception(True)
 
             # Set up the request interception handler
-            # try:
             page.on(
                 "request", lambda request: asyncio.ensure_future(block_images(request))
             )
-            # except NetworkError as e:
-            #     print(f"AAAAA Error occurred: {e}")
 
             # This increases the timeout as it is sometimes triggered at the default of 30s
             page.setDefaultNavigationTimeout(60000)
@@ -334,9 +311,7 @@ async def get_listing_details(url, semaphore, browser):
             # print("Listing scraped", time.perf_counter())
             return listing.__dict__
         except Exception as e:
-            # print(f"Failed url: {url}")
-            # print(e)
-            return url
+            return f"{url}: {str(e)}"
         finally:
             await page.close()
 

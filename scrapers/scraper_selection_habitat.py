@@ -14,21 +14,9 @@ import shutil
 from unidecode import unidecode
 
 from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
 from models import Listing
-from utilities.utilities import get_gps, get_data
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+from utilities.utility_holder import get_gps, get_data
+from utilities.agent_dict import agent_dict
 
 try:
     try:
@@ -67,7 +55,7 @@ except:
         town_list = json.load(infile)
 
 
-def selection_get_listings(host_photos=False):
+def selection_get_listings(old_listing_urls_dict, host_photos=False):
     t0 = time.perf_counter()
     URL = "https://www.selectionhabitat.com/ajax/ListeBien.php?ope=1&page=1&ListeViewBienForm=text&lieu=D%C2%A411%C2%A4Aude+(11)%C2%A40.7517563608706%C2%A40.0415626093272%C2%A40%7CD%C2%A409%C2%A4Ari%C3%A8ge+(09)%C2%A40.7493157360778%C2%A40.0251932867004%C2%A40%7CD%C2%A466%C2%A4Pyr%C3%A9n%C3%A9es-Orientales+(66)%C2%A40.7435327970408%C2%A40.0443244340435%C2%A40&lieu-alentour=0&langue=fr&MapWidth=100&MapHeight=394&DataConfig=JsConfig.GGMap.Liste&Pagination=0"
     page = requests.get(URL)
@@ -93,15 +81,7 @@ def selection_get_listings(host_photos=False):
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Selection Habitat"
-    ]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Selection Habitat":
-            links_old.append(listing["link_url"])
-    # print("Listings found from prevous scrape:", len(links_old))
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -112,11 +92,9 @@ def selection_get_listings(host_photos=False):
 
     listing_photos_to_delete_local = []
 
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
+    if links_dead and host_photos:
+        for link in links_dead:
+            listing_photos_to_delete_local.append(old_listing_urls_dict[link])
 
         for listing_ref in listing_photos_to_delete_local:
             try:
@@ -129,6 +107,8 @@ def selection_get_listings(host_photos=False):
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
+
+    listings = []
 
     response_objects = get_data(links_to_scrape)
 
@@ -154,14 +134,12 @@ def selection_get_listings(host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for selection: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def selection_get_links(page):
@@ -375,8 +353,7 @@ def get_listing_details(page, url, host_photos):
         return listing.__dict__
 
     except Exception as e:
-        # print(e)
-        return url
+        return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()

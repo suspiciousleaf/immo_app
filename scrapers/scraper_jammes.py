@@ -14,21 +14,9 @@ import shutil
 from unidecode import unidecode
 
 from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
 from models import Listing
-from utilities.utilities import get_gps, get_data
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+from utilities.utility_holder import get_gps, get_data
+from utilities.agent_dict import agent_dict
 
 try:
     try:
@@ -46,7 +34,7 @@ except:
     gps_dict = []
 
 
-def jammes_get_listings(sold_url_list, host_photos=False):
+def jammes_get_listings(old_listing_urls_dict, sold_url_list, host_photos=False):
     t0 = time.perf_counter()
     URL = "https://www.cabinet-jammes.com/fr/liste.htm?page=1"
     page = requests.get(URL)
@@ -72,15 +60,7 @@ def jammes_get_listings(sold_url_list, host_photos=False):
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Cabinet Jammes"
-    ]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Cabinet Jammes":
-            links_old.append(listing["link_url"])
-    # print("Listings found from prevous scrape:", len(links_old))
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -91,11 +71,9 @@ def jammes_get_listings(sold_url_list, host_photos=False):
 
     listing_photos_to_delete_local = []
 
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
+    if links_dead and host_photos:
+        for link in links_dead:
+            listing_photos_to_delete_local.append(old_listing_urls_dict[link])
 
         for listing_ref in listing_photos_to_delete_local:
             try:
@@ -108,6 +86,8 @@ def jammes_get_listings(sold_url_list, host_photos=False):
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
+
+    listings = []
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         response_objects = executor.map(
@@ -134,14 +114,12 @@ def jammes_get_listings(sold_url_list, host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Cabinet Jammes: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def jammes_get_links(page):
@@ -172,7 +150,7 @@ def get_listing_details(page, url, host_photos):
         prop_type_div = soup.find("h2", class_="detail-bien-type")
         prop_type = prop_type_div.find(string=True)
         # print("Type:", prop_type)
-        types = prop_type
+        types = str(prop_type)
 
         # Get location
         location_div = soup.find("h2", class_="detail-bien-ville")
@@ -328,8 +306,8 @@ def get_listing_details(page, url, host_photos):
 
         return listing.__dict__
 
-    except:
-        return url
+    except Exception as e:
+        return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()
