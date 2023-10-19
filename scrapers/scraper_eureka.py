@@ -8,25 +8,10 @@ import grequests
 import requests
 from pprint import pprint
 from bs4 import BeautifulSoup
-import shutil
 from unidecode import unidecode
 
-# from async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
 from models import Listing
-from utilities.utilities import get_gps, get_data
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+from utilities.utility_holder import get_gps, get_data
 
 try:
     try:
@@ -62,7 +47,7 @@ except:
         postcodes_dict = json.load(infile)
 
 
-def eureka_immo_get_listings(host_photos=False):
+def eureka_immo_get_listings(old_listing_urls_dict):
     t0 = time.perf_counter()
     # Total number of listings isn't given on the page, but is around 90 listings. This wouldequate to 9 pages of listings. The code below will scrape 15 pages of listings at ocne rather than counting through pages until the listings stop. This takes appprox 1 second instead of 3 seconds. If the total listings scraped approaches 15 pages worth, a note will be printed to "pages" can be adjusted.
 
@@ -81,15 +66,7 @@ def eureka_immo_get_listings(host_photos=False):
     if len(links) > (pages * 10 - 20):
         print("Eureka Immo increase 'pages' variable")
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Eureka Immobilier"
-    ]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Eureka Immobilier":
-            links_old.append(listing["link_url"])
-    # print("Listings found from prevous scrape:", len(links_old))
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -98,25 +75,11 @@ def eureka_immo_get_listings(host_photos=False):
     print("Old listings to remove:", len(links_dead))
     # pprint(links_dead)
 
-    listing_photos_to_delete_local = []
-
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
-
-        for listing_ref in listing_photos_to_delete_local:
-            try:
-                shutil.rmtree(
-                    f"{cwd}/static/images/eureka/{listing_ref}", ignore_errors=True
-                )
-            except:
-                pass
-
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
+
+    listings = []
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         resp_to_scrape = get_data(links_to_scrape)
@@ -124,7 +87,6 @@ def eureka_immo_get_listings(host_photos=False):
             get_listing_details,
             (item["response"] for item in resp_to_scrape),
             links_to_scrape,
-            [host_photos for x in links_to_scrape],
         )
         for result in results:
             if isinstance(result, str):
@@ -141,14 +103,12 @@ def eureka_immo_get_listings(host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Eureka Immobilier: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def eureka_immo_get_links(page):
@@ -166,7 +126,7 @@ def eureka_immo_get_links(page):
     return links
 
 
-def get_listing_details(page, url, host_photos):
+def get_listing_details(page, url):
     try:
         agent = "Eureka Immobilier"
         link_url = url
@@ -319,8 +279,8 @@ def get_listing_details(page, url, host_photos):
             gps,
         )
         return listing.__dict__
-    except:
-        return url
+    except Exception as e:
+        return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()

@@ -16,19 +16,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 
 from models import Listing
-from utilities.utilities import get_data
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+from utilities.utility_holder import get_data
 
 try:
     try:
@@ -46,8 +34,10 @@ except:
     gps_dict = []
 
 
-def safti_get_listings(sold_url_list):
+def safti_get_listings(old_listing_urls_dict, sold_url_set):
     t0 = time.perf_counter()
+
+    unwanted_listings = sold_url_set.union(set(old_listing_urls_dict.keys()))
 
     print("\nSafti scraper beginning...")
 
@@ -67,7 +57,6 @@ def safti_get_listings(sold_url_list):
         "https://www.safti.fr/votre-conseiller-safti/pascal-campos",
         "https://www.safti.fr/votre-conseiller-safti/nathalie-francois",
         "https://www.safti.fr/votre-conseiller-safti/dany-pabou",
-        "https://www.safti.fr/votre-conseiller-safti/andrea-oustric",
     ]
 
     new_listings = []
@@ -99,21 +88,27 @@ def safti_get_listings(sold_url_list):
         pprint(failed_scrape_links)
 
     new_listings = remove_duplicates(new_listings)
+    new_listings_urls = [listing["link_url"] for listing in new_listings]
 
-    new_listings = [
-        listing for listing in new_listings if listing["link_url"] not in sold_url_list
+    listings = [
+        listing
+        for listing in new_listings
+        if listing["link_url"] not in unwanted_listings
     ]
 
-    print(f"Listings found: {len(new_listings)}")
+    links_dead = [
+        link for link in old_listing_urls_dict.keys() if link not in new_listings_urls
+    ]
 
-    new_listings.sort(key=lambda x: x["price"])
+    print("New listings to add:", len(listings))
+    print("Old listings to remove:", len(links_dead))
 
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Safti: {time_taken:.2f}s")
 
-    return new_listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def get_listing_details(page, url):
@@ -187,8 +182,7 @@ def get_listing_details(page, url):
 
         return listings
     except Exception as e:
-        # print(e)
-        return url
+        return f"{url}: {str(e)}"
 
 
 def remove_duplicates(listings):

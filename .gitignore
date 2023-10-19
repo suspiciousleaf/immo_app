@@ -9,5 +9,13 @@ listings_descr_strings.json
 Example_layout.png
 expected format.txt
 test.py
-/static/reddit
+/static
 listings - Copy.json
+steph_listings_raw.json
+steph_listings.json
+app_db.py
+test2.py
+test*
+app_db_mysqlclient.py
+ssh_info.txt
+.env

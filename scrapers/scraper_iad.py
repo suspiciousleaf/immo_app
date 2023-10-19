@@ -9,13 +9,10 @@ import grequests
 import requests
 from pprint import pprint
 from bs4 import BeautifulSoup, NavigableString
-import shutil
 from unidecode import unidecode
 
-from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
 from models import Listing
-from utilities.utilities import get_gps, get_data
+from utilities.utility_holder import get_gps, get_data
 
 headers = {
     "authority": "www.iadfrance.com",
@@ -27,18 +24,6 @@ headers = {
     "accept-encoding": "gzip, deflate, br",
     "accept-language": "en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7",
 }
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
 
 try:
     try:
@@ -56,7 +41,7 @@ except:
     gps_dict = []
 
 
-def iad_immo_get_listings(host_photos=False):
+def iad_immo_get_listings(old_listing_urls_dict, host_photos=False):
     t0 = time.perf_counter()
 
     s = requests.Session()
@@ -84,15 +69,7 @@ def iad_immo_get_listings(host_photos=False):
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "IAD Immobilier"
-    ]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "IAD Immobilier":
-            links_old.append(listing["link_url"])
-    # print("Listings found from prevous scrape:", len(links_old))
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -101,25 +78,11 @@ def iad_immo_get_listings(host_photos=False):
     print("Old listings to remove:", len(links_dead))
     # pprint(links_dead)
 
-    listing_photos_to_delete_local = []
-
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
-
-        for listing_ref in listing_photos_to_delete_local:
-            try:
-                shutil.rmtree(
-                    f"{cwd}/static/images/iad/{listing_ref}", ignore_errors=True
-                )
-            except:
-                pass
-
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
+
+    listings = []
 
     resp_to_scrape = get_data(links_to_scrape)
 
@@ -128,7 +91,6 @@ def iad_immo_get_listings(host_photos=False):
             get_listing_details,
             (item["response"] for item in resp_to_scrape),
             links_to_scrape,
-            [host_photos for x in resp_to_scrape],
         )
         for result in results:
             if isinstance(result, str):
@@ -145,14 +107,12 @@ def iad_immo_get_listings(host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for IAD Immobilier: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def iad_get_links(URL, s):
@@ -170,7 +130,7 @@ def iad_get_links(URL, s):
     return links
 
 
-def get_listing_details(page, url, host_photos):
+def get_listing_details(page, url):
     try:
         agent = "IAD Immobilier"
         link_url = url
@@ -319,34 +279,7 @@ def get_listing_details(page, url, host_photos):
 
         # pprint(photos)
 
-        if host_photos:
-            agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
-
-            make_photos_dir(ref, cwd, agent_abbr)
-
-            photos_hosted = []
-            photos_failed = []
-            i = 0
-            failed = 0
-
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                response_objects = executor.map(requests.get, (link for link in photos))
-                for result in response_objects:
-                    try:
-                        photos_hosted.append(
-                            dl_comp_photo(result, ref, i, cwd, agent_abbr)
-                        )
-                        i += 1
-                    except:
-                        photos_failed.append(result.url)
-                        print("HTTP status code:", result.status_code, result.url)
-                        failed += 1
-
-            if failed:
-                print(f"{failed} photos failed to scrape")
-                pprint(photos_failed)
-        else:
-            photos_hosted = photos
+        photos_hosted = photos
 
         gps = None
         if isinstance(town, str):
@@ -376,12 +309,11 @@ def get_listing_details(page, url, host_photos):
             photos_hosted,
             gps,
         )
-        # print(listing.__dict__)
+
         return listing.__dict__
 
     except Exception as e:
-        print(e, url)
-        return url
+        return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()

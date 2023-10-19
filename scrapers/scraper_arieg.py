@@ -12,19 +12,8 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 
 from models import Listing
-from utilities.utilities import get_gps, get_data
+from utilities.utility_holder import get_gps, get_data
 
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
 
 try:
     try:
@@ -63,7 +52,7 @@ except:
         town_list = json.load(infile)
 
 
-def arieg_get_listings():
+def arieg_get_listings(old_listing_urls_dict):
     t0 = time.perf_counter()
     URL = "https://www.ariegimmo.com/fr/liste.htm?page=1&TypeModeListeForm=text&tdp=all&lieu-alentour=0#page=1&TypeModeListeForm=text&tdp=all"
     page = requests.get(URL)
@@ -88,15 +77,7 @@ def arieg_get_listings():
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Arieg'Immo"
-    ]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Arieg'Immo":
-            links_old.append(listing["link_url"])
-    # print("Listings found from prevous scrape:", len(links_old))
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -105,14 +86,11 @@ def arieg_get_listings():
     print("Old listings to remove:", len(links_dead))
     # pprint(links_dead)
 
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listings.remove(listing)
-
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
+
+    listings = []
 
     response_objects = get_data(links_to_scrape)
 
@@ -137,14 +115,12 @@ def arieg_get_listings():
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Arieg'Immo: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def arieg_get_links(page):
@@ -230,9 +206,6 @@ def get_listing_details(page, url):
                         )
                 except:
                     pass
-            # elif "Ref" in element:
-            #     if len(element.replace("Ref ", "").strip()) < 7:
-            #         ref = element.replace("Ref ", "").strip()
 
         location_div = soup.find("h2", class_="detail-bien-ville").get_text()
         # This ensures we capture a 5 digit string inside brackets, that begins with either 09, 11, or 66
@@ -334,8 +307,7 @@ def get_listing_details(page, url):
         return listing.__dict__
 
     except Exception as e:
-        # print(e)
-        return url
+        return f"{url}: {str(e)}"
 
 
 # test_url = "https://www.ariegimmo.com/fr/detail.htm?cle=0900780048&monnaie=2"

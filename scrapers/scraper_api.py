@@ -14,21 +14,12 @@ import shutil
 from unidecode import unidecode
 
 from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
-from models import Listing
-from utilities.utilities import get_gps, get_data
 
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+# from db_utilities import get_current_listing_urls
+from models import Listing
+from utilities.utility_holder import get_gps, get_data
+from utilities.agent_dict import agent_dict
+
 
 try:
     try:
@@ -46,7 +37,7 @@ except:
     gps_dict = []
 
 
-def api_get_listings(host_photos=False):
+def api_get_listings(old_listing_urls_dict, host_photos=False):
     t0 = time.perf_counter()
 
     URL = "http://www.pyrenees-immobilier.com/fr/annonces-immobilieres-p-r12-1.html#page=1"
@@ -71,13 +62,7 @@ def api_get_listings(host_photos=False):
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [listing for listing in listings_json if listing["agent"] == "A.P.I."]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "A.P.I.":
-            links_old.append(listing["link_url"])
-    # print("Listings found from prevous scrape:", len(links_old))
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -88,11 +73,9 @@ def api_get_listings(host_photos=False):
 
     listing_photos_to_delete_local = []
 
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
+    if links_dead and host_photos:
+        for link in links_dead:
+            listing_photos_to_delete_local.append(old_listing_urls_dict[link])
 
         for listing_ref in listing_photos_to_delete_local:
             try:
@@ -108,6 +91,13 @@ def api_get_listings(host_photos=False):
 
     #   async scraping is too fast, results in many 503 responses. Multi-threading is just slow enough to get all the responses, and async still works for the photos
 
+    # print(f"Old links: {len(links_old)}")
+    # print(f"Dead links: {len(links_dead)}")
+    # print(f"Still active: {len(links_old)-len(links_dead)}")
+    # print(f"New links ot scrape: {len(links_to_scrape)}")
+
+    listings = []
+
     with concurrent.futures.ThreadPoolExecutor() as executor:
         response_objects = executor.map(
             requests.get, (link for link in links_to_scrape)
@@ -116,7 +106,7 @@ def api_get_listings(host_photos=False):
             get_listing_details,
             (item for item in response_objects),
             links_to_scrape,
-            [host_photos for x in links_to_scrape],
+            [host_photos for _ in links_to_scrape],
         )
         for result in results:
             if isinstance(result, str):
@@ -133,14 +123,12 @@ def api_get_listings(host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for A.P.I: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def api_get_links(page):
@@ -329,8 +317,7 @@ def get_listing_details(page, url, host_photos):
 
         return listing.__dict__
     except Exception as e:
-        # print(e)
-        return url
+        return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()

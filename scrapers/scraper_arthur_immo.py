@@ -13,21 +13,10 @@ import shutil
 from unidecode import unidecode
 
 from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
 from models import Listing
-from utilities.utilities import get_gps, get_data
+from utilities.utility_holder import get_gps, get_data
+from utilities.agent_dict import agent_dict
 
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
 
 try:
     try:
@@ -45,7 +34,7 @@ except:
     gps_dict = []
 
 
-def arthur_immo_get_listings(sold_url_list, host_photos=False):
+def arthur_immo_get_listings(old_listing_urls_dict, sold_url_list, host_photos=False):
     t0 = time.perf_counter()
 
     URL = "https://www.lavelanet-arthurimmo.com/recherche,basic.htm?transactions=acheter&page=1"
@@ -74,14 +63,8 @@ def arthur_immo_get_listings(sold_url_list, host_photos=False):
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Arthur Immo"
-    ]
+    links_old = set(old_listing_urls_dict.keys())
 
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Arthur Immo":
-            links_old.append(listing["link_url"])
     # print("Listings found from prevous scrape:", len(links_old))
 
     links_to_scrape = [link for link in links if link not in links_old]
@@ -93,11 +76,9 @@ def arthur_immo_get_listings(sold_url_list, host_photos=False):
 
     listing_photos_to_delete_local = []
 
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
+    if links_dead and host_photos:
+        for link in links_dead:
+            listing_photos_to_delete_local.append(old_listing_urls_dict[link])
 
         for listing_ref in listing_photos_to_delete_local:
             try:
@@ -110,6 +91,8 @@ def arthur_immo_get_listings(sold_url_list, host_photos=False):
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
+
+    listings = []
 
     resp_to_scrape = get_data(links_to_scrape)
 
@@ -135,14 +118,12 @@ def arthur_immo_get_listings(sold_url_list, host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Arthur Immo: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def arthur_immo_get_links(page):
@@ -176,9 +157,9 @@ def get_listing_details(page, url, host_photos):
             str(line).replace("<li>", "").replace("</li>", "") for line in find_li
         ]
         correct_line = [line for line in find_li_clean if line.find("href") == -1][0]
-        # pprint(correct_line)
+
         types = correct_line.split()[0]
-        # print("Type:", types)
+
         postcode = correct_line.split()[-1][1:-1]
         # print("Postcode:", postcode)
 
@@ -352,8 +333,7 @@ def get_listing_details(page, url, host_photos):
         )
         return listing.__dict__
     except Exception as e:
-        # print(e)
-        return url
+        return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()
@@ -378,5 +358,5 @@ cwd = os.getcwd()
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(arthur_listings, outfile, ensure_ascii=False)
 
-# Time elapsed for Arthur Immo: 97.84560751914978 async 158 links with photos, down from 1.5+ hours
+# Time elapsed for Arthur Immo: 97.84s async 158 links with photos, down from 1.5+ hours
 # Time elapsed for Arthur Immo: 24.02s 157 links without photos

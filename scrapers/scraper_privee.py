@@ -8,7 +8,7 @@ from pprint import pprint
 from unidecode import unidecode
 
 from models import Listing
-from utilities.utilities import get_gps, get_data, property_types
+from utilities.utility_holder import get_gps, get_data, property_types
 
 proxy = {
     "http": "http://158.160.56.149:8080",
@@ -62,17 +62,7 @@ try:
 except:
     print("gps_dict not found")
     gps_dict = []
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+
 
 type_list_raw = ["Terrain", "Immeuble"]
 for value in property_types.values():
@@ -81,55 +71,58 @@ type_list = [item.casefold() for item in type_list_raw]
 
 
 def get_listing_details(resp_object, link_url):
-    prop_soup = BeautifulSoup(resp_object.content, "html.parser")
-    agent = "Propriétés Privées"
-    link_url = link_url
-    # print(link_url)
-    price = get_price(prop_soup)
-    # print(f"Price: {price} €")
-    ref = get_ref(prop_soup)
-    # print(f"Ref: {ref}")
-    types = get_type(prop_soup)
-    # print(f"Type: {types}")
-    town = get_town(prop_soup)
-    # print(f"Town: {town}")
-    postcode = get_postcode(prop_soup)
-    # print(f"Postcode: {postcode}")
-    details_dict = get_details(prop_soup, types)
-    rooms = details_dict["rooms"]
-    # print(f"Rooms: {rooms}")
-    bedrooms = details_dict["bedrooms"]
-    # print(f"Bedrooms: {bedrooms}")
-    plot = details_dict["plot"]
-    # print(f"Plot: {plot} m²")
-    size = details_dict["size"]
-    # print(f"Size: {size} m²")
-    description = get_description(prop_soup)
-    # print(description)
-    gps = get_gps_location(town, postcode)
-    # print(f"GPS: {gps}")
-    photos = get_photos(prop_soup)
-    photos_hosted = photos
-    # pprint(photos)
+    try:
+        prop_soup = BeautifulSoup(resp_object.content, "html.parser")
+        agent = "Propriétés Privées"
+        link_url = link_url
+        # print(link_url)
+        price = get_price(prop_soup)
+        # print(f"Price: {price} €")
+        ref = get_ref(prop_soup)
+        # print(f"Ref: {ref}")
+        types = get_type(prop_soup)
+        # print(f"Type: {types}")
+        town = get_town(prop_soup)
+        # print(f"Town: {town}")
+        postcode = get_postcode(prop_soup)
+        # print(f"Postcode: {postcode}")
+        details_dict = get_details(prop_soup, types)
+        rooms = details_dict["rooms"]
+        # print(f"Rooms: {rooms}")
+        bedrooms = details_dict["bedrooms"]
+        # print(f"Bedrooms: {bedrooms}")
+        plot = details_dict["plot"]
+        # print(f"Plot: {plot} m²")
+        size = details_dict["size"]
+        # print(f"Size: {size} m²")
+        description = get_description(prop_soup)
+        # print(description)
+        gps = get_gps_location(town, postcode)
+        # print(f"GPS: {gps}")
+        photos = get_photos(prop_soup)
+        photos_hosted = photos
+        # pprint(photos)
 
-    listing = Listing(
-        types,
-        town,
-        postcode,
-        price,
-        agent,
-        ref,
-        bedrooms,
-        rooms,
-        plot,
-        size,
-        link_url,
-        description,
-        photos,
-        photos_hosted,
-        gps,
-    )
-    return listing.__dict__
+        listing = Listing(
+            types,
+            town,
+            postcode,
+            price,
+            agent,
+            ref,
+            bedrooms,
+            rooms,
+            plot,
+            size,
+            link_url,
+            description,
+            photos,
+            photos_hosted,
+            gps,
+        )
+        return listing.__dict__
+    except Exception as e:
+        return f"{link_url}: {str(e)}"
 
 
 def get_price(prop_soup):
@@ -295,7 +288,7 @@ def privee_get_links(page):
     return links
 
 
-def privee_get_listings():
+def privee_get_listings(old_listing_urls_dict):
     """Scrapes www.proprietes-privees.com local properties and returns a list of available listings as dictionaries"""
     t0 = time.perf_counter()
 
@@ -319,13 +312,7 @@ def privee_get_listings():
 
     print("\nPropriétés Privées number of unique listing URLs found:", len(links))
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Propriétés Privées"
-    ]
-
-    links_old = []
-    for listing in listings:
-        links_old.append(listing["link_url"])
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -334,8 +321,7 @@ def privee_get_listings():
     print("Old listings to remove:", len(links_dead))
     # pprint(links_dead)
 
-    listing_photos_to_delete_local = []
-
+    listings = []
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
@@ -362,14 +348,12 @@ def privee_get_listings():
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Propriétés Privées Immobilier: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 # privee_listings = privee_get_listings()

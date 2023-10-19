@@ -1,6 +1,6 @@
 # Web scraper to gather listings from all estate agents covering a specific area, and serve the data up with an API.
 
-### My region lacks a single website where all estate agents post their listings so they can all be searched in one place. The goal of this project is to create a web scraper that will scrape all listings from the estate agents, make the data as uniform as possible, extract available data so that it can be searched more easily, exported in json format, and finally hosted in the form of an API that can be queried by the front end.
+### My region lacks a single website where all estate agents post their listings so they can all be searched in one place. The goal of this project is to create a web scraper that will scrape all listings from the estate agents, make the data as uniform as possible, extract available data so that it can be searched more easily, stored in a MySQL database, and finally hosted in the form of an API that can be queried by the front end.
 <br>
 Many agents are individual offices and there is no consistency between their advertising. Quality of information also varies considerably between agents. 
 
@@ -23,26 +23,25 @@ Data is normalized as much as possible, the string scraped for location is verif
 <br>
 <br>
 If `host_photos` is set to `True` when calling the main scraper function, in addition to scraping each listing page, the program will download all photos, compress them, and save them to a new local directory. These will then be uploaded and hosted on [PythonAnywhere](https://www.pythonanywhere.com/). This is necessary for *Richardson*, which is HTTP only so cannot embed images using HTTPS, and *Ami*, which blocks leeching. 
-Photos for old listings will be deleted when the listing is taken down from the agent website.
+Photos for old listings will be deleted when the listing is taken down from the agent website. Rsync is used to synchronize the hosted directory images with the local ones at the end fo each run of the scraper.
 <br>
 <br>
 
 ## Long version:
-When `app.py` is run, the program will run an individual scraper for each estate agent. At present, 17 agents are included. 
+When `app.py` is run, the program will run an individual scraper for each estate agent. At present, 24 agents are included. 
 The scrapers follow the same process for (almost) all agents. They start by finding the total number of listings that the agent has, dividing that by the number of listings per search page (currently hard coded) to find how many search pages to expect, generate the url for each search page, and scrape each of those to get the urls for all available listings.
 <br>
-The program then checks for an existing `listings.json` file, which is generated the first time `app.py` runs. If `listings.json` already exists, the program creates a list of all previously scaped listing urls for this agent, and compare them to the newly scraped urls. Any urls which are present in `listings.json` but no longer on the agent website will be removed from the list, any listings still present will be kept, and any new urls not found in `listings.json` will be added to a list of urls to scrape.
+Previously scraped listing urls are retrieved from the database and compared to the newly available ones. Listings in the database that are no longer online will be deleted, and ones found online but not yet in the database will be scraped.
 <br>
-These urls are then passed to the next scraper, that scrapes the individual listing page and returns the data as a dictionary. Once all urls have been scraped, the list is returned to `app.py` and the next agent scraper begins. After all agents have been scraped, the full list will be exported as `listings.json`, which is then used as the data source for the `API`.
-
+These urls are passed to the next scraper, that scrapes the individual listing page and returns the data as a dictionary. Once all urls have been scraped, the list is returned to `app.py` and the next agent scraper begins. After all agents have been scraped, any new listings will be added to the database, and any old ones will be deleted.
 <br>
 Once all scrapers have run, the *Type* of each listing is checked in an attempt to fit them in to one of *House, Apartment, Multi-occupancy building, Land, Commercial,* or *Other*. If the type doesn't fit into one fo the first five, it will be set to *Other*, and the scraped type will be set to a new value in the dictionary so it can be categorized later, and will also print to console.
 
 Some scrapers run asynchronously using `grequests`, some run using multi-threading, one (*Cimm*) directly accesses an `API` I found in network requests on page loading, and *Beaux Villages* is done asynchronously using a headless browser as it is dynamic, with no `ajax` or `API` that can be used instead. 
 <br>
 <br>
-If `host_photos` is set to `True` when calling the main scraper function, in addition to scraping each listing page, the program will download all photos, compress them, and save them to a new local directory. These will then be uploaded and hosted on [PythonAnywhere](https://www.pythonanywhere.com/). This is necessary for *Richardson*, which is HTTP only so cannot embed images using HTTPS, and *Ami*, which blocks leeching. 
-Photos for old listings will be deleted when the listing is taken down from the agent website.
+If `host_photos` is set to `True` when calling the main scraper function, in addition to scraping each listing page, the program will download all photos, compress them, and save them to a new local directory. These will then be uploaded and hosted on [PythonAnywhere](https://www.eu.pythonanywhere.com/). This is necessary for *Richardson*, which is HTTP only so cannot embed images using HTTPS, and *Ami*, which blocks leeching. 
+Photos for old listings will be deleted when the listing is taken down from the agent website. Rsync is used to keep the hosted directory up to date.
 <br>
 <br>
 # Difficulties encountered
@@ -63,7 +62,7 @@ Several listing agents use dynamic page rendering. For all but one, I found eith
 
 # API
 ### Base URL:
-https://suspiciousleaf.pythonanywhere.com/search_results
+https://suspiciousleaf.eu.pythonanywhere.com/search_results
 <br>
 
 ### Query parameters:
@@ -80,7 +79,7 @@ https://suspiciousleaf.pythonanywhere.com/search_results
 | keywords   | Keywords to search for in description, e.g. *garage* | Comma-separated values |
 <br>
 ### An example query
-https://suspiciousleaf.pythonanywhere.com/search_results?agents=ami&town=limoux&search_radius=10&types=Maison&min_beds=1&max_beds=9&min_price=50&max_price=500000&min_plot=50&max_plot=50000&min_size=50&max_size=5000&keywords=piscine&inc_none_beds=False
+https://suspiciousleaf.eu.pythonanywhere.com/search_results?agents=ami&town=limoux&search_radius=10&types=Maison&min_beds=1&max_beds=9&min_price=50&max_price=500000&min_plot=50&max_plot=50000&min_size=50&max_size=5000&keywords=piscine&inc_none_beds=False
 <br>
 <br>
 # How to run
@@ -101,5 +100,5 @@ The `API` is run by running `flask_app.py`. It can then be accessed on `localhos
 - Additional comments to explain more intricate use cases
 <br>
 
-- The possibility of integrating a proxy should be more thoroughly investigated to potentially improve the scraping speed for some agents. The main gain would be seen when running the scraper for the first time to create `listings.json`, which takes several minutes, because on each subsequent run, very few additional listings are typically scraped. This means that any gains in requests per second may end up being lost to increases in latency. 
-- Separate the repo into folders.
+- The possibility of integrating a proxy should be more thoroughly investigated to potentially improve the scraping speed for some agents. The main gain would be seen when running the scraper for the first time, which takes several minutes, because on each subsequent run very few additional listings are typically scraped. This means that any gains in requests per second may end up being lost to increases in latency. 
+

@@ -10,26 +10,11 @@ import requests
 from pprint import pprint
 from bs4 import BeautifulSoup
 
-# import shutil
 from unidecode import unidecode
 
-# from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-# from json_search import agent_dict
 from models import Listing
-from utilities.utilities import get_gps, get_data
+from utilities.utility_holder import get_gps, get_data
 
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
 
 try:
     try:
@@ -56,7 +41,7 @@ except:
         postcodes_dict = json.load(infile)
 
 
-def human_get_listings(host_photos=False):
+def human_get_listings(old_listing_urls_dict):
     t0 = time.perf_counter()
 
     URL = "https://www.human-immobilier.fr/achat-maison-appartement-terrain-immeuble-aude?quartiers=11439-11441&surface=&sterr=&prix=-100000000&typebien=1-2-3-9&nbpieces=1-2-3-4-5&og=0&where=Aude-__11_&_b=1&_p=1&tyloc=6&neuf=1&ancien=1&ids=11"
@@ -108,14 +93,7 @@ def human_get_listings(host_photos=False):
 
     # print("Number of unique listing URLs found:", len(links))
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Human Immobilier"
-    ]
-
-    links_old = []
-    for listing in listings:
-        links_old.append(listing["link_url"])
-    # print("Listings found from prevous scrape:", len(links_old))
+    links_old = set(old_listing_urls_dict.keys())
 
     links_to_scrape = [link for link in links if link not in links_old]
     print("New listings to add:", len(links_to_scrape))
@@ -123,15 +101,11 @@ def human_get_listings(host_photos=False):
     links_dead = [link for link in links_old if link not in links]
     print("Old listings to remove:", len(links_dead))
 
-    # Remove listings that are no longer on agent website
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listings.remove(listing)
-
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
+
+    listings = []
 
     resp_to_scrape = get_data(links_to_scrape, header=False, prox=True)
 
@@ -140,7 +114,6 @@ def human_get_listings(host_photos=False):
             get_listing_details,
             (item["response"] for item in resp_to_scrape),
             links_to_scrape,
-            [host_photos for x in links_to_scrape],
         )
         for result in results:
             if isinstance(result, str):
@@ -157,14 +130,12 @@ def human_get_listings(host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Human Immobilier: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def human_get_links(page):
@@ -182,7 +153,7 @@ def human_get_links(page):
     return link_list
 
 
-def get_listing_details(page, url, host_photos):
+def get_listing_details(page, url):
     try:
         agent = "Human Immobilier"
         link_url = url
@@ -299,30 +270,6 @@ def get_listing_details(page, url, host_photos):
 
         # pprint(photos)
 
-        # if host_photos:
-        #     agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
-
-        #     make_photos_dir(ref, cwd, agent_abbr)
-
-        #     photos_hosted = []
-        #     photos_failed = []
-        #     i = 0
-        #     failed = 0
-
-        #     resp = get_data(photos, header=False, prox=True)
-        #     for item in resp:
-        #         try:
-        #             photos_hosted.append(
-        #                 dl_comp_photo(item["response"], ref, i, cwd, agent_abbr)
-        #             )
-        #             i += 1
-        #         except:
-        #             photos_failed.append(item["link"])
-        #             failed += 1
-        #     if failed:
-        #         print(f"{failed} photos failed to scrape")
-        #         pprint(photos_failed)
-        # else:
         photos_hosted = photos
 
         gps = None
@@ -357,8 +304,7 @@ def get_listing_details(page, url, host_photos):
         return listing.__dict__
 
     except Exception as e:
-        print(e)
-        return url
+        return f"{url}: {str(e)}"
 
 
 # human_listings = human_get_listings()

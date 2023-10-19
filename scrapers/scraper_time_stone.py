@@ -13,23 +13,11 @@ import shutil
 from unidecode import unidecode
 
 from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
 from models import Listing
-from utilities.utilities import get_gps, get_data
+from utilities.utility_holder import get_gps, get_data
+from utilities.agent_dict import agent_dict
 
 #   The code below looks for a json holding previous scraped info, and will import it if present. The previous json is imported so the scraper can check if a property listing has already been scraped, and if it has it will skip over that listing to save time. Any listings that were previously scraped and are no longer present on the agent website will be deleted, and any new listings found will be scraped and added. This is all done using the URL, so changes within a listing (eg price, photos) will not be updated. The website is only there to give an overview of all available properties, so users will view the property on the agent website if interested and will see any updates there.
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
 
 try:
     try:
@@ -47,7 +35,7 @@ except:
     gps_dict = []
 
 
-def time_stone_get_listings(sold_url_list, host_photos=False):
+def time_stone_get_listings(old_listing_urls_dict, sold_url_set, host_photos=False):
     t0 = time.perf_counter()
     URL = "https://www.timeandstoneimmobilier.com/fr/liste.htm?page=1"
     page = requests.get(URL)
@@ -69,21 +57,11 @@ def time_stone_get_listings(sold_url_list, host_photos=False):
     for item in resp:
         links += time_stone_get_links(item["response"])
 
-    links = [link for link in links if link not in sold_url_list]
+    links = [link for link in links if link not in sold_url_set]
 
-    print("Number of unique listing URLs found:", len(links))
+    print("Number of unique listing URLs found (excluding sold):", len(links))
 
-    listings = [
-        listing
-        for listing in listings_json
-        if listing["agent"] == "Time and Stone Immobilier"
-    ]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Time and Stone Immobilier":
-            links_old.append(listing["link_url"])
-    # print("Listings found from prevous scrape:", len(links_old))
+    links_old = set(old_listing_urls_dict.keys())
 
     # Identifies any listing URLs that haven't previously beed scraped
     links_to_scrape = [link for link in links if link not in links_old]
@@ -96,11 +74,9 @@ def time_stone_get_listings(sold_url_list, host_photos=False):
 
     listing_photos_to_delete_local = []
 
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
+    if links_dead and host_photos:
+        for link in links_dead:
+            listing_photos_to_delete_local.append(old_listing_urls_dict[link])
 
         for listing_ref in listing_photos_to_delete_local:
             try:
@@ -113,6 +89,8 @@ def time_stone_get_listings(sold_url_list, host_photos=False):
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
+
+    listings = []
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         response_objects = executor.map(
@@ -139,14 +117,12 @@ def time_stone_get_listings(sold_url_list, host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Time & Stone: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def time_stone_get_links(page):
@@ -177,11 +153,12 @@ def get_listing_details(page, url, host_photos):
         prop_type_div = soup.find("span", class_="detail-bien-type")
         prop_type = prop_type_div.find(string=True)
         # print("Type:", prop_type)
-        types = prop_type
+        types = str(prop_type)
 
         # Get location
         location_div = soup.find("h2", class_="detail-bien-ville")
         location_raw = location_div.find(string=True).strip().split()
+        location_raw = [str(elem) for elem in location_raw]
         location_postcode = location_raw.pop(-1).strip("(").strip(")")
         location_town = " ".join(location_raw)
         town = unidecode(location_town.capitalize())
@@ -336,8 +313,8 @@ def get_listing_details(page, url, host_photos):
 
         return listing.__dict__
 
-    except:
-        return url
+    except Exception as e:
+        return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()

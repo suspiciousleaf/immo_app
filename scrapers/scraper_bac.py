@@ -11,19 +11,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 
 from models import Listing
-from utilities.utilities import get_gps, get_data
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+from utilities.utility_holder import get_gps, get_data
 
 try:
     try:
@@ -41,7 +29,7 @@ except:
     gps_dict = []
 
 
-def bac_get_listings():
+def bac_get_listings(old_listing_urls_dict):
     t0 = time.perf_counter()
 
     URL = "https://www.bac-immobilier.com/vente/1"
@@ -67,14 +55,9 @@ def bac_get_listings():
 
     print("Number of unique listing URLs found:", len(links))
     # pprint(links)
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "BAC Immobilier"
-    ]
 
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "BAC Immobilier":
-            links_old.append(listing["link_url"])
+    links_old = set(old_listing_urls_dict.keys())
+
     # print("Listings found from prevous scrape:", len(links_old))
 
     links_to_scrape = [link for link in links if link not in links_old]
@@ -84,16 +67,13 @@ def bac_get_listings():
     print("Old listings to remove:", len(links_dead))
     # pprint(links_dead)
 
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listings.remove(listing)
-
     counter_success = 0
     counter_fail = 0
     failed_scrape_links = []
 
     resp_to_scrape = get_data(links_to_scrape)
+
+    listings = []
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         results = executor.map(
@@ -116,8 +96,6 @@ def bac_get_listings():
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     listings_duplicates_removed = []
     ref_list = []
     for listing in listings:
@@ -130,7 +108,7 @@ def bac_get_listings():
     time_taken = t1 - t0
     print(f"Time elapsed for BAC Immobilier: {time_taken:.2f}s")
 
-    return listings_duplicates_removed
+    return {"listings": listings_duplicates_removed, "urls_to_remove": links_dead}
 
 
 def bac_get_links(page):
@@ -285,9 +263,7 @@ def get_listing_details(page, url):
         return listing.__dict__
 
     except Exception as e:
-        # print(e)
-        # print(url)
-        return url
+        return f"{url}: {str(e)}"
 
 
 # test_urls = [

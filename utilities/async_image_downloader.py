@@ -1,25 +1,11 @@
 import io
-import json
 import os
-import grequests
-import requests
+import subprocess
 
 from PIL import Image
 
 # Sets the current working directory to cwd
 cwd = os.getcwd()
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
 
 
 def make_photos_dir(ref: str, cwd, agent: str):
@@ -53,4 +39,17 @@ def dl_comp_photo(response, ref, filename, cwd, agent):
 
     # print(f"Image saved for agent: {agent}, ref: {ref}, image: {filename}")
 
-    return f"https://suspiciousleaf.pythonanywhere.com/{image_path}/{filename}.jpg"
+    return f"https://suspiciousleaf.eu.pythonanywhere.com/{image_path}/{filename}.jpg"
+
+
+def sync_local_remote_image_directories():
+    """This function uses rsync and wsl to synchronize the remote photo directory on PythonAnywhere with the local directory. New images added, old images deleted."""
+
+    command = "wsl rsync -azh --delete static/images/ suspiciousleaf@ssh.eu.pythonanywhere.com:immo_app/static/images/"
+
+    try:
+        print("\nPhoto sync beginning...")
+        subprocess.run(command, shell=True, text=True)
+        print("Photo sync complete.")
+    except Exception as e:
+        print("An error occured during photo sync: " + str(e))

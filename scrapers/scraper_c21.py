@@ -11,22 +11,8 @@ from bs4 import BeautifulSoup
 import shutil
 from unidecode import unidecode
 
-from utilities.async_image_downloader import make_photos_dir, dl_comp_photo
-from json_search import agent_dict
 from models import Listing
-from utilities.utilities import get_gps, get_data
-
-try:
-    try:
-        with open("listings.json", "r", encoding="utf8") as infile:
-            listings_json = json.load(infile)
-    except:
-        with open(
-            "/home/suspiciousleaf/immo_app/listings.json", "r", encoding="utf8"
-        ) as infile:
-            listings_json = json.load(infile)
-except:
-    listings_json = []
+from utilities.utility_holder import get_gps, get_data
 
 try:
     try:
@@ -62,7 +48,7 @@ except:
         postcodes_dict = json.load(infile)
 
 
-def c21_get_listings(host_photos=False):
+def c21_get_listings(old_listing_urls_dict, host_photos=False):
     t0 = time.perf_counter()
 
     URL = "https://www.century21.fr/annonces/f/achat-maison-appartement-terrain-parking-immeuble-divers/d-09_ariege-11_aude/?cible=d-11_aude"
@@ -96,14 +82,7 @@ def c21_get_listings(host_photos=False):
 
     print("Number of unique listing URLs found:", len(links))
 
-    listings = [
-        listing for listing in listings_json if listing["agent"] == "Century 21"
-    ]
-
-    links_old = []
-    for listing in listings:
-        if listing["agent"] == "Century 21":
-            links_old.append(listing["link_url"])
+    links_old = set(old_listing_urls_dict.keys())
     # print("Listings found from previous scrape:", len(links_old))
 
     links_to_scrape = [link for link in links if link not in links_old]
@@ -115,11 +94,9 @@ def c21_get_listings(host_photos=False):
 
     listing_photos_to_delete_local = []
 
-    if links_dead:
-        for listing in listings:
-            if listing["link_url"] in links_dead:
-                listing_photos_to_delete_local.append(listing["ref"])
-                listings.remove(listing)
+    if links_dead and host_photos:
+        for link in links_dead:
+            listing_photos_to_delete_local.append(old_listing_urls_dict[link])
 
         for listing_ref in listing_photos_to_delete_local:
             try:
@@ -134,6 +111,8 @@ def c21_get_listings(host_photos=False):
     failed_scrape_links = []
 
     # Century 21 will block scraping if you request more than 100 urls in a short period of time. Scraping the search pages for urls uses up appro 20 of these, so if there are more than 75 urls to scrape then the program will so them in serial, which is slow enough to not get blocked. This will likely only be when populating a new listings.json. Every other time can be done asynchronously
+
+    listings = []
 
     if len(links_to_scrape) < 75:
         with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -169,14 +148,12 @@ def c21_get_listings(host_photos=False):
         print(f"Failed to scrape: {counter_fail}/{len(links_to_scrape)} \nFailed URLs:")
         pprint(failed_scrape_links)
 
-    listings.sort(key=lambda x: x["price"])
-
     t1 = time.perf_counter()
 
     time_taken = t1 - t0
     print(f"Time elapsed for Century 21: {time_taken:.2f}s")
 
-    return listings
+    return {"listings": listings, "urls_to_remove": links_dead}
 
 
 def c21_get_links(page):
@@ -390,8 +367,7 @@ def get_listing_details(page, url, host_photos):
 
         return listing.__dict__
     except Exception as e:
-        # print(e)
-        return url
+        return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()
