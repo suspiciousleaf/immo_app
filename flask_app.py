@@ -1,7 +1,7 @@
 import json
 from pprint import pprint
 
-from flask import Flask, send_file, request
+from flask import Flask, request
 
 from db_search import search, get_listings_by_listingID
 from utilities.db_utilities import open_SSH_tunnel, close_SSH_tunnel
@@ -22,13 +22,7 @@ except:
         postcodes_dict = json.load(infile)
     running_local = False
 
-app = Flask(__name__, static_url_path="/static")
-
-
-# This path is used to serve images that have been downloaded from the listing agent and hosted, rather than being used directly from the listing agent image host
-@app.route("/static/images/<path:agent>/<path:ref>/<path:image>")
-def download_file(agent, ref, image):
-    return send_file(f"static/images/{agent}/{ref}/{image}")
+app = Flask(__name__)
 
 
 # The after_request is used to add a header to every request to fix CORS errors (cross origin resource sharing)
