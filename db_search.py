@@ -290,6 +290,7 @@ def search(
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")
+        return f"An error occurred: {str(e)}"
 
 
 @connect_to_database
