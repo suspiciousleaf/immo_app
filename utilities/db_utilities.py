@@ -9,6 +9,7 @@ load_dotenv()
 ssh_password = os.environ.get("PA_SSH_PASS")
 db_password = os.environ.get("PA_DB_PASS")
 database = os.environ.get("PA_DB_NAME")
+host = os.environ.get("HOST")
 
 
 def open_SSH_tunnel():
@@ -51,11 +52,10 @@ def connect_to_database(original_func):
     def make_connection(*args, **kwargs):
         results = None
         try:
-            # print("Connecting to database...")
             db = mysql.connector.connect(
                 user="suspiciousleaf",
                 password=db_password,
-                host="127.0.0.1",
+                host=host,
                 port=3306,
                 database=database,
                 use_pure=True,
@@ -70,7 +70,6 @@ def connect_to_database(original_func):
                 cursor.close()
             if "db" in locals() and db:
                 db.close()
-            # print("Database connection closed")
             if results is not None:
                 return results
 
