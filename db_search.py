@@ -279,18 +279,12 @@ def search(
 
         print(f"\nTime taken: {time.perf_counter() - t0:.2f}s\n")
 
-        # print(cursor.statement)
-
         results = cursor.fetchall()
 
-        if results:
-            return results
-        else:
-            return []
+        return results
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-        return f"An error occurred: {str(e)}"
 
 
 @connect_to_database
@@ -304,12 +298,11 @@ def get_listings_by_listingID(db, cursor, listing_IDs: list[str]) -> list:
         list[dict]: List of full listings
     """
     try:
-        table_name = "listings"
         t0 = time.perf_counter()
         cursor = db.cursor(dictionary=True)
 
         # listingID must be selected to enable the "save listing" function, even though it isn't displayed on the page.
-        query = f"SELECT listingID, types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos_hosted FROM {table_name} WHERE FIND_IN_SET(listingID, %(listing_IDs_requested)s);"
+        query = f"SELECT listingID, types, town, postcode, price, agent, ref, bedrooms, rooms, plot, size, link_url, description, photos_hosted FROM listings WHERE FIND_IN_SET(listingID, %(listing_IDs_requested)s);"
 
         params = {}
 
@@ -321,15 +314,12 @@ def get_listings_by_listingID(db, cursor, listing_IDs: list[str]) -> list:
 
         results = cursor.fetchall()
 
-        if results:
-            for result in results:
-                if result["description"]:
-                    result["description"] = result["description"].split(":;:")
-                if result["photos_hosted"]:
-                    result["photos_hosted"] = result["photos_hosted"].split(":;:")
-            return results
-        else:
-            return []
+        for result in results:
+            if result["description"]:
+                result["description"] = result["description"].split(":;:")
+            if result["photos_hosted"]:
+                result["photos_hosted"] = result["photos_hosted"].split(":;:")
+        return results
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")

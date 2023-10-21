@@ -2,14 +2,21 @@ import mysql.connector
 from pprint import pprint
 import os
 import subprocess
-from dotenv import load_dotenv
 
-load_dotenv()
+# from dotenv import load_dotenv
+from utilities.creds import PA_SSH_PASS, PA_DB_PASS, PA_DB_NAME, HOST
 
-ssh_password = os.environ.get("PA_SSH_PASS")
-db_password = os.environ.get("PA_DB_PASS")
-database = os.environ.get("PA_DB_NAME")
-host = os.environ.get("HOST")
+# load_dotenv()
+
+# ssh_password = os.environ.get("PA_SSH_PASS")
+# db_password = os.environ.get("PA_DB_PASS")
+# database = os.environ.get("PA_DB_NAME")
+# host = os.environ.get("HOST")
+
+ssh_password = PA_SSH_PASS
+db_password = PA_DB_PASS
+database = PA_DB_NAME
+host = HOST
 
 
 def open_SSH_tunnel():

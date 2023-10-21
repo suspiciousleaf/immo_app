@@ -19,3 +19,4 @@ test*
 app_db_mysqlclient.py
 ssh_info.txt
 .env
+creds.py

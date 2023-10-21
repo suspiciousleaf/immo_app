@@ -72,6 +72,7 @@ def try_csv(input):
 def full_listing_ids():
     if running_local:
         ssh = open_SSH_tunnel()
+
     listingID_list = try_csv(request.args.get("id"))
 
     results = get_listings_by_listingID(listingID_list)
