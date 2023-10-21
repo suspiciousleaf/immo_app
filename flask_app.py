@@ -90,7 +90,7 @@ def search_call():
         ssh = open_SSH_tunnel()
     # The code below extracts the search parameters from the query and validates them using the above functions, then calls the search function with those parameters as arguments
 
-    inc_none_beds_req = request.args.get("inc_none_beds") == "true"
+    inc_none_beds_req = not request.args.get("inc_none_beds") == "false"
 
     min_beds_req = try_min(request.args.get("min_beds"))
     max_beds_req = try_max(request.args.get("max_beds"))
@@ -101,19 +101,21 @@ def search_call():
     agent_list_req = try_csv(request.args.get("agents"))
     type_list_req = try_csv(request.args.get("types"))
 
-    inc_none_plot_req = request.args.get("inc_none_plot") == "true"
+    inc_none_plot_req = not request.args.get("inc_none_plot") == "false"
 
     min_plot_req = try_min(request.args.get("min_plot"))
     max_plot_req = try_max(request.args.get("max_plot"))
 
-    inc_none_size_req = request.args.get("inc_none_size") == "true"
+    inc_none_size_req = not request.args.get("inc_none_size") == "false"
 
     min_size_req = try_min(request.args.get("min_size"))
     max_size_req = try_max(request.args.get("max_size"))
 
     depts_list_req = try_csv(request.args.get("depts"))
     search_radius_req = try_min(request.args.get("search_radius"))
-    inc_none_location_req = request.args.get("inc_none_location") == "true"
+
+    inc_none_location_req = not request.args.get("inc_none_location") == "false"
+
     towns_req = try_csv(request.args.get("town"))
 
     keyword_list_req = try_csv(request.args.get("keywords"))
