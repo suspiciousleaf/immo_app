@@ -112,7 +112,7 @@ def location_search(
 
     Args:
         gps_list (list): List of GPS coordinates (nested for multiples)
-        radius (int): Search radius in metres
+        radius (int): Search radius in kilometres
 
     Returns:
         dict: "gps_dict": GPS coordinates, "query_string": String with all conditionals and placeholders
@@ -126,7 +126,7 @@ def location_search(
     # Generate the conditional string for SQL query
     query_string = " OR ".join(
         [
-            f"(ST_Distance_Sphere(gps, ST_GeomFromText('POINT(%(lat{i})s %(long{i})s)', 4326)) <= {radius})"
+            f"(ST_Distance_Sphere(gps, ST_GeomFromText('POINT(%(lat{i})s %(long{i})s)', 4326)) <= {radius*1000})"
             for i, _ in enumerate(gps_list)
         ]
     )
@@ -137,94 +137,6 @@ def location_search(
         }
     else:
         return {"gps_dict": gps_dict, "query_string": f"({query_string})"}
-
-
-def perform_search(
-    cursor,
-    type_list=None,
-    agent_list=None,
-    depts_list=None,
-    keyword_list=None,
-    price_min=None,
-    price_max=None,
-    bedrooms_min=None,
-    bedrooms_max=None,
-    inc_none_beds=False,
-    size_min=None,
-    size_max=None,
-    inc_none_size=False,
-    plot_min=None,
-    plot_max=None,
-    inc_none_plot=False,
-    towns=None,
-    search_radius=0,
-    inc_none_location=False,
-):
-    query = f"SELECT listingID, agent, plot, size, price FROM listings"
-
-    conditions = []
-    params = {}
-
-    if agent_list:
-        agents = ",".join(agent_list)
-        conditions.append("FIND_IN_SET(agent, %(agents)s)")
-        params["agents"] = agents
-
-    if depts_list:
-        dept_response = department_search(depts_list, inc_none_location)
-        conditions.append(dept_response["query_string"])
-        params.update(dept_response["depts_dict"])
-
-    if type_list:
-        types = ",".join(type_list)
-        conditions.append("FIND_IN_SET(types, %(types)s)")
-        params["types"] = types
-
-    price_response = min_max_filter(conditions, params, "price", price_min, price_max)
-    conditions = price_response["conditions"]
-    params = price_response["params"]
-
-    bedrooms_response = min_max_filter(
-        conditions, params, "bedrooms", bedrooms_min, bedrooms_max, inc_none_beds
-    )
-    conditions = bedrooms_response["conditions"]
-    params = bedrooms_response["params"]
-
-    size_response = min_max_filter(
-        conditions, params, "size", size_min, size_max, inc_none_size
-    )
-    conditions = size_response["conditions"]
-    params = size_response["params"]
-
-    plot_response = min_max_filter(
-        conditions, params, "plot", plot_min, plot_max, inc_none_plot
-    )
-    conditions = plot_response["conditions"]
-    params = plot_response["params"]
-
-    if keyword_list:
-        response = keyword_search(keyword_list)
-        conditions.append(response["query_string"])
-        params.update(response["keywords_dict"])
-
-    if towns:
-        gps_list = [
-            [
-                gps_town_dict[key.replace("-", ";")][0],
-                gps_town_dict[key.replace("-", ";")][1],
-            ]
-            for key in towns
-        ]
-        gps_response = location_search(gps_list, search_radius, inc_none_location)
-        conditions.append(gps_response["query_string"])
-        params.update(gps_response["gps_dict"])
-
-    if conditions:
-        query += " WHERE " + " AND ".join(conditions)
-
-    query += ";"
-
-    cursor.execute(query, params)
 
 
 @connect_to_database
@@ -247,44 +159,96 @@ def search(
     plot_max=None,
     inc_none_plot=False,
     towns=None,
-    search_radius=0,
+    search_radius=1,
     inc_none_location=False,
 ):
     try:
         t0 = time.perf_counter()
+
         # Change cursor provided to dictionary cursor for results
         cursor = db.cursor(dictionary=True)
 
-        perform_search(
-            cursor,
-            type_list,
-            agent_list,
-            depts_list,
-            keyword_list,
-            price_min,
-            price_max,
-            bed_min,
-            bed_max,
-            inc_none_beds,
-            size_min,
-            size_max,
-            inc_none_size,
-            plot_min,
-            plot_max,
-            inc_none_plot,
-            towns,
-            search_radius,
-            inc_none_location,
-        )
+        query = f"SELECT listingID, agent, plot, size, price FROM listings"
 
-        print(f"\nTime taken: {time.perf_counter() - t0:.2f}s\n")
+        conditions = []
+        params = {}
+
+        if agent_list:
+            agents = ",".join(agent_list)
+            conditions.append("FIND_IN_SET(agent, %(agents)s)")
+            params["agents"] = agents
+
+        if depts_list:
+            dept_response = department_search(depts_list, inc_none_location)
+            conditions.append(dept_response["query_string"])
+            params.update(dept_response["depts_dict"])
+
+        if type_list:
+            types = ",".join(type_list)
+            conditions.append("FIND_IN_SET(types, %(types)s)")
+            params["types"] = types
+
+        price_response = min_max_filter(
+            conditions, params, "price", price_min, price_max
+        )
+        conditions = price_response["conditions"]
+        params = price_response["params"]
+
+        bedrooms_response = min_max_filter(
+            conditions, params, "bedrooms", bed_min, bed_max, inc_none_beds
+        )
+        conditions = bedrooms_response["conditions"]
+        params = bedrooms_response["params"]
+
+        size_response = min_max_filter(
+            conditions, params, "size", size_min, size_max, inc_none_size
+        )
+        conditions = size_response["conditions"]
+        params = size_response["params"]
+
+        plot_response = min_max_filter(
+            conditions, params, "plot", plot_min, plot_max, inc_none_plot
+        )
+        conditions = plot_response["conditions"]
+        params = plot_response["params"]
+
+        if keyword_list:
+            response = keyword_search(keyword_list)
+            conditions.append(response["query_string"])
+            params.update(response["keywords_dict"])
+
+        if towns:
+            gps_list = []
+            for town in towns:
+                try:
+                    gps_list.append(
+                        [
+                            gps_town_dict[town.replace("-", ";")][0],
+                            gps_town_dict[town.replace("-", ";")][1],
+                        ]
+                    )
+                except:
+                    pass
+
+            gps_response = location_search(gps_list, search_radius, inc_none_location)
+            conditions.append(gps_response["query_string"])
+            params.update(gps_response["gps_dict"])
+
+        if conditions:
+            query += " WHERE " + " AND ".join(conditions)
+
+        query += ";"
+
+        cursor.execute(query, params)
 
         results = cursor.fetchall()
+
+        print(f"\nTime taken: {time.perf_counter() - t0:.2f}s\n")
 
         return results
 
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
+        return [f"An error occurred: {str(e)}"]
 
 
 @connect_to_database
