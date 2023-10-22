@@ -44,18 +44,10 @@ def agents():
     return agent_dict
 
 
-# This  will check if a valid value is given for fields which define a maximum value, and will return infinite if not found
-def try_max(input):
+# This  will check if a valid value is given for fields which require a number, and return None if not valid. This will exclude that parameter from being used in the search
+def try_num(input):
     try:
-        return int(input)
-    except:
-        return None
-
-
-# This  will check if a valid value is given for fields which define a minimum value, and will return 0 if not found
-def try_min(input):
-    try:
-        return int(input)
+        return int(float(input))
     except:
         return None
 
@@ -83,36 +75,37 @@ def full_listing_ids():
     return results
 
 
-# The path below is to receive the search query and parameters, and call the search function from json_search.py
+# The path below is to receive the search query and parameters, and call the search function from db_search.py
 @app.route("/search_results", methods=["GET"])
 def search_call():
     if running_local:
         ssh = open_SSH_tunnel()
+
     # The code below extracts the search parameters from the query and validates them using the above functions, then calls the search function with those parameters as arguments
 
     inc_none_beds_req = not request.args.get("inc_none_beds") == "false"
 
-    min_beds_req = try_min(request.args.get("min_beds"))
-    max_beds_req = try_max(request.args.get("max_beds"))
+    min_beds_req = try_num(request.args.get("min_beds"))
+    max_beds_req = try_num(request.args.get("max_beds"))
 
-    min_price_req = try_min(request.args.get("min_price"))
-    max_price_req = try_max(request.args.get("max_price"))
+    min_price_req = try_num(request.args.get("min_price"))
+    max_price_req = try_num(request.args.get("max_price"))
 
     agent_list_req = try_csv(request.args.get("agents"))
     type_list_req = try_csv(request.args.get("types"))
 
     inc_none_plot_req = not request.args.get("inc_none_plot") == "false"
 
-    min_plot_req = try_min(request.args.get("min_plot"))
-    max_plot_req = try_max(request.args.get("max_plot"))
+    min_plot_req = try_num(request.args.get("min_plot"))
+    max_plot_req = try_num(request.args.get("max_plot"))
 
     inc_none_size_req = not request.args.get("inc_none_size") == "false"
 
-    min_size_req = try_min(request.args.get("min_size"))
-    max_size_req = try_max(request.args.get("max_size"))
+    min_size_req = try_num(request.args.get("min_size"))
+    max_size_req = try_num(request.args.get("max_size"))
 
     depts_list_req = try_csv(request.args.get("depts"))
-    search_radius_req = try_min(request.args.get("search_radius"))
+    search_radius_req = try_num(request.args.get("search_radius"))
 
     inc_none_location_req = not request.args.get("inc_none_location") == "false"
 
@@ -154,4 +147,5 @@ def search_call():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=105)
 
-#! Test search local with lots of parameters, change town name csv to GPS coordinate list
+#! Century21 can return listings with towns + postcodes but no GPS coords
+#! richardson listings missing some photos, eg ref 4149
