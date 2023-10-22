@@ -243,11 +243,9 @@ def search(
 
         results = cursor.fetchall()
 
-        statement = cursor.statement
-
         print(f"\nTime taken: {time.perf_counter() - t0:.2f}s\n")
 
-        return {"statement": statement, "results": results}
+        return results
 
     except Exception as e:
         return [f"An error occurred: {str(e)}"]
