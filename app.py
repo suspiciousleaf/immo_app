@@ -361,9 +361,21 @@ def main():
         print("\nThe following uncategorized property types were found:")
         pprint(uncategorized_types)
 
-    # Add newly scrape listings to database if present.
-    if all_listings:
-        add_listings(all_listings)
+    # Verify if new listings should be added to the database. Can be used to skip if suspicious behaviour has been noticed.
+    add_listings_response = None
+    while add_listings_response != "y" and add_listings_response != "n":
+        add_verify = None
+        add_listings_response = input("Add new listings to database? Y/N: ").lower()
+        if add_listings_response == "y":
+            add_listings(all_listings)
+        elif add_listings_response == "n":
+            print("Do not add new listings to the database.")
+            while add_verify != "y" and add_verify != "n":
+                add_verify = input("Confirm? Y/N: ")
+                if add_verify == "n":
+                    add_listings_response = None
+                elif add_verify == "y":
+                    pass
 
     # This counts up each time the scraper is run, and will run the function that scans main images for "Sold" etc text to remove those listings once every five times the scraper runs
 
@@ -383,14 +395,29 @@ def main():
     else:
         pass  # times_run_since_last_image_scan["counter"] += 1
 
-    # Any listings no longer online, or detected as sold by the image scanner, are removed from the database
+    # Verify whether listings detected as no longer online should be removed from the database.
     if listings_to_remove:
-        delete_listings_by_url_list(listings_to_remove)
+        remove_listings_response = None
+        while remove_listings_response != "y" and remove_listings_response != "n":
+            delete_verify = None
+            remove_listings_response = input(
+                "Delete old listings from database? Y/N: "
+            ).lower()
+            if remove_listings_response == "y":
+                delete_listings_by_url_list(listings_to_remove)
+            elif remove_listings_response == "n":
+                print("Do not delete old listings from the database.")
+                while delete_verify != "y" and delete_verify != "n":
+                    delete_verify = input("Confirm? Y/N: ")
+                    if delete_verify == "n":
+                        remove_listings_response = None
+                    elif delete_verify == "y":
+                        pass
 
     if running_local:
         close_SSH_tunnel(ssh)
-
-    sync_local_remote_image_directories()
+        if add_listings_response == "y" or remove_listings_response == "y":
+            sync_local_remote_image_directories()
 
     # This saves the updated counter for the image scan
     with open(
@@ -416,11 +443,12 @@ if __name__ == "__main__":
 
 # Maybe add:
 
-# TODO
-
-
-#! Check if agents_dict can be moved to utilities file, see what the search function expects to receive from search query, see what front end sends, etc.
-
+# TODO Check line to run file for errors, Safti
+# TODO Add verification before adding / removing data from database at end of script
+# TODO Move served jsons to static files, tell Amy
+#! Beaux Villages has some listing types of "House" and "Business", change manually
+#! Safti is currently commented out from listings being added, it appears to run but listings not affected.
+#! Delete old Beaux listings where description is NULL, and re scrape
 
 # TODO Century21 can return town and postcode but no GPS from scraper, eg 'https://www.century21.fr/trouver_logement/detail/6602900456/'
 
