@@ -1,7 +1,8 @@
-# Running this program will run all of the scrapers. If a listings.json file is found it will add newly found listings and remove ones that are no longer present on the agent websites. If no listings.json file is present, it will build one from scratch. Typical time to run an update is 1 minute, building a new one is around 3 minutes. If no photos are hosted, it can be as little as 90 seconds.
-from gevent import monkey
+# Running this program will run all of the scrapers, update the database with new and removed listings, download and process any requested images, and sync the remote image directory with the local one.
 
-monkey.patch_all(thread=False, select=False)
+# from gevent import monkey
+
+# monkey.patch_all(thread=False, select=False)
 import grequests
 import json
 import time
@@ -365,7 +366,9 @@ def main():
     add_listings_response = None
     while add_listings_response != "y" and add_listings_response != "n":
         add_verify = None
-        add_listings_response = input("Add new listings to database? Y/N: ").lower()
+        add_listings_response = input(
+            f"\nAdd {len(all_listings)} new listings to database? Y/N: "
+        ).lower()
         if add_listings_response == "y":
             add_listings(all_listings)
         elif add_listings_response == "n":
@@ -401,7 +404,7 @@ def main():
         while remove_listings_response != "y" and remove_listings_response != "n":
             delete_verify = None
             remove_listings_response = input(
-                "Delete old listings from database? Y/N: "
+                f"\nDelete {len(listings_to_remove)} old listings from database? Y/N: "
             ).lower()
             if remove_listings_response == "y":
                 delete_listings_by_url_list(listings_to_remove)
@@ -443,12 +446,9 @@ if __name__ == "__main__":
 
 # Maybe add:
 
-# TODO Check line to run file for errors, Safti
-# TODO Add verification before adding / removing data from database at end of script
 # TODO Move served jsons to static files, tell Amy
-#! Beaux Villages has some listing types of "House" and "Business", change manually
-#! Safti is currently commented out from listings being added, it appears to run but listings not affected.
-#! Delete old Beaux listings where description is NULL, and re scrape
+
+# TODO Fix image analyzer and add back in
 
 # TODO Century21 can return town and postcode but no GPS from scraper, eg 'https://www.century21.fr/trouver_logement/detail/6602900456/'
 
