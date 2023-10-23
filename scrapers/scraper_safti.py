@@ -30,7 +30,7 @@ try:
         ) as infile:
             gps_dict = json.load(infile)
 except:
-    print("gps_dictnot found")
+    print("gps_dict not found")
     gps_dict = []
 
 
@@ -96,9 +96,15 @@ def safti_get_listings(old_listing_urls_dict, sold_url_set):
         if listing["link_url"] not in unwanted_listings
     ]
 
-    links_dead = [
-        link for link in old_listing_urls_dict.keys() if link not in new_listings_urls
-    ]
+    # If more than a single page fails to scrape, no listings will be removed from the database. On rare occasions most or all can fail one one run, and then succeed the next day without any change in the code.
+    if counter_fail > 1:
+        links_dead = []
+    else:
+        links_dead = [
+            link
+            for link in old_listing_urls_dict.keys()
+            if link not in new_listings_urls
+        ]
 
     print("New listings to add:", len(listings))
     print("Old listings to remove:", len(links_dead))

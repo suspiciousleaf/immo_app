@@ -226,6 +226,24 @@ async def get_listing_details(url, semaphore, browser):
                     except:
                         pass
 
+            # Location of "rooms" changed in some listings, code below catches second location.
+            if rooms is None:
+                label_div_pieces = soup.find_all("div", "label-r-com")
+                result_div_pieces = soup.find_all("div", "result-r-com")
+                label_list_pieces = [
+                    item.get_text().strip() for item in label_div_pieces
+                ]
+                result_list_pieces = [
+                    item.get_text(strip=True) for item in result_div_pieces
+                ]
+
+                for i in range(len(label_div_pieces)):
+                    if label_list_pieces[i] == "N° pieces":
+                        try:
+                            rooms = int(result_list_pieces[i])
+                        except:
+                            pass
+
             # print(ref)
             # print(type(ref))
             # print(plot)
@@ -238,7 +256,7 @@ async def get_listing_details(url, semaphore, browser):
             # print(rooms)
             # print(type(bedrooms))
 
-            price_raw = soup.find("div", class_="ip-detail-price").get_text()
+            price_raw = soup.find("div", class_="ip-detail-price").contents[0]
             price = int("".join([x for x in price_raw if x.isnumeric()]))
 
             # print(price)
@@ -250,12 +268,13 @@ async def get_listing_details(url, semaphore, browser):
                     .splitlines()
                 )
                 for line in description_raw:
-                    if "Géorisques" or "Plus de détails" in line:
+                    if "Géorisques" in line or "Plus de détails" in line:
                         break
                     if line:
                         description.append(line)
             except:
                 description - []
+
             # pprint(description)
 
             for postcode_key, towns in postcodes_dict.items():
