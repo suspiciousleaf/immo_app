@@ -3,6 +3,7 @@ import time
 import json
 
 from utilities.db_utilities import connect_to_database
+from utilities.agent_dict import agent_dict
 
 
 try:
@@ -174,9 +175,12 @@ def search(
         params = {}
 
         if agent_list:
-            agents = ",".join(agent_list)
-            conditions.append("FIND_IN_SET(agent, %(agents)s)")
-            params["agents"] = agents
+            try:
+                agents = ",".join([agent_dict[agent] for agent in agent_list])
+                conditions.append("FIND_IN_SET(agent, %(agents)s)")
+                params["agents"] = agents
+            except:
+                pass
 
         if depts_list:
             dept_response = department_search(depts_list, inc_none_location)
