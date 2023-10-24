@@ -157,5 +157,3 @@ if __name__ == "__main__":
 
 #! Century21 can return listings with towns + postcodes but no GPS coords
 #! richardson listings missing some photos, eg ref 4149
-
-#! In full_listing_ids, listings aren't returned in the exact order requested. Add sorting
