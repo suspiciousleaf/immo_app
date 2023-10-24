@@ -9,7 +9,7 @@ listings_descr_strings.json
 Example_layout.png
 expected format.txt
 test.py
-/static
+/static/images/
 listings - Copy.json
 steph_listings_raw.json
 steph_listings.json

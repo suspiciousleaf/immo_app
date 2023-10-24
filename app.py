@@ -429,8 +429,8 @@ def main():
         json.dump(times_run_since_last_image_scan, outfile, ensure_ascii=False)
 
     print("\n\nTotal listings added: ", len(all_listings))
-    print("\n\nTotal listings removed: ", len(listings_to_remove))
-    print("COMPLETE")
+    print("\nTotal listings removed: ", len(listings_to_remove))
+    print("\nCOMPLETE")
 
     t1 = time.perf_counter()
 

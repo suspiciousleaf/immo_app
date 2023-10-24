@@ -67,7 +67,15 @@ def full_listing_ids():
 
     listingID_list = try_csv(request.args.get("id"))
 
-    results = get_listings_by_listingID(listingID_list)
+    results_unordered = get_listings_by_listingID(listingID_list)
+
+    # Sort returned listings so the order matches the requested order
+    results = [
+        listing
+        for listingID in listingID_list
+        for listing in results_unordered
+        if str(listing["listingID"]) == listingID
+    ]
 
     if running_local:
         close_SSH_tunnel(ssh)
@@ -149,3 +157,5 @@ if __name__ == "__main__":
 
 #! Century21 can return listings with towns + postcodes but no GPS coords
 #! richardson listings missing some photos, eg ref 4149
+
+#! In full_listing_ids, listings aren't returned in the exact order requested. Add sorting
