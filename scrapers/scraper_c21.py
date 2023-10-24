@@ -241,7 +241,12 @@ def get_listing_details(page, url, host_photos):
             )
             for word in description_joined:
                 if unidecode(word.casefold()) in town_list:
-                    town = unidecode(word.capitalize())
+                    town = unidecode(
+                        word.casefold()
+                        .replace("st", "saint")
+                        .replace("d olmes", "d'olmes")
+                        .capitalize()
+                    )
                     postcode = [
                         i
                         for i in postcodes_dict
