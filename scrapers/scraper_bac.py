@@ -188,11 +188,13 @@ def get_listing_details(page, url):
                     pass
             elif "habitable" in line:
                 try:
-                    size = int(
-                        "".join(
-                            [num for num in line if num.isnumeric() and num.isascii()]
-                        )
-                    )
+                    size_raw = []
+                    for char in line:
+                        if char.isnumeric() and char.isascii():
+                            size_raw.append(char)
+                        elif char == ",":
+                            size_raw.append(".")
+                    size = int(float("".join(size_raw)))
                 except:
                     pass
             elif "terrain" in line:

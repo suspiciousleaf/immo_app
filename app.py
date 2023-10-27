@@ -450,6 +450,6 @@ if __name__ == "__main__":
 
 # TODO Fix image analyzer and add back in
 
-# TODO Century21 can return town and postcode but no GPS from scraper, eg 'https://www.century21.fr/trouver_logement/detail/6602900456/'
-
 # New immo to add? https://www.hdc-immo.com/
+
+# TODO BAC Immo is scraping some property sizes too large, missing decimal places

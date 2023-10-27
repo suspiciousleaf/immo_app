@@ -154,6 +154,3 @@ def search_call():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=105)
-
-#! Century21 can return listings with towns + postcodes but no GPS coords
-#! richardson listings missing some photos, eg ref 4149
