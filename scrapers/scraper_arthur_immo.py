@@ -101,7 +101,7 @@ def arthur_immo_get_listings(old_listing_urls_dict, sold_url_list, host_photos=F
             get_listing_details,
             (item["response"] for item in resp_to_scrape),
             links_to_scrape,
-            [host_photos for x in resp_to_scrape],
+            [host_photos for _ in resp_to_scrape],
         )
         for result in results:
             if isinstance(result, str):
@@ -141,6 +141,34 @@ def arthur_immo_get_links(page):
     ]
 
     return links
+
+
+def get_photos(page):
+    """Returns a list of image urls for the listing, scraped from a different page to the main listing
+
+    Args:
+        page (response object from listing request)
+
+    Returns:
+        images(list)
+    """
+    parent_url = page.url
+    photo_page_url = parent_url.replace(".htm", "/photos.htm")
+    photo_page = requests.get(photo_page_url)
+    soup = BeautifulSoup(photo_page.content, "html.parser")
+
+    images_raw = soup.find_all("img")
+    images = []
+    for image in images_raw:
+        image_url = image.get("src")
+        if (
+            "media.studio" in image_url
+            and "width" not in image_url
+            and image_url not in images
+        ):
+            images.append(image_url)
+
+    return images
 
 
 def get_listing_details(page, url, host_photos):
@@ -255,25 +283,30 @@ def get_listing_details(page, url, host_photos):
         # Photos are stored on a different page and hosted on another website. This finds the website and generates the links without visiting the main image page, or hosting website.
         # Listings with 5 or fewer photos don't have a separate page to host them, so the try/except tries the method for more than 5 images, if that fails, then scrapes the listing page for the photos available.
 
-        photos = []
-        try:
-            total_number_photos = 5 + int(
-                soup.find("p", class_="lg:text-2xl").contents[0][1:]
-            )
-            photo_links_div = soup.find("img", class_="object-cover")
-            photo_raw_link = photo_links_div.get("src").split("/0/")
+        # photos = []
+        # try:
+        #     total_number_photos = 5 + int(
+        #         soup.find("p", class_="lg:text-2xl").contents[0][1:]
+        #     )
+        #     photo_links_div = soup.find("img", class_="object-cover")
+        #     photo_raw_link = photo_links_div.get("src").split("/0/")
 
-            for i in range(
-                total_number_photos
-            ):  # Might need to add .jpg to the end of links to make it work
-                photos.append(
-                    photo_raw_link[0] + "/" + str(i) + "/" + photo_raw_link[1]
-                )
+        #     for i in range(
+        #         total_number_photos
+        #     ):  # Might need to add .jpg to the end of links to make it work
+        #         photos.append(
+        #             photo_raw_link[0] + "/" + str(i) + "/" + photo_raw_link[1]
+        #         )
+        # except:
+        #     photo_links_div = soup.find_all("img", class_="object-cover")
+        #     for child in photo_links_div:
+        #         if "backgrounds" not in child.get("src"):
+        #             photos.append(child.get("src"))
+
+        try:
+            photos = get_photos(page)
         except:
-            photo_links_div = soup.find_all("img", class_="object-cover")
-            for child in photo_links_div:
-                if "backgrounds" not in child.get("src"):
-                    photos.append(child.get("src"))
+            photos = []
 
         # pprint(photos)
 
