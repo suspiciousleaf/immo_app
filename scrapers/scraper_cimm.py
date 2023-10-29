@@ -13,7 +13,7 @@ from models import Listing
 def cimm_get_listings(old_listing_urls_dict, sold_url_list):
     t0 = time.perf_counter()
 
-    print("Starting Cimm Immobilier")
+    print("\nStarting Cimm Immobilier")
 
     URL = "https://api.cimm.com/api/realties?agencies=12444"
     page = requests.get(URL)
@@ -51,7 +51,7 @@ def cimm_get_listings(old_listing_urls_dict, sold_url_list):
 
     t1 = time.perf_counter()
     time_taken = t1 - t0
-    print(f"\nTime elapsed for Cimm Immobilier: {time_taken:.2f}s")
+    print(f"Time elapsed for Cimm Immobilier: {time_taken:.2f}s")
 
     return {"listings": listings_to_return, "urls_to_remove": links_dead}
 
