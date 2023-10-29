@@ -101,6 +101,7 @@ property_types = {
         "Ensemble",
         "Gite",
         "Grange",
+        "Habitation",
         "Hotel",
         "House",
         "Investissement",
@@ -120,6 +121,7 @@ property_types = {
     },
     "Commerce": {
         "Agence",
+        "Alimentation",
         "Ateliers",
         "Bar",
         "Bazar",
