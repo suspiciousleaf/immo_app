@@ -453,3 +453,5 @@ if __name__ == "__main__":
 # New immo to add? https://www.hdc-immo.com/
 
 # TODO BAC Immo is scraping some property sizes too large, missing decimal places
+
+#! Test Beaux Villages scraper for size and other specs, re scrape everything
