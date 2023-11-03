@@ -385,7 +385,7 @@ def main():
     if times_run_since_last_image_scan["counter"] >= 5:
         try:
             print("\nImage scan function running, this will take approx 90 seconds")
-            listing_urls_to_remove = sold_image_check(all_listings)
+            listing_urls_to_remove = sold_image_check()
             if listing_urls_to_remove:
                 listings_to_remove.extend(listing_urls_to_remove)
                 add_sold_urls_to_database(listing_urls_to_remove)
@@ -396,7 +396,7 @@ def main():
         except Exception as e:
             print(f"Image filter failed: {e}")
     else:
-        pass  # times_run_since_last_image_scan["counter"] += 1
+        times_run_since_last_image_scan["counter"] += 1
 
     # Verify whether listings detected as no longer online should be removed from the database.
     if listings_to_remove:
@@ -448,10 +448,26 @@ if __name__ == "__main__":
 
 # TODO Move served jsons to static files, tell Amy
 
-# TODO Fix image analyzer and add back in
-
 # New immo to add? https://www.hdc-immo.com/
 
 # TODO BAC Immo is scraping some property sizes too large, missing decimal places
 
 #! Test Beaux Villages scraper for size and other specs, re scrape everything
+
+# Image scan function running, this will take approx 90 seconds
+# Unavailable listings detected for Arthur Immo: 11
+# Unavailable listings detected for Cimm Immobilier: 5
+# Cabinet Jammes image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11036/11036329_1.jpg?fit=contain&h=950&q=90&w=1400&s=daa91c73f3bad16f2d110de0a8e1e502
+# Unavailable listings detected for Cabinet Jammes: 0
+# M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110271475_28.jpg?fit=crop&h=950&q=90&w=1400&s=04f76f4702ed5d615971f64f398fcad7
+# M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110271658_33.jpg?fit=crop&h=950&q=90&w=1400&s=cb7f3e1edf21e352ee35c0f245f1733c
+# Unavailable listings detected for M&M Immobilier: 4
+# Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/01/05/1005827/cd48bb0f524b6dda5815c6d1c4634584fee24f99/rg_nobn.jpg?1
+# Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/01/05/1005419/02fed5c0e6b758e569a1e392c401d9a9fed0bbc9/rg_nobn.jpg?1
+# Unavailable listings detected for Safti: 2
+# Unavailable listings detected for Sextant: 10
+# Unavailable listings detected for Time and Stone Immobilier: 0
+# Found 0 unavailable listings
+# Number of listings removed by image scan: 0
+
+#! Move image scan to after database has been updated, so it doesn't try to analyze listings that have been removed. Or update list with urls to remove etc.
