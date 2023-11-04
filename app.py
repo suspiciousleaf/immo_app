@@ -57,9 +57,7 @@ from utilities.async_image_downloader import sync_local_remote_image_directories
 
 try:
     try:
-        with open(
-            "times_run_since_last_image_scan_counter.json", "r", encoding="utf8"
-        ) as infile:
+        with open("times_run_since_last_image_scan_counter.json", "r") as infile:
             times_run_since_last_image_scan = json.load(infile)
         running_local = True
     except:
@@ -67,7 +65,6 @@ try:
         with open(
             "/home/suspiciousleaf/immo_app/times_run_since_last_image_scan_counter.json",
             "r",
-            encoding="utf8",
         ) as infile:
             times_run_since_last_image_scan = json.load(infile)
 except:
@@ -423,10 +420,8 @@ def main():
             sync_local_remote_image_directories()
 
     # This saves the updated counter for the image scan
-    with open(
-        "times_run_since_last_image_scan_counter.json", "w", encoding="utf-8"
-    ) as outfile:
-        json.dump(times_run_since_last_image_scan, outfile, ensure_ascii=False)
+    with open("times_run_since_last_image_scan_counter.json", "w") as outfile:
+        json.dump(times_run_since_last_image_scan, outfile)
 
     print("\n\nTotal listings added: ", len(all_listings))
     print("\nTotal listings removed: ", len(listings_to_remove))
@@ -453,21 +448,5 @@ if __name__ == "__main__":
 # TODO BAC Immo is scraping some property sizes too large, missing decimal places
 
 #! Test Beaux Villages scraper for size and other specs, re scrape everything
-
-# Image scan function running, this will take approx 90 seconds
-# Unavailable listings detected for Arthur Immo: 11
-# Unavailable listings detected for Cimm Immobilier: 5
-# Cabinet Jammes image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11036/11036329_1.jpg?fit=contain&h=950&q=90&w=1400&s=daa91c73f3bad16f2d110de0a8e1e502
-# Unavailable listings detected for Cabinet Jammes: 0
-# M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110271475_28.jpg?fit=crop&h=950&q=90&w=1400&s=04f76f4702ed5d615971f64f398fcad7
-# M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110271658_33.jpg?fit=crop&h=950&q=90&w=1400&s=cb7f3e1edf21e352ee35c0f245f1733c
-# Unavailable listings detected for M&M Immobilier: 4
-# Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/01/05/1005827/cd48bb0f524b6dda5815c6d1c4634584fee24f99/rg_nobn.jpg?1
-# Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/01/05/1005419/02fed5c0e6b758e569a1e392c401d9a9fed0bbc9/rg_nobn.jpg?1
-# Unavailable listings detected for Safti: 2
-# Unavailable listings detected for Sextant: 10
-# Unavailable listings detected for Time and Stone Immobilier: 0
-# Found 0 unavailable listings
-# Number of listings removed by image scan: 0
 
 #! Move image scan to after database has been updated, so it doesn't try to analyze listings that have been removed. Or update list with urls to remove etc.

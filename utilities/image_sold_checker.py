@@ -156,7 +156,7 @@ def sold_image_check() -> list:
             # Filter listings to be tested
             images_to_remove = remove_unavailable(temp_list, agent)
             print(f"Unavailable listings detected for {agent}: {len(images_to_remove)}")
-            sold_image_urls_set.union(images_to_remove)
+            sold_image_urls_set.update(images_to_remove)
 
         except Exception as e:
             print(f"{agent} filter failed: {e}")
@@ -165,7 +165,7 @@ def sold_image_check() -> list:
 
     for listing in test_listings:
         if listing["photos"] in sold_image_urls_set:
-            listing_urls_to_remove.append[listing["link_url"]]
+            listing_urls_to_remove.append(listing["link_url"])
 
     print(f"Found {len(listing_urls_to_remove)} unavailable listings")
     return listing_urls_to_remove
