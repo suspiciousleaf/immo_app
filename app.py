@@ -57,9 +57,7 @@ from utilities.async_image_downloader import sync_local_remote_image_directories
 
 try:
     try:
-        with open(
-            "times_run_since_last_image_scan_counter.json", "r", encoding="utf8"
-        ) as infile:
+        with open("times_run_since_last_image_scan_counter.json", "r") as infile:
             times_run_since_last_image_scan = json.load(infile)
         running_local = True
     except:
@@ -67,7 +65,6 @@ try:
         with open(
             "/home/suspiciousleaf/immo_app/times_run_since_last_image_scan_counter.json",
             "r",
-            encoding="utf8",
         ) as infile:
             times_run_since_last_image_scan = json.load(infile)
 except:
@@ -385,7 +382,7 @@ def main():
     if times_run_since_last_image_scan["counter"] >= 5:
         try:
             print("\nImage scan function running, this will take approx 90 seconds")
-            listing_urls_to_remove = sold_image_check(all_listings)
+            listing_urls_to_remove = sold_image_check()
             if listing_urls_to_remove:
                 listings_to_remove.extend(listing_urls_to_remove)
                 add_sold_urls_to_database(listing_urls_to_remove)
@@ -396,7 +393,7 @@ def main():
         except Exception as e:
             print(f"Image filter failed: {e}")
     else:
-        pass  # times_run_since_last_image_scan["counter"] += 1
+        times_run_since_last_image_scan["counter"] += 1
 
     # Verify whether listings detected as no longer online should be removed from the database.
     if listings_to_remove:
@@ -423,10 +420,8 @@ def main():
             sync_local_remote_image_directories()
 
     # This saves the updated counter for the image scan
-    with open(
-        "times_run_since_last_image_scan_counter.json", "w", encoding="utf-8"
-    ) as outfile:
-        json.dump(times_run_since_last_image_scan, outfile, ensure_ascii=False)
+    with open("times_run_since_last_image_scan_counter.json", "w") as outfile:
+        json.dump(times_run_since_last_image_scan, outfile)
 
     print("\n\nTotal listings added: ", len(all_listings))
     print("\nTotal listings removed: ", len(listings_to_remove))
@@ -448,10 +443,10 @@ if __name__ == "__main__":
 
 # TODO Move served jsons to static files, tell Amy
 
-# TODO Fix image analyzer and add back in
-
 # New immo to add? https://www.hdc-immo.com/
 
 # TODO BAC Immo is scraping some property sizes too large, missing decimal places
 
 #! Test Beaux Villages scraper for size and other specs, re scrape everything
+
+#! Move image scan to after database has been updated, so it doesn't try to analyze listings that have been removed. Or update list with urls to remove etc.
