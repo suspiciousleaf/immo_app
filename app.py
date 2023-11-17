@@ -450,3 +450,5 @@ if __name__ == "__main__":
 #! Test Beaux Villages scraper for size and other specs, re scrape everything
 
 #! Move image scan to after database has been updated, so it doesn't try to analyze listings that have been removed. Or update list with urls to remove etc.
+
+# 16/11/2023 Number of listings in sold_urls: 324
