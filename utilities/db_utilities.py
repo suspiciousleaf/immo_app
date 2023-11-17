@@ -249,7 +249,7 @@ def create_listings_table(db, cursor):
         cursor: cursor object
     """
     # Character sets changed for columns to minimize size, particularly for description and photos. utf8 char assumed to be 4 bytes each, so 16383 chars* 4 bytes = 65,532, which is the max under the total row size limit of 65535 bytes. latin1 and ascii chars are 1 byte each.
-    columns_string = "listingID int PRIMARY KEY AUTO_INCREMENT, types VARCHAR(11), town VARCHAR(255), postcode CHAR(5), price INT UNSIGNED, agent VARCHAR(50), ref VARCHAR(30), bedrooms SMALLINT UNSIGNED, rooms SMALLINT UNSIGNED, plot MEDIUMINT UNSIGNED, size MEDIUMINT UNSIGNED, link_url VARCHAR(1024), description VARCHAR(14000), photos TEXT, photos_hosted TEXT, gps POINT, types_original VARCHAR(30)"
+    columns_string = "listingID INT UNSIGNED PRIMARY KEY AUTO_INCREMENT, types VARCHAR(11), town VARCHAR(255), postcode CHAR(5), price INT UNSIGNED, agent VARCHAR(50), ref VARCHAR(30), bedrooms SMALLINT UNSIGNED, rooms SMALLINT UNSIGNED, plot MEDIUMINT UNSIGNED, size MEDIUMINT UNSIGNED, link_url VARCHAR(1024) NOT NULL, description VARCHAR(14000), photos TEXT, photos_hosted TEXT, gps POINT, types_original VARCHAR(30)"
 
     # Total bytes used with description as TEXT: Approx 6089 bytes. Max size is 65,535, so 59,446 bytes remain. Divided by 4 for utf8mb4 charset gives approx 14,861 VARCHAR length available to use. This is roughly double the maximum length of descriptions scraped so far, so should be safe to try using. Description changed from TEXT to VARCHAR(14000) to improve query performance.
 
