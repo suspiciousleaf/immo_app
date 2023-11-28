@@ -130,6 +130,7 @@ property_types = {
         "Bergerie",
         "Boucherie",
         "Bureau",
+        "Bureaux",
         "Business",
         "Cave",
         "Chocolaterie",
