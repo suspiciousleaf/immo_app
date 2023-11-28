@@ -451,4 +451,6 @@ if __name__ == "__main__":
 
 #! Move image scan to after database has been updated, so it doesn't try to analyze listings that have been removed. Or update list with urls to remove etc.
 
+# TODO Create functions to make indexes in db_utilities
+
 # 16/11/2023 Number of listings in sold_urls: 324
