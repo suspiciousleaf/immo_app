@@ -36,7 +36,7 @@ Previously scraped listing urls are retrieved from the database and compared to 
 These urls are passed to the next function, that scrapes the individual listing page and returns the data as a dictionary. Once all urls have been scraped, the list is returned to `app.py` and the next agent scraper begins. 
 <br>
 Once all scrapers have run, the *Type* of each listing is checked in an attempt to fit them in to one of *House, Apartment, Multi-occupancy building, Land, Commercial,* or *Other*. If the type doesn't fit into one fo the first five, it will be set to *Other*, and the scraped type will be set to a new value in the dictionary so it can be categorized later, and will also print to console.
-After all agents have been scraped and data verified, a promt will appear to confirm is new listings should be added to the database, and another to confirm if old ones should be deleted.
+After all agents have been scraped and data verified, a promt will appear to confirm if new listings should be added to the database, and another to confirm if old ones should be deleted.
 
 Some scrapers run asynchronously using `grequests`, some run using multi-threading, and a couple directly access an `API` I found in network requests on page loading.
 <br>
@@ -72,12 +72,12 @@ https://suspiciousleaf.eu.pythonanywhere.com/search_results
 | town     | Requested locations |  Comma-separated values | Leave blank for all |
 | search_radius  | Radius around each of the above towns in km | Number | 0 |
 | types | Types of property to include |  Comma-separated values | Leave blank for all |
-| min_X, max_X  | Min and max values for price, bedrooms, rooms, land size, property size  | Number | |
+| min_X, max_X  | Min and max values for price, bedrooms, rooms, land size("plot"), property size ("size")  | Number | |
 | inc_none_X    | Include listings where X is not known. Bedrooms, location, land size, property size   | Boolean | True |
 | keywords   | Keywords to search for in description, e.g. *garage* | Comma-separated values |
 <br>
 ### An example query
-https://suspiciousleaf.eu.pythonanywhere.com/search_results?agents=ami&town=limoux&search_radius=10&types=Maison&min_beds=1&max_beds=9&min_price=50&max_price=500000&min_plot=50&max_plot=50000&min_size=50&max_size=5000&keywords=piscine&inc_none_beds=False
+https://suspiciousleaf.eu.pythonanywhere.com/search_results??town=11000-carcassonne&search_radius=25&types=Maison&min_beds=4&max_price=750000&min_plot=1000&min_size=100&max_size=300&inc_none_location=false&inc_none_size=false&inc_none_plot=false&keywords=piscine
 <br>
 <br>
 # How to run
@@ -99,4 +99,3 @@ The `API` is run by running `flask_app.py`. It can then be accessed on `localhos
 <br>
 
 - The possibility of integrating a proxy should be more thoroughly investigated to potentially improve the scraping speed for some agents. The main gain would be seen when running the scraper for the first time, which takes several minutes, because on each subsequent run very few additional listings are typically scraped. This means that any gains in requests per second may end up being lost to increases in latency. 
-

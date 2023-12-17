@@ -20,3 +20,4 @@ app_db_mysqlclient.py
 ssh_info.txt
 .env
 creds.py
+note_to_self.txt
