@@ -77,9 +77,26 @@ https://suspiciousleaf.eu.pythonanywhere.com/search_results
 | keywords   | Keywords to search for in description, e.g. *garage* | Comma-separated values |
 <br>
 ### An example query
+<br>
 https://suspiciousleaf.eu.pythonanywhere.com/search_results??town=11000-carcassonne&search_radius=25&types=Maison&min_beds=4&max_price=750000&min_plot=1000&min_size=100&max_size=300&inc_none_location=false&inc_none_size=false&inc_none_plot=false&keywords=piscine
 <br>
 <br>
+This will return a `JSON` object with barebones details for each property in the search criteria. 
+
+"agent": "Safti",
+"listingID": 6257,
+"plot": 1041,
+"price": 279000,
+"size": 102
+
+These are the details used for sorting on the front end, and the primary key used on the database. This allows the front end to sort results, control pagination, save listings to a favourite or block list locally, and then query the back end for the complete listings required for each listing to be shown on that page using `listingID`.
+
+Example query for full listing:
+<br>
+https://suspiciousleaf.eu.pythonanywhere.com/full_listings?id=14554,13328,14144,13867,15570,15386,15591,13868,15389,14134,15394,14125
+<br>
+<br>
+
 # How to run
 
 To run the scraper, run `app.py`.
