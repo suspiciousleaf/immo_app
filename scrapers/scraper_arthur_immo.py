@@ -208,11 +208,11 @@ def get_listing_details(page, url, host_photos):
 
         # Get ref
         details_div = soup.find("ul", class_="lg:grid-cols-2").contents
+        ref = None
         for line in details_div:
-            if "Ref internal" in str(line):
-                ref = str(line).replace("text-gray-400", "").replace("1e2022", "")
-
-        ref = "".join([num for num in ref if num.isdigit()])
+            if "Référence" in line.get_text():
+                ref = "".join([num for num in line.get_text() if num.isdigit()])
+                break
         # print("ref:", ref)
 
         # Chambres
@@ -365,6 +365,7 @@ def get_listing_details(page, url, host_photos):
             gps,
         )
         return listing.__dict__
+
     except Exception as e:
         return f"{url}: {str(e)}"
 
@@ -373,11 +374,11 @@ cwd = os.getcwd()
 
 
 # test_urls = [
-#     "https://www.lavelanet-arthurimmo.com/annonces/achat/maison/dreuilhe-09300/26841133.htm"
+#     "https://www.lavelanet-arthurimmo.com/annonces/achat/maison/lavelanet-09300/28476286.htm"
 # ]
 
 # for test_url in test_urls:
-#     get_listing_details(requests.get(test_url), test_url, False)
+#     print(get_listing_details(requests.get(test_url), test_url, False))
 
 
 # try:

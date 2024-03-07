@@ -150,218 +150,215 @@ def ami09_get_links(
 
 
 def get_listing_details(page, url, host_photos):
-    try:
-        agent = "Ami Immobilier"
-        soup = BeautifulSoup(page.content, "html.parser")
-        link_url = url
+    # try:
+    agent = "Ami Immobilier"
+    soup = BeautifulSoup(page.content, "html.parser")
+    link_url = url
 
-        # print("\n\nNext property\n")
+    # print("\n\nNext property\n")
 
-        # print(URL)
-        # Get type
-        types_div = soup.find("h1").get_text()
-        types_div_cleaned = (
-            types_div.replace("-", ";").replace("–", ";").replace("—", ";")
-        )
-        if types_div_cleaned.count(";") == 2:
-            types = types_div_cleaned.split(";")[1].strip().capitalize()
-        else:
-            types = "Maison"
-        if types[-1] == "s":
-            types = types[:-1]
-        # print("Type:", types)
+    # print(URL)
+    # Get type
+    types_div = soup.find("h1").get_text()
+    types_div_cleaned = types_div.replace("-", ";").replace("–", ";").replace("—", ";")
+    if types_div_cleaned.count(";") == 2:
+        types = types_div_cleaned.split(";")[1].strip().capitalize()
+    else:
+        types = "Maison"
+    if types[-1] == "s":
+        types = types[:-1]
+    # print("Type:", types)
 
-        # Get location
-        town = None
-        top_table_div = soup.find_all("table", class_="main_tableau_acf")[0].contents
-        for item in top_table_div:
-            if "Lieu:" in item.get_text():
-                town = unidecode(item.get_text().replace("Lieu:", "").capitalize())
+    # Get location
+    town = None
+    top_table_div = soup.find_all("table", class_="main_tableau_acf")[0].contents
+    for item in top_table_div:
+        if "Lieu:" in item.get_text():
+            town = unidecode(item.get_text().replace("Lieu:", "").capitalize())
 
-        location_div = soup.find("h1").get_text().replace("—", "-").replace("–", "-")
-        if location_div[-5:].isdigit():
-            postcode = location_div[-5:]
-            location_div = location_div[:-5]
-        else:
-            postcode = None
+    location_div = soup.find("h1").get_text().replace("—", "-").replace("–", "-")
+    if location_div[-5:].isdigit():
+        postcode = location_div[-5:]
+        location_div = location_div[:-5]
+    else:
+        postcode = None
 
-        # print("\n", location_div)
-        # print("Postcode:", postcode)
+    # print("\n", location_div)
+    # print("Postcode:", postcode)
 
-        if not town:
-            if location_div.count("-") > 0:
-                try:
-                    town = unidecode(location_div.split("-")[-1].strip().capitalize())
-                except:
-                    pass
-            else:
-                town = None
-
-        # print("Town:", town)
-
-        # Get ref
-        ref_div = soup.find("table", class_="main_tableau_acf").get_text()
-        ref = "".join([num for num in ref_div if num.isdigit()])
-        # print("ref:", ref)
-
-        if ref == "":
-            ref_div_2 = link_url.split("/")[-2].split("-")[0]
-            if ref_div_2.isnumeric():
-                ref = ref_div_2
-        # print("ref:", ref)
-
-        # Get price
-        price_div = soup.find("span", class_="woocommerce-Price-amount").get_text()
-        price = int("".join([num for num in price_div if num.isdigit()]))
-        # print("Price:", price, "€")
-
-        # Get property details
-        details_div = soup.find_all("table", class_="main_tableau_acf")[1].contents
-        # print(details_div)
-        bedrooms = None
-        try:
-            for item in details_div:
-                if "chambres" in item.get_text():
-                    bedrooms = int(
-                        "".join([num for num in item.get_text() if num.isdigit()])
-                    )
-        except:
-            pass
-        # print("Bedrooms:", bedrooms)
-
-        # Rooms
-        # pprint(details_div)
-        rooms = None
-        try:
-            for item in details_div:
-                if "pièces" in item.get_text():
-                    rooms = int(
-                        "".join([num for num in item.get_text() if num.isdigit()])
-                    )
-        except:
-            pass
-
-        # print("Rooms:", rooms)
-
-        # Description
-
-        description_outer = soup.find("div", class_="et_pb_wc_description")
-        description = description_outer.find(
-            "div", class_="et_pb_module_inner"
-        ).p.get_text()
-        description = [description]
-        # print(description)
-
-        plot = None
-        try:
-            for item in details_div:
-                if "Surface terrain" in item.get_text():
-                    plot = int(
-                        "".join(
-                            [
-                                num
-                                for num in item.get_text()
-                                if num.isdigit() and num.isascii()
-                            ]
-                        )
-                    )
-        except:
-            pass
-
-        # If plot hasn't been found in details_div, the regex below tries to capture it in the description
-        if not plot:
+    if not town:
+        if location_div.count("-") > 0:
             try:
-                regex = r"terrain.*?(\d+)m²"
-
-                match = re.search(regex, description[0], re.IGNORECASE)
-
-                if match:
-                    plot = int(match.group(1))
+                town = unidecode(location_div.split("-")[-1].strip().capitalize())
             except:
                 pass
+        else:
+            town = None
 
-        # print("Plot:", plot, "m²")
+    # print("Town:", town)
 
-        # Property size
-        size = None
-        try:
-            for item in details_div:
-                if "habitable" in item.get_text():
-                    size = int(
-                        float(
-                            item.get_text()[
-                                item.get_text().find(":")
-                                + 1 : item.get_text().find(" m²")
-                            ]
-                        )
+    # Get ref
+    ref_div = soup.find("table", class_="main_tableau_acf").get_text()
+    ref = "".join([num for num in ref_div if num.isdigit()])
+    # print("ref:", ref)
+
+    if ref == "":
+        ref_div_2 = link_url.split("/")[-2].split("-")[0]
+        if ref_div_2.isnumeric():
+            ref = ref_div_2
+    # print("ref:", ref)
+
+    # Get price
+    price_div = soup.find("span", class_="woocommerce-Price-amount").get_text()
+    price = int("".join([num for num in price_div if num.isdigit()]))
+    # print("Price:", price, "€")
+
+    # Get property details
+    details_div = soup.find_all("table", class_="main_tableau_acf")[1].contents
+    # print(details_div)
+    bedrooms = None
+    try:
+        for item in details_div:
+            if "chambres" in item.get_text():
+                bedrooms = int(
+                    "".join([num for num in item.get_text() if num.isdigit()])
+                )
+    except:
+        pass
+    # print("Bedrooms:", bedrooms)
+
+    # Rooms
+    # pprint(details_div)
+    rooms = None
+    try:
+        for item in details_div:
+            if "pièces" in item.get_text():
+                rooms = int("".join([num for num in item.get_text() if num.isdigit()]))
+    except:
+        pass
+
+    # print("Rooms:", rooms)
+
+    # Description
+
+    description_outer = soup.find("div", class_="et_pb_wc_description")
+    description = description_outer.find(
+        "div", class_="et_pb_module_inner"
+    ).p.get_text()
+    description = [description]
+    # print(description)
+
+    plot = None
+    try:
+        for item in details_div:
+            if "Surface terrain" in item.get_text():
+                plot = int(
+                    "".join(
+                        [
+                            num
+                            for num in item.get_text()
+                            if num.isdigit() and num.isascii()
+                        ]
                     )
+                )
+    except:
+        pass
+
+    # If plot hasn't been found in details_div, the regex below tries to capture it in the description
+    if not plot:
+        try:
+            regex = r"terrain.*?(\d+)m²"
+
+            match = re.search(regex, description[0], re.IGNORECASE)
+
+            if match:
+                plot = int(match.group(1))
         except:
             pass
-        # print("Size:", size, "m²")
 
-        # Photos
-        photos = []
-        photos_div = soup.find("figure", class_="woocommerce-product-gallery__wrapper")
-        photos_div = photos_div.find_all("a")
-        for element in photos_div:
-            photos.append(element.get("href"))
+    # print("Plot:", plot, "m²")
 
-        if host_photos:
-            agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
-
-            make_photos_dir(ref, cwd, agent_abbr)
-
-            photos_hosted = []
-            photos_failed = []
-            i = 0
-            failed = 0
-
-            resp = get_data(photos, header=False)
-            for item in resp:
-                try:
-                    photos_hosted.append(
-                        dl_comp_photo(item["response"], ref, i, cwd, agent_abbr)
+    # Property size
+    size = None
+    try:
+        for item in details_div:
+            if "habitable" in item.get_text():
+                size = int(
+                    float(
+                        item.get_text()[
+                            item.get_text().find(":") + 1 : item.get_text().find(" m²")
+                        ]
                     )
-                    i += 1
-                except:
-                    photos_failed.append(item["link"])
-                    failed += 1
+                )
+    except:
+        pass
+    # print("Size:", size, "m²")
 
-            if failed:
-                print(f"{failed} photos failed to scrape")
-                pprint(photos_failed)
-        else:
-            photos_hosted = photos
+    # Photos
+    photos = []
+    photos_div = soup.find("div", class_="woocommerce-product-gallery__wrapper")
+    photos_div = photos_div.find_all("a")
+    for element in photos_div:
+        photos.append(element.get("href"))
 
-        gps = None
+    if host_photos:
+        agent_abbr = [i for i in agent_dict if agent_dict[i] == agent][0]
 
-        listing = Listing(
-            types,
-            town,
-            postcode,
-            price,
-            agent,
-            ref,
-            bedrooms,
-            rooms,
-            plot,
-            size,
-            link_url,
-            description,
-            photos,
-            photos_hosted,
-            gps,
-        )
+        make_photos_dir(ref, cwd, agent_abbr)
 
-        return listing.__dict__
-    except Exception as e:
-        return f"{url}: {str(e)}"
+        photos_hosted = []
+        photos_failed = []
+        i = 0
+        failed = 0
+
+        resp = get_data(photos, header=False)
+        for item in resp:
+            try:
+                photos_hosted.append(
+                    dl_comp_photo(item["response"], ref, i, cwd, agent_abbr)
+                )
+                i += 1
+            except:
+                photos_failed.append(item["link"])
+                failed += 1
+
+        if failed:
+            print(f"{failed} photos failed to scrape")
+            pprint(photos_failed)
+    else:
+        photos_hosted = photos
+
+    gps = None
+
+    listing = Listing(
+        types,
+        town,
+        postcode,
+        price,
+        agent,
+        ref,
+        bedrooms,
+        rooms,
+        plot,
+        size,
+        link_url,
+        description,
+        photos,
+        photos_hosted,
+        gps,
+    )
+
+    return listing.__dict__
+
+
+# except Exception as e:
+#     return f"{url}: {str(e)}"
 
 
 cwd = os.getcwd()
 
-# test_url = "https://www.ami09.com/produit/5730-maison-belesta-09300/"
-# get_listing_details(requests.get(test_url), test_url, False)
+# test_url = "https://www.ami09.com/produit/5795-maison-belesta-09300/"
+# print(get_listing_details(requests.get(test_url), test_url, False))
 
 # get_listing_details(requests.get("https://www.ami09.com/produit/5668-maison-belesta-09300/"), "https://www.ami09.com/produit/5731-maison-belesta/", False)
 
