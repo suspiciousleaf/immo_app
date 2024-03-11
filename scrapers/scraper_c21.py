@@ -16,11 +16,13 @@ from utilities.utility_holder import get_gps, get_data
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+        with open(
+            "static/data/postcodes_gps_dict.json", "r", encoding="utf8"
+        ) as infile:
             gps_dict = json.load(infile)
     except:
         with open(
-            "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json",
+            "/home/suspiciousleaf/immo_app/static/data/postcodes_gps_dict.json",
             "r",
             encoding="utf8",
         ) as infile:
@@ -30,20 +32,24 @@ except:
     gps_dict = []
 
 try:
-    with open("ville_list_clean.json", "r", encoding="utf8") as infile:
+    with open("static/data/ville_list_clean.json", "r", encoding="utf8") as infile:
         town_list = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/ville_list_clean.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/ville_list_clean.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         town_list = json.load(infile)
 
 try:
-    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/postcodes_dict.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         postcodes_dict = json.load(infile)
 

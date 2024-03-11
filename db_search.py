@@ -3,17 +3,27 @@ import time
 import json
 
 from utilities.db_utilities import connect_to_database
-from utilities.agent_dict import agent_dict
 
 
 try:
-    with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
         gps_town_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/postcodes_gps_dict.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         gps_town_dict = json.load(infile)
+
+try:
+    with open("static/data/agents.json", "r", encoding="utf8") as infile:
+        agent_dict = json.load(infile)
+except:
+    with open(
+        "/home/suspiciousleaf/immo_app/static/data/agents.json", "r", encoding="utf8"
+    ) as infile:
+        agent_dict = json.load(infile)
 
 
 def keyword_search(keyword_list: list[str]) -> dict:

@@ -1,4 +1,4 @@
-# This program is used to build the dictionary of postcodes with their GPS coordinates, output is postcodes_gps_dict.json
+# This program is used to build the dictionary of postcodes with their GPS coordinates, output is static/data/postcodes_gps_dict
 
 import json
 
@@ -36,7 +36,7 @@ def postcode_dict_maker():
 
     postcode_dict = {lst[0]: lst[1:] for lst in postcode_list}
 
-    with open("postcodes_dict.json", "w", encoding="utf-8") as outfile:
+    with open("static/data/postcodes_dict.json", "w", encoding="utf-8") as outfile:
         json.dump(postcode_dict(), outfile, ensure_ascii=False)
 
 
@@ -47,14 +47,14 @@ def create_town_list():
     """This will make a json file with all recognised town names only"""
     town_list = [item for item in postcodes if item.isnumeric() == False]
 
-    with open("ville_list_clean.json", "w", encoding="utf-8") as outfile:
+    with open("static/data/ville_list_clean.json", "w", encoding="utf-8") as outfile:
         json.dump(town_list, outfile, ensure_ascii=False)
 
 
 # create_town_list()
 
 try:
-    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
         town_postcode_dict = json.load(infile)
 except:
     print(
@@ -87,7 +87,7 @@ def create_gps_dict():
         # This will return any towns that failed to find a GPS coordinate, so it can be done manually afterwards.
         pprint(failed_list)
 
-    with open("postcodes_gps_dict.json", "w", encoding="utf-8") as outfile:
+    with open("static/data/postcodes_gps_dict.json", "w", encoding="utf-8") as outfile:
         json.dump(postcode_dict, outfile, ensure_ascii=False)
 
 

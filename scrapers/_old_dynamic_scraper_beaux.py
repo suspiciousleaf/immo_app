@@ -17,21 +17,25 @@ from models import Listing
 from utilities.utility_holder import get_gps
 
 try:
-    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/postcodes_dict.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         postcodes_dict = json.load(infile)
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+        with open(
+            "static/data/postcodes_gps_dict.json", "r", encoding="utf8"
+        ) as infile:
             gps_dict = json.load(infile)
     except:
         with open(
-            "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json",
+            "/home/suspiciousleaf/immo_app/static/data/postcodes_gps_dict.json",
             "r",
             encoding="utf8",
         ) as infile:

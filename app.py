@@ -23,7 +23,7 @@ from utilities.db_utilities import (
     open_SSH_tunnel,
     close_SSH_tunnel,
 )
-from utilities.agent_dict import agent_dict
+
 from scrapers.scraper_ami09 import ami09_get_listings
 from scrapers.scraper_api import api_get_listings
 from scrapers.scraper_arieg import arieg_get_listings
@@ -69,6 +69,15 @@ try:
             times_run_since_last_image_scan = json.load(infile)
 except:
     times_run_since_last_image_scan = {"counter": 5}
+
+try:
+    with open("static/data/agents.json", "r", encoding="utf8") as infile:
+        agent_dict = json.load(infile)
+except:
+    with open(
+        "/home/suspiciousleaf/immo_app/static/data/agents.json", "r", encoding="utf8"
+    ) as infile:
+        agent_dict = json.load(infile)
 
 # The code below will run the imported scraper for each agent, host_photos will determine if the photos for each listing are downloaded, resized, and compressed for local hosting. Try/except is used to prevent an error with a single scraper causing the whole program to fail to run. Faults are reported to the failed_scrapes list, and finally to the console.
 
@@ -454,3 +463,5 @@ if __name__ == "__main__":
 # TODO Create functions to make indexes in db_utilities
 
 # 16/11/2023 Number of listings in sold_urls: 324
+
+# TODO Some agents host a new photo when it is sold, so the url changes. If image scanner doesn't find the image, run the scraper again on the url to get the primary image, and then scan that. Safti, Jammes, M&M, Arthur
