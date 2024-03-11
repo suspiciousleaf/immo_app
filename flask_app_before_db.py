@@ -4,7 +4,7 @@ import math
 from flask import Flask, send_file
 from flask import request
 
-from json_search import search, listings_id_search, agent_dict
+from json_search import search, listings_id_search  # , agent_dict
 
 # The imports below are to get the listing data, as well as two dictionaries that are used. The path of the file is different when hosted locally or on PythonAnywhere, so the try/except allows the files to be imported correctly regardless of whether the program is run locally or when hosted.
 
@@ -17,11 +17,13 @@ except:
     ) as infile:
         listings = json.load(infile)
 try:  # postcodes_dict.json
-    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/postcodes_dict.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         postcodes_dict = json.load(infile)
 
@@ -47,10 +49,10 @@ def postcodes():
     return postcodes_dict
 
 
-# Dictionary of agent abbreviated names : full agent names
-@app.route("/agent_dict/", methods=["GET"])
-def agents():
-    return agent_dict
+# # Dictionary of agent abbreviated names : full agent names
+# @app.route("/agent_dict/", methods=["GET"])
+# def agents():
+#     return agent_dict
 
 
 # This  will check if a valid value is given for fields which define a maximum value, and will return infinite if not found

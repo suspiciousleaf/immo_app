@@ -7,31 +7,14 @@ from unidecode import unidecode
 from geopy.distance import distance
 
 # This is used to convert the agent name strings used in the search request to the full agent names used in the listings
-agent_dict = {
-    "ami": "Ami Immobilier",
-    "api": "A.P.I.",
-    "arieg": "Arieg'Immo",
-    "arthur": "Arthur Immo",
-    "aude": "Aude Immobilier",
-    "bac": "BAC Immobilier",
-    "beaux": "Beaux Villages",
-    "c21": "Century 21",
-    "cimm": "Cimm Immobilier",
-    "eureka": "Eureka Immobilier",
-    "europe": "Europe Sud Immobilier",
-    "human": "Human Immobilier",
-    "iad": "IAD Immobilier",
-    "l'immo": "L'Immo Chez Toit",
-    "jammes": "Cabinet Jammes",
-    "mm": "M&M Immobilier",
-    "nestenn": "Nestenn",
-    "privee": "Propriétés Privées",
-    "richardson": "Richardson Immobilier",
-    "safti": "Safti",
-    "selection": "Selection Habitat",
-    "sextant": "Sextant",
-    "time": "Time and Stone Immobilier",
-}
+try:
+    with open("static/data/agents.json", "r", encoding="utf8") as infile:
+        agent_dict = json.load(infile)
+except:
+    with open(
+        "/home/suspiciousleaf/immo_app/static/data/agents.json", "r", encoding="utf8"
+    ) as infile:
+        agent_dict = json.load(infile)
 
 try:
     try:
@@ -46,19 +29,23 @@ except:
     listings = []
 
 try:
-    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/postcodes_dict.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         postcodes_dict = json.load(infile)
 try:
-    with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
         gps_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/postcodes_gps_dict.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         gps_dict = json.load(infile)
 try:

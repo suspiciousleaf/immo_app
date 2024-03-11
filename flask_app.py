@@ -5,19 +5,20 @@ from flask import Flask, request
 
 from db_search import search, get_listings_by_listingID
 from utilities.db_utilities import open_SSH_tunnel, close_SSH_tunnel
-from utilities.agent_dict import agent_dict
 
 
 # The import below is used to get the dictionary that is used. The path of the file is different when hosted locally or on PythonAnywhere, so the try/except allows the files to be imported correctly regardless of whether the program is run locally or when hosted. This same try/except is used to track if running locally or hosted, so that an ssh tunnel can be opened for the database connection if running locally.
 
 try:  # postcodes_dict.json
-    with open("postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
     # running_local is used to track if the program is running on the local machine (which requres an ssh tunnel to be established to access the databases), or if it is running on the host, which does not require it.
     running_local = True
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/postcodes_dict.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/postcodes_dict.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         postcodes_dict = json.load(infile)
     running_local = False
@@ -32,16 +33,16 @@ def add_header(response):
     return response
 
 
-# The postcode dictionary is used by the front end for the location search section, to autofill search queries
-@app.route("/postcode_dict/", methods=["GET"])
-def postcodes():
-    return postcodes_dict
+# # The postcode dictionary is used by the front end for the location search section, to autofill search queries
+# @app.route("/postcode_dict/", methods=["GET"])
+# def postcodes():
+#     return postcodes_dict
 
 
-# Dictionary of agent abbreviated names : full agent names
-@app.route("/agent_dict/", methods=["GET"])
-def agents():
-    return agent_dict
+# # Dictionary of agent abbreviated names : full agent names
+# @app.route("/agent_dict/", methods=["GET"])
+# def agents():
+#     return agent_dict
 
 
 # This  will check if a valid value is given for fields which require a number, and return None if not valid. This will exclude that parameter from being used in the search

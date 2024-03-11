@@ -50,11 +50,13 @@ proxy = {
 
 try:
     try:
-        with open("postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+        with open(
+            "static/data/postcodes_gps_dict.json", "r", encoding="utf8"
+        ) as infile:
             gps_dict = json.load(infile)
     except:
         with open(
-            "/home/suspiciousleaf/immo_app/postcodes_gps_dict.json",
+            "/home/suspiciousleaf/immo_app/static/data/postcodes_gps_dict.json",
             "r",
             encoding="utf8",
         ) as infile:
@@ -293,22 +295,35 @@ def privee_get_listings(old_listing_urls_dict):
     t0 = time.perf_counter()
 
     agent_urls = [
-        "https://www.proprietes-privees.com/negociateur/pascal.bourbon",
         "https://www.proprietes-privees.com/negociateur/alban.paumier",
-        "https://www.proprietes-privees.com/negociateur/guillaume.ellin",
+        "https://www.proprietes-privees.com/negociateur/aubin.stanisz",
         "https://www.proprietes-privees.com/negociateur/benjamin.cadiou",
-        "https://www.proprietes-privees.com/negociateur/clement.philippe",
+        "https://www.proprietes-privees.com/negociateur/bernard.puech",
         "https://www.proprietes-privees.com/negociateur/charlotte.khoudiacoff",
+        "https://www.proprietes-privees.com/negociateur/christophe.vitoux",
+        "https://www.proprietes-privees.com/negociateur/clement.philippe",
+        "https://www.proprietes-privees.com/negociateur/elodie.carayon",
+        "https://www.proprietes-privees.com/negociateur/eric.guglielmi",
+        "https://www.proprietes-privees.com/negociateur/frederic.revel",
+        "https://www.proprietes-privees.com/negociateur/guillaume.ellin",
         "https://www.proprietes-privees.com/negociateur/laurent.vernhet",
+        "https://www.proprietes-privees.com/negociateur/laetitia.gary",
+        "https://www.proprietes-privees.com/negociateur/marie.rives",
+        "https://www.proprietes-privees.com/negociateur/nicolas.meyer",
+        "https://www.proprietes-privees.com/negociateur/pascal.bourbon",
         "https://www.proprietes-privees.com/negociateur/samuel.gros",
-        "https://www.proprietes-privees.com/negociateur/francois.deseynes",
+        "https://www.proprietes-privees.com/negociateur/sandrine.marseguerra",
+        "https://www.proprietes-privees.com/negociateur/sylvie.lebel",
+        "https://www.proprietes-privees.com/negociateur/sylvie.leroy",
+        "https://www.proprietes-privees.com/negociateur/virgile.janny",
     ]
 
     links = []
     resp = get_data(agent_urls, prox=True)
     for item in resp:
         # print(item["link"], item["response"].status_code)
-        links.extend(privee_get_links(item["response"]))
+        if item["response"].status_code == 200:
+            links.extend(privee_get_links(item["response"]))
 
     print("\nPropriétés Privées number of unique listing URLs found:", len(links))
 
@@ -356,7 +371,7 @@ def privee_get_listings(old_listing_urls_dict):
     return {"listings": listings, "urls_to_remove": links_dead}
 
 
-# privee_listings = privee_get_listings()
+# privee_listings = privee_get_listings([])
 
 # with open("api.json", "w", encoding="utf-8") as outfile:
 #     json.dump(privee_listings, outfile, ensure_ascii=False)
