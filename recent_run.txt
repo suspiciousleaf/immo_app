@@ -5,183 +5,179 @@ Pages: 6
 Number of unique listing URLs found: 61
 New listings to add: 0
 Old listings to remove: 0
-Time elapsed for Ami Immobilier: 7.28s
+Time elapsed for Ami Immobilier: 0.57s
 
-Api Immo number of listings: 388
+Api Immo number of listings: 385
 Pages: 39
-Number of unique listing URLs found: 388
-New listings to add: 8   
-Old listings to remove: 8
-Successfully scraped: 7/8
-Failed to scrape: 1/8 
+Number of unique listing URLs found: 385
+New listings to add: 6   
+Old listings to remove: 2
+Successfully scraped: 5/6
+Failed to scrape: 1/6 
 Failed URLs:
 ['http://www.pyrenees-immobilier.com/fr/vente-maison-de-ville-saverdun-p-r7-0900419370.html: '
  'list index out of range']
-Time elapsed for A.P.I: 5.71s
+Time elapsed for A.P.I: 6.07s
 
-Arieg'Immo number of listings: 69
+Arieg'Immo number of listings: 70
 Pages: 6
-Number of unique listing URLs found: 69
-New listings to add: 3
+Number of unique listing URLs found: 70
+New listings to add: 1
 Old listings to remove: 0
-Successfully scraped: 2/3
-Failed to scrape: 1/3 
+Successfully scraped: 0/1
+Failed to scrape: 1/1 
 Failed URLs:
 ['https://www.ariegimmo.com/fr/detail.htm?cle=09006330797&monnaie=2: '
  "'NoneType' object has no attribute 'group'"]
-Time elapsed for Arieg'Immo: 5.04s
+Time elapsed for Arieg'Immo: 4.73s
 
 Arthur Immobilier number of listings: 145
 Pages: 10
-Number of unique listing URLs found: 115
-New listings to add: 2
+Number of unique listing URLs found: 112
+New listings to add: 0
 Old listings to remove: 0
-Successfully scraped: 2/2
-Time elapsed for Arthur Immo: 5.22s
+Time elapsed for Arthur Immo: 2.70s
 
 Aude Immobilier number of listings: 59
 Pages: 6
 Number of unique listing URLs found: 59
-New listings to add: 2
+New listings to add: 0
 Old listings to remove: 0
-Successfully scraped: 2/2
-Time elapsed for Aude Immobilier: 1.90s
+Time elapsed for Aude Immobilier: 1.50s
 
 BAC Immobilier number of listings: 215
 Pages: 22
 Number of unique listing URLs found: 212
-New listings to add: 2
-Old listings to remove: 1
-Successfully scraped: 2/2
-Total listings without duplicates: 2
-Time elapsed for BAC Immobilier: 3.60s
-
-Beaux Villages number of listings: 428
-Pages: 10
-Number of unique listing URLs found: 412
 New listings to add: 1
-Old listings to remove: 8
+Old listings to remove: 0
 Successfully scraped: 1/1
-Time elapsed for Beaux Villages: 8.14s
+Total listings without duplicates: 1
+Time elapsed for BAC Immobilier: 3.04s
 
-Century 21 number of listings: 496
+Beaux Villages number of listings: 430
+Pages: 10
+Number of unique listing URLs found: 413
+New listings to add: 2
+Old listings to remove: 2
+Successfully scraped: 2/2
+Time elapsed for Beaux Villages: 9.46s
+
+Century 21 number of listings: 495
 Pages: 25
-Number of unique listing URLs found: 496
-New listings to add: 6
-Old listings to remove: 4
-Successfully scraped: 6/6
-Time elapsed for Century 21: 8.64s
+Number of unique listing URLs found: 495
+New listings to add: 2
+Old listings to remove: 3
+Successfully scraped: 2/2
+Time elapsed for Century 21: 7.24s
 
 Starting Cimm Immobilier
-New listings to add: 2
-Old listings to remove: 1
-Time elapsed for Cimm Immobilier: 2.79s
-
-Eureka Immobilier number of listings: 96
-New listings to add: 0
+New listings to add: 1
 Old listings to remove: 0
-Time elapsed for Eureka Immobilier: 0.98s
+Time elapsed for Cimm Immobilier: 3.08s
+
+Eureka Immobilier number of listings: 97
+New listings to add: 1
+Old listings to remove: 0
+Successfully scraped: 1/1
+Time elapsed for Eureka Immobilier: 1.12s
 
 Europe Sud Immobilier unique listing URLs found: 117
 New listings to add: 1
-Old listings to remove: 3
+Old listings to remove: 0
 Successfully scraped: 0/1
 Failed to scrape: 1/1 
 Failed URLs:
 ["https://www.europe-sud-immobilier.com/2201-terrain-a-batir.html: 'NoneType' "
  "object has no attribute 'start'"]
-Time elapsed for Europe Sud Immobilier: 1.96s
+Time elapsed for Europe Sud Immobilier: 1.95s
 
-Human Immobilier number of listings: 329
-New listings to add: 3
+Human Immobilier number of listings: 326
+New listings to add: 2
 Old listings to remove: 2
-Successfully scraped: 3/3
-Time elapsed for Human Immobilier: 10.85s
+Successfully scraped: 2/2
+Time elapsed for Human Immobilier: 12.68s
 
-IAD Immo number of listings: 75
+IAD Immo number of listings: 74
 Pages: 3
-Number of unique listing URLs found: 75
-New listings to add: 1
-Old listings to remove: 2
-Successfully scraped: 1/1
-Time elapsed for IAD Immobilier: 3.67s
+Number of unique listing URLs found: 74
+New listings to add: 0
+Old listings to remove: 1
+Time elapsed for IAD Immobilier: 3.03s
 
 L'Immo Chez Toit number of listings: 1
 Pages: 0
 Number of unique listing URLs found: 1
 New listings to add: 0
 Old listings to remove: 0
-Time elapsed for L'Immo Chez Toit: 0.46s
+Time elapsed for L'Immo Chez Toit: 0.36s
 
-Jammes Immo number of listings: 54
+Jammes Immo number of listings: 56
 Pages: 5
-Number of unique listing URLs found: 53
-New listings to add: 0
+Number of unique listing URLs found: 55
+New listings to add: 1
 Old listings to remove: 0
-Time elapsed for Cabinet Jammes: 1.75s
+Successfully scraped: 1/1
+Time elapsed for Cabinet Jammes: 2.21s
 
-M&M Immo number of listings: 89
+M&M Immo number of listings: 90
 Pages: 9
-Number of unique listing URLs found: 80
-New listings to add: 1
-Old listings to remove: 3
-Successfully scraped: 1/1
-Time elapsed for M&M Immobilier: 2.55s
+Number of unique listing URLs found: 73
+New listings to add: 2
+Old listings to remove: 0
+Successfully scraped: 2/2
+Time elapsed for M&M Immobilier: 2.58s
 
-Nestenn Immo number of listings: 177
+Nestenn Immo number of listings: 176
 Pages: 6
-Number of unique listing URLs found: 177
-New listings to add: 1
+Number of unique listing URLs found: 176
+New listings to add: 0
 Old listings to remove: 1
+Time elapsed for Nestenn: 2.98s
+
+Propriétés Privées number of unique listing URLs found: 177
+New listings to add: 1
+Old listings to remove: 2
 Successfully scraped: 1/1
-Time elapsed for Nestenn: 4.87s
+Time elapsed for Propriétés Privées Immobilier: 4.35s
 
-Propriétés Privées number of unique listing URLs found: 179
-New listings to add: 3
-Old listings to remove: 3
-Successfully scraped: 3/3
-Time elapsed for Propriétés Privées Immobilier: 5.46s
-
-Richardson number of available listings found: 94
+Richardson number of available listings found: 93
 New listings to add: 0
 Old listings to remove: 0
-Time elapsed for Richardson Immobilier: 9.73s
+Time elapsed for Richardson Immobilier: 9.50s
 
 Safti scraper beginning...
 Agents successfully scraped: 15/15
-New listings to add: 23
-Old listings to remove: 2
-Time elapsed for Safti: 3.18s
+New listings to add: 0
+Old listings to remove: 0
+Time elapsed for Safti: 4.02s
 
-Selection Habitat number of listings: 196
+Selection Habitat number of listings: 194
 Pages: 20
-Number of unique listing URLs found: 196
-New listings to add: 2
-Old listings to remove: 4
-Successfully scraped: 2/2
-Time elapsed for selection: 5.75s
+Number of unique listing URLs found: 194
+New listings to add: 0
+Old listings to remove: 1
+Time elapsed for selection: 4.49s
 
-Sextant number of listings: 72
+Sextant number of listings: 71
 Pages: 6
-Number of unique listing URLs found: 15
-New listings to add: 9
-Old listings to remove: 8
-Successfully scraped: 9/9
-Time elapsed for Sextant: 5.55s
+Number of unique listing URLs found: 9
+New listings to add: 0
+Old listings to remove: 0
+Time elapsed for Sextant: 3.37s
 
 Starting Stéphane Plaza
-New listings to add: 8
-Old listings to remove: 5
-Time elapsed for Stéphane Plaza: 1.35s
+New listings to add: 2
+Old listings to remove: 1
+Time elapsed for Stéphane Plaza: 1.61s
 
 Time and Stone number of listings: 50
 Pages: 5
 Number of unique listing URLs found (excluding sold): 44
 New listings to add: 0
 Old listings to remove: 0
-Time elapsed for Time & Stone: 1.37s
+Time elapsed for Time & Stone: 1.38s
 
-Add 75 new listings to database? Y/N: y
+Add 20 new listings to database? Y/N: y
 
 Adding data...
 All data added successfully
@@ -196,26 +192,26 @@ Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-
 Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/26841133/x64b93147b3127
 Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/26841177/x653f7febdc524
 Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/27989236/x65450bcb6a325
-Unavailable listings detected for Arthur Immo: 3
-Unavailable listings detected for Cimm Immobilier: 3
+Unavailable listings detected for Arthur Immo: 0
+Unavailable listings detected for Cimm Immobilier: 0
 Cabinet Jammes image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11036/11036329_1.jpg?fit=contain&h=950&q=90&w=1400&s=daa91c73f3bad16f2d110de0a8e1e502
 Unavailable listings detected for Cabinet Jammes: 0
 M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110272358_8.jpg?fit=crop&h=950&q=90&w=1400&s=55b452fe7fc97dd65370a380a279b4a1
 M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110272395_54.jpg?fit=crop&h=950&q=90&w=1400&s=5e7dc2a94ffae1c6d44de5852ee50a54
 M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110271664_51.jpg?fit=crop&h=950&q=90&w=1400&s=3ac20c9ae9301856b222c32268b449c2
-Unavailable listings detected for M&M Immobilier: 8
+Unavailable listings detected for M&M Immobilier: 0
 Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/01/05/1005827/cd48bb0f524b6dda5815c6d1c4634584fee24f99/rg_nobn.jpg?1
 Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/01/05/1005419/02fed5c0e6b758e569a1e392c401d9a9fed0bbc9/rg_nobn.jpg?1
 Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/9/49/949535/1316bb89ee6ed04402bed5edf824d344ed58d21a/g.jpg
 Safti image failed to download. HTTP code: 403, url: https://nig-aws-prod-bien-photo.S3.eu-west-3.amazonaws.com/safti-fr/11/05/1105888/e628074983bda4e2cf4ac82a193b8b657a0c17f5/rg_nobn.jpg?2
-Unavailable listings detected for Safti: 2
-Unavailable listings detected for Sextant: 7
+Unavailable listings detected for Safti: 0
+Unavailable listings detected for Sextant: 0
 Unavailable listings detected for Time and Stone Immobilier: 0
-Found 23 unavailable listings
-Number of listings removed by image scan: 23
+Found 0 unavailable listings
+Number of listings removed by image scan: 0
 
-Delete 78 old listings from database? Y/N: y
-Deleted 78 entries from listings successfully
+Delete 15 old listings from database? Y/N: y
+Deleted 15 entries from listings successfully
 
 Closing SSH Tunnel
 
@@ -224,9 +220,9 @@ Photo sync beginning...
 Photo sync complete.
 
 
-Total listings added:  75
+Total listings added:  20
 
-Total listings removed:  78
+Total listings removed:  15
 
 COMPLETE
-Total time elapsed: 275.11s
+Total time elapsed: 315.94s

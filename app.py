@@ -71,11 +71,13 @@ except:
     times_run_since_last_image_scan = {"counter": 5}
 
 try:
-    with open("static/data/agents.json", "r", encoding="utf8") as infile:
+    with open("static/data/agent_mapping.json", "r", encoding="utf8") as infile:
         agent_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/static/data/agents.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/agent_mapping.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         agent_dict = json.load(infile)
 
@@ -391,13 +393,13 @@ def main():
     if times_run_since_last_image_scan["counter"] >= 5:
         try:
             print("\nImage scan function running, this will take approx 90 seconds")
-            listing_urls_to_remove = sold_image_check()
-            if listing_urls_to_remove:
-                listings_to_remove.extend(listing_urls_to_remove)
-                add_sold_urls_to_database(listing_urls_to_remove)
+            listing_to_remove_sold_photos = sold_image_check(listings_to_remove)
+            if listing_to_remove_sold_photos:
+                listings_to_remove.extend(listing_to_remove_sold_photos)
+                add_sold_urls_to_database(listing_to_remove_sold_photos)
             times_run_since_last_image_scan["counter"] = 0
             print(
-                f"Number of listings removed by image scan: {len(listing_urls_to_remove)}"
+                f"Number of listings removed by image scan: {len(listing_to_remove_sold_photos)}"
             )
         except Exception as e:
             print(f"Image filter failed: {e}")
@@ -449,8 +451,6 @@ if __name__ == "__main__":
 #! Nestenn sold links appearing in search results: https://immobilier-lavelanet.nestenn.com/maison-2012-vue-lac-de-montbel-ref-37611829
 
 # Maybe add:
-
-# TODO Move served jsons to static files, tell Amy
 
 # New immo to add? https://www.hdc-immo.com/
 

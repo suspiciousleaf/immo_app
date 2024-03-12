@@ -17,11 +17,11 @@ except:
     ) as infile:
         listings = json.load(infile)
 try:  # postcodes_dict.json
-    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcode_mapping.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/static/data/postcodes_dict.json",
+        "/home/suspiciousleaf/immo_app/static/data/postcode_mapping.json",
         "r",
         encoding="utf8",
     ) as infile:
