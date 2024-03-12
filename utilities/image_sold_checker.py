@@ -131,7 +131,7 @@ def remove_unavailable(test_listings: list, agent) -> set:
     return set(sold_image_urls)
 
 
-def sold_image_check() -> list:
+def sold_image_check(listings_to_remove) -> list:
     """Checks first image of listings to check for "Vendu" etc text overlay"""
     # List of agents who require the first image to be scanned to check if the listing is under offer / sold
 
@@ -150,7 +150,12 @@ def sold_image_check() -> list:
     # This is used to store the urls of photos of unavailable properties
     sold_image_urls_set = set()
     for agent in agents:
-        temp_list = [listing for listing in test_listings if listing["agent"] == agent]
+        temp_list = [
+            listing
+            for listing in test_listings
+            if listing["agent"] == agent
+            and listing["link_url"] not in listings_to_remove
+        ]
 
         try:
             # Filter listings to be tested

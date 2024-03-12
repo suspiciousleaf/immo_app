@@ -8,11 +8,13 @@ from geopy.distance import distance
 
 # This is used to convert the agent name strings used in the search request to the full agent names used in the listings
 try:
-    with open("static/data/agents.json", "r", encoding="utf8") as infile:
+    with open("static/data/agent_mapping.json", "r", encoding="utf8") as infile:
         agent_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/static/data/agents.json", "r", encoding="utf8"
+        "/home/suspiciousleaf/immo_app/static/data/agent_mapping.json",
+        "r",
+        encoding="utf8",
     ) as infile:
         agent_dict = json.load(infile)
 
@@ -29,21 +31,21 @@ except:
     listings = []
 
 try:
-    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcode_mapping.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/static/data/postcodes_dict.json",
+        "/home/suspiciousleaf/immo_app/static/data/postcode_mapping.json",
         "r",
         encoding="utf8",
     ) as infile:
         postcodes_dict = json.load(infile)
 try:
-    with open("static/data/postcodes_gps_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/town_gps_mapping.json", "r", encoding="utf8") as infile:
         gps_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/static/data/postcodes_gps_dict.json",
+        "/home/suspiciousleaf/immo_app/static/data/town_gps_mapping.json",
         "r",
         encoding="utf8",
     ) as infile:

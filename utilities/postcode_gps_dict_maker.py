@@ -36,7 +36,7 @@ def postcode_dict_maker():
 
     postcode_dict = {lst[0]: lst[1:] for lst in postcode_list}
 
-    with open("static/data/postcodes_dict.json", "w", encoding="utf-8") as outfile:
+    with open("static/data/postcode_mapping.json", "w", encoding="utf-8") as outfile:
         json.dump(postcode_dict(), outfile, ensure_ascii=False)
 
 
@@ -54,7 +54,7 @@ def create_town_list():
 # create_town_list()
 
 try:
-    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcode_mapping.json", "r", encoding="utf8") as infile:
         town_postcode_dict = json.load(infile)
 except:
     print(
@@ -87,7 +87,7 @@ def create_gps_dict():
         # This will return any towns that failed to find a GPS coordinate, so it can be done manually afterwards.
         pprint(failed_list)
 
-    with open("static/data/postcodes_gps_dict.json", "w", encoding="utf-8") as outfile:
+    with open("static/data/town_gps_mapping.json", "w", encoding="utf-8") as outfile:
         json.dump(postcode_dict, outfile, ensure_ascii=False)
 
 

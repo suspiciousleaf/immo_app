@@ -18,13 +18,11 @@ from utilities.utility_holder import get_gps, get_data
 
 try:
     try:
-        with open(
-            "static/data/postcodes_gps_dict.json", "r", encoding="utf8"
-        ) as infile:
+        with open("static/data/town_gps_mapping.json", "r", encoding="utf8") as infile:
             gps_dict = json.load(infile)
     except:
         with open(
-            "/home/suspiciousleaf/immo_app/static/data/postcodes_gps_dict.json",
+            "/home/suspiciousleaf/immo_app/static/data/town_gps_mapping.json",
             "r",
             encoding="utf8",
         ) as infile:
@@ -34,11 +32,11 @@ except:
     gps_dict = []
 
 try:
-    with open("static/data/postcodes_dict.json", "r", encoding="utf8") as infile:
+    with open("static/data/postcode_mapping.json", "r", encoding="utf8") as infile:
         postcodes_dict = json.load(infile)
 except:
     with open(
-        "/home/suspiciousleaf/immo_app/static/data/postcodes_dict.json",
+        "/home/suspiciousleaf/immo_app/static/data/postcode_mapping.json",
         "r",
         encoding="utf8",
     ) as infile:
