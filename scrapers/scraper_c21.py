@@ -114,7 +114,7 @@ def c21_get_listings(old_listing_urls_dict, host_photos=False):
     counter_fail = 0
     failed_scrape_links = []
 
-    # Century 21 will block scraping if you request more than 100 urls in a short period of time. Scraping the search pages for urls uses up appro 20 of these, so if there are more than 75 urls to scrape then the program will so them in serial, which is slow enough to not get blocked. This will likely only be when populating a new listings.json. Every other time can be done asynchronously
+    # Century 21 will block scraping if you request more than 100 urls in a short period of time. Scraping the search pages for urls uses up appro 20 of these, so if there are more than 75 urls to scrape then the program will so them in serial, which is slow enough to not get blocked. This will likely only be when scraping from fresh rather than updating listings. Every other time can be done asynchronously
 
     listings = []
 
@@ -135,6 +135,7 @@ def c21_get_listings(old_listing_urls_dict, host_photos=False):
                     listings.append(result)
                     counter_success += 1
     else:
+        print("Excessive pages to scrape, rate limit applied.")
         for link in links_to_scrape:
             resp_object = requests.get(link)
             result = get_listing_details(resp_object, link, False)
@@ -339,7 +340,7 @@ def get_listing_details(page, url, host_photos):
         photos_div = soup.find_all("div", class_="c-the-detail-images__slides__item")
 
         for item in photos_div:
-            photos.append("https://" + item.get("data-src")[2:])
+            photos.append("https://www.century21.fr" + item.get("data-src"))
 
         photos_hosted = photos
 
@@ -381,10 +382,10 @@ def get_listing_details(page, url, host_photos):
 
 cwd = os.getcwd()
 
-# test_url = "https://www.century21.fr/trouver_logement/detail/2947413780/"
-# for test_url in problem_list:
+# test_url = "https://www.century21.fr/trouver_logement/detail/5337827364/"
+# # for test_url in problem_list:
 
-# get_listing_details(requests.get(test_url), test_url, False)
+# pprint(get_listing_details(requests.get(test_url), test_url, False))
 
 
 # c21_listings = c21_get_listings()
