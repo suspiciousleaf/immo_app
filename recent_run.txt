@@ -183,27 +183,10 @@ Adding data...
 All data added successfully
 
 Image scan function running, this will take approx 90 seconds
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/27504574/x64e36eec66879
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/27151248/x65180a51bb924
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/27554602/x6525e093f0c86
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/27224101/x64e4cec185413
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/27485521/x64c8f2f2e6112
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/27131359/x64f59026155b4
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/26841133/x64b93147b3127
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/26841177/x653f7febdc524
-Arthur Immo image failed to download. HTTP code: 404, url: https://media.studio-net.fr/biens/27989236/x65450bcb6a325
 Unavailable listings detected for Arthur Immo: 0
 Unavailable listings detected for Cimm Immobilier: 0
-Cabinet Jammes image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11036/11036329_1.jpg?fit=contain&h=950&q=90&w=1400&s=daa91c73f3bad16f2d110de0a8e1e502
 Unavailable listings detected for Cabinet Jammes: 0
-M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110272358_8.jpg?fit=crop&h=950&q=90&w=1400&s=55b452fe7fc97dd65370a380a279b4a1
-M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110272395_54.jpg?fit=crop&h=950&q=90&w=1400&s=5e7dc2a94ffae1c6d44de5852ee50a54
-M&M Immobilier image failed to download. HTTP code: 404, url: https://assets.adaptimmo.com/photos-biens/11027/110271664_51.jpg?fit=crop&h=950&q=90&w=1400&s=3ac20c9ae9301856b222c32268b449c2
 Unavailable listings detected for M&M Immobilier: 0
-Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/01/05/1005827/cd48bb0f524b6dda5815c6d1c4634584fee24f99/rg_nobn.jpg?1
-Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/01/05/1005419/02fed5c0e6b758e569a1e392c401d9a9fed0bbc9/rg_nobn.jpg?1
-Safti image failed to download. HTTP code: 404, url: https://photo.safti.fr/biens/9/49/949535/1316bb89ee6ed04402bed5edf824d344ed58d21a/g.jpg
-Safti image failed to download. HTTP code: 403, url: https://nig-aws-prod-bien-photo.S3.eu-west-3.amazonaws.com/safti-fr/11/05/1105888/e628074983bda4e2cf4ac82a193b8b657a0c17f5/rg_nobn.jpg?2
 Unavailable listings detected for Safti: 0
 Unavailable listings detected for Sextant: 0
 Unavailable listings detected for Time and Stone Immobilier: 0

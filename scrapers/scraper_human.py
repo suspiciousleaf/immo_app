@@ -268,7 +268,12 @@ def get_listing_details(page, url):
         photos_div_raw = soup.find("div", id="gallery")
         photos_div = photos_div_raw.findAll("a", class_="spanPhoto")
         for item in photos_div:
-            photos.append(f"https://www.human-immobilier.fr{item.get('data-lc-href')}")
+            photos.append(item.get("data-lc-href"))
+
+        # Was returningL
+        # https://www.human-immobilier.frhttps://www.human-immobilier.fr//images/513-428_130324113919.jpg?v=20230504
+        # Changed photos.append(f"https://www.human-immobilier.fr{item.get('data-lc-href')}") to:
+        # photos.append(item.get('data-lc-href'))
 
         # pprint(photos)
 

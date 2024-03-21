@@ -452,6 +452,8 @@ if __name__ == "__main__":
 
 # Maybe add:
 
+#! Beaux Villages photos not scraping, returning None (see ref 18684)
+
 # New immo to add? https://www.hdc-immo.com/
 
 # TODO BAC Immo is scraping some property sizes too large, missing decimal places
