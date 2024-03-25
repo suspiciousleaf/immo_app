@@ -157,7 +157,7 @@ def api_get_links(page):
     return links
 
 
-def get_listing_details(page, url, host_photos):
+def get_listing_details(page, url, host_photos=False):
     try:
         agent = "A.P.I."
         soup = BeautifulSoup(page.content, "html.parser")
@@ -189,8 +189,11 @@ def get_listing_details(page, url, host_photos):
 
         details_div = soup.find("div", class_="detail-bien-specs").get_text()
         details_div = details_div.split("\n")
-        prop_ref = [line for line in details_div if "Ref" in line and len(line) < 10][0]
-        ref = "".join([num for num in prop_ref if num.isdigit()])
+        ref = [
+            line.replace("Ref", "").replace(" ", "").strip()
+            for line in details_div
+            if "Ref" in line and len(line.replace(" ", "")) <= 12
+        ][0]
 
         # print("ref:", ref)
 
@@ -326,6 +329,7 @@ def get_listing_details(page, url, host_photos):
         )
 
         return listing.__dict__
+
     except Exception as e:
         return f"{url}: {str(e)}"
 

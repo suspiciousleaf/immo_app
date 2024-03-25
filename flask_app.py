@@ -33,18 +33,6 @@ def add_header(response):
     return response
 
 
-# # The postcode dictionary is used by the front end for the location search section, to autofill search queries
-# @app.route("/postcode_dict/", methods=["GET"])
-# def postcodes():
-#     return postcodes_dict
-
-
-# # Dictionary of agent abbreviated names : full agent names
-# @app.route("/agent_dict/", methods=["GET"])
-# def agents():
-#     return agent_dict
-
-
 # This  will check if a valid value is given for fields which require a number, and return None if not valid. This will exclude that parameter from being used in the search
 def try_num(input):
     try:

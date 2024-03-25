@@ -58,7 +58,7 @@ def check_image_sold(image, agent: str) -> tuple():  # returns True if unavailab
             "Arthur Immo": [(244, 149, 5)],  # yellow (47, 55, 62)
             "Cimm Immobilier": [(250, 5, 5), (240, 15, 15)],
             "Cabinet Jammes": [(5, 205, 250)],
-            # Some M&M listings use a shade of blue that gives false positives for sky
+            # Some M&M listings use a shade of blue that gives false positives for sky. Only used on two listings so far.
             "M&M Immobilier": [
                 (250, 250, 150),
                 (250, 5, 5),
@@ -76,7 +76,7 @@ def check_image_sold(image, agent: str) -> tuple():  # returns True if unavailab
         }
 
         count = 0
-        # Pixel RGB colour values must be within a margin of +/- 5 of the stated value, to allow for jpg compression altering some colours.
+        # Pixel RGB colour values must be within a margin of +/- 6 of the stated value, to allow for jpg compression altering some colours.
         tolerance = 6
 
         for pixel in img_data:

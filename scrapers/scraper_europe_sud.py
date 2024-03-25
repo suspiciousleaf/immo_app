@@ -91,10 +91,9 @@ def europe_sud_get_listings(old_listing_urls_dict, host_photos=False):
     counter_fail = 0
     failed_scrape_links = []
 
+    listings = []
     if links_to_scrape:
         resp_to_scrape = get_data(links_to_scrape)
-
-        listings = []
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
             results = executor.map(

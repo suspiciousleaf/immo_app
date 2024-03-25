@@ -190,9 +190,7 @@ def main():
         failed_scrapes["Human Immobilier"] = e
 
     try:
-        iad_listings = iad_immo_get_listings(
-            old_listing_urls_dict["IAD Immobilier"], host_photos=False
-        )
+        iad_listings = iad_immo_get_listings(old_listing_urls_dict["IAD Immobilier"])
     except Exception as e:
         iad_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["IAD Immobilier"] = e
@@ -450,11 +448,7 @@ if __name__ == "__main__":
 
 #! Nestenn sold links appearing in search results: https://immobilier-lavelanet.nestenn.com/maison-2012-vue-lac-de-montbel-ref-37611829
 
-# Maybe add:
-
-#! Beaux Villages photos not scraping, returning None (see ref 18684)
-
-# New immo to add? https://www.hdc-immo.com/
+# Maybe add: https://www.hdc-immo.com/
 
 # TODO BAC Immo is scraping some property sizes too large, missing decimal places
 

@@ -15,14 +15,7 @@ from models import Listing
 from utilities.utility_holder import get_gps, get_data
 
 headers = {
-    "authority": "www.iadfrance.com",
-    "cache-control": "max-age=0",
-    "upgrade-insecure-requests": "1",
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
-    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-    "referer": "https://www.iadfrance.fr/",
-    "accept-encoding": "gzip, deflate, br",
-    "accept-language": "en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7",
 }
 
 try:
@@ -41,7 +34,7 @@ except:
     gps_dict = []
 
 
-def iad_immo_get_listings(old_listing_urls_dict, host_photos=False):
+def iad_immo_get_listings(old_listing_urls_dict):
     t0 = time.perf_counter()
 
     s = requests.Session()
@@ -137,11 +130,17 @@ def get_listing_details(page, url):
         soup = BeautifulSoup(page.content, "html.parser")
         # print(soup)
         # Price
+
+        price = soup.find("div", class_="adPrice")
+
         price = int(
-            soup.find("div", class_="adPrice text-darkblue text-h3")
-            .get_text()
-            .replace("€", "")
-            .replace(" ", "")
+            "".join(
+                [
+                    num
+                    for num in soup.find("div", class_="adPrice").get_text()
+                    if num.isdigit()
+                ]
+            )
         )
 
         # These are set to None here in case they aren't included in the listing details

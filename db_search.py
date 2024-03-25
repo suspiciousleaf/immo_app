@@ -267,6 +267,20 @@ def search(
         return [f"An error occurred: {str(e)}"]
 
 
+"""Example SQL search query:
+SELECT listingID, agent, plot, size, price FROM listings 
+WHERE FIND_IN_SET(agent, %(agents)s) 
+AND FIND_IN_SET(types, %(types)s) 
+AND price BETWEEN %(price_min)s AND %(price_max)s 
+AND bedrooms BETWEEN %(bedrooms_min)s AND %(bedrooms_max)s 
+AND size BETWEEN %(size_min)s AND %(size_max)s 
+AND plot BETWEEN %(plot_min)s AND %(plot_max)s 
+AND description LIKE %(kw0)s 
+AND description LIKE %(kw1)s 
+AND ((ST_Distance_Sphere(gps, ST_GeomFromText('POINT(%(lat0)s %(long0)s)', 4326)) <= 10000) 
+OR (ST_Distance_Sphere(gps, ST_GeomFromText('POINT(%(lat1)s %(long1)s)', 4326)) <= 10000));"""
+
+
 @connect_to_database
 def get_listings_by_listingID(db, cursor, listing_IDs: list[str]) -> list:
     """Takes a list of UUIDs (listingID) as strings and returns those entire listings
