@@ -295,7 +295,6 @@ def privee_get_listings(old_listing_urls_dict):
     agent_urls = [
         "https://www.proprietes-privees.com/negociateur/alban.paumier",
         "https://www.proprietes-privees.com/negociateur/aubin.stanisz",
-        "https://www.proprietes-privees.com/negociateur/benjamin.cadiou",
         "https://www.proprietes-privees.com/negociateur/bernard.puech",
         "https://www.proprietes-privees.com/negociateur/charlotte.khoudiacoff",
         "https://www.proprietes-privees.com/negociateur/christophe.vitoux",
@@ -318,10 +317,16 @@ def privee_get_listings(old_listing_urls_dict):
 
     links = []
     resp = get_data(agent_urls, prox=True)
-    for item in resp:
+    for i, item in enumerate(resp):
         # print(item["link"], item["response"].status_code)
         if item["response"].status_code == 200:
-            links.extend(privee_get_links(item["response"]))
+            try:
+                links.extend(privee_get_links(item["response"]))
+            except Exception as e:
+                agent_failed = " ".join(agent_urls[i].split("/")[-1].split(".")).title()
+                print(
+                    f"Check if agent still with company: {agent_failed}, URL {agent_urls[i]}, Exception:{e}"
+                )
 
     print("\nPropriétés Privées number of unique listing URLs found:", len(links))
 
