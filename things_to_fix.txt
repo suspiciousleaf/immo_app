@@ -1,0 +1,66 @@
+Century 21 number of listings: 506
+Pages: 26
+Number of unique listing URLs found: 506
+New listings to add: 287
+Old listings to remove: 51
+Excessive pages to scrape, rate limit applied.
+Successfully scraped: 0/287
+Failed to scrape: 287/287 
+Failed URLs:
+['https://www.century21.fr/trouver_logement/detail/11563066685/: invalid '
+ 'literal for int() with base 10: '
+ "'465000\\xa0\\n\\n\\n\\n\\nHonoraireschargevendeur'",
+ 'https://www.century21.fr/trouver_logement/detail/11856991969/: invalid '
+ 'literal for int() with base 10: '
+ "'457000\\xa0\\n\\n\\n\\n\\nHonoraireschargevendeur'",
+ 'https://www.century21.fr/trouver_logement/detail/7518138130/: invalid '
+ 'literal for int() with base 10: '
+ "'142000\\xa0\\n\\n\\n\\n\\nHonoraireschargevendeur'",
+ 'https://www.century21.fr/trouver_logement/detail/7576231857/: invalid '
+ 'literal for int() with base 10: '
+ "'125000\\xa0\\n\\n\\n\\n\\nHonoraireschargeacquéreur:9,29%TTC\\n\\n\\nPrixhorshonoraires:114375'",
+ 'https://www.century21.fr/trouver_logement/detail/12049463095/: invalid '
+ 'literal for int() with base 10: '
+ "'167000\\xa0\\n\\n\\n\\n\\nHonoraireschargevendeur'",
+
+
+
+
+Safti scraper beginning...
+Agents successfully scraped: 11/15
+Failed to scrape: 4/15 
+Failed URLs:
+["https://www.safti.fr/votre-conseiller-safti/jean-cannet: 'NoneType' object "
+ "has no attribute 'contents'",
+ "https://www.safti.fr/votre-conseiller-safti/sebastien-perennes: 'NoneType' "
+ "object has no attribute 'contents'",
+ "https://www.safti.fr/votre-conseiller-safti/sylvie-jubault: 'NoneType' "
+ "object has no attribute 'contents'",
+ "https://www.safti.fr/votre-conseiller-safti/sabine-ladouce: 'NoneType' "
+ "object has no attribute 'contents'"]
+New listings to add: 59
+Old listings to remove: 0
+Time elapsed for Safti: 2.94s
+
+
+
+The following agent(s) failed to scrape entirely:
+
+{'Ami Immobilier': AttributeError("'NoneType' object has no attribute 'get_text'"),
+ 'Human Immobilier': AttributeError("'NoneType' object has no attribute 'findAll'"),
+ 'Richardson Immobilier': AttributeError("'NoneType' object has no attribute 'b'")}
+
+
+
+The authenticity of host 'ssh.eu.pythonanywhere.com (18.197.67.125)' can't be established.
+RSA key fingerprint is SHA256:zy2jmqxNg/fs6tFZK55OjHTI3B2UofzOiUvTPtcX3/Y.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? fingerprint
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'ssh.eu.pythonanywhere.com' (RSA) to the list of known hosts.
+<<<<<<:>~ PythonAnywhere SSH. Help @ https://help.pythonanywhere.com/pages/SSHAccess
+suspiciousleaf@ssh.eu.pythonanywhere.com's password: 
+c;GWT6xY}kKJ2]b
+Photo sync complete.
+
+

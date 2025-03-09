@@ -90,6 +90,7 @@ proxy = {
 property_types = {
     "Maison": {
         "Autre",
+        "Avicole",
         "Batiment",
         "Bastide",
         "Batisse",
@@ -109,6 +110,7 @@ property_types = {
         "Investissement",
         "Local",
         "Maison",
+        "Manoir",
         "Moulin",
         "Mas",
         "Peniche",
@@ -129,6 +131,7 @@ property_types = {
         "Ateliers",
         "Bar",
         "Bazar",
+        "Bien",
         "Tabac",
         "Bergerie",
         "Boucherie",
@@ -159,11 +162,16 @@ property_types = {
     "Appartement": {
         "Apartment",
         "Studio",
-        "Duplex",
         "Appartment",
         "Appartement",
         "Appart’hôtel",
         "Appart'hotel",
         "Résidence",
     },
+    "Immeuble": {
+        "Duplex",
+        "Triplex",
+    },
+    "Terrain": {},
+    "Other": {},
 }

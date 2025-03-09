@@ -25,7 +25,8 @@ from utilities.db_utilities import (
 )
 
 from scrapers.scraper_ami09 import ami09_get_listings
-from scrapers.scraper_api import api_get_listings
+
+# from scrapers.scraper_api import api_get_listings
 from scrapers.scraper_arieg import arieg_get_listings
 from scrapers.scraper_arthur_immo import arthur_immo_get_listings
 from scrapers.scraper_aude import aude_immo_get_listings
@@ -107,13 +108,13 @@ def main():
         ami09_listings = {"listings": [], "urls_to_remove": []}
         failed_scrapes["Ami Immobilier"] = e
 
-    try:
-        api_listings = api_get_listings(
-            old_listing_urls_dict["A.P.I."], host_photos=False
-        )
-    except Exception as e:
-        api_listings = {"listings": [], "urls_to_remove": []}
-        failed_scrapes["A.P.I."] = e
+    # try:
+    #     api_listings = api_get_listings(
+    #         old_listing_urls_dict["A.P.I."], host_photos=False
+    #     )
+    # except Exception as e:
+    #     api_listings = {"listings": [], "urls_to_remove": []}
+    #     failed_scrapes["A.P.I."] = e
 
     try:
         arieg_listings = arieg_get_listings(old_listing_urls_dict["Arieg'Immo"])
@@ -292,7 +293,7 @@ def main():
 
     listing_agents = [
         ami09_listings,
-        api_listings,
+        # api_listings,
         arieg_listings,
         arthur_immo_listings,
         aude_immo_listings,
@@ -344,14 +345,7 @@ def main():
         for property_type, values in property_types.items():
             if temp_type in values:
                 listing["types"] = property_type
-        if listing["types"] not in [
-            "Maison",
-            "Appartement",
-            "Immeuble",
-            "Terrain",
-            "Commerce",
-            "Other",
-        ]:
+        if listing["types"] not in property_types:
             uncategorized_types.append(
                 {"types": listing["types"], "url": listing["link_url"]}
             )
